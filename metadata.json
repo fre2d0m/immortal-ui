@@ -1,0 +1,6 @@
+{
+  "name": "Dark Tactile UI",
+  "description": "Dark skeuomorphic component system inspired by Linear and X, featuring dual diagonal specular rims, tactile buttons, recessed inputs, and interactive controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

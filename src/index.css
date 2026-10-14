@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* CSS Houdini Custom Property: enables native smooth interpolation of gradient angles */
+@property --local-rim-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 135deg;
+}
+
+:root {
+  /* Dynamic light controls (default 135deg top-left to bottom-right) */
+  --rim-angle: 135deg;
+  --hover-sweep: 180deg;
+  --sweep-duration: 650ms;
+  --local-rim-angle: 135deg;
+  --specular-opacity: 0.45;
+  --secondary-specular-opacity: 0.24;
+  --bg-contrast: 1;
+
+  /* Surfaces: completely opaque rich obsidian blacks (prevents milky gray layering) */
+  --bg-canvas: #070708;
+  --bg-card: linear-gradient(155deg, #111114 0%, #08080a 55%, #0d0d10 100%);
+  --bg-subcard: linear-gradient(145deg, #101013 0%, #070709 60%, #0c0c0f 100%);
+  --bg-subcard-hover: linear-gradient(145deg, #141418 0%, #09090b 60%, #101014 100%);
+  --bg-convex: linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%);
+  --bg-convex-hover: linear-gradient(145deg, #232329 0%, #0d0d10 55%, #1a1a20 100%);
+  --bg-convex-active: linear-gradient(145deg, #08080a 0%, #121215 100%);
+  --bg-concave: linear-gradient(180deg, #040405 0%, #0b0b0d 100%);
+
+  /* Static Dual Specular Diagonal Rim (for non-sweeping containers) */
+  --border-rim: linear-gradient(
+    var(--rim-angle),
+    rgba(255, 255, 255, var(--specular-opacity)) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(255, 255, 255, 0.03) 60%,
+    rgba(255, 255, 255, var(--secondary-specular-opacity)) 100%
+  );
+  --border-rim-subtle: linear-gradient(
+    var(--rim-angle),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.04) 42%,
+    rgba(255, 255, 255, 0.02) 62%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  --border-rim-focus: linear-gradient(
+    var(--rim-angle),
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+
+  /* Tactile Shadows */
+  --shadow-convex:
+    0 12px 28px -6px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.14),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.9);
+  --shadow-convex-sm:
+    0 4px 10px rgba(0, 0, 0, 0.75),
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.16),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.8);
+  --shadow-concave:
+    inset 0 2px 5px rgba(0, 0, 0, 0.92),
+    inset 0 1px 2px rgba(0, 0, 0, 0.85),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Typography Colors */
+  --text-primary: #f4f4f6;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+}
+
+/* =========================================================================
+   Interactive Specular Rim Sweep Engine
+   Uses @property --local-rim-angle to smoothly rotate the dual specular
+   highlight by --hover-sweep (e.g. 90deg, 180deg, 360deg) when hovered.
+   ========================================================================= */
+@keyframes rimContinuousOrbit {
+  0% {
+    --local-rim-angle: var(--rim-angle, 135deg);
+  }
+  100% {
+    --local-rim-angle: calc(var(--rim-angle, 135deg) + 360deg);
+  }
+}
+
+.tactile-rim-sweep {
+  --local-rim-angle: var(--rim-angle, 135deg);
+  transition:
+    --local-rim-angle var(--sweep-duration, 650ms) cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease,
+    color 0.18s ease;
+}
+
+.tactile-rim-sweep:hover,
+.group:hover .tactile-rim-sweep {
+  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 180deg));
+}
+
+:root[data-sweep-mode="infinite"] .tactile-rim-sweep:hover,
+:root[data-sweep-mode="infinite"] .group:hover .tactile-rim-sweep {
+  animation: rimContinuousOrbit var(--sweep-duration, 1200ms) linear infinite;
+}
+
+/* =========================================================================
+   Liquid Chrome & Prismatic Chromatic Dispersion Surface
+   IMPORTANT: Defined directly on the element selector (NOT on :root) so that
+   var(--local-rim-angle) dynamically re-evaluates and animates on :hover!
+   ========================================================================= */
+.chrome-dispersion-surface {
+  --local-rim-angle: var(--rim-angle, 135deg);
+  background-image: conic-gradient(
+    from var(--local-rim-angle) at 50% 50%,
+    #ffffff 0deg,
+    #e4e4e7 28deg,
+    #facc15 33deg,
+    #ea580c 36deg,
+    #050508 40deg,
+    #18181b 52deg,
+    #1d4ed8 56deg,
+    #7dd3fc 59deg,
+    #ffffff 63deg,
+    #d4d4d8 105deg,
+    #71717a 142deg,
+    #f59e0b 147deg,
+    #040406 152deg,
+    #09090b 172deg,
+    #2563eb 176deg,
+    #ffffff 181deg,
+    #f4f4f6 218deg,
+    #facc15 224deg,
+    #dc2626 227deg,
+    #050507 232deg,
+    #27272a 255deg,
+    #3b82f6 259deg,
+    #ffffff 264deg,
+    #d4d4d8 310deg,
+    #ea580c 316deg,
+    #050507 321deg,
+    #1e40af 326deg,
+    #ffffff 331deg,
+    #ffffff 360deg
+  );
+  transition:
+    --local-rim-angle var(--sweep-duration, 650ms) cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease;
+}
+
+.chrome-dispersion-surface:hover,
+.group:hover .chrome-dispersion-surface {
+  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 180deg));
+}
+
+.chrome-dispersion-surface[data-auto-flow="true"] {
+  animation: rimContinuousOrbit 2400ms linear infinite;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.065) 1px, transparent 1px);
+  background-size: 100% 100%, 18px 18px;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Glowing divider line */
+.glow-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    transparent 100%
+  );
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+  border: 2px solid #09090b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
