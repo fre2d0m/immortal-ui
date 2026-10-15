@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, RotateCcw, Sparkles, Orbit, Gem } from 'lucide-react';
+import { Volume2, VolumeX, RotateCcw, Sparkles, Orbit, Gem, Layers } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 import {
   METAL_MATERIALS,
@@ -28,7 +28,8 @@ export const LightingLab: React.FC = () => {
   } = useMetalConfig();
 
   const [soundOn, setSoundOn] = useState(true);
-  const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.gold;
+  const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
+  const isClassic = !activePreset.isWebGLMetal;
 
   const toggleSound = () => {
     const next = !soundOn;
@@ -41,10 +42,10 @@ export const LightingLab: React.FC = () => {
     resetDefaults();
     setSoundOn(true);
     audioEngine.enabled = true;
-    audioEngine.playClick('metal');
+    audioEngine.playClick('button');
     toast({
-      title: '已重置为清爽默认参数',
-      description: '24K 皇家黄金 · 静态 135° 对角双高光（默认不旋转）',
+      title: '已恢复初始默认风格：经典暗色轻拟物',
+      description: '1px 135° 对角双高光 · 凸起与凹陷曜石黑立体质感',
       type: 'info',
     });
   };
@@ -68,20 +69,20 @@ export const LightingLab: React.FC = () => {
             style={{ color: activePreset.accentHex }}
             className="w-9 h-9 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center"
           >
-            <Gem className="w-4 h-4" />
+            {isClassic ? <Layers className="w-4 h-4" /> : <Gem className="w-4 h-4" />}
           </div>
           <div>
             <h4 className="text-xs sm:text-sm font-semibold text-zinc-100 flex items-center gap-2">
-              方案 C · WebGL 全局金属材质与光学控制台
+              全局风格与金属材质切换引擎 (Style & Metal Customizer)
               <span
                 style={{ color: activePreset.accentHex }}
                 className="text-[10px] font-normal font-mono bg-zinc-900 px-2 py-0.5 rounded border border-white/10"
               >
-                当前全局：{activePreset.name}
+                当前：{activePreset.name}
               </span>
             </h4>
             <p className="text-[11px] text-zinc-400 mt-0.5">
-              点击任意金属即可切换全站组件材质；默认保持清爽的 135° 静态对角双高光（不旋转），也支持按需开启 Hover 旋转或流体动画
+              默认采用最初的「经典暗色轻拟物 (Pure CSS 135° 对角双高光)」，点击任意金属材质即可一键切换至 WebGL 物理流光金属
             </p>
           </div>
         </div>
@@ -105,61 +106,83 @@ export const LightingLab: React.FC = () => {
             type="button"
             onClick={handleReset}
             className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer transition-all flex items-center gap-1"
-            title="重置为推荐参数"
+            title="恢复默认经典暗色轻拟物风格"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>重置参数</span>
+            <span>恢复默认轻拟物</span>
           </button>
         </div>
       </div>
 
-      {/* Section 1: 6 Physical Metal Materials Selector */}
+      {/* Section 1: Classic Default + 6 Physical Metal Materials Selector */}
       <div className="flex flex-col gap-2.5">
         <div className="flex items-center justify-between text-xs text-zinc-300 font-medium">
           <span className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-            选择全站默认物理金属材质 (Global Metal Material)
+            选择全局渲染风格：经典暗色轻拟物 (默认) 或 6 种 WebGL 物理金属材质
           </span>
-          <span className="text-[11px] text-zinc-400 font-mono">
+          <span className="text-[11px] text-zinc-400 font-mono hidden sm:inline">
             {activePreset.name} · {activePreset.description}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
           {materialList.map((mat) => {
             const isSelected = mat.id === material;
+            const isMatClassic = !mat.isWebGLMetal;
             return (
               <button
                 key={mat.id}
                 type="button"
                 onClick={() => {
-                  audioEngine.playClick('metal');
+                  audioEngine.playClick(isMatClassic ? 'button' : 'metal');
                   setMaterial(mat.id as MetalMaterialId);
                   toast({
-                    title: `已切换全局材质：${mat.name}`,
-                    description: `全站组件已实时应用 ${mat.enName} 金属光泽`,
+                    title: `已切换全局风格：${mat.name}`,
+                    description: isMatClassic
+                      ? '已恢复初始纯 CSS 135° 对角双高光暗色轻拟物风格'
+                      : `已启用方案 C WebGL ${mat.enName} 物理金属材质`,
                     type: 'success',
                   });
                 }}
-                style={{
-                  padding: isSelected ? '2px' : '1.5px',
-                }}
+                style={
+                  isMatClassic
+                    ? {
+                        backgroundImage: `var(--bg-convex), ${
+                          isSelected ? 'var(--border-rim-focus)' : 'var(--border-rim)'
+                        }`,
+                        backgroundOrigin: 'padding-box, border-box',
+                        backgroundClip: 'padding-box, border-box',
+                        boxShadow: `var(--shadow-convex-sm)`,
+                      }
+                    : {
+                        padding: isSelected ? '2px' : '1.5px',
+                      }
+                }
                 className={`relative h-14 rounded-xl overflow-hidden cursor-pointer transition-all text-left focus:outline-none ${
+                  isMatClassic ? 'border border-transparent px-2.5 py-2 flex items-center gap-2' : ''
+                } ${
                   isSelected
-                    ? 'shadow-[0_6px_20px_rgba(0,0,0,0.9)]'
-                    : 'opacity-75 hover:opacity-100'
+                    ? 'shadow-[0_6px_20px_rgba(0,0,0,0.9)] ring-1 ring-white/30'
+                    : 'opacity-80 hover:opacity-100'
                 }`}
               >
-                <WebGLBezelCanvas
-                  material={mat.id as MetalMaterialId}
-                  hovered={isSelected}
-                  sweepDeg={0}
-                  canvasWidth={160}
-                  canvasHeight={64}
-                />
+                {!isMatClassic && (
+                  <WebGLBezelCanvas
+                    material={mat.id as MetalMaterialId}
+                    hovered={isSelected}
+                    sweepDeg={0}
+                    canvasWidth={150}
+                    canvasHeight={64}
+                  />
+                )}
                 <div
-                  style={{ background: mat.capGradient }}
-                  className="relative z-10 w-full h-full px-3 py-2 rounded-[10px] flex items-center gap-2.5"
+                  style={!isMatClassic ? { background: mat.capGradient } : undefined}
+                  className={
+                    isMatClassic
+                      ? 'w-full h-full flex items-center gap-2'
+                      : 'relative z-10 w-full h-full px-2.5 py-2 rounded-[10px] flex items-center gap-2'
+                  }
                 >
                   <span
                     style={{
@@ -167,17 +190,17 @@ export const LightingLab: React.FC = () => {
                       boxShadow:
                         'inset 0 1px 1px rgba(255,255,255,0.8), 0 2px 5px rgba(0,0,0,0.8)',
                     }}
-                    className="w-6 h-6 rounded-full shrink-0 border border-white/20"
+                    className="w-5 h-5 rounded-full shrink-0 border border-white/25"
                   />
                   <div className="min-w-0 flex-1">
                     <div
                       style={{ color: isSelected ? mat.accentHex : '#e4e4e7' }}
-                      className="text-xs font-semibold truncate"
+                      className="text-[11px] font-semibold truncate"
                     >
                       {mat.name}
                     </div>
-                    <div className="text-[10px] text-zinc-500 font-mono truncate">
-                      {isSelected ? '✓ 当前全局' : mat.enName}
+                    <div className="text-[9px] text-zinc-500 font-mono truncate">
+                      {isSelected ? '✓ 当前生效' : isMatClassic ? 'Default CSS' : mat.enName}
                     </div>
                   </div>
                 </div>
@@ -281,7 +304,7 @@ export const LightingLab: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
         <div className="flex items-center gap-2 text-zinc-400">
           <Orbit className="w-3.5 h-3.5 text-zinc-300" />
-          <span>全局按钮 Hover 表现（默认不旋转，仅原地提亮金属光泽）：</span>
+          <span>全局按钮 Hover 表现（默认不旋转，仅原地提亮）：</span>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           {[

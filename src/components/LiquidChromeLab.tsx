@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Code2, Sparkles, Search } from 'lucide-react';
+import { Copy, Check, Code2, Sparkles, Search, RotateCcw } from 'lucide-react';
 import {
   TactileButton,
   TactileBadge,
@@ -9,6 +9,7 @@ import {
 import {
   METAL_MATERIALS,
   MetalMaterialId,
+  WEBGL_METAL_IDS,
   useMetalConfig,
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
@@ -17,7 +18,6 @@ import { useToast } from './TactileToast';
 
 /* =========================================================================
    Large Showcase Button for a Specific Metal Material (Squircle or Circle)
-   Uses the shared Solution C WebGL Shader Engine
    ========================================================================= */
 const MetalEmblemShowcaseButton: React.FC<{
   materialId: MetalMaterialId;
@@ -131,11 +131,11 @@ export const LiquidChromeLab: React.FC = () => {
   const [previewSwitch, setPreviewSwitch] = useState(true);
   const [previewText, setPreviewText] = useState('');
 
-  const activePreset = METAL_MATERIALS[activeMaterial] || METAL_MATERIALS.gold;
+  const activePreset = METAL_MATERIALS[activeMaterial] || METAL_MATERIALS.classic;
 
   const webglShaderCode = `// =========================================================================
 // 方案 C · WebGL GLSL 多金属材质对角双高光着色器 (Physical Metallic Spectrum Shader)
-// 默认保持干净的 135° 对角双高光，Hover 滑入时原地提亮金属高光（也可按需配置旋转）
+// 默认保持干净的 135° 对角双高光，Hover 滑入时原地提亮金属高光
 // 支持通过 uniform 传入不同金属的物理反射率三元组 (u_highColor, u_midColor, u_darkColor)：
 // - 24K 黄金 (Gold):     High(1.0, 0.93, 0.55), Mid(0.92, 0.66, 0.10), Dark(0.22, 0.13, 0.02)
 // - 镜面铂银 (Platinum): High(1.0, 1.0, 1.0),   Mid(0.76, 0.79, 0.85), Dark(0.08, 0.08, 0.10)
@@ -184,11 +184,14 @@ void main() {
 
   const handleSelectGlobalMaterial = (matId: MetalMaterialId) => {
     const mat = METAL_MATERIALS[matId];
-    audioEngine.playClick('metal');
+    audioEngine.playClick(matId === 'classic' ? 'button' : 'metal');
     setMaterial(matId);
     toast({
-      title: `已设为全局材质：${mat.name}`,
-      description: `全站按钮、输入框、开关、徽章及卡片边框已实时切换为 ${mat.enName}`,
+      title: `已设为全局风格：${mat.name}`,
+      description:
+        matId === 'classic'
+          ? '已恢复初始默认纯 CSS 暗色轻拟物风格'
+          : `全站按钮、输入框、开关、徽章及卡片边框已实时切换为 ${mat.enName}`,
       type: 'success',
     });
   };
@@ -211,7 +214,7 @@ void main() {
                 方案 C · WebGL 物理金属材质系统
               </TactileBadge>
               <span className="text-xs font-mono text-zinc-400">
-                当前全局材质：
+                当前全局风格：
                 <strong style={{ color: activePreset.accentHex }} className="ml-1">
                   {activePreset.name} ({activePreset.enName})
                 </strong>
@@ -221,12 +224,22 @@ void main() {
               style={{ color: activePreset.accentHex }}
               className="text-lg sm:text-xl font-bold tracking-tight mt-2"
             >
-              物理金属材质图鉴（点击下方任意卡片「设为全局材质」即可实时改变全站组件）
+              经典轻拟物 (默认) 与 6 大物理金属材质切换图鉴
             </h2>
           </div>
+
+          <TactileButton
+            variant={activeMaterial === 'classic' ? 'metallic' : 'default'}
+            size="sm"
+            material="classic"
+            icon={<RotateCcw className="w-3.5 h-3.5" />}
+            onClick={() => handleSelectGlobalMaterial('classic')}
+          >
+            {activeMaterial === 'classic' ? '✓ 当前：经典暗色轻拟物 (默认)' : '恢复经典暗色轻拟物 (默认)'}
+          </TactileButton>
         </div>
 
-        {/* Live Global Material Interactive Preview Bar right inside LiquidChromeLab */}
+        {/* Live Global Material Interactive Preview Bar */}
         <div
           style={{
             backgroundImage: `var(--bg-subcard), ${activePreset.cssBorderRimSubtle}`,
@@ -243,10 +256,10 @@ void main() {
             <div>
               <div className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-                <span>当前全局材质实时生效预览：{activePreset.name}</span>
+                <span>当前全局实时生效预览：{activePreset.name}</span>
               </div>
               <div className="text-[11px] text-zinc-400">
-                未单独指定 <code className="text-zinc-300">material</code> 属性的所有组件均自动同步此材质，默认保持干净的 135° 对角双高光
+                全站所有组件实时同步此风格，默认保持干净的 135° 静态对角双高光
               </div>
             </div>
           </div>
@@ -256,14 +269,14 @@ void main() {
               全局默认按钮
             </TactileButton>
             <TactileButton variant="metallic" size="sm">
-              纯金属实心盖
+              高光主按钮
             </TactileButton>
             <TactileButton variant="recessed" size="sm">
               凹陷次级按钮
             </TactileButton>
             <div className="w-44">
               <TactileInput
-                placeholder="全局金属输入框..."
+                placeholder="全局实时输入框..."
                 value={previewText}
                 onChange={(e) => setPreviewText(e.target.value)}
                 icon={<Search className="w-3.5 h-3.5" />}
@@ -278,7 +291,7 @@ void main() {
 
         {/* 6 Metal Material Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {(Object.keys(METAL_MATERIALS) as MetalMaterialId[]).map((matId) => {
+          {WEBGL_METAL_IDS.map((matId) => {
             const mat = METAL_MATERIALS[matId];
             const isSelected = activeMaterial === matId;
             return (

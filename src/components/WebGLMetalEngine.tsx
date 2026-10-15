@@ -8,9 +8,14 @@ import React, {
 } from 'react';
 
 /* =========================================================================
-   1. Physical Metal Material Definitions (RGB Reflectance Curves)
+   1. Style & Physical Metal Material Definitions
+   - 'classic' (DEFAULT): Earliest pure CSS Dark Light-Skeuomorphism
+     (1px 135° diagonal dual-specular rim, convex/concave obsidian surfaces)
+   - 'gold' | 'platinum' | 'obsidian' | 'cobalt' | 'rosegold' | 'emerald':
+     Solution C WebGL GLSL Physical Flowing Metal Shaders
    ========================================================================= */
 export type MetalMaterialId =
+  | 'classic'
   | 'platinum'
   | 'gold'
   | 'obsidian'
@@ -23,6 +28,7 @@ export interface MetalMaterialPreset {
   name: string;
   enName: string;
   description: string;
+  isWebGLMetal: boolean;
   /** Specular peak highlight color (RGB 0..1) */
   highRGB: [number, number, number];
   /** Primary metallic body reflection color (RGB 0..1) */
@@ -44,28 +50,31 @@ export interface MetalMaterialPreset {
 }
 
 export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
-  platinum: {
-    id: 'platinum',
-    name: '镜面铂银',
-    enName: 'Platinum Chrome',
-    description: '高纯度冷调镜面银白，经典高反差镀铬光泽',
+  classic: {
+    id: 'classic',
+    name: '经典暗色轻拟物',
+    enName: 'Classic Dark Tactile',
+    description: '默认初始风格 · 1px 135° 对角双高光微倒角 + 凸起/凹陷曜石黑立体表面',
+    isWebGLMetal: false,
     highRGB: [1.0, 1.0, 1.0],
-    midRGB: [0.76, 0.79, 0.85],
-    darkRGB: [0.08, 0.08, 0.10],
-    swatchGradient: 'linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #18181b 100%)',
-    capGradient: 'linear-gradient(155deg, #17171c 0%, #09090b 60%, #121216 100%)',
-    bevelHighlight: 'rgba(255, 255, 255, 0.24)',
+    midRGB: [0.75, 0.75, 0.78],
+    darkRGB: [0.06, 0.06, 0.08],
+    swatchGradient:
+      'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, #27272a 45%, #09090b 75%, rgba(255,255,255,0.45) 100%)',
+    capGradient: 'linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%)',
+    bevelHighlight: 'rgba(255, 255, 255, 0.18)',
     accentHex: '#f4f4f6',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.52) 0%, rgba(161,161,170,0.10) 42%, rgba(161,161,170,0.05) 60%, rgba(255,255,255,0.28) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.24) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.03) 65%, rgba(255,255,255,0.16) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 42%, rgba(255,255,255,0.02) 62%, rgba(255,255,255,0.12) 100%)',
   },
   gold: {
     id: 'gold',
     name: '24K 皇家黄金',
     enName: '24K Royal Gold',
     description: '天然暖金香槟高光与深邃古铜金暗部交织',
+    isWebGLMetal: true,
     highRGB: [1.0, 0.93, 0.55],
     midRGB: [0.92, 0.66, 0.10],
     darkRGB: [0.22, 0.13, 0.02],
@@ -78,11 +87,30 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     cssBorderRimSubtle:
       'linear-gradient(var(--rim-angle, 135deg), rgba(253,224,71,0.36) 0%, rgba(234,179,8,0.08) 45%, rgba(161,98,7,0.04) 65%, rgba(250,204,21,0.20) 100%)',
   },
+  platinum: {
+    id: 'platinum',
+    name: '镜面铂银',
+    enName: 'Platinum Chrome',
+    description: '高纯度冷调镜面银白，经典高反差镀铬光泽',
+    isWebGLMetal: true,
+    highRGB: [1.0, 1.0, 1.0],
+    midRGB: [0.76, 0.79, 0.85],
+    darkRGB: [0.08, 0.08, 0.10],
+    swatchGradient: 'linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #18181b 100%)',
+    capGradient: 'linear-gradient(155deg, #17171c 0%, #09090b 60%, #121216 100%)',
+    bevelHighlight: 'rgba(255, 255, 255, 0.28)',
+    accentHex: '#f4f4f6',
+    cssBorderRim:
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.58) 0%, rgba(161,161,170,0.12) 42%, rgba(161,161,170,0.06) 60%, rgba(255,255,255,0.32) 100%)',
+    cssBorderRimSubtle:
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.04) 65%, rgba(255,255,255,0.18) 100%)',
+  },
   obsidian: {
     id: 'obsidian',
     name: '曜石黑钛',
     enName: 'Obsidian Titanium',
     description: '阳极氧化暗黑枪色钛金属，低调冷峻的锋利折光',
+    isWebGLMetal: true,
     highRGB: [0.72, 0.74, 0.78],
     midRGB: [0.30, 0.32, 0.36],
     darkRGB: [0.04, 0.04, 0.05],
@@ -100,6 +128,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     name: '深海钴蓝钛',
     enName: 'Cobalt Blue Metal',
     description: '电镀蓝宝石金属光泽，冰青高光与深海蓝底色',
+    isWebGLMetal: true,
     highRGB: [0.68, 0.90, 1.0],
     midRGB: [0.18, 0.52, 0.96],
     darkRGB: [0.04, 0.11, 0.26],
@@ -117,6 +146,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     name: '大马士革玫瑰金',
     enName: 'Rose Gold Copper',
     description: '温暖柔和的香槟粉金与紫铜暗部反光',
+    isWebGLMetal: true,
     highRGB: [1.0, 0.82, 0.80],
     midRGB: [0.90, 0.44, 0.42],
     darkRGB: [0.22, 0.06, 0.08],
@@ -134,6 +164,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     name: '极光祖母绿钛',
     enName: 'Emerald Titanium',
     description: '赛博精密仪器级翠绿阳极氧化金属',
+    isWebGLMetal: true,
     highRGB: [0.68, 1.0, 0.86],
     midRGB: [0.10, 0.74, 0.48],
     darkRGB: [0.02, 0.18, 0.11],
@@ -148,13 +179,19 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
   },
 };
 
+/** Helper list of only the 6 WebGL physical metals */
+export const WEBGL_METAL_IDS: MetalMaterialId[] = [
+  'gold',
+  'platinum',
+  'obsidian',
+  'cobalt',
+  'rosegold',
+  'emerald',
+];
+
 /* =========================================================================
-   2. Global WebGL Metal Configuration Context
-   Defaults:
-   - Static 135° diagonal dual-specular metal rim (autoFlow = false)
-   - Default hoverSweepDeg = 0 (clean static angle on hover, only brightens,
-     avoiding cluttered spinning across the UI unless user enables it or
-     a button specifies sweepDeg)
+   2. Global Style & Metal Configuration Context
+   Default material is 'classic' (Earliest Pure CSS Dark Tactile UI)
    ========================================================================= */
 export interface MetalConfigContextType {
   material: MetalMaterialId;
@@ -177,7 +214,7 @@ export interface MetalConfigContextType {
 }
 
 const DEFAULT_METAL_CONFIG: MetalConfigContextType = {
-  material: 'gold',
+  material: 'classic',
   setMaterial: () => {},
   dispersion: 0,
   setDispersion: () => {},
@@ -204,7 +241,6 @@ export const useMetalConfig = () => {
 
 /* =========================================================================
    3. Shared Singleton WebGL Shader Engine (Solution C Core)
-   Renders all registered UI components using a single shared WebGL context
    ========================================================================= */
 const VERTEX_SHADER_SRC = `
   attribute vec2 a_position;
@@ -259,30 +295,20 @@ const FRAGMENT_SHADER_SRC = `
     return v;
   }
 
-  // Clean Dual-Specular Physical Metallic Reflectance
-  // Produces two crisp opposing diagonal highlights (top-left primary + bottom-right secondary)
-  // without cluttered multi-stripe ripples
   vec3 sampleMetallicSpectrum(float angle, float rotOffset, float hoverBoost, float disp, vec3 cHigh, vec3 cMid, vec3 cDark) {
     float theta = angle - rotOffset;
 
-    // Primary diagonal axis: 2 opposing specular lobes (cos(2*theta))
-    // Plus subtle asymmetry (cos(theta)) so top-left is primary and bottom-right is secondary
     float dualLobe = cos(theta * 2.0);
     float asymmetry = 0.18 * cos(theta);
     float w = dualLobe + asymmetry;
     float dw = -2.0 * sin(theta * 2.0);
 
-    // Normalized transition [0.0 = dark metallic body, 1.0 = specular highlight]
     float t = clamp((w + 0.85) / 1.95, 0.0, 1.0);
-
-    // Hover boosts metallic reflection brightness smoothly in-place
     t = clamp(t + hoverBoost * 0.18, 0.0, 1.0);
 
-    // Rich 3-stop physical metal gradient: Dark Horizon -> Natural Metal Body -> Specular Peak
     vec3 lowerMetal = mix(cDark, cMid, smoothstep(0.0, 0.52, t));
     vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.58, 1.0, t));
 
-    // Crisp specular gleam at the diagonal corners
     float peakGleam = smoothstep(0.72, 1.15, w + hoverBoost * 0.25);
     baseMetal = mix(baseMetal, cHigh, peakGleam * (0.45 + hoverBoost * 0.25));
 
@@ -290,7 +316,6 @@ const FRAGMENT_SHADER_SRC = `
       return baseMetal;
     }
 
-    // Optional Thin-Film Prismatic Dispersion at the dark/bright horizon boundary
     float fringeBell = pow(sin(t * 3.14159265), 1.6);
     vec3 warmFringe = mix(vec3(0.94, 0.30, 0.04), vec3(0.99, 0.84, 0.12), smoothstep(0.2, 0.78, t));
     vec3 coldFringe = mix(vec3(0.10, 0.30, 0.90), vec3(0.50, 0.86, 1.00), smoothstep(0.2, 0.78, t));
@@ -302,12 +327,10 @@ const FRAGMENT_SHADER_SRC = `
   void main() {
     vec2 p = v_uv * 2.0 - 1.0;
 
-    // Aspect-corrected angle so wide rectangular buttons & inputs have balanced corner highlights
     vec2 pAspect = vec2(p.x * pow(max(u_aspect, 0.25), 0.35), p.y);
     float angle = atan(pAspect.y, pAspect.x);
     float len = length(p);
 
-    // Optional liquid mercury warp (active only when u_warp > 0)
     float warpPhase = 0.0;
     if (u_warp > 0.005) {
       float cornerFactor = smoothstep(0.3, 1.15, abs(p.x) * abs(p.y) * 2.4 + len * 0.35);
@@ -362,9 +385,8 @@ class SharedWebGLShaderEngine {
   private lastTime = 0;
   private globalTime = 0;
 
-  // Global config snapshot updated by MetalConfigProvider
   public globalConfig = {
-    material: 'gold' as MetalMaterialId,
+    material: 'classic' as MetalMaterialId,
     dispersion: 0,
     liquidWarp: 0,
     bezelWidth: 2,
@@ -467,14 +489,12 @@ class SharedWebGLShaderEngine {
     const glCanvas = this.glCanvas;
 
     if (gl && glCanvas && this.program) {
-      // 135deg corresponds to top-left (-3*PI/4 in screen UV where Y is up)
       const baseRad = ((cfg.baseAngleDeg - 135) * Math.PI) / 180 + (3 * Math.PI) / 4;
 
       this.surfaces.forEach((surf) => {
         const st = surf.getState();
         const isActive = st.hovered || st.focused;
 
-        // Only rotate on hover if explicitly configured via sweepDegOverride or global hoverSweepDeg
         const sweepDeg =
           st.sweepDegOverride !== undefined ? st.sweepDegOverride : cfg.hoverSweepDeg;
         const targetHoverRad = isActive ? (sweepDeg * Math.PI) / 180 : 0.0;
@@ -486,9 +506,8 @@ class SharedWebGLShaderEngine {
           (targetHoverIntensity - surf.currentHoverIntensity) * Math.min(1, dt * 10.0);
 
         const matId = st.materialOverride || cfg.material;
-        const mat = METAL_MATERIALS[matId] || METAL_MATERIALS.gold;
+        const mat = METAL_MATERIALS[matId] || METAL_MATERIALS.classic;
 
-        // Dimmed state for inactive/unchecked controls while still preserving the global metal hue
         const dimFactor = st.dimmed ? 0.55 : 1.0;
         const highColor: [number, number, number] = [
           mat.highRGB[0] * dimFactor,
@@ -540,11 +559,10 @@ export const sharedMetalEngine = new SharedWebGLShaderEngine();
 
 /* =========================================================================
    4. MetalConfigProvider Component
-   Syncs global metal material to both the WebGL singleton engine AND
-   document :root CSS variables so all cards, dividers, and surfaces update!
+   Defaults to 'classic' (Original Dark Tactile Skeuomorphic UI)
    ========================================================================= */
 export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [material, setMaterial] = useState<MetalMaterialId>('gold');
+  const [material, setMaterial] = useState<MetalMaterialId>('classic');
   const [dispersion, setDispersion] = useState<number>(0);
   const [liquidWarp, setLiquidWarp] = useState<number>(0);
   const [bezelWidth, setBezelWidth] = useState<number>(2);
@@ -553,7 +571,6 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
   const [hoverSweepDeg, setHoverSweepDeg] = useState<number>(0);
   const [baseAngleDeg, setBaseAngleDeg] = useState<number>(135);
 
-  // Sync React state into the 60fps singleton engine
   sharedMetalEngine.globalConfig = {
     material,
     dispersion,
@@ -565,9 +582,8 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
     baseAngleDeg,
   };
 
-  // Sync global CSS custom properties so cards, subcards, navbar, and modals reflect the chosen metal
   useEffect(() => {
-    const preset = METAL_MATERIALS[material] || METAL_MATERIALS.gold;
+    const preset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
     const root = document.documentElement;
     root.style.setProperty('--rim-angle', `${baseAngleDeg}deg`);
     root.style.setProperty('--hover-sweep', `${hoverSweepDeg}deg`);
@@ -577,7 +593,7 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
   }, [material, baseAngleDeg, hoverSweepDeg]);
 
   const resetDefaults = () => {
-    setMaterial('gold');
+    setMaterial('classic');
     setDispersion(0);
     setLiquidWarp(0);
     setBezelWidth(2);
@@ -645,7 +661,6 @@ export const WebGLBezelCanvas: React.FC<WebGLBezelSurfaceProps> = ({
   canvasHeight = 80,
   className = '',
 }) => {
-  // Subscribe to context so any global material change triggers immediate re-render of stateRef
   const { material: globalMaterial } = useMetalConfig();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const idRef = useRef(`webgl-surf-${Math.random().toString(36).substring(2, 9)}`);

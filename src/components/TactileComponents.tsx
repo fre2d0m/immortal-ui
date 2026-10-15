@@ -9,9 +9,43 @@ import {
 } from './WebGLMetalEngine';
 
 /* =========================================================================
-   1. TactileButton (Powered by Solution C WebGL GLSL Flowing Metal Shader)
-   Supports global metal material or per-button `material` prop override
-   ('platinum' | 'gold' | 'obsidian' | 'cobalt' | 'rosegold' | 'emerald')
+   Dynamic CSS Specular Rim Helpers (for 'classic' Dark Tactile Mode)
+   ========================================================================= */
+const CLASSIC_RIM_DEFAULT = `linear-gradient(
+  var(--local-rim-angle, var(--rim-angle, 135deg)),
+  rgba(255, 255, 255, 0.45) 0%,
+  rgba(255, 255, 255, 0.06) 40%,
+  rgba(255, 255, 255, 0.03) 60%,
+  rgba(255, 255, 255, 0.24) 100%
+)`;
+
+const CLASSIC_RIM_SUBTLE = `linear-gradient(
+  var(--local-rim-angle, var(--rim-angle, 135deg)),
+  rgba(255, 255, 255, 0.22) 0%,
+  rgba(255, 255, 255, 0.04) 42%,
+  rgba(255, 255, 255, 0.02) 62%,
+  rgba(255, 255, 255, 0.12) 100%
+)`;
+
+const CLASSIC_RIM_METALLIC = `linear-gradient(
+  var(--local-rim-angle, var(--rim-angle, 135deg)),
+  #ffffff 0%,
+  #a1a1aa 50%,
+  #e4e4e7 100%
+)`;
+
+const CLASSIC_RIM_DANGER = `linear-gradient(
+  var(--local-rim-angle, var(--rim-angle, 135deg)),
+  rgba(251, 113, 133, 0.55) 0%,
+  rgba(251, 113, 133, 0.08) 50%,
+  rgba(251, 113, 133, 0.28) 100%
+)`;
+
+/* =========================================================================
+   1. TactileButton
+   - Default ('classic'): Earliest pure CSS Dark Light-Skeuomorphism
+   - Metal selected ('gold', 'platinum', 'obsidian', 'cobalt', 'rosegold', 'emerald'):
+     Solution C WebGL GLSL Flowing Metal Shader
    ========================================================================= */
 export interface TactileButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'default' | 'metallic' | 'recessed' | 'danger' | 'ghost';
@@ -30,7 +64,7 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
   size = 'md',
   material,
   loading = false,
-  soundType = 'metal',
+  soundType = 'button',
   icon,
   sweepDeg,
   bezelPx,
@@ -40,25 +74,143 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
   style,
   ...props
 }) => {
-  const { material: globalMaterial, bezelWidth: globalBezel } = useMetalConfig();
+  const {
+    material: globalMaterial,
+    bezelWidth: globalBezel,
+    hoverSweepDeg: globalHoverSweep,
+  } = useMetalConfig();
   const [hovered, setHovered] = useState(false);
 
-  const effectiveMaterial: MetalMaterialId =
-    material || (variant === 'danger' ? 'rosegold' : globalMaterial);
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const effectiveMaterial: MetalMaterialId = material || globalMaterial;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (disabled || loading) return;
+    audioEngine.playClick(variant === 'metallic' || !isClassic ? 'metal' : soundType);
+    if (onClick) onClick(e);
+  };
+
+  if (variant === 'ghost') {
+    return (
+      <button
+        {...props}
+        disabled={disabled || loading}
+        onClick={handleClick}
+        className={`h-10 px-4 rounded-xl border border-white/10 text-xs sm:text-sm text-zinc-300 hover:text-white hover:bg-white/5 cursor-pointer transition-colors inline-flex items-center justify-center gap-2 ${className}`}
+      >
+        {icon}
+        {children}
+      </button>
+    );
+  }
+
+  /* -----------------------------------------------------------------------
+     MODE A: Classic Pure CSS Dark Tactile Skeuomorphic Button (Default)
+     ----------------------------------------------------------------------- */
+  if (isClassic) {
+    const getClassicVariantStyle = (): React.CSSProperties => {
+      const effectiveSweep = sweepDeg !== undefined ? sweepDeg : globalHoverSweep;
+      const customVars = {
+        '--hover-sweep': `${effectiveSweep}deg`,
+      } as React.CSSProperties;
+
+      switch (variant) {
+        case 'metallic':
+          return {
+            ...customVars,
+            backgroundImage: `linear-gradient(160deg, #ffffff 0%, #d4d4d8 60%, #a1a1aa 100%), ${CLASSIC_RIM_METALLIC}`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: `0 8px 20px -2px rgba(255, 255, 255, 0.14), 0 4px 10px rgba(0, 0, 0, 0.85), inset 0 1px 1px #ffffff, inset 0 -1px 1px rgba(0, 0, 0, 0.25)`,
+            color: '#09090b',
+            fontWeight: 600,
+          };
+        case 'recessed':
+          return {
+            ...customVars,
+            backgroundImage: `var(--bg-concave), ${CLASSIC_RIM_SUBTLE}`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: `var(--shadow-concave)`,
+            color: hovered ? '#f4f4f6' : '#a1a1aa',
+          };
+        case 'danger':
+          return {
+            ...customVars,
+            backgroundImage: `linear-gradient(145deg, #2a1216 0%, #13080a 60%, #1f0d10 100%), ${CLASSIC_RIM_DANGER}`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: `var(--shadow-convex-sm)`,
+            color: '#fda4af',
+          };
+        case 'default':
+        default:
+          return {
+            ...customVars,
+            backgroundImage: `${hovered ? 'var(--bg-convex-hover)' : 'var(--bg-convex)'}, ${CLASSIC_RIM_DEFAULT}`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: `var(--shadow-convex-sm)`,
+            color: hovered ? '#ffffff' : '#f4f4f6',
+          };
+      }
+    };
+
+    const getClassicSizeClasses = () => {
+      switch (size) {
+        case 'sm':
+          return 'h-8 px-3 text-xs rounded-lg gap-1.5';
+        case 'lg':
+          return 'h-12 px-6 text-sm rounded-2xl gap-2.5 font-medium';
+        case 'icon':
+          return 'w-10 h-10 p-0 rounded-xl justify-center';
+        case 'md':
+        default:
+          return 'h-10 px-4 text-xs sm:text-sm rounded-xl gap-2';
+      }
+    };
+
+    return (
+      <button
+        {...props}
+        disabled={disabled || loading}
+        onClick={handleClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          ...getClassicVariantStyle(),
+          ...style,
+        }}
+        className={`
+          tactile-rim-sweep relative inline-flex items-center justify-center border border-transparent
+          font-medium select-none cursor-pointer
+          active:translate-y-[1px] active:scale-[0.985]
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40
+          disabled:opacity-50 disabled:pointer-events-none
+          ${getClassicSizeClasses()}
+          ${className}
+        `}
+      >
+        {loading ? (
+          <Loader2 className="w-4 h-4 animate-spin text-current" />
+        ) : (
+          icon && <span className="inline-flex shrink-0 items-center justify-center">{icon}</span>
+        )}
+        {children}
+      </button>
+    );
+  }
+
+  /* -----------------------------------------------------------------------
+     MODE B: Solution C WebGL Flowing Metal Button (When a metal is chosen)
+     ----------------------------------------------------------------------- */
   const effectiveBezel =
     bezelPx !== undefined
       ? bezelPx
       : variant === 'recessed'
       ? Math.max(1.25, globalBezel * 0.75)
       : globalBezel;
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (disabled || loading) return;
-    audioEngine.playClick(soundType);
-    if (onClick) onClick(e);
-  };
 
   const getOuterSizeClasses = () => {
     switch (size) {
@@ -88,12 +240,14 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
     }
   };
 
-  // Inner cap background depending on variant & metal material
   const getCapStyle = (): React.CSSProperties => {
     if (variant === 'metallic') {
       return {
         background: matPreset.swatchGradient,
-        color: effectiveMaterial === 'obsidian' || effectiveMaterial === 'cobalt' ? '#ffffff' : '#09090b',
+        color:
+          effectiveMaterial === 'obsidian' || effectiveMaterial === 'cobalt'
+            ? '#ffffff'
+            : '#09090b',
         fontWeight: 600,
         boxShadow:
           'inset 0 1px 1px rgba(255,255,255,0.65), inset 0 -1px 2px rgba(0,0,0,0.45)',
@@ -121,19 +275,6 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
     };
   };
 
-  if (variant === 'ghost') {
-    return (
-      <button
-        {...props}
-        disabled={disabled || loading}
-        onClick={handleClick}
-        className={`h-10 px-4 rounded-xl border border-white/10 text-xs sm:text-sm text-zinc-300 hover:text-white hover:bg-white/5 cursor-pointer transition-colors ${className}`}
-      >
-        {children}
-      </button>
-    );
-  }
-
   return (
     <button
       {...props}
@@ -158,9 +299,8 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
         ${className}
       `}
     >
-      {/* Solution C: WebGL GLSL Flowing Metal Shader Bezel */}
       <WebGLBezelCanvas
-        material={effectiveMaterial}
+        material={variant === 'danger' && !material ? 'rosegold' : effectiveMaterial}
         dimmed={variant === 'recessed' && !hovered}
         hovered={hovered}
         sweepDeg={sweepDeg}
@@ -168,7 +308,6 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
         canvasHeight={80}
       />
 
-      {/* Inner Tactile Button Cap */}
       <span
         style={getCapStyle()}
         className={`relative z-10 w-full h-full inline-flex items-center justify-center gap-2 transition-colors duration-150 ${getInnerPadClasses()}`}
@@ -192,7 +331,7 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
 };
 
 /* =========================================================================
-   2. TactileInput (Powered by Solution C WebGL Metal Bezel)
+   2. TactileInput
    ========================================================================= */
 export interface TactileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode;
@@ -215,7 +354,63 @@ export const TactileInput: React.FC<TactileInputProps> = ({
   const [focused, setFocused] = useState(false);
 
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
+
+  if (isClassic) {
+    return (
+      <div
+        style={{
+          backgroundImage: `var(--bg-concave), ${
+            focused ? 'var(--border-rim-focus)' : 'var(--border-rim-subtle)'
+          }`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: focused
+            ? `inset 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 0 3px rgba(255, 255, 255, 0.06)`
+            : `var(--shadow-concave)`,
+          ...style,
+        }}
+        className={`group relative flex items-center w-full rounded-xl border border-transparent transition-all duration-200 ${className}`}
+      >
+        {icon && (
+          <span
+            className={`pl-3.5 transition-colors pointer-events-none flex items-center justify-center ${
+              focused ? 'text-zinc-200' : 'text-zinc-500'
+            }`}
+          >
+            {icon}
+          </span>
+        )}
+        <input
+          {...props}
+          value={value}
+          onFocus={(e) => {
+            setFocused(true);
+            if (props.onFocus) props.onFocus(e);
+          }}
+          onBlur={(e) => {
+            setFocused(false);
+            if (props.onBlur) props.onBlur(e);
+          }}
+          className="w-full h-10 px-3.5 bg-transparent border-none outline-none text-zinc-100 placeholder:text-zinc-600 text-xs sm:text-sm font-normal"
+        />
+        {kbd && (
+          <span
+            style={{
+              backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+              backgroundOrigin: 'padding-box, border-box',
+              backgroundClip: 'padding-box, border-box',
+            }}
+            className="mr-2.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-zinc-400 rounded-md border border-transparent shadow-sm select-none"
+          >
+            {kbd}
+          </span>
+        )}
+      </div>
+    );
+  }
+
   const pad = Math.max(1.5, Math.min(3.5, bezelWidth * 0.85));
 
   return (
@@ -284,7 +479,7 @@ export const TactileInput: React.FC<TactileInputProps> = ({
 };
 
 /* =========================================================================
-   3. TactileTextarea (Powered by Solution C WebGL Metal Bezel)
+   3. TactileTextarea
    ========================================================================= */
 export interface TactileTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   material?: MetalMaterialId;
@@ -301,6 +496,37 @@ export const TactileTextarea: React.FC<TactileTextareaProps> = ({
   const [focused, setFocused] = useState(false);
 
   const effectiveMaterial = material || globalMaterial;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
+
+  if (isClassic) {
+    return (
+      <textarea
+        {...props}
+        onFocus={(e) => {
+          setFocused(true);
+          if (props.onFocus) props.onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          if (props.onBlur) props.onBlur(e);
+        }}
+        style={{
+          backgroundImage: `var(--bg-concave), ${
+            focused ? 'var(--border-rim-focus)' : 'var(--border-rim-subtle)'
+          }`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: focused
+            ? `inset 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 0 3px rgba(255, 255, 255, 0.06)`
+            : `var(--shadow-concave)`,
+          ...style,
+        }}
+        className={`w-full min-h-[86px] p-3.5 rounded-xl border border-transparent outline-none text-zinc-100 placeholder:text-zinc-600 text-xs sm:text-sm font-normal resize-y transition-all duration-200 leading-relaxed ${className}`}
+      />
+    );
+  }
+
   const pad = Math.max(1.5, Math.min(3.5, bezelWidth * 0.85));
 
   return (
@@ -348,7 +574,7 @@ export const TactileTextarea: React.FC<TactileTextareaProps> = ({
 };
 
 /* =========================================================================
-   4. TactileSwitch (WebGL Metal Thumb + Recessed Obsidian Track)
+   4. TactileSwitch
    ========================================================================= */
 export interface TactileSwitchProps {
   id?: string;
@@ -374,13 +600,88 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
   const switchId = id || `switch-${Math.random().toString(36).substring(2, 9)}`;
 
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
 
   const toggle = () => {
     audioEngine.playClick('switch');
     onChange(!checked);
   };
 
+  if (isClassic) {
+    const classicTrack = (
+      <div
+        onClick={toggle}
+        role="switch"
+        aria-checked={checked}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            toggle();
+          }
+        }}
+        style={{
+          backgroundImage: `${
+            checked
+              ? 'linear-gradient(180deg, #121216 0%, #1c1c22 100%)'
+              : 'var(--bg-concave)'
+          }, var(--border-rim-subtle)`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: `var(--shadow-concave)`,
+        }}
+        className="relative inline-flex items-center w-12 h-7 rounded-full border border-transparent cursor-pointer shrink-0 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+      >
+        <div
+          style={{
+            backgroundImage: `${
+              checked
+                ? 'linear-gradient(145deg, #ffffff 0%, #d4d4d8 100%)'
+                : 'linear-gradient(145deg, #27272a 0%, #121215 100%)'
+            }, var(--border-rim)`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: checked
+              ? '0 0 12px rgba(255, 255, 255, 0.35), 0 2px 5px rgba(0, 0, 0, 0.9)'
+              : '0 2px 4px rgba(0, 0, 0, 0.9), inset 0 1px 0.5px rgba(255, 255, 255, 0.25)',
+            transform: checked ? 'translateX(22px)' : 'translateX(3px)',
+          }}
+          className="w-5 h-5 rounded-full border border-transparent transition-all duration-300 flex items-center justify-center"
+        >
+          <span
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              checked
+                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.9)]'
+                : 'bg-zinc-600'
+            }`}
+          />
+        </div>
+      </div>
+    );
+
+    if (!label) return classicTrack;
+
+    return (
+      <div
+        style={{
+          backgroundImage: `var(--bg-subcard), var(--border-rim-subtle)`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: `inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 12px rgba(0, 0, 0, 0.6)`,
+        }}
+        className={`flex items-center justify-between p-3.5 rounded-xl border border-transparent transition-all duration-200 select-none ${className}`}
+      >
+        <label htmlFor={switchId} onClick={toggle} className="cursor-pointer pr-4 flex-1">
+          <div className="text-xs sm:text-sm font-medium text-zinc-100">{label}</div>
+          {hint && <div className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">{hint}</div>}
+        </label>
+        {classicTrack}
+      </div>
+    );
+  }
+
+  /* WebGL Metal Mode */
   const content = (
     <div
       onClick={toggle}
@@ -398,7 +699,6 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
       }}
       className="relative inline-flex items-center w-12 h-7 cursor-pointer shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-full overflow-hidden"
     >
-      {/* WebGL Metal Bezel around the Switch Track */}
       <WebGLBezelCanvas
         material={effectiveMaterial}
         dimmed={!checked && !hovered}
@@ -408,7 +708,6 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
         canvasHeight={56}
       />
 
-      {/* Inner Concave Track */}
       <div
         style={{
           background: checked
@@ -418,7 +717,6 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
         }}
         className="relative z-10 w-full h-full rounded-full flex items-center transition-colors duration-300"
       >
-        {/* Metallic Thumb */}
         <div
           style={{
             background: checked
@@ -480,7 +778,7 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
 };
 
 /* =========================================================================
-   5. TactileCheckbox (WebGL Metal Bezel + Metallic Checkmark)
+   5. TactileCheckbox
    ========================================================================= */
 export interface TactileCheckboxProps {
   checked: boolean;
@@ -502,13 +800,61 @@ export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
   const { material: globalMaterial } = useMetalConfig();
   const [hovered, setHovered] = useState(false);
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
 
   const toggle = () => {
     if (disabled) return;
     audioEngine.playClick('button');
     onChange(!checked);
   };
+
+  if (isClassic) {
+    return (
+      <div
+        onClick={toggle}
+        className={`inline-flex items-start gap-3 cursor-pointer select-none group ${
+          disabled ? 'opacity-50 pointer-events-none' : ''
+        }`}
+      >
+        <div
+          style={{
+            backgroundImage: checked
+              ? `linear-gradient(145deg, #f4f4f6 0%, #a1a1aa 100%), var(--border-rim)`
+              : `var(--bg-concave), var(--border-rim-subtle)`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: checked
+              ? `0 3px 8px rgba(0, 0, 0, 0.8), inset 0 1px 0.5px #ffffff`
+              : `var(--shadow-concave)`,
+          }}
+          className="w-5 h-5 rounded-md border border-transparent flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#09090b"
+            strokeWidth="3.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`w-3.5 h-3.5 transition-all duration-200 ${
+              checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            }`}
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        {label && (
+          <div className="flex flex-col">
+            <span className="text-xs sm:text-sm text-zinc-300 group-hover:text-zinc-100 transition-colors">
+              {label}
+            </span>
+            {hint && <span className="text-[11px] text-zinc-500">{hint}</span>}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -542,7 +888,11 @@ export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            stroke={effectiveMaterial === 'obsidian' || effectiveMaterial === 'cobalt' ? '#ffffff' : '#09090b'}
+            stroke={
+              effectiveMaterial === 'obsidian' || effectiveMaterial === 'cobalt'
+                ? '#ffffff'
+                : '#09090b'
+            }
             strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -567,7 +917,7 @@ export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
 };
 
 /* =========================================================================
-   6. TactileRadioGroup (WebGL Metal Ring & Core)
+   6. TactileRadioGroup
    ========================================================================= */
 export interface TactileRadioOption {
   value: string;
@@ -585,7 +935,54 @@ export const TactileRadioGroup: React.FC<{
 }> = ({ options, value, onChange, material, direction = 'row' }) => {
   const { material: globalMaterial } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
+
+  if (isClassic) {
+    return (
+      <div className={`flex ${direction === 'row' ? 'flex-wrap gap-4' : 'flex-col gap-2.5'}`}>
+        {options.map((opt) => {
+          const isSelected = value === opt.value;
+          return (
+            <div
+              key={opt.value}
+              onClick={() => {
+                audioEngine.playClick('select');
+                onChange(opt.value);
+              }}
+              className="inline-flex items-center gap-2.5 cursor-pointer select-none group"
+            >
+              <div
+                style={{
+                  backgroundImage: `var(--bg-concave), ${
+                    isSelected ? 'var(--border-rim)' : 'var(--border-rim-subtle)'
+                  }`,
+                  backgroundOrigin: 'padding-box, border-box',
+                  backgroundClip: 'padding-box, border-box',
+                  boxShadow: `var(--shadow-concave)`,
+                }}
+                className="w-5 h-5 rounded-full border border-transparent flex items-center justify-center shrink-0 transition-all duration-200"
+              >
+                <div
+                  style={{
+                    transform: isSelected ? 'scale(1)' : 'scale(0.3)',
+                    opacity: isSelected ? 1 : 0,
+                    background: 'radial-gradient(circle at 35% 35%, #ffffff, #a1a1aa)',
+                    boxShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
+                  }}
+                  className="w-2.5 h-2.5 rounded-full transition-all duration-200"
+                />
+              </div>
+              <div className="text-xs sm:text-sm text-zinc-300 group-hover:text-zinc-100 transition-colors">
+                {opt.label}
+                {opt.hint && <span className="text-zinc-500 ml-1.5 text-xs">({opt.hint})</span>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className={`flex ${direction === 'row' ? 'flex-wrap gap-4' : 'flex-col gap-2.5'}`}>
@@ -640,7 +1037,7 @@ export const TactileRadioGroup: React.FC<{
 };
 
 /* =========================================================================
-   7. TactileSlider (Metallic Track Fill)
+   7. TactileSlider
    ========================================================================= */
 export interface TactileSliderProps {
   value: number;
@@ -665,7 +1062,8 @@ export const TactileSlider: React.FC<TactileSliderProps> = ({
 }) => {
   const { material: globalMaterial } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
   const percentage = Math.round(((value - min) / (max - min)) * 100);
 
   return (
@@ -674,7 +1072,7 @@ export const TactileSlider: React.FC<TactileSliderProps> = ({
         <div className="flex items-center justify-between text-xs font-medium text-zinc-400">
           <span>{label}</span>
           <span
-            style={{ color: matPreset.accentHex }}
+            style={{ color: isClassic ? '#e4e4e7' : matPreset.accentHex }}
             className="font-mono bg-zinc-900/80 px-2 py-0.5 rounded border border-white/10"
           >
             {value}
@@ -694,7 +1092,9 @@ export const TactileSlider: React.FC<TactileSliderProps> = ({
           }}
           onMouseDown={() => audioEngine.playClick('select')}
           style={{
-            background: `linear-gradient(90deg, ${matPreset.accentHex} 0%, ${matPreset.accentHex}99 ${percentage}%, #050507 ${percentage}%, #09090b 100%)`,
+            background: isClassic
+              ? `linear-gradient(90deg, #e4e4e7 0%, #71717a ${percentage}%, #050507 ${percentage}%, #09090b 100%)`
+              : `linear-gradient(90deg, ${matPreset.accentHex} 0%, ${matPreset.accentHex}99 ${percentage}%, #050507 ${percentage}%, #09090b 100%)`,
             boxShadow: `var(--shadow-concave)`,
           }}
           className="
@@ -713,7 +1113,7 @@ export const TactileSlider: React.FC<TactileSliderProps> = ({
 };
 
 /* =========================================================================
-   8. TactileSelect (Powered by Solution C WebGL Metal Bezel)
+   8. TactileSelect
    ========================================================================= */
 export interface TactileSelectOption {
   value: string;
@@ -735,7 +1135,8 @@ export const TactileSelect: React.FC<{
   const containerRef = useRef<HTMLDivElement>(null);
 
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
   const selectedOption = options.find((o) => o.value === value);
 
   useEffect(() => {
@@ -747,6 +1148,101 @@ export const TactileSelect: React.FC<{
     window.addEventListener('click', handleOutsideClick);
     return () => window.removeEventListener('click', handleOutsideClick);
   }, []);
+
+  if (isClassic) {
+    return (
+      <div ref={containerRef} className="relative w-full flex flex-col gap-1.5">
+        {label && <label className="text-xs font-medium text-zinc-400">{label}</label>}
+        <button
+          type="button"
+          onClick={() => {
+            audioEngine.playClick('select');
+            setIsOpen(!isOpen);
+          }}
+          style={{
+            backgroundImage: `var(--bg-convex), ${
+              isOpen ? 'var(--border-rim-focus)' : 'var(--border-rim)'
+            }`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
+            boxShadow: `var(--shadow-convex-sm)`,
+          }}
+          className="w-full h-10 px-3.5 rounded-xl border border-transparent flex items-center justify-between text-xs sm:text-sm text-zinc-100 cursor-pointer select-none transition-all duration-200 focus:outline-none"
+        >
+          <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className={`w-4 h-4 text-zinc-400 transition-transform duration-200 shrink-0 ml-2 ${
+              isOpen ? 'rotate-180 text-zinc-100' : ''
+            }`}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+
+        {isOpen && (
+          <div
+            style={{
+              backgroundImage: `linear-gradient(160deg, #16161a 0%, #09090b 100%), var(--border-rim)`,
+              backgroundOrigin: 'padding-box, border-box',
+              backgroundClip: 'padding-box, border-box',
+              boxShadow: `0 20px 40px rgba(0, 0, 0, 0.95), inset 0 1px 0.5px rgba(255, 255, 255, 0.2)`,
+            }}
+            className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 p-1.5 rounded-xl border border-transparent flex flex-col gap-1 animate-in fade-in zoom-in-95 duration-150"
+          >
+            {options.map((opt) => {
+              const isSelected = opt.value === value;
+              return (
+                <div
+                  key={opt.value}
+                  onClick={() => {
+                    audioEngine.playClick('select');
+                    onChange(opt.value);
+                    setIsOpen(false);
+                  }}
+                  style={
+                    isSelected
+                      ? {
+                          backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+                          backgroundOrigin: 'padding-box, border-box',
+                          backgroundClip: 'padding-box, border-box',
+                        }
+                      : {}
+                  }
+                  className={`flex items-center justify-between px-3 py-2 rounded-lg border border-transparent text-xs sm:text-sm cursor-pointer transition-all ${
+                    isSelected
+                      ? 'text-zinc-100 font-medium'
+                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <div>
+                    <div>{opt.label}</div>
+                    {opt.description && (
+                      <div className="text-[10px] text-zinc-500 font-normal">{opt.description}</div>
+                    )}
+                  </div>
+                  {isSelected && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      className="w-3.5 h-3.5 text-zinc-100 shrink-0 ml-2"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative w-full flex flex-col gap-1.5">
@@ -853,7 +1349,7 @@ export const TactileSelect: React.FC<{
 };
 
 /* =========================================================================
-   9. TactileTabs (Segmented Control with WebGL Metal Active Tab)
+   9. TactileTabs (Segmented Control)
    ========================================================================= */
 export interface TactileTabItem {
   id: string;
@@ -870,7 +1366,58 @@ export const TactileTabs: React.FC<{
 }> = ({ tabs, activeId, onChange, material, className = '' }) => {
   const { material: globalMaterial, bezelWidth } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
+
+  if (isClassic) {
+    return (
+      <div
+        style={{
+          backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: `var(--shadow-concave)`,
+        }}
+        className={`p-1 rounded-xl border border-transparent flex gap-1 ${className}`}
+      >
+        {tabs.map((tab) => {
+          const isActive = tab.id === activeId;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                audioEngine.playClick('button');
+                onChange(tab.id);
+              }}
+              style={
+                isActive
+                  ? {
+                      backgroundImage: `var(--bg-convex), var(--border-rim)`,
+                      backgroundOrigin: 'padding-box, border-box',
+                      backgroundClip: 'padding-box, border-box',
+                      boxShadow: `var(--shadow-convex-sm)`,
+                    }
+                  : {}
+              }
+              className={`
+                flex-1 h-8 sm:h-9 px-3 rounded-lg border border-transparent text-xs sm:text-sm font-medium
+                flex items-center justify-center gap-1.5 transition-all duration-200 select-none cursor-pointer
+                ${
+                  isActive
+                    ? 'text-zinc-100 font-semibold'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }
+              `}
+            >
+              {tab.icon && <span className="w-4 h-4">{tab.icon}</span>}
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -932,7 +1479,7 @@ export const TactileTabs: React.FC<{
 };
 
 /* =========================================================================
-   10. TactileBadge (WebGL Metal Capsule)
+   10. TactileBadge
    ========================================================================= */
 export const TactileBadge: React.FC<{
   children: ReactNode;
@@ -942,7 +1489,8 @@ export const TactileBadge: React.FC<{
 }> = ({ children, dotColor = 'white', material, className = '' }) => {
   const { material: globalMaterial } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
-  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
 
   const getDotStyle = () => {
     switch (dotColor) {
@@ -957,6 +1505,23 @@ export const TactileBadge: React.FC<{
         return 'bg-zinc-200 shadow-[0_0_8px_rgba(255,255,255,0.7)]';
     }
   };
+
+  if (isClassic) {
+    return (
+      <span
+        style={{
+          backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+          backgroundOrigin: 'padding-box, border-box',
+          backgroundClip: 'padding-box, border-box',
+          boxShadow: `var(--shadow-convex-sm)`,
+        }}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-medium text-zinc-300 rounded-full border border-transparent select-none ${className}`}
+      >
+        <span className={`w-1.5 h-1.5 rounded-full ${getDotStyle()}`} />
+        {children}
+      </span>
+    );
+  }
 
   return (
     <span
@@ -992,7 +1557,8 @@ export const TactileCard: React.FC<{
   headerAction?: ReactNode;
 }> = ({ title, description, badge, children, className = '', headerAction }) => {
   const { material } = useMetalConfig();
-  const matPreset = METAL_MATERIALS[material] || METAL_MATERIALS.gold;
+  const matPreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
+  const isClassic = !matPreset.isWebGLMetal;
 
   return (
     <div
@@ -1009,8 +1575,12 @@ export const TactileCard: React.FC<{
           <div>
             {title && (
               <h3
-                style={{ color: matPreset.accentHex }}
-                className="text-sm sm:text-base font-semibold tracking-tight"
+                style={!isClassic ? { color: matPreset.accentHex } : undefined}
+                className={`text-sm sm:text-base font-semibold tracking-tight ${
+                  isClassic
+                    ? 'text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400'
+                    : ''
+                }`}
               >
                 {title}
               </h3>

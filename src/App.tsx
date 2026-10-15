@@ -16,10 +16,20 @@ import { HeroEmblem } from './components/HeroEmblem';
 import { LightingLab } from './components/LightingLab';
 import { LiquidChromeLab } from './components/LiquidChromeLab';
 import { ComponentDocs } from './components/ComponentDocs';
+import {
+  ShadcnCardsExample,
+  ShadcnDashboardExample,
+  ShadcnPlaygroundExample,
+} from './components/ShadcnExamplesGrid';
 import { ToastProvider, useToast } from './components/TactileToast';
 import { TactileModal } from './components/TactileModal';
 import { audioEngine } from './components/AudioEngine';
-import { MetalConfigProvider } from './components/WebGLMetalEngine';
+import {
+  MetalConfigProvider,
+  METAL_MATERIALS,
+  MetalMaterialId,
+  useMetalConfig,
+} from './components/WebGLMetalEngine';
 import {
   LayoutGrid,
   Code2,
@@ -30,31 +40,49 @@ import {
   Terminal,
   Settings,
   Cpu,
-  Layers,
   Eye,
   EyeOff,
-  Bell,
+  Copy,
+  Check,
+  ArrowRight,
+  Layers,
+  Activity,
+  Play,
+  RotateCcw,
 } from 'lucide-react';
+
+type MainTabId =
+  | 'examples-cards'
+  | 'examples-dashboard'
+  | 'examples-playground'
+  | 'components'
+  | 'metal-lab'
+  | 'docs';
 
 function AppContent() {
   const { toast } = useToast();
+  const { material, setMaterial, resetDefaults } = useMetalConfig();
+  const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
+  const isClassic = !activePreset.isWebGLMetal;
 
-  // Navigation tab
-  const [currentNav, setCurrentNav] = useState<'showcase' | 'chrome' | 'docs' | 'studio'>('showcase');
+  // Main shadcn-style navigation tab (defaults to shadcn's signature 'Cards' example grid)
+  const [activeTab, setActiveTab] = useState<MainTabId>('examples-cards');
+
+  // Toggle for expanded Optical & Shader Customizer drawer
+  const [showCustomizer, setShowCustomizer] = useState(false);
+
+  // CLI copy state
+  const [copiedCli, setCopiedCli] = useState(false);
 
   // Modal demo state
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Card 1: Buttons demo state
+  // Foundational Components tab state
   const [btnLoading, setBtnLoading] = useState(false);
   const [activeSegmentTab, setActiveSegmentTab] = useState('overview');
-
-  // Card 2: Inputs demo state
   const [searchVal, setSearchVal] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('grok');
   const [showPassword, setShowPassword] = useState(false);
-
-  // Card 3: Controls demo state
   const [enableRayTracing, setEnableRayTracing] = useState(true);
   const [enableLowPower, setEnableLowPower] = useState(false);
   const [specularStrength, setSpecularStrength] = useState(68);
@@ -62,7 +90,7 @@ function AppContent() {
   const [hapticCheck, setHapticCheck] = useState(true);
   const [themeMode, setThemeMode] = useState('obsidian');
 
-  // Card 4: Form example state
+  // Composite Form example state
   const [formName, setFormName] = useState('Tactile-Worker-01');
   const [formEngine, setFormEngine] = useState('linear');
   const [formMaxTokens, setFormMaxTokens] = useState(4096);
@@ -78,216 +106,431 @@ function AppContent() {
     });
   };
 
+  const handleCopyCli = () => {
+    navigator.clipboard.writeText('npx tactile-ui@latest init');
+    setCopiedCli(true);
+    audioEngine.playClick('button');
+    toast({
+      title: 'CLI 初始化命令已复制',
+      description: 'npx tactile-ui@latest init',
+      type: 'success',
+    });
+    setTimeout(() => setCopiedCli(false), 2000);
+  };
+
+  const handleQuickMaterialSwitch = (matId: MetalMaterialId) => {
+    const mat = METAL_MATERIALS[matId];
+    audioEngine.playClick(matId === 'classic' ? 'button' : 'metal');
+    setMaterial(matId);
+    toast({
+      title: `已切换全局风格：${mat.name}`,
+      description:
+        matId === 'classic'
+          ? '已恢复默认纯 CSS 135° 对角双高光暗色轻拟物风格'
+          : `全站所有组件已实时应用 WebGL ${mat.enName} 金属材质`,
+      type: 'success',
+    });
+  };
+
+  const materialList = Object.values(METAL_MATERIALS);
+
   return (
-    <div className="min-h-screen text-zinc-100 flex flex-col pb-20">
-      {/* Top Navbar */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/[0.06] bg-[#070708]/85 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          {/* Logo & Title */}
-          <div className="flex items-center gap-3">
+    <div className="min-h-screen text-zinc-100 flex flex-col pb-24">
+      {/* =====================================================================
+          1. Top Sticky Navbar (ui.shadcn.com style)
+         ===================================================================== */}
+      <header className="sticky top-0 z-40 w-full border-b border-white/[0.07] bg-[#070708]/85 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+          {/* Left: Brand & Nav Links */}
+          <div className="flex items-center gap-6">
             <div
-              style={{
-                backgroundImage: `var(--bg-convex), var(--border-rim)`,
-                backgroundOrigin: 'padding-box, border-box',
-                backgroundClip: 'padding-box, border-box',
-                boxShadow: `var(--shadow-convex-sm)`,
+              onClick={() => {
+                audioEngine.playClick('button');
+                setActiveTab('examples-cards');
               }}
-              className="w-9 h-9 rounded-xl border border-transparent flex items-center justify-center shrink-0 cursor-pointer"
-              onClick={() => audioEngine.playClick('metal')}
+              className="flex items-center gap-2.5 cursor-pointer group"
             >
-              <Zap className="w-4 h-4" style={{ color: 'var(--metal-accent, #fde047)' }} />
-            </div>
-            <div>
+              <div
+                style={{
+                  backgroundImage: `var(--bg-convex), var(--border-rim)`,
+                  backgroundOrigin: 'padding-box, border-box',
+                  backgroundClip: 'padding-box, border-box',
+                  boxShadow: `var(--shadow-convex-sm)`,
+                }}
+                className="w-8 h-8 rounded-lg border border-transparent flex items-center justify-center shrink-0"
+              >
+                <Zap className="w-4 h-4" style={{ color: activePreset.accentHex }} />
+              </div>
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-sm sm:text-base text-zinc-100 tracking-tight">
-                  Dark Tactile UI
+                <span className="font-bold text-sm sm:text-base text-zinc-100 tracking-tight">
+                  tactile/ui
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-white/10 hidden sm:inline-block">
-                  v2.5 Chrome
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-white/10 hidden sm:inline-block">
+                  v3.0
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-500 hidden sm:block">
-                暗色轻拟物 · 对角双高光 & 色散流光金属系统
-              </p>
             </div>
-          </div>
 
-          {/* Navigation Mode Switcher */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <div
-              style={{
-                backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
-                backgroundOrigin: 'padding-box, border-box',
-                backgroundClip: 'padding-box, border-box',
-                boxShadow: `var(--shadow-concave)`,
-              }}
-              className="p-1 rounded-xl border border-transparent flex gap-1"
-            >
+            <nav className="hidden md:flex items-center gap-5 text-xs font-medium">
               <button
                 type="button"
-                onClick={() => {
-                  audioEngine.playClick('button');
-                  setCurrentNav('showcase');
-                }}
-                style={
-                  currentNav === 'showcase'
-                    ? {
-                        backgroundImage: `var(--bg-convex), var(--border-rim)`,
-                        backgroundOrigin: 'padding-box, border-box',
-                        backgroundClip: 'padding-box, border-box',
-                        boxShadow: `var(--shadow-convex-sm)`,
-                      }
-                    : {}
-                }
-                className={`px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
-                  currentNav === 'showcase'
-                    ? 'text-zinc-100 font-semibold'
+                onClick={() => setActiveTab('examples-cards')}
+                className={`cursor-pointer transition-colors ${
+                  activeTab.startsWith('examples-')
+                    ? 'text-white font-semibold'
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                <span>全景陈列馆</span>
+                Examples (场景示例)
               </button>
-
               <button
                 type="button"
-                onClick={() => {
-                  audioEngine.playClick('metal');
-                  setCurrentNav('chrome');
-                }}
-                style={
-                  currentNav === 'chrome'
-                    ? {
-                        backgroundImage: `var(--bg-convex), var(--border-rim)`,
-                        backgroundOrigin: 'padding-box, border-box',
-                        backgroundClip: 'padding-box, border-box',
-                        boxShadow: `var(--shadow-convex-sm)`,
-                      }
-                    : {}
-                }
-                className={`px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
-                  currentNav === 'chrome'
+                onClick={() => setActiveTab('components')}
+                className={`cursor-pointer transition-colors ${
+                  activeTab === 'components'
+                    ? 'text-white font-semibold'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                Components (基础组件)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('metal-lab')}
+                className={`cursor-pointer transition-colors flex items-center gap-1 ${
+                  activeTab === 'metal-lab'
                     ? 'text-amber-300 font-semibold'
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>流光金属实验室 (CSS/SVG/WebGL)</span>
+                <span>Metals (流光金属)</span>
               </button>
-
               <button
                 type="button"
-                onClick={() => {
-                  audioEngine.playClick('button');
-                  setCurrentNav('docs');
-                }}
-                style={
-                  currentNav === 'docs'
-                    ? {
-                        backgroundImage: `var(--bg-convex), var(--border-rim)`,
-                        backgroundOrigin: 'padding-box, border-box',
-                        backgroundClip: 'padding-box, border-box',
-                        boxShadow: `var(--shadow-convex-sm)`,
-                      }
-                    : {}
-                }
-                className={`px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
-                  currentNav === 'docs'
-                    ? 'text-zinc-100 font-semibold'
+                onClick={() => setActiveTab('docs')}
+                className={`cursor-pointer transition-colors ${
+                  activeTab === 'docs'
+                    ? 'text-white font-semibold'
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                <Code2 className="w-3.5 h-3.5" />
-                <span>代码生成器 (shadcn)</span>
+                Docs & Code (源码)
               </button>
+            </nav>
+          </div>
 
+          {/* Right: Current Style Indicator + Customize Toggle + Modal Test */}
+          <div className="flex items-center gap-2">
+            {/* Active Style Indicator Pill */}
+            <button
+              type="button"
+              onClick={() => setShowCustomizer(!showCustomizer)}
+              style={{
+                backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+                backgroundOrigin: 'padding-box, border-box',
+                backgroundClip: 'padding-box, border-box',
+              }}
+              className="h-8 px-3 rounded-lg border border-transparent text-xs font-medium flex items-center gap-2 cursor-pointer text-zinc-200 hover:text-white transition-all"
+              title="展开/收起光学与材质定制器"
+            >
+              <span
+                style={{ background: activePreset.swatchGradient }}
+                className="w-3 h-3 rounded-full border border-white/30"
+              />
+              <span className="hidden sm:inline">风格：</span>
+              <span style={{ color: activePreset.accentHex }} className="font-semibold">
+                {activePreset.name}
+              </span>
+              <SlidersHorizontal className="w-3.5 h-3.5 text-zinc-400 ml-0.5" />
+            </button>
+
+            {!isClassic && (
               <button
                 type="button"
-                onClick={() => {
-                  audioEngine.playClick('button');
-                  setCurrentNav('studio');
-                }}
-                style={
-                  currentNav === 'studio'
-                    ? {
-                        backgroundImage: `var(--bg-convex), var(--border-rim)`,
-                        backgroundOrigin: 'padding-box, border-box',
-                        backgroundClip: 'padding-box, border-box',
-                        boxShadow: `var(--shadow-convex-sm)`,
-                      }
-                    : {}
-                }
-                className={`px-3 py-1.5 rounded-lg border border-transparent text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer hidden md:flex ${
-                  currentNav === 'studio'
-                    ? 'text-zinc-100 font-semibold'
-                    : 'text-zinc-400 hover:text-zinc-200'
-                }`}
+                onClick={() => handleQuickMaterialSwitch('classic')}
+                className="h-8 px-2.5 rounded-lg bg-zinc-900 border border-white/10 text-[11px] text-zinc-300 hover:text-white cursor-pointer flex items-center gap-1 transition-colors"
+                title="一键切回默认经典暗色轻拟物风格"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>实战控制台</span>
+                <RotateCcw className="w-3 h-3" />
+                <span className="hidden sm:inline">恢复默认轻拟物</span>
               </button>
-            </div>
+            )}
 
-            {/* Modal Trigger */}
             <TactileButton
               variant="metallic"
               size="sm"
               onClick={() => setIsModalOpen(true)}
               className="hidden sm:inline-flex"
             >
-              弹窗测试 (Modal)
+              Modal 弹窗
             </TactileButton>
           </div>
         </div>
       </header>
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex-1">
-        {/* 1:1 Hero Section & Tactile Emblem */}
-        <HeroEmblem />
+      {/* =====================================================================
+          2. shadcn/ui Hero Section + 1:1 Reference Emblem + Instant Style Bar
+         ===================================================================== */}
+      <section className="relative border-b border-white/[0.06] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-7 sm:pt-12 sm:pb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left 8 Cols: shadcn/ui Hero Typography & Actions */}
+            <div className="lg:col-span-8 flex flex-col items-start text-left">
+              {/* Announcement Pill */}
+              <button
+                type="button"
+                onClick={() => setActiveTab('metal-lab')}
+                style={{
+                  backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+                  backgroundOrigin: 'padding-box, border-box',
+                  backgroundClip: 'padding-box, border-box',
+                }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-transparent text-xs text-zinc-300 hover:text-white mb-5 cursor-pointer transition-all"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span>默认采用经典暗色轻拟物 (135° 对角双高光)</span>
+                <span className="text-zinc-600">|</span>
+                <span style={{ color: activePreset.accentHex }} className="font-medium flex items-center gap-1">
+                  可随时切换 6 种 WebGL 物理金属 <ArrowRight className="w-3 h-3" />
+                </span>
+              </button>
 
-        {/* Real-time Optical Lab for Dynamic Specular Angles & Sound Controls */}
-        <LightingLab />
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-400 leading-[1.15]">
+                Build your tactile component library.
+              </h1>
 
-        <div className="glow-divider mb-10" />
+              <p className="text-sm sm:text-base text-zinc-400 mt-4 max-w-2xl leading-relaxed">
+                一套如同 <span className="text-zinc-200 font-medium">shadcn/ui</span> 般可直接复制源码的交互组件库。
+                默认呈现最纯粹的<span className="text-zinc-100 font-medium">经典暗色轻拟物（135° 对角双高光微倒角 + 凸起/凹陷立体阴影）</span>；
+                同时内置 <span className="text-amber-300 font-medium">方案 C (WebGL GLSL 物理金属着色器)</span>，点击下方材质按钮即可将全站实时切换为黄金、铂银、黑钛、钴蓝等金属。
+              </p>
 
-        {/* Dedicated Liquid Chrome Tab View */}
-        {currentNav === 'chrome' && <LiquidChromeLab />}
+              {/* Hero CTA Buttons + CLI Snippet */}
+              <div className="flex flex-wrap items-center gap-3 mt-6">
+                <TactileButton
+                  variant="metallic"
+                  onClick={() => setActiveTab('docs')}
+                >
+                  浏览源码与复制 (Get Started)
+                </TactileButton>
 
-        {/* View 1: Showcase Gallery (includes Liquid Chrome Lab at top + full component cards below) */}
-        {currentNav === 'showcase' && (
-          <div className="flex flex-col gap-10">
-            {/* Featured Liquid Chrome & WebGL Exploration Lab */}
-            <LiquidChromeLab />
+                <TactileButton
+                  variant="default"
+                  onClick={() => setActiveTab('components')}
+                >
+                  查看基础组件库 (Components)
+                </TactileButton>
 
-            <div className="glow-divider" />
+                <button
+                  type="button"
+                  onClick={handleCopyCli}
+                  style={{
+                    backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
+                    backgroundOrigin: 'padding-box, border-box',
+                    backgroundClip: 'padding-box, border-box',
+                    boxShadow: `var(--shadow-concave)`,
+                  }}
+                  className="h-10 px-3.5 rounded-xl border border-transparent font-mono text-xs text-zinc-400 hover:text-zinc-200 flex items-center gap-2.5 cursor-pointer transition-colors"
+                >
+                  <Terminal className="w-3.5 h-3.5 text-zinc-500" />
+                  <span>npx tactile-ui@latest init</span>
+                  {copiedCli ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5 text-zinc-500" />
+                  )}
+                </button>
+              </div>
+            </div>
 
-            {/* Grid Layout of the 3 Key Cards + 1 Composite Form Card */}
+            {/* Right 4 Cols: 1:1 Reference X Emblem Interactive Showcase */}
+            <div className="lg:col-span-4 flex flex-col items-center justify-center">
+              <HeroEmblem compact />
+            </div>
+          </div>
+
+          {/* ===============================================================
+              Theme & Metal Switcher Strip (Like ui.shadcn.com Theme Bar)
+             =============================================================== */}
+          <div className="mt-8 pt-5 border-t border-white/[0.06] flex flex-col gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs text-zinc-400">
+                <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
+                <span className="font-medium text-zinc-200">一键切换全站材质风格：</span>
+                <span className="hidden sm:inline text-zinc-500">
+                  （默认保留最早的暗色轻拟物，点击金属即可切换）
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowCustomizer(!showCustomizer)}
+                className="text-xs text-zinc-400 hover:text-white flex items-center gap-1.5 cursor-pointer font-mono"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5" />
+                <span>{showCustomizer ? '收起高级光学参数 ▲' : '展开高级光学控制台 (Customize) ▼'}</span>
+              </button>
+            </div>
+
+            {/* 7 Style Pills: Classic Default + 6 WebGL Metals */}
+            <div className="flex flex-wrap items-center gap-2">
+              {materialList.map((mat) => {
+                const isSelected = mat.id === material;
+                const isMatClassic = !mat.isWebGLMetal;
+                return (
+                  <button
+                    key={mat.id}
+                    type="button"
+                    onClick={() => handleQuickMaterialSwitch(mat.id as MetalMaterialId)}
+                    style={{
+                      backgroundImage: `${
+                        isSelected ? 'var(--bg-convex-hover)' : 'var(--bg-subcard)'
+                      }, ${isSelected ? mat.cssBorderRim : 'var(--border-rim-subtle)'}`,
+                      backgroundOrigin: 'padding-box, border-box',
+                      backgroundClip: 'padding-box, border-box',
+                      boxShadow: isSelected ? 'var(--shadow-convex-sm)' : 'none',
+                    }}
+                    className={`h-9 px-3.5 rounded-xl border border-transparent text-xs font-medium flex items-center gap-2 cursor-pointer transition-all ${
+                      isSelected
+                        ? 'text-white font-semibold scale-[1.01]'
+                        : 'text-zinc-400 hover:text-zinc-200 opacity-85 hover:opacity-100'
+                    }`}
+                  >
+                    <span
+                      style={{ background: mat.swatchGradient }}
+                      className="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0"
+                    />
+                    <span style={isSelected ? { color: mat.accentHex } : undefined}>
+                      {mat.name}
+                    </span>
+                    {isMatClassic && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-zinc-200">
+                        默认
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          3. Collapsible Optical & Shader Customizer Panel
+         ===================================================================== */}
+      {showCustomizer && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 w-full animate-in fade-in duration-200">
+          <LightingLab />
+        </div>
+      )}
+
+      {/* =====================================================================
+          4. shadcn/ui Examples Navigation Bar + Main Workspace
+         ===================================================================== */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 w-full flex-1 flex flex-col gap-6">
+        {/* Horizontal Tab Bar (Identical to ui.shadcn.com) */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {[
+              { id: 'examples-cards', label: 'Examples · Cards (综合卡片墙)', icon: <LayoutGrid className="w-3.5 h-3.5" /> },
+              { id: 'examples-dashboard', label: 'Dashboard (算力仪表盘)', icon: <Activity className="w-3.5 h-3.5" /> },
+              { id: 'examples-playground', label: 'Playground (AI 推理台)', icon: <Play className="w-3.5 h-3.5" /> },
+              { id: 'components', label: 'Components (基础组件总览)', icon: <Layers className="w-3.5 h-3.5" /> },
+              { id: 'metal-lab', label: 'Metal Lab (流光金属图鉴)', icon: <Sparkles className="w-3.5 h-3.5" /> },
+              { id: 'docs', label: 'Code & Docs (复制源码)', icon: <Code2 className="w-3.5 h-3.5" /> },
+            ].map((tab) => {
+              const active = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    audioEngine.playClick('button');
+                    setActiveTab(tab.id as MainTabId);
+                  }}
+                  style={
+                    active
+                      ? {
+                          backgroundImage: `var(--bg-convex), var(--border-rim)`,
+                          backgroundOrigin: 'padding-box, border-box',
+                          backgroundClip: 'padding-box, border-box',
+                          boxShadow: `var(--shadow-convex-sm)`,
+                          color: activePreset.accentHex,
+                        }
+                      : undefined
+                  }
+                  className={`px-3.5 py-1.5 rounded-xl border border-transparent text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all ${
+                    active
+                      ? 'font-semibold'
+                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]'
+                  }`}
+                >
+                  {tab.icon}
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-mono">
+            <span>当前渲染模式：</span>
+            <span style={{ color: activePreset.accentHex }} className="font-semibold">
+              {isClassic ? 'Pure CSS Dark Tactile (Default)' : `WebGL GLSL (${activePreset.enName})`}
+            </span>
+          </div>
+        </div>
+
+        {/* =================================================================
+            VIEW 1: shadcn/ui Cards Grid (Default Landing Page View)
+           ================================================================= */}
+        {activeTab === 'examples-cards' && <ShadcnCardsExample />}
+
+        {/* =================================================================
+            VIEW 2: shadcn/ui Dashboard Example
+           ================================================================= */}
+        {activeTab === 'examples-dashboard' && <ShadcnDashboardExample />}
+
+        {/* =================================================================
+            VIEW 3: shadcn/ui Playground Example
+           ================================================================= */}
+        {activeTab === 'examples-playground' && <ShadcnPlaygroundExample />}
+
+        {/* =================================================================
+            VIEW 4: Foundational Components Catalog (Buttons, Inputs, Controls)
+           ================================================================= */}
+        {activeTab === 'components' && (
+          <div className="flex flex-col gap-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Card 1: 按钮体系 (Buttons & Micro-interactions) */}
+              {/* Card 1: 按钮体系 */}
               <TactileCard
                 title="按钮与微交互 (Buttons)"
-                description="凸起弧面、对角金属高光边与按压内陷反馈"
+                description="凸起弧面、135° 对角高光边与按压内陷反馈"
                 badge={<TactileBadge dotColor="white">Tactile</TactileBadge>}
               >
-                {/* Variants */}
                 <div className="flex flex-col gap-2">
-                  <div className="text-xs font-medium text-zinc-400">主要变体 (跟随当前全局金属材质)</div>
+                  <div className="text-xs font-medium text-zinc-400">
+                    主要变体 (跟随当前全局风格：{activePreset.name})
+                  </div>
                   <div className="flex flex-wrap gap-2.5">
-                    <TactileButton variant="default">默认流光边</TactileButton>
-                    <TactileButton variant="metallic">纯金属实心盖</TactileButton>
+                    <TactileButton variant="default">默认高光边</TactileButton>
+                    <TactileButton variant="metallic">高光主按钮</TactileButton>
                     <TactileButton variant="recessed">凹陷次级</TactileButton>
                     <TactileButton variant="danger">危险操作</TactileButton>
                   </div>
                 </div>
 
-                {/* Multi-Metal Material Buttons */}
+                {/* Multi-Style / Multi-Metal Material Buttons */}
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400 flex items-center justify-between">
-                    <span>多金属材质按钮 (material 属性独立指定)</span>
-                    <span className="text-[10px] font-mono text-amber-300">WebGL Shader</span>
+                    <span>单按钮独立指定材质 (material 属性)</span>
+                    <span className="text-[10px] font-mono text-zinc-500">支持混排</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
+                    <TactileButton size="sm" material="classic">
+                      经典轻拟物
+                    </TactileButton>
                     <TactileButton size="sm" material="gold">
                       24K 黄金
                     </TactileButton>
@@ -303,30 +546,24 @@ function AppContent() {
                     <TactileButton size="sm" material="rosegold">
                       玫瑰金
                     </TactileButton>
-                    <TactileButton size="sm" material="emerald">
-                      祖母绿钛
-                    </TactileButton>
                   </div>
                 </div>
 
                 {/* Per-Button Sweep Angle Comparison */}
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400 flex items-center justify-between">
-                    <span>独立配置 Hover 高光旋转距离 (sweepDeg)</span>
+                    <span>按需开启 Hover 高光旋转 (sweepDeg)</span>
                     <span className="text-[10px] font-mono text-zinc-500">鼠标滑入对比</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <TactileButton variant="default" size="sm" sweepDeg={90}>
-                      转 90° (四分之一)
+                      转 90°
                     </TactileButton>
                     <TactileButton variant="default" size="sm" sweepDeg={180}>
-                      转 180° (对角互换)
+                      转 180°
                     </TactileButton>
                     <TactileButton variant="default" size="sm" sweepDeg={360}>
-                      转 360° (整圈流光)
-                    </TactileButton>
-                    <TactileButton variant="default" size="sm" sweepDeg={-180}>
-                      逆转 -180°
+                      转 360°
                     </TactileButton>
                   </div>
                 </div>
@@ -383,13 +620,12 @@ function AppContent() {
                 </div>
               </TactileCard>
 
-              {/* Card 2: 凹陷式输入组件 (Inputs & Select) */}
+              {/* Card 2: 凹陷式输入组件 */}
               <TactileCard
                 title="凹陷式输入组件 (Inputs & Select)"
-                description="深槽内阴影 + 聚焦态对角银白高光环"
+                description="深槽内阴影 + 聚焦态对角高光环"
                 badge={<TactileBadge dotColor="amber">Form</TactileBadge>}
               >
-                {/* Search Input */}
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">
                     命令搜索框 (Search Input)
@@ -403,7 +639,6 @@ function AppContent() {
                   />
                 </div>
 
-                {/* Custom Select */}
                 <div className="flex flex-col gap-2">
                   <TactileSelect
                     label="下拉选择器 (Custom Select)"
@@ -429,7 +664,6 @@ function AppContent() {
                   />
                 </div>
 
-                {/* Password field with toggle */}
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">带遮罩凭证输入</label>
                   <div className="relative">
@@ -448,20 +682,18 @@ function AppContent() {
                   </div>
                 </div>
 
-                {/* Textarea */}
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">多行文本域 (Textarea)</label>
                   <TactileTextarea placeholder="输入系统提示词或自定义微质感 CSS 规则..." />
                 </div>
               </TactileCard>
 
-              {/* Card 3: 选框与物理拨杆 (Controls, Switches, Slider) - No Gray Haze! */}
+              {/* Card 3: 选框与物理拨杆 */}
               <TactileCard
                 title="选框与物理拨杆 (Controls)"
                 description="凹槽轨道配合高光凸起滑块的真实触感"
                 badge={<TactileBadge dotColor="green">Interactive</TactileBadge>}
               >
-                {/* Switches (Fixed no gray haze) */}
                 <div className="flex flex-col gap-3">
                   <TactileSwitch
                     id="sw-rt"
@@ -480,7 +712,6 @@ function AppContent() {
                   />
                 </div>
 
-                {/* Slider */}
                 <div className="flex flex-col gap-2 pt-1">
                   <TactileSlider
                     label="边缘高光强度 (Specular Intensity)"
@@ -489,7 +720,6 @@ function AppContent() {
                   />
                 </div>
 
-                {/* Checkboxes & Radios */}
                 <div className="flex flex-col gap-3 pt-1">
                   <div className="text-xs font-medium text-zinc-400">
                     复选框与单选框 (Checkbox & Radio)
@@ -616,88 +846,15 @@ function AppContent() {
           </div>
         )}
 
-        {/* View 2: shadcn/ui Component Docs & Code Generator */}
-        {currentNav === 'docs' && <ComponentDocs />}
+        {/* =================================================================
+            VIEW 5: Liquid Chrome & Physical Metal Lab
+           ================================================================= */}
+        {activeTab === 'metal-lab' && <LiquidChromeLab />}
 
-        {/* View 3: Studio Interactive Hardware Control Room */}
-        {currentNav === 'studio' && (
-          <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <TactileCard
-                title="算力阵列 Alpha"
-                description="物理核数：64 Cores / 128 Threads"
-                badge={<TactileBadge dotColor="green">运行中</TactileBadge>}
-              >
-                <div className="flex flex-col gap-3">
-                  <div className="flex justify-between text-xs text-zinc-400">
-                    <span>负载利用率</span>
-                    <span className="text-zinc-200 font-mono">42.8%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-zinc-950 border border-white/10 overflow-hidden p-0.5">
-                    <div className="h-full bg-gradient-to-r from-zinc-400 to-white rounded-full w-[42.8%]" />
-                  </div>
-                  <TactileSwitch
-                    checked={true}
-                    onChange={() => {}}
-                    label="自动扩缩容保护"
-                    hint="超过 85% 自动调度冗余节点"
-                  />
-                </div>
-              </TactileCard>
-
-              <TactileCard
-                title="算力阵列 Beta"
-                description="物理核数：32 Cores / 64 Threads"
-                badge={<TactileBadge dotColor="amber">高负载</TactileBadge>}
-              >
-                <div className="flex flex-col gap-3">
-                  <div className="flex justify-between text-xs text-zinc-400">
-                    <span>负载利用率</span>
-                    <span className="text-zinc-200 font-mono">88.4%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-zinc-950 border border-white/10 overflow-hidden p-0.5">
-                    <div className="h-full bg-gradient-to-r from-amber-400 to-amber-200 rounded-full w-[88.4%]" />
-                  </div>
-                  <TactileSwitch
-                    checked={false}
-                    onChange={() => {}}
-                    label="安全阻尼降频"
-                    hint="当前处于全速超频状态"
-                  />
-                </div>
-              </TactileCard>
-
-              <TactileCard
-                title="边缘中继网关"
-                description="在全球 18 个区域部署 CDN 节点"
-                badge={<TactileBadge dotColor="white">在线 18/18</TactileBadge>}
-              >
-                <div className="flex flex-col gap-3">
-                  <TactileButton
-                    variant="metallic"
-                    className="w-full"
-                    onClick={() => {
-                      toast({
-                        title: '开始边缘节点探活',
-                        description: '正在向 18 个边缘中继发送 ping 指令...',
-                        type: 'info',
-                      });
-                    }}
-                  >
-                    即刻探活全局节点
-                  </TactileButton>
-                  <TactileButton
-                    variant="recessed"
-                    className="w-full"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    配置路由策略
-                  </TactileButton>
-                </div>
-              </TactileCard>
-            </div>
-          </div>
-        )}
+        {/* =================================================================
+            VIEW 6: Component Docs & Copyable Code Generator
+           ================================================================= */}
+        {activeTab === 'docs' && <ComponentDocs />}
       </main>
 
       {/* Tactile Modal Component */}
