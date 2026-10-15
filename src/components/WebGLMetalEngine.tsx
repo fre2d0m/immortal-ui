@@ -12,7 +12,7 @@ import React, {
    - 'classic' (DEFAULT): Earliest pure CSS Dark Light-Skeuomorphism
      (1px 135° diagonal dual-specular rim, convex/concave obsidian surfaces)
    - 'gold' | 'platinum' | 'obsidian' | 'cobalt' | 'rosegold' | 'emerald':
-     Solution C WebGL GLSL Physical Flowing Metal Shaders
+     Solution C WebGL GLSL Physical Flowing Metal Shaders (1px refined micro-bezel)
    ========================================================================= */
 export type MetalMaterialId =
   | 'classic'
@@ -52,9 +52,9 @@ export interface MetalMaterialPreset {
 export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
   classic: {
     id: 'classic',
-    name: '经典暗色轻拟物',
-    enName: 'Classic Dark Tactile',
-    description: '默认初始风格 · 1px 135° 对角双高光微倒角 + 凸起/凹陷曜石黑立体表面',
+    name: 'Classic Dark Tactile',
+    enName: 'Classic CSS',
+    description: 'Default style · 1px 135° dual-specular micro-bevel with convex & concave obsidian surfaces',
     isWebGLMetal: false,
     highRGB: [1.0, 1.0, 1.0],
     midRGB: [0.75, 0.75, 0.78],
@@ -62,7 +62,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     swatchGradient:
       'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, #27272a 45%, #09090b 75%, rgba(255,255,255,0.45) 100%)',
     capGradient: 'linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%)',
-    bevelHighlight: 'rgba(255, 255, 255, 0.18)',
+    bevelHighlight: 'rgba(255, 255, 255, 0.16)',
     accentHex: '#f4f4f6',
     cssBorderRim:
       'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.24) 100%)',
@@ -71,111 +71,111 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
   },
   gold: {
     id: 'gold',
-    name: '24K 皇家黄金',
+    name: '24K Royal Gold',
     enName: '24K Royal Gold',
-    description: '天然暖金香槟高光与深邃古铜金暗部交织',
+    description: 'Warm champagne gold specular peaks woven with deep antique bronze shadows',
     isWebGLMetal: true,
-    highRGB: [1.0, 0.93, 0.55],
-    midRGB: [0.92, 0.66, 0.10],
-    darkRGB: [0.22, 0.13, 0.02],
+    highRGB: [0.98, 0.88, 0.48],
+    midRGB: [0.82, 0.58, 0.10],
+    darkRGB: [0.12, 0.08, 0.02],
     swatchGradient: 'linear-gradient(135deg, #fef08a 0%, #eab308 50%, #422006 100%)',
-    capGradient: 'linear-gradient(155deg, #1f190d 0%, #0c0905 60%, #171208 100%)',
-    bevelHighlight: 'rgba(253, 224, 71, 0.32)',
+    capGradient: 'linear-gradient(145deg, #1c1810 0%, #090806 55%, #14110b 100%)',
+    bevelHighlight: 'rgba(253, 224, 71, 0.16)',
     accentHex: '#fde047',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(254,240,138,0.62) 0%, rgba(234,179,8,0.16) 42%, rgba(161,98,7,0.08) 60%, rgba(250,204,21,0.36) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(253,224,71,0.48) 0%, rgba(234,179,8,0.08) 40%, rgba(161,98,7,0.04) 60%, rgba(250,204,21,0.25) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(253,224,71,0.36) 0%, rgba(234,179,8,0.08) 45%, rgba(161,98,7,0.04) 65%, rgba(250,204,21,0.20) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(253,224,71,0.25) 0%, rgba(234,179,8,0.05) 42%, rgba(161,98,7,0.02) 62%, rgba(250,204,21,0.14) 100%)',
   },
   platinum: {
     id: 'platinum',
-    name: '镜面铂银',
+    name: 'Platinum Chrome',
     enName: 'Platinum Chrome',
-    description: '高纯度冷调镜面银白，经典高反差镀铬光泽',
+    description: 'High-purity cool mirror silver with high-contrast polished chrome gleam',
     isWebGLMetal: true,
-    highRGB: [1.0, 1.0, 1.0],
-    midRGB: [0.76, 0.79, 0.85],
-    darkRGB: [0.08, 0.08, 0.10],
+    highRGB: [0.95, 0.96, 0.98],
+    midRGB: [0.64, 0.67, 0.73],
+    darkRGB: [0.06, 0.06, 0.08],
     swatchGradient: 'linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #18181b 100%)',
-    capGradient: 'linear-gradient(155deg, #17171c 0%, #09090b 60%, #121216 100%)',
-    bevelHighlight: 'rgba(255, 255, 255, 0.28)',
+    capGradient: 'linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%)',
+    bevelHighlight: 'rgba(255, 255, 255, 0.16)',
     accentHex: '#f4f4f6',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.58) 0%, rgba(161,161,170,0.12) 42%, rgba(161,161,170,0.06) 60%, rgba(255,255,255,0.32) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.48) 0%, rgba(161,161,170,0.07) 40%, rgba(161,161,170,0.03) 60%, rgba(255,255,255,0.25) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.04) 65%, rgba(255,255,255,0.18) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.04) 42%, rgba(255,255,255,0.02) 62%, rgba(255,255,255,0.13) 100%)',
   },
   obsidian: {
     id: 'obsidian',
-    name: '曜石黑钛',
+    name: 'Obsidian Titanium',
     enName: 'Obsidian Titanium',
-    description: '阳极氧化暗黑枪色钛金属，低调冷峻的锋利折光',
+    description: 'Anodized stealth gunmetal titanium with understated razor-sharp edge reflections',
     isWebGLMetal: true,
-    highRGB: [0.72, 0.74, 0.78],
-    midRGB: [0.30, 0.32, 0.36],
+    highRGB: [0.66, 0.68, 0.72],
+    midRGB: [0.28, 0.30, 0.34],
     darkRGB: [0.04, 0.04, 0.05],
     swatchGradient: 'linear-gradient(135deg, #a1a1aa 0%, #3f3f46 45%, #09090b 100%)',
-    capGradient: 'linear-gradient(155deg, #121215 0%, #070709 60%, #0d0d10 100%)',
-    bevelHighlight: 'rgba(161, 161, 170, 0.22)',
+    capGradient: 'linear-gradient(145deg, #141418 0%, #070709 55%, #0e0e12 100%)',
+    bevelHighlight: 'rgba(161, 161, 170, 0.14)',
     accentHex: '#d4d4d8',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(161,161,170,0.42) 0%, rgba(63,63,70,0.12) 42%, rgba(39,39,42,0.06) 60%, rgba(161,161,170,0.22) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(161,161,170,0.38) 0%, rgba(63,63,70,0.07) 40%, rgba(39,39,42,0.03) 60%, rgba(161,161,170,0.20) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(161,161,170,0.22) 0%, rgba(63,63,70,0.06) 45%, rgba(39,39,42,0.03) 65%, rgba(161,161,170,0.12) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(161,161,170,0.20) 0%, rgba(63,63,70,0.04) 42%, rgba(39,39,42,0.02) 62%, rgba(161,161,170,0.11) 100%)',
   },
   cobalt: {
     id: 'cobalt',
-    name: '深海钴蓝钛',
+    name: 'Cobalt Blue Metal',
     enName: 'Cobalt Blue Metal',
-    description: '电镀蓝宝石金属光泽，冰青高光与深海蓝底色',
+    description: 'Electroplated sapphire metallic finish with ice-cyan peaks and deep ocean shadows',
     isWebGLMetal: true,
-    highRGB: [0.68, 0.90, 1.0],
-    midRGB: [0.18, 0.52, 0.96],
-    darkRGB: [0.04, 0.11, 0.26],
+    highRGB: [0.62, 0.86, 1.0],
+    midRGB: [0.18, 0.48, 0.90],
+    darkRGB: [0.03, 0.07, 0.16],
     swatchGradient: 'linear-gradient(135deg, #bae6fd 0%, #2563eb 50%, #08142c 100%)',
-    capGradient: 'linear-gradient(155deg, #0f192d 0%, #060a12 60%, #0b1322 100%)',
-    bevelHighlight: 'rgba(125, 211, 252, 0.32)',
+    capGradient: 'linear-gradient(145deg, #111827 0%, #070a10 55%, #0c121e 100%)',
+    bevelHighlight: 'rgba(125, 211, 252, 0.16)',
     accentHex: '#7dd3fc',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(125,211,252,0.62) 0%, rgba(37,99,235,0.18) 42%, rgba(29,78,216,0.08) 60%, rgba(96,165,250,0.36) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(125,211,252,0.48) 0%, rgba(37,99,235,0.08) 40%, rgba(29,78,216,0.04) 60%, rgba(96,165,250,0.25) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(125,211,252,0.36) 0%, rgba(37,99,235,0.08) 45%, rgba(29,78,216,0.04) 65%, rgba(96,165,250,0.20) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(125,211,252,0.25) 0%, rgba(37,99,235,0.05) 42%, rgba(29,78,216,0.02) 62%, rgba(96,165,250,0.14) 100%)',
   },
   rosegold: {
     id: 'rosegold',
-    name: '大马士革玫瑰金',
+    name: 'Rose Gold Copper',
     enName: 'Rose Gold Copper',
-    description: '温暖柔和的香槟粉金与紫铜暗部反光',
+    description: 'Warm blush champagne rose gold with rich burnished copper undertones',
     isWebGLMetal: true,
-    highRGB: [1.0, 0.82, 0.80],
-    midRGB: [0.90, 0.44, 0.42],
-    darkRGB: [0.22, 0.06, 0.08],
+    highRGB: [0.98, 0.76, 0.75],
+    midRGB: [0.82, 0.38, 0.38],
+    darkRGB: [0.14, 0.04, 0.06],
     swatchGradient: 'linear-gradient(135deg, #ffe4e6 0%, #fb7185 50%, #3b0813 100%)',
-    capGradient: 'linear-gradient(155deg, #211216 0%, #0c0608 60%, #190d11 100%)',
-    bevelHighlight: 'rgba(253, 164, 175, 0.32)',
+    capGradient: 'linear-gradient(145deg, #1d1215 0%, #0a0608 55%, #150d10 100%)',
+    bevelHighlight: 'rgba(253, 164, 175, 0.16)',
     accentHex: '#fda4af',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(254,205,211,0.62) 0%, rgba(244,63,94,0.16) 42%, rgba(159,18,57,0.08) 60%, rgba(251,113,133,0.36) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(253,164,175,0.48) 0%, rgba(244,63,94,0.08) 40%, rgba(159,18,57,0.04) 60%, rgba(251,113,133,0.25) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(253,164,175,0.36) 0%, rgba(244,63,94,0.08) 45%, rgba(159,18,57,0.04) 65%, rgba(251,113,133,0.20) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(253,164,175,0.25) 0%, rgba(244,63,94,0.05) 42%, rgba(159,18,57,0.02) 62%, rgba(251,113,133,0.14) 100%)',
   },
   emerald: {
     id: 'emerald',
-    name: '极光祖母绿钛',
+    name: 'Emerald Titanium',
     enName: 'Emerald Titanium',
-    description: '赛博精密仪器级翠绿阳极氧化金属',
+    description: 'Precision-grade emerald anodized alloy with cyber-mint specular highlights',
     isWebGLMetal: true,
-    highRGB: [0.68, 1.0, 0.86],
-    midRGB: [0.10, 0.74, 0.48],
-    darkRGB: [0.02, 0.18, 0.11],
+    highRGB: [0.60, 0.96, 0.80],
+    midRGB: [0.10, 0.66, 0.44],
+    darkRGB: [0.02, 0.11, 0.07],
     swatchGradient: 'linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #032217 100%)',
-    capGradient: 'linear-gradient(155deg, #0d2019 0%, #050c09 60%, #0a1813 100%)',
-    bevelHighlight: 'rgba(110, 231, 183, 0.32)',
+    capGradient: 'linear-gradient(145deg, #0f1d17 0%, #060b09 55%, #0b1511 100%)',
+    bevelHighlight: 'rgba(110, 231, 183, 0.16)',
     accentHex: '#6ee7b7',
     cssBorderRim:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(167,243,208,0.62) 0%, rgba(16,185,129,0.16) 42%, rgba(5,150,105,0.08) 60%, rgba(52,211,153,0.36) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(110,231,183,0.48) 0%, rgba(16,185,129,0.08) 40%, rgba(5,150,105,0.04) 60%, rgba(52,211,153,0.25) 100%)',
     cssBorderRimSubtle:
-      'linear-gradient(var(--rim-angle, 135deg), rgba(110,231,183,0.36) 0%, rgba(16,185,129,0.08) 45%, rgba(5,150,105,0.04) 65%, rgba(52,211,153,0.20) 100%)',
+      'linear-gradient(var(--rim-angle, 135deg), rgba(110,231,183,0.25) 0%, rgba(16,185,129,0.05) 42%, rgba(5,150,105,0.02) 62%, rgba(52,211,153,0.14) 100%)',
   },
 };
 
@@ -191,7 +191,7 @@ export const WEBGL_METAL_IDS: MetalMaterialId[] = [
 
 /* =========================================================================
    2. Global Style & Metal Configuration Context
-   Default material is 'classic' (Earliest Pure CSS Dark Tactile UI)
+   Default bezelWidth is 1px to match the refined hairline of Classic CSS mode!
    ========================================================================= */
 export interface MetalConfigContextType {
   material: MetalMaterialId;
@@ -220,7 +220,7 @@ const DEFAULT_METAL_CONFIG: MetalConfigContextType = {
   setDispersion: () => {},
   liquidWarp: 0,
   setLiquidWarp: () => {},
-  bezelWidth: 2,
+  bezelWidth: 1,
   setBezelWidth: () => {},
   autoFlow: false,
   setAutoFlow: () => {},
@@ -241,6 +241,9 @@ export const useMetalConfig = () => {
 
 /* =========================================================================
    3. Shared Singleton WebGL Shader Engine (Solution C Core)
+   Calibrated to match the delicate 135° diagonal dual-specular falloff of
+   the classic CSS mode (top-left primary ~50% luminance, middle ~6% quiet
+   dark edge, bottom-right secondary ~26% bounce, brightening on hover).
    ========================================================================= */
 const VERTEX_SHADER_SRC = `
   attribute vec2 a_position;
@@ -298,19 +301,24 @@ const FRAGMENT_SHADER_SRC = `
   vec3 sampleMetallicSpectrum(float angle, float rotOffset, float hoverBoost, float disp, vec3 cHigh, vec3 cMid, vec3 cDark) {
     float theta = angle - rotOffset;
 
-    float dualLobe = cos(theta * 2.0);
-    float asymmetry = 0.18 * cos(theta);
-    float w = dualLobe + asymmetry;
-    float dw = -2.0 * sin(theta * 2.0);
+    // Asymmetric 135-deg Diagonal Dual Specular Distribution
+    // Matches CSS: rgba(255,255,255,0.45) 0% -> 0.06 40% -> 0.03 60% -> 0.24 100%
+    float cosT = cos(theta);
+    float primaryLobe = pow(max(0.0, cosT), 2.1);
+    float secondaryLobe = pow(max(0.0, -cosT), 2.3) * 0.52;
+    float dw = -sin(theta * 2.0);
 
-    float t = clamp((w + 0.85) / 1.95, 0.0, 1.0);
-    t = clamp(t + hoverBoost * 0.18, 0.0, 1.0);
+    // Normalized specular weight [0.05 = quiet dark edge, 0.92 = top-left peak]
+    float t = clamp(0.05 + primaryLobe * 0.86 + secondaryLobe * 0.86 + hoverBoost * 0.16, 0.0, 1.0);
 
-    vec3 lowerMetal = mix(cDark, cMid, smoothstep(0.0, 0.52, t));
-    vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.58, 1.0, t));
+    // 3-stop physical metal interpolation
+    vec3 lowerMetal = mix(cDark, cMid, smoothstep(0.04, 0.56, t));
+    vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.55, 0.98, t));
 
-    float peakGleam = smoothstep(0.72, 1.15, w + hoverBoost * 0.25);
-    baseMetal = mix(baseMetal, cHigh, peakGleam * (0.45 + hoverBoost * 0.25));
+    // Restrained luminance envelope so resting state is never glaring,
+    // matching the subtle sophistication of Classic Dark Tactile CSS mode
+    float restingExposure = mix(0.66, 0.90, hoverBoost);
+    baseMetal *= restingExposure;
 
     if (disp <= 0.005) {
       return baseMetal;
@@ -321,13 +329,14 @@ const FRAGMENT_SHADER_SRC = `
     vec3 coldFringe = mix(vec3(0.10, 0.30, 0.90), vec3(0.50, 0.86, 1.00), smoothstep(0.2, 0.78, t));
     vec3 prismColor = (dw < 0.0) ? warmFringe : coldFringe;
 
-    return mix(baseMetal, prismColor, fringeBell * disp * 0.85);
+    return mix(baseMetal, prismColor * restingExposure, fringeBell * disp * 0.85);
   }
 
   void main() {
     vec2 p = v_uv * 2.0 - 1.0;
 
-    vec2 pAspect = vec2(p.x * pow(max(u_aspect, 0.25), 0.35), p.y);
+    // Gentle aspect correction so rectangular buttons have natural corner-focused highlights
+    vec2 pAspect = vec2(p.x * pow(max(u_aspect, 0.25), 0.22), p.y);
     float angle = atan(pAspect.y, pAspect.x);
     float len = length(p);
 
@@ -389,7 +398,7 @@ class SharedWebGLShaderEngine {
     material: 'classic' as MetalMaterialId,
     dispersion: 0,
     liquidWarp: 0,
-    bezelWidth: 2,
+    bezelWidth: 1,
     autoFlow: false,
     flowSpeed: 1.0,
     hoverSweepDeg: 0,
@@ -559,13 +568,13 @@ export const sharedMetalEngine = new SharedWebGLShaderEngine();
 
 /* =========================================================================
    4. MetalConfigProvider Component
-   Defaults to 'classic' (Original Dark Tactile Skeuomorphic UI)
+   Defaults to 'classic' with bezelWidth = 1px (matching Classic CSS mode)
    ========================================================================= */
 export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [material, setMaterial] = useState<MetalMaterialId>('classic');
   const [dispersion, setDispersion] = useState<number>(0);
   const [liquidWarp, setLiquidWarp] = useState<number>(0);
-  const [bezelWidth, setBezelWidth] = useState<number>(2);
+  const [bezelWidth, setBezelWidth] = useState<number>(1);
   const [autoFlow, setAutoFlow] = useState<boolean>(false);
   const [flowSpeed, setFlowSpeed] = useState<number>(1.0);
   const [hoverSweepDeg, setHoverSweepDeg] = useState<number>(0);
@@ -596,7 +605,7 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
     setMaterial('classic');
     setDispersion(0);
     setLiquidWarp(0);
-    setBezelWidth(2);
+    setBezelWidth(1);
     setAutoFlow(false);
     setFlowSpeed(1.0);
     setHoverSweepDeg(0);

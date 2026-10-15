@@ -61,7 +61,7 @@ type MainTabId =
 
 function AppContent() {
   const { toast } = useToast();
-  const { material, setMaterial, resetDefaults } = useMetalConfig();
+  const { material, setMaterial } = useMetalConfig();
   const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
   const isClassic = !activePreset.isWebGLMetal;
 
@@ -100,8 +100,8 @@ function AppContent() {
     e.preventDefault();
     audioEngine.playClick('metal');
     toast({
-      title: '配置已持久化保存',
-      description: `服务节点 [${formName}] 的拟物配置参数已同步至本地环境`,
+      title: 'Configuration Saved',
+      description: `Node [${formName}] tactile parameters synced to local environment`,
       type: 'success',
     });
   };
@@ -111,7 +111,7 @@ function AppContent() {
     setCopiedCli(true);
     audioEngine.playClick('button');
     toast({
-      title: 'CLI 初始化命令已复制',
+      title: 'CLI Command Copied',
       description: 'npx tactile-ui@latest init',
       type: 'success',
     });
@@ -123,11 +123,11 @@ function AppContent() {
     audioEngine.playClick(matId === 'classic' ? 'button' : 'metal');
     setMaterial(matId);
     toast({
-      title: `已切换全局风格：${mat.name}`,
+      title: `Global Style: ${mat.name}`,
       description:
         matId === 'classic'
-          ? '已恢复默认纯 CSS 135° 对角双高光暗色轻拟物风格'
-          : `全站所有组件已实时应用 WebGL ${mat.enName} 金属材质`,
+          ? 'Restored default Pure CSS 135° dual-specular Dark Tactile style'
+          : `Applied WebGL ${mat.enName} physical metal shader across all components`,
       type: 'success',
     });
   };
@@ -181,7 +181,7 @@ function AppContent() {
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                Examples (场景示例)
+                Examples
               </button>
               <button
                 type="button"
@@ -192,7 +192,7 @@ function AppContent() {
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                Components (基础组件)
+                Components
               </button>
               <button
                 type="button"
@@ -204,7 +204,7 @@ function AppContent() {
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>Metals (流光金属)</span>
+                <span>Metals</span>
               </button>
               <button
                 type="button"
@@ -215,7 +215,7 @@ function AppContent() {
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                Docs & Code (源码)
+                Docs & Code
               </button>
             </nav>
           </div>
@@ -232,13 +232,13 @@ function AppContent() {
                 backgroundClip: 'padding-box, border-box',
               }}
               className="h-8 px-3 rounded-lg border border-transparent text-xs font-medium flex items-center gap-2 cursor-pointer text-zinc-200 hover:text-white transition-all"
-              title="展开/收起光学与材质定制器"
+              title="Toggle Optical & Metal Shader Customizer"
             >
               <span
                 style={{ background: activePreset.swatchGradient }}
                 className="w-3 h-3 rounded-full border border-white/30"
               />
-              <span className="hidden sm:inline">风格：</span>
+              <span className="hidden sm:inline">Style:</span>
               <span style={{ color: activePreset.accentHex }} className="font-semibold">
                 {activePreset.name}
               </span>
@@ -250,10 +250,10 @@ function AppContent() {
                 type="button"
                 onClick={() => handleQuickMaterialSwitch('classic')}
                 className="h-8 px-2.5 rounded-lg bg-zinc-900 border border-white/10 text-[11px] text-zinc-300 hover:text-white cursor-pointer flex items-center gap-1 transition-colors"
-                title="一键切回默认经典暗色轻拟物风格"
+                title="Switch back to default Classic Dark Tactile style"
               >
                 <RotateCcw className="w-3 h-3" />
-                <span className="hidden sm:inline">恢复默认轻拟物</span>
+                <span className="hidden sm:inline">Reset Default</span>
               </button>
             )}
 
@@ -263,7 +263,7 @@ function AppContent() {
               onClick={() => setIsModalOpen(true)}
               className="hidden sm:inline-flex"
             >
-              Modal 弹窗
+              Modal Demo
             </TactileButton>
           </div>
         </div>
@@ -289,10 +289,10 @@ function AppContent() {
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-transparent text-xs text-zinc-300 hover:text-white mb-5 cursor-pointer transition-all"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <span>默认采用经典暗色轻拟物 (135° 对角双高光)</span>
+                <span>Default Classic Dark Tactile (1px 135° Dual-Specular Rim)</span>
                 <span className="text-zinc-600">|</span>
                 <span style={{ color: activePreset.accentHex }} className="font-medium flex items-center gap-1">
-                  可随时切换 6 种 WebGL 物理金属 <ArrowRight className="w-3 h-3" />
+                  Switchable to 6 WebGL Physical Metals <ArrowRight className="w-3 h-3" />
                 </span>
               </button>
 
@@ -301,9 +301,10 @@ function AppContent() {
               </h1>
 
               <p className="text-sm sm:text-base text-zinc-400 mt-4 max-w-2xl leading-relaxed">
-                一套如同 <span className="text-zinc-200 font-medium">shadcn/ui</span> 般可直接复制源码的交互组件库。
-                默认呈现最纯粹的<span className="text-zinc-100 font-medium">经典暗色轻拟物（135° 对角双高光微倒角 + 凸起/凹陷立体阴影）</span>；
-                同时内置 <span className="text-amber-300 font-medium">方案 C (WebGL GLSL 物理金属着色器)</span>，点击下方材质按钮即可将全站实时切换为黄金、铂银、黑钛、钴蓝等金属。
+                Beautifully crafted, copy-and-paste dark skeuomorphic components inspired by{' '}
+                <span className="text-zinc-200 font-medium">shadcn/ui</span>, Linear, and X.
+                Defaults to <span className="text-zinc-100 font-medium">Classic Dark Tactile (1px 135° dual-specular micro-bevels + convex/concave obsidian depth)</span>,
+                with built-in <span className="text-amber-300 font-medium">WebGL GLSL physical metal shaders</span> for 24K Gold, Platinum, Obsidian Titanium, and Cobalt Blue.
               </p>
 
               {/* Hero CTA Buttons + CLI Snippet */}
@@ -312,14 +313,14 @@ function AppContent() {
                   variant="metallic"
                   onClick={() => setActiveTab('docs')}
                 >
-                  浏览源码与复制 (Get Started)
+                  Get Started
                 </TactileButton>
 
                 <TactileButton
                   variant="default"
                   onClick={() => setActiveTab('components')}
                 >
-                  查看基础组件库 (Components)
+                  Browse Components
                 </TactileButton>
 
                 <button
@@ -357,9 +358,9 @@ function AppContent() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs text-zinc-400">
                 <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-                <span className="font-medium text-zinc-200">一键切换全站材质风格：</span>
+                <span className="font-medium text-zinc-200">Global Style & Material Preset:</span>
                 <span className="hidden sm:inline text-zinc-500">
-                  （默认保留最早的暗色轻拟物，点击金属即可切换）
+                  (Classic Dark Tactile by default — click any metal to switch live)
                 </span>
               </div>
 
@@ -369,7 +370,7 @@ function AppContent() {
                 className="text-xs text-zinc-400 hover:text-white flex items-center gap-1.5 cursor-pointer font-mono"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>{showCustomizer ? '收起高级光学参数 ▲' : '展开高级光学控制台 (Customize) ▼'}</span>
+                <span>{showCustomizer ? 'Hide Optical Customizer ▲' : 'Customize Optics & Shaders ▼'}</span>
               </button>
             </div>
 
@@ -406,7 +407,7 @@ function AppContent() {
                     </span>
                     {isMatClassic && (
                       <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-zinc-200">
-                        默认
+                        Default
                       </span>
                     )}
                   </button>
@@ -434,12 +435,12 @@ function AppContent() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06] pb-3">
           <div className="flex flex-wrap items-center gap-1.5">
             {[
-              { id: 'examples-cards', label: 'Examples · Cards (综合卡片墙)', icon: <LayoutGrid className="w-3.5 h-3.5" /> },
-              { id: 'examples-dashboard', label: 'Dashboard (算力仪表盘)', icon: <Activity className="w-3.5 h-3.5" /> },
-              { id: 'examples-playground', label: 'Playground (AI 推理台)', icon: <Play className="w-3.5 h-3.5" /> },
-              { id: 'components', label: 'Components (基础组件总览)', icon: <Layers className="w-3.5 h-3.5" /> },
-              { id: 'metal-lab', label: 'Metal Lab (流光金属图鉴)', icon: <Sparkles className="w-3.5 h-3.5" /> },
-              { id: 'docs', label: 'Code & Docs (复制源码)', icon: <Code2 className="w-3.5 h-3.5" /> },
+              { id: 'examples-cards', label: 'Examples · Cards', icon: <LayoutGrid className="w-3.5 h-3.5" /> },
+              { id: 'examples-dashboard', label: 'Dashboard', icon: <Activity className="w-3.5 h-3.5" /> },
+              { id: 'examples-playground', label: 'Playground', icon: <Play className="w-3.5 h-3.5" /> },
+              { id: 'components', label: 'Components', icon: <Layers className="w-3.5 h-3.5" /> },
+              { id: 'metal-lab', label: 'Metal Lab', icon: <Sparkles className="w-3.5 h-3.5" /> },
+              { id: 'docs', label: 'Code & Docs', icon: <Code2 className="w-3.5 h-3.5" /> },
             ].map((tab) => {
               const active = activeTab === tab.id;
               return (
@@ -475,7 +476,7 @@ function AppContent() {
           </div>
 
           <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-mono">
-            <span>当前渲染模式：</span>
+            <span>Renderer:</span>
             <span style={{ color: activePreset.accentHex }} className="font-semibold">
               {isClassic ? 'Pure CSS Dark Tactile (Default)' : `WebGL GLSL (${activePreset.enName})`}
             </span>
@@ -503,48 +504,48 @@ function AppContent() {
         {activeTab === 'components' && (
           <div className="flex flex-col gap-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Card 1: 按钮体系 */}
+              {/* Card 1: Buttons */}
               <TactileCard
-                title="按钮与微交互 (Buttons)"
-                description="凸起弧面、135° 对角高光边与按压内陷反馈"
+                title="Buttons & Micro-Interactions"
+                description="Convex surfaces, 1px 135° dual-specular rims, and tactile press feedback"
                 badge={<TactileBadge dotColor="white">Tactile</TactileBadge>}
               >
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400">
-                    主要变体 (跟随当前全局风格：{activePreset.name})
+                    Primary Variants (Active Style: {activePreset.name})
                   </div>
                   <div className="flex flex-wrap gap-2.5">
-                    <TactileButton variant="default">默认高光边</TactileButton>
-                    <TactileButton variant="metallic">高光主按钮</TactileButton>
-                    <TactileButton variant="recessed">凹陷次级</TactileButton>
-                    <TactileButton variant="danger">危险操作</TactileButton>
+                    <TactileButton variant="default">Default Rim</TactileButton>
+                    <TactileButton variant="metallic">Metallic Primary</TactileButton>
+                    <TactileButton variant="recessed">Recessed</TactileButton>
+                    <TactileButton variant="danger">Danger</TactileButton>
                   </div>
                 </div>
 
                 {/* Multi-Style / Multi-Metal Material Buttons */}
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400 flex items-center justify-between">
-                    <span>单按钮独立指定材质 (material 属性)</span>
-                    <span className="text-[10px] font-mono text-zinc-500">支持混排</span>
+                    <span>Per-Button Material Overrides (material prop)</span>
+                    <span className="text-[10px] font-mono text-zinc-500">Mixable</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <TactileButton size="sm" material="classic">
-                      经典轻拟物
+                      Classic CSS
                     </TactileButton>
                     <TactileButton size="sm" material="gold">
-                      24K 黄金
+                      24K Gold
                     </TactileButton>
                     <TactileButton size="sm" material="platinum">
-                      镜面铂银
+                      Platinum
                     </TactileButton>
                     <TactileButton size="sm" material="obsidian">
-                      曜石黑钛
+                      Obsidian
                     </TactileButton>
                     <TactileButton size="sm" material="cobalt">
-                      深海钴蓝
+                      Cobalt Blue
                     </TactileButton>
                     <TactileButton size="sm" material="rosegold">
-                      玫瑰金
+                      Rose Gold
                     </TactileButton>
                   </div>
                 </div>
@@ -552,25 +553,25 @@ function AppContent() {
                 {/* Per-Button Sweep Angle Comparison */}
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400 flex items-center justify-between">
-                    <span>按需开启 Hover 高光旋转 (sweepDeg)</span>
-                    <span className="text-[10px] font-mono text-zinc-500">鼠标滑入对比</span>
+                    <span>Optional Hover Specular Sweep (sweepDeg)</span>
+                    <span className="text-[10px] font-mono text-zinc-500">Hover to test</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <TactileButton variant="default" size="sm" sweepDeg={90}>
-                      转 90°
+                      Sweep 90°
                     </TactileButton>
                     <TactileButton variant="default" size="sm" sweepDeg={180}>
-                      转 180°
+                      Sweep 180°
                     </TactileButton>
                     <TactileButton variant="default" size="sm" sweepDeg={360}>
-                      转 360°
+                      Sweep 360°
                     </TactileButton>
                   </div>
                 </div>
 
                 {/* Sizes and Icons */}
                 <div className="flex flex-col gap-2">
-                  <div className="text-xs font-medium text-zinc-400">图标按钮与尺寸 (Icon & Sizes)</div>
+                  <div className="text-xs font-medium text-zinc-400">Icon Buttons & Sizes</div>
                   <div className="flex flex-wrap items-center gap-2.5">
                     <TactileButton
                       variant="default"
@@ -588,7 +589,7 @@ function AppContent() {
                     </TactileButton>
 
                     <TactileButton variant="recessed" size="sm">
-                      小号 (Sm)
+                      Small (Sm)
                     </TactileButton>
 
                     <TactileButton
@@ -600,38 +601,38 @@ function AppContent() {
                         setTimeout(() => setBtnLoading(false), 1200);
                       }}
                     >
-                      {btnLoading ? '处理中' : '动态加载'}
+                      {btnLoading ? 'Loading' : 'Async Action'}
                     </TactileButton>
                   </div>
                 </div>
 
                 {/* Segmented Tabs */}
                 <div className="flex flex-col gap-2">
-                  <div className="text-xs font-medium text-zinc-400">分段控制器 (Segmented Tabs)</div>
+                  <div className="text-xs font-medium text-zinc-400">Segmented Tabs</div>
                   <TactileTabs
                     activeId={activeSegmentTab}
                     onChange={setActiveSegmentTab}
                     tabs={[
-                      { id: 'overview', label: '概览视图' },
-                      { id: 'nodes', label: '节点监控' },
-                      { id: 'keys', label: '密钥管理' },
+                      { id: 'overview', label: 'Overview' },
+                      { id: 'nodes', label: 'Nodes' },
+                      { id: 'keys', label: 'API Keys' },
                     ]}
                   />
                 </div>
               </TactileCard>
 
-              {/* Card 2: 凹陷式输入组件 */}
+              {/* Card 2: Recessed Inputs */}
               <TactileCard
-                title="凹陷式输入组件 (Inputs & Select)"
-                description="深槽内阴影 + 聚焦态对角高光环"
+                title="Recessed Inputs & Select"
+                description="Carved inner shadow slots with focused diagonal specular rims"
                 badge={<TactileBadge dotColor="amber">Form</TactileBadge>}
               >
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">
-                    命令搜索框 (Search Input)
+                    Command Search Input
                   </label>
                   <TactileInput
-                    placeholder="搜索组件、指令或文档..."
+                    placeholder="Search components, commands, or docs..."
                     kbd="⌘K"
                     value={searchVal}
                     onChange={(e) => setSearchVal(e.target.value)}
@@ -641,31 +642,31 @@ function AppContent() {
 
                 <div className="flex flex-col gap-2">
                   <TactileSelect
-                    label="下拉选择器 (Custom Select)"
+                    label="Custom Select Dropdown"
                     value={selectedEngine}
                     onChange={setSelectedEngine}
                     options={[
                       {
                         value: 'grok',
-                        label: 'Grok-3 金属推理引擎',
-                        description: '极速响应、实时光线倒角着色',
+                        label: 'Grok-3 Metal Reasoning Engine',
+                        description: 'Ultra-low latency with real-time bevel shading',
                       },
                       {
                         value: 'linear',
-                        label: 'Linear 极速渲染内核',
-                        description: '毫秒级同步、键盘优先交互',
+                        label: 'Linear Instant Render Kernel',
+                        description: 'Sub-millisecond sync & keyboard-first navigation',
                       },
                       {
                         value: 'raycast',
-                        label: 'Raycast 本地工作流',
-                        description: '系统级快捷键集成与扩展',
+                        label: 'Raycast Local Workflow',
+                        description: 'System-level hotkeys and native extensions',
                       },
                     ]}
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-medium text-zinc-400">带遮罩凭证输入</label>
+                  <label className="text-xs font-medium text-zinc-400">Masked Secret Input</label>
                   <div className="relative">
                     <TactileInput
                       type={showPassword ? 'text' : 'password'}
@@ -683,15 +684,15 @@ function AppContent() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-medium text-zinc-400">多行文本域 (Textarea)</label>
-                  <TactileTextarea placeholder="输入系统提示词或自定义微质感 CSS 规则..." />
+                  <label className="text-xs font-medium text-zinc-400">Multi-line Textarea</label>
+                  <TactileTextarea placeholder="Enter system prompt or custom micro-tactile CSS rules..." />
                 </div>
               </TactileCard>
 
-              {/* Card 3: 选框与物理拨杆 */}
+              {/* Card 3: Controls */}
               <TactileCard
-                title="选框与物理拨杆 (Controls)"
-                description="凹槽轨道配合高光凸起滑块的真实触感"
+                title="Switches, Sliders & Checks"
+                description="Recessed tracks paired with illuminated metallic thumbs"
                 badge={<TactileBadge dotColor="green">Interactive</TactileBadge>}
               >
                 <div className="flex flex-col gap-3">
@@ -699,22 +700,22 @@ function AppContent() {
                     id="sw-rt"
                     checked={enableRayTracing}
                     onChange={setEnableRayTracing}
-                    label="硬件光线追踪高光"
-                    hint="启用 135° 对角边缘实时反光渲染"
+                    label="Hardware Ray-Traced Specular"
+                    hint="Enable real-time 135° diagonal edge reflections"
                   />
 
                   <TactileSwitch
                     id="sw-lp"
                     checked={enableLowPower}
                     onChange={setEnableLowPower}
-                    label="静默低功耗模式"
-                    hint="减弱背景点阵对比度与阴影扩散"
+                    label="Low-Power Eco Mode"
+                    hint="Reduce ambient shadow spread and dot-matrix contrast"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2 pt-1">
                   <TactileSlider
-                    label="边缘高光强度 (Specular Intensity)"
+                    label="Edge Specular Intensity"
                     value={specularStrength}
                     onChange={setSpecularStrength}
                   />
@@ -722,18 +723,18 @@ function AppContent() {
 
                 <div className="flex flex-col gap-3 pt-1">
                   <div className="text-xs font-medium text-zinc-400">
-                    复选框与单选框 (Checkbox & Radio)
+                    Checkboxes & Radio Group
                   </div>
                   <div className="flex flex-wrap gap-4">
                     <TactileCheckbox
                       checked={saveTokenCheck}
                       onChange={setSaveTokenCheck}
-                      label="自动保存令牌"
+                      label="Auto-save tokens"
                     />
                     <TactileCheckbox
                       checked={hapticCheck}
                       onChange={setHapticCheck}
-                      label="开启触觉反馈"
+                      label="Acoustic feedback"
                     />
                   </div>
 
@@ -743,8 +744,8 @@ function AppContent() {
                       value={themeMode}
                       onChange={setThemeMode}
                       options={[
-                        { value: 'obsidian', label: '曜石黑 (Obsidian)' },
-                        { value: 'titanium', label: '钛金属 (Titanium)' },
+                        { value: 'obsidian', label: 'Obsidian Dark' },
+                        { value: 'titanium', label: 'Brushed Titanium' },
                       ]}
                     />
                   </div>
@@ -754,8 +755,8 @@ function AppContent() {
 
             {/* Composite Real-World Form Card */}
             <TactileCard
-              title="实战配置案例：AI 算力节点管理 (Complete Composite Card)"
-              description="展示按钮、输入框、滑块与拨杆在真实业务卡片中的统一协同质感"
+              title="Composite Example: AI Compute Node Configuration"
+              description="Showcasing buttons, recessed inputs, sliders, and switches working together in a production form"
               badge={<TactileBadge dotColor="white">Production Ready</TactileBadge>}
               headerAction={
                 <TactileButton
@@ -763,14 +764,14 @@ function AppContent() {
                   size="sm"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  高级参数配置
+                  Advanced Optics
                 </TactileButton>
               }
             >
               <form onSubmit={handleSaveForm} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-zinc-400">节点服务标识 (Node ID)</label>
+                    <label className="text-xs font-medium text-zinc-400">Node Service Identifier</label>
                     <TactileInput
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
@@ -781,13 +782,13 @@ function AppContent() {
 
                   <div className="flex flex-col gap-2">
                     <TactileSelect
-                      label="调度算法与内核 (Scheduling Engine)"
+                      label="Scheduling Engine"
                       value={formEngine}
                       onChange={setFormEngine}
                       options={[
-                        { value: 'linear', label: 'Linear-Cluster 极致性能' },
-                        { value: 'distributed', label: '分布式低功耗调度' },
-                        { value: 'failover', label: '双活灾备冗余阵列' },
+                        { value: 'linear', label: 'Linear-Cluster Ultra Performance' },
+                        { value: 'distributed', label: 'Distributed Low-Power Scheduler' },
+                        { value: 'failover', label: 'Active-Active Redundant Array' },
                       ]}
                     />
                   </div>
@@ -795,7 +796,7 @@ function AppContent() {
 
                 <div className="flex flex-col gap-4">
                   <TactileSlider
-                    label="上下文最大令牌数 (Context Tokens)"
+                    label="Max Context Tokens"
                     value={formMaxTokens}
                     min={1024}
                     max={8192}
@@ -807,15 +808,15 @@ function AppContent() {
                   <TactileSwitch
                     checked={formCache}
                     onChange={setFormCache}
-                    label="高速 KV 缓存预热"
-                    hint="减少首字生成延迟至 15ms"
+                    label="High-Speed KV Cache Warmup"
+                    hint="Reduces time-to-first-token latency to 15ms"
                   />
                 </div>
 
                 <div className="md:col-span-2 flex items-center justify-between pt-4 border-t border-white/[0.06]">
                   <div className="flex items-center gap-2 text-xs text-zinc-400">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>系统状态就绪 · 待部署变更: 1 项</span>
+                    <span>System Ready · 1 pending change</span>
                   </div>
 
                   <div className="flex items-center gap-3">
@@ -829,15 +830,15 @@ function AppContent() {
                         setFormMaxTokens(4096);
                         setFormCache(true);
                         toast({
-                          title: '表单已重置',
+                          title: 'Form Reset',
                           type: 'info',
                         });
                       }}
                     >
-                      重置修改
+                      Reset
                     </TactileButton>
                     <TactileButton type="submit" variant="metallic" size="sm">
-                      保存并应用配置
+                      Save & Deploy
                     </TactileButton>
                   </div>
                 </div>
@@ -861,23 +862,23 @@ function AppContent() {
       <TactileModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="高级轻拟物参数微调 (Advanced Optics)"
-        description="针对高分屏与不同光照环境调整对角高光锐度及倒角曲率"
+        title="Advanced Tactile Optics"
+        description="Fine-tune diagonal specular sharpness and bevel curvature for high-DPI displays."
       >
         <div className="flex flex-col gap-4 py-2">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-zinc-400">自定义环境变量配置</label>
+            <label className="text-xs font-medium text-zinc-400">Environment Configuration</label>
             <TactileInput defaultValue="DARK_SKEUOMORPHIC_SPECULAR_ENABLE=true" />
           </div>
 
           <TactileSwitch
             checked={true}
             onChange={() => {}}
-            label="启用次级对角反光 (Secondary Ambient Bounce)"
-            hint="在右下角模拟自然环境光反射"
+            label="Secondary Ambient Bounce"
+            hint="Simulate natural bottom-right bounce light across beveled rims"
           />
 
-          <TactileSlider label="表面微弧光深度 (Convex Depth)" value={74} onChange={() => {}} />
+          <TactileSlider label="Convex Surface Depth" value={74} onChange={() => {}} />
         </div>
       </TactileModal>
     </div>

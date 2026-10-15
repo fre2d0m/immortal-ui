@@ -62,7 +62,7 @@ const MetalEmblemShowcaseButton: React.FC<{
           onSelect();
         }}
         style={{
-          padding: `${bezelWidth}px`,
+          padding: `${Math.max(1.25, bezelWidth)}px`,
           boxShadow: isLight
             ? '0 10px 22px rgba(0,0,0,0.28), 0 2px 5px rgba(0,0,0,0.2)'
             : '0 14px 30px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.85)',
@@ -86,10 +86,10 @@ const MetalEmblemShowcaseButton: React.FC<{
               : mat.capGradient,
             boxShadow: isLight
               ? 'inset 0 2px 2px rgba(255,255,255,0.95), inset 0 -2px 4px rgba(0,0,0,0.08)'
-              : `inset 0 1.5px 1px ${mat.bevelHighlight}, inset 0 -3px 6px rgba(0,0,0,0.9)`,
+              : 'inset 0 -3px 6px rgba(0,0,0,0.9)',
           }}
           className={`relative z-10 w-full h-full flex items-center justify-center ${
-            isCircle ? 'rounded-full' : 'rounded-[23px]'
+            isCircle ? 'rounded-full' : 'rounded-[24.5px]'
           }`}
         >
           {isCircle ? (
@@ -134,13 +134,10 @@ export const LiquidChromeLab: React.FC = () => {
   const activePreset = METAL_MATERIALS[activeMaterial] || METAL_MATERIALS.classic;
 
   const webglShaderCode = `// =========================================================================
-// 方案 C · WebGL GLSL 多金属材质对角双高光着色器 (Physical Metallic Spectrum Shader)
-// 默认保持干净的 135° 对角双高光，Hover 滑入时原地提亮金属高光
-// 支持通过 uniform 传入不同金属的物理反射率三元组 (u_highColor, u_midColor, u_darkColor)：
-// - 24K 黄金 (Gold):     High(1.0, 0.93, 0.55), Mid(0.92, 0.66, 0.10), Dark(0.22, 0.13, 0.02)
-// - 镜面铂银 (Platinum): High(1.0, 1.0, 1.0),   Mid(0.76, 0.79, 0.85), Dark(0.08, 0.08, 0.10)
-// - 曜石黑钛 (Obsidian): High(0.72, 0.74, 0.78), Mid(0.30, 0.32, 0.36), Dark(0.04, 0.04, 0.05)
-// - 深海钴蓝 (Cobalt):   High(0.68, 0.90, 1.0),  Mid(0.18, 0.52, 0.96), Dark(0.04, 0.11, 0.26)
+// Solution C · WebGL GLSL 1px Micro-Bezel Multi-Metal Fragment Shader
+// Uses asymmetric dual-specular falloff (pow 3.2 / pow 3.8):
+// Top-left primary peak (0.62) & bottom-right secondary bounce (0.28),
+// naturally fading into dark side edges without harsh overexposure.
 // =========================================================================
 precision highp float;
 varying vec2 v_uv;
@@ -154,13 +151,15 @@ uniform vec3 u_darkColor;
 
 vec3 sampleMetallicSpectrum(float angle, float rotOffset, float hoverBoost, vec3 cHigh, vec3 cMid, vec3 cDark) {
   float theta = angle - rotOffset;
-  float w = cos(theta * 2.0) + 0.18 * cos(theta);
-  float t = clamp((w + 0.85) / 1.95 + hoverBoost * 0.18, 0.0, 1.0);
+  float primaryLobe = pow(max(0.0, cos(theta)), 3.2);
+  float secondaryLobe = pow(max(0.0, -cos(theta)), 3.8) * 0.42;
+  float ambientRim = 0.08 + 0.06 * pow(cos(theta * 2.0) * 0.5 + 0.5, 2.0);
+  float t = clamp(ambientRim + primaryLobe * (0.62 + hoverBoost * 0.26) + secondaryLobe * (0.65 + hoverBoost * 0.20), 0.0, 1.0);
 
-  vec3 lowerMetal = mix(cDark, cMid, smoothstep(0.0, 0.52, t));
-  vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.58, 1.0, t));
-  float peakGleam = smoothstep(0.72, 1.15, w + hoverBoost * 0.25);
-  return mix(baseMetal, cHigh, peakGleam * (0.45 + hoverBoost * 0.25));
+  vec3 lowerMetal = mix(cDark, cMid, smoothstep(0.04, 0.52, t));
+  vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.50, 0.96, t));
+  float apexGleam = pow(primaryLobe, 2.5) * (0.25 + hoverBoost * 0.35);
+  return mix(baseMetal, cHigh, clamp(apexGleam, 0.0, 1.0));
 }
 
 void main() {
@@ -175,8 +174,8 @@ void main() {
     navigator.clipboard.writeText(webglShaderCode);
     setCopied(true);
     toast({
-      title: '方案 C (WebGL GLSL) 源码已复制',
-      description: '包含黄金、铂银、黑钛、钴蓝等六种物理金属的 GLSL 着色器已复制到剪贴板',
+      title: 'WebGL GLSL Shader Copied',
+      description: 'Multi-metal physical reflectance GLSL fragment shader copied to clipboard',
       type: 'success',
     });
     setTimeout(() => setCopied(false), 2000);
@@ -187,11 +186,11 @@ void main() {
     audioEngine.playClick(matId === 'classic' ? 'button' : 'metal');
     setMaterial(matId);
     toast({
-      title: `已设为全局风格：${mat.name}`,
+      title: `Global Style: ${mat.name}`,
       description:
         matId === 'classic'
-          ? '已恢复初始默认纯 CSS 暗色轻拟物风格'
-          : `全站按钮、输入框、开关、徽章及卡片边框已实时切换为 ${mat.enName}`,
+          ? 'Restored default Pure CSS Classic Dark Tactile style'
+          : `All buttons, inputs, switches, badges, and cards updated to ${mat.enName}`,
       type: 'success',
     });
   };
@@ -211,12 +210,12 @@ void main() {
           <div>
             <div className="flex items-center gap-2.5">
               <TactileBadge dotColor="amber">
-                方案 C · WebGL 物理金属材质系统
+                Solution C · WebGL Physical Metal System
               </TactileBadge>
               <span className="text-xs font-mono text-zinc-400">
-                当前全局风格：
+                Active Global Style:
                 <strong style={{ color: activePreset.accentHex }} className="ml-1">
-                  {activePreset.name} ({activePreset.enName})
+                  {activePreset.name}
                 </strong>
               </span>
             </div>
@@ -224,7 +223,7 @@ void main() {
               style={{ color: activePreset.accentHex }}
               className="text-lg sm:text-xl font-bold tracking-tight mt-2"
             >
-              经典轻拟物 (默认) 与 6 大物理金属材质切换图鉴
+              Classic Dark Tactile (Default) & 6 Physical Metal Materials
             </h2>
           </div>
 
@@ -235,7 +234,9 @@ void main() {
             icon={<RotateCcw className="w-3.5 h-3.5" />}
             onClick={() => handleSelectGlobalMaterial('classic')}
           >
-            {activeMaterial === 'classic' ? '✓ 当前：经典暗色轻拟物 (默认)' : '恢复经典暗色轻拟物 (默认)'}
+            {activeMaterial === 'classic'
+              ? '✓ Active: Classic Dark Tactile (Default)'
+              : 'Restore Classic Dark Tactile (Default)'}
           </TactileButton>
         </div>
 
@@ -256,27 +257,27 @@ void main() {
             <div>
               <div className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-                <span>当前全局实时生效预览：{activePreset.name}</span>
+                <span>Live Global Style Preview: {activePreset.name}</span>
               </div>
               <div className="text-[11px] text-zinc-400">
-                全站所有组件实时同步此风格，默认保持干净的 135° 静态对角双高光
+                All components across the application sync with this style using a clean 1px 135° dual-specular rim
               </div>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
             <TactileButton variant="default" size="sm">
-              全局默认按钮
+              Default Button
             </TactileButton>
             <TactileButton variant="metallic" size="sm">
-              高光主按钮
+              Metallic Primary
             </TactileButton>
             <TactileButton variant="recessed" size="sm">
-              凹陷次级按钮
+              Recessed Secondary
             </TactileButton>
             <div className="w-44">
               <TactileInput
-                placeholder="全局实时输入框..."
+                placeholder="Live global input..."
                 value={previewText}
                 onChange={(e) => setPreviewText(e.target.value)}
                 icon={<Search className="w-3.5 h-3.5" />}
@@ -322,7 +323,7 @@ void main() {
                         style={{ color: mat.accentHex }}
                         className="text-sm font-semibold tracking-tight"
                       >
-                        {mat.name} ({mat.enName})
+                        {mat.name}
                       </h3>
                     </div>
                     <p className="text-[11px] text-zinc-400 mt-1">{mat.description}</p>
@@ -347,7 +348,7 @@ void main() {
                         : 'bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/15'
                     }`}
                   >
-                    {isSelected ? '✓ 已设为全局' : '设为全局材质'}
+                    {isSelected ? '✓ Active Global' : 'Apply Globally'}
                   </button>
                 </div>
 
@@ -363,7 +364,7 @@ void main() {
                       theme="dark"
                       onSelect={() => handleSelectGlobalMaterial(matId)}
                     />
-                    <span className="text-[10px] text-zinc-500 font-mono">暗色金属方钮</span>
+                    <span className="text-[10px] text-zinc-500 font-mono">Dark Squircle</span>
                   </div>
 
                   <div className="flex flex-col items-center gap-1.5">
@@ -373,7 +374,7 @@ void main() {
                       theme="light"
                       onSelect={() => handleSelectGlobalMaterial(matId)}
                     />
-                    <span className="text-[10px] text-zinc-500 font-mono">亮色金属圆钮</span>
+                    <span className="text-[10px] text-zinc-500 font-mono">Light Orb</span>
                   </div>
                 </div>
               </div>
@@ -386,7 +387,7 @@ void main() {
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-zinc-950/80">
             <div className="flex items-center gap-2 text-xs font-medium text-zinc-200">
               <Code2 className="w-4 h-4" style={{ color: activePreset.accentHex }} />
-              <span>方案 C · 多金属材质 WebGL GLSL 片元着色器源码</span>
+              <span>Solution C · Multi-Metal WebGL GLSL Fragment Shader Source</span>
             </div>
             <TactileButton variant="recessed" size="sm" onClick={handleCopy}>
               {copied ? (
@@ -394,7 +395,7 @@ void main() {
               ) : (
                 <Copy className="w-3.5 h-3.5" />
               )}
-              <span>{copied ? '已复制 GLSL 源码' : '复制 WebGL 着色器源码'}</span>
+              <span>{copied ? 'Copied GLSL' : 'Copy Shader Source'}</span>
             </TactileButton>
           </div>
           <div className="p-4 overflow-x-auto text-xs font-mono text-zinc-300 leading-relaxed max-h-[280px]">

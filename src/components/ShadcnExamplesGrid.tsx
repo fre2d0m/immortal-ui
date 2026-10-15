@@ -34,8 +34,6 @@ import {
   Zap,
   Play,
   RotateCcw,
-  Terminal,
-  ShieldCheck,
 } from 'lucide-react';
 
 /* =========================================================================
@@ -92,7 +90,7 @@ export const ShadcnCardsExample: React.FC = () => {
     setCopiedShare(true);
     audioEngine.playClick('metal');
     toast({
-      title: '分享链接已复制',
+      title: 'Share Link Copied',
       description: shareUrl,
       type: 'success',
     });
@@ -105,15 +103,15 @@ export const ShadcnCardsExample: React.FC = () => {
       <div className="flex flex-col gap-6">
         {/* Card 1: Create an account */}
         <TactileCard
-          title="创建开发者账户 (Create an account)"
-          description="输入您的邮箱与凭证，或使用第三方通行证快速接入"
+          title="Create an account"
+          description="Enter your email below to create your account"
           badge={<TactileBadge dotColor="white">Auth</TactileBadge>}
         >
           <div className="grid grid-cols-2 gap-3">
             <TactileButton
               variant="default"
               onClick={() =>
-                toast({ title: '已触发 GitHub OAuth 鉴权', type: 'info' })
+                toast({ title: 'GitHub OAuth initiated', type: 'info' })
               }
               icon={
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -126,7 +124,7 @@ export const ShadcnCardsExample: React.FC = () => {
             <TactileButton
               variant="default"
               onClick={() =>
-                toast({ title: '已触发 X (Twitter) OAuth 鉴权', type: 'info' })
+                toast({ title: 'X Corp OAuth initiated', type: 'info' })
               }
               icon={
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
@@ -148,7 +146,7 @@ export const ShadcnCardsExample: React.FC = () => {
 
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-300">邮箱地址 (Email)</label>
+              <label className="text-xs font-medium text-zinc-300">Email</label>
               <TactileInput
                 type="email"
                 value={email}
@@ -157,7 +155,7 @@ export const ShadcnCardsExample: React.FC = () => {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-300">登录密码 (Password)</label>
+              <label className="text-xs font-medium text-zinc-300">Password</label>
               <TactileInput
                 type="password"
                 value={password}
@@ -171,20 +169,20 @@ export const ShadcnCardsExample: React.FC = () => {
             className="w-full"
             onClick={() =>
               toast({
-                title: '开发者账户创建成功',
-                description: `欢迎加入，验证邮件已发送至 ${email}`,
+                title: 'Account Created',
+                description: `Verification email sent to ${email}`,
                 type: 'success',
               })
             }
           >
-            立即创建账户 (Create account)
+            Create account
           </TactileButton>
         </TactileCard>
 
         {/* Card 2: Payment Method */}
         <TactileCard
-          title="支付与结算方式 (Payment Method)"
-          description="为算力集群绑定账单结算方式，支持实时高光选中态"
+          title="Payment Method"
+          description="Add a new payment method to your account."
         >
           {/* 3-Tile Payment Selector */}
           <div className="grid grid-cols-3 gap-2.5">
@@ -213,7 +211,7 @@ export const ShadcnCardsExample: React.FC = () => {
                           boxShadow: active ? 'var(--shadow-convex-sm)' : 'none',
                         }
                       : {
-                          padding: active ? '2px' : '1px',
+                          padding: active ? '1.5px' : '1px',
                         }
                   }
                   className={`relative h-20 rounded-xl overflow-hidden cursor-pointer transition-all flex flex-col items-center justify-center gap-1.5 ${
@@ -235,7 +233,7 @@ export const ShadcnCardsExample: React.FC = () => {
                     className={
                       isClassic
                         ? 'flex flex-col items-center justify-center gap-1.5'
-                        : 'relative z-10 w-full h-full rounded-[10px] flex flex-col items-center justify-center gap-1.5'
+                        : 'relative z-10 w-full h-full rounded-[10.5px] flex flex-col items-center justify-center gap-1.5'
                     }
                   >
                     <span
@@ -259,7 +257,7 @@ export const ShadcnCardsExample: React.FC = () => {
 
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-300">持卡人姓名 (Name)</label>
+              <label className="text-xs font-medium text-zinc-300">Name</label>
               <TactileInput
                 value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
@@ -268,7 +266,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-zinc-300">卡号 (Card number)</label>
+              <label className="text-xs font-medium text-zinc-300">Card number</label>
               <TactileInput
                 value={cardNumber}
                 onChange={(e) => setCardNumber(e.target.value)}
@@ -278,18 +276,18 @@ export const ShadcnCardsExample: React.FC = () => {
 
             <div className="grid grid-cols-3 gap-2.5">
               <TactileSelect
-                label="月份 (Expires)"
+                label="Expires"
                 value={expMonth}
                 onChange={setExpMonth}
                 options={[
-                  { value: '01', label: '01 月' },
-                  { value: '04', label: '04 月' },
-                  { value: '08', label: '08 月' },
-                  { value: '12', label: '12 月' },
+                  { value: '01', label: 'Jan (01)' },
+                  { value: '04', label: 'Apr (04)' },
+                  { value: '08', label: 'Aug (08)' },
+                  { value: '12', label: 'Dec (12)' },
                 ]}
               />
               <TactileSelect
-                label="年份 (Year)"
+                label="Year"
                 value={expYear}
                 onChange={setExpYear}
                 options={[
@@ -300,7 +298,7 @@ export const ShadcnCardsExample: React.FC = () => {
                 ]}
               />
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-medium text-zinc-400">安全码 (CVC)</label>
+                <label className="text-xs font-medium text-zinc-400">CVC</label>
                 <TactileInput
                   value={cvc}
                   onChange={(e) => setCvc(e.target.value)}
@@ -315,13 +313,13 @@ export const ShadcnCardsExample: React.FC = () => {
             className="w-full"
             onClick={() =>
               toast({
-                title: '支付方式已绑定',
-                description: `持卡人 ${cardName} (${payMethod.toUpperCase()}) 校验通过`,
+                title: 'Payment Method Saved',
+                description: `Verified ${cardName} (${payMethod.toUpperCase()})`,
                 type: 'success',
               })
             }
           >
-            继续并保存 (Continue)
+            Continue
           </TactileButton>
         </TactileCard>
       </div>
@@ -330,8 +328,8 @@ export const ShadcnCardsExample: React.FC = () => {
       <div className="flex flex-col gap-6">
         {/* Card 3: Team Members */}
         <TactileCard
-          title="团队成员与权限 (Team Members)"
-          description="管理组织成员对组件库与算力集群的访问角色"
+          title="Team Members"
+          description="Invite your team members to collaborate."
           badge={<TactileBadge dotColor="green">3 Active</TactileBadge>}
         >
           <div className="flex flex-col gap-3.5">
@@ -386,9 +384,9 @@ export const ShadcnCardsExample: React.FC = () => {
                     value={member.role}
                     onChange={member.setRole}
                     options={[
-                      { value: 'owner', label: 'Owner (所有者)', description: '全量管理权限' },
-                      { value: 'developer', label: 'Developer', description: '部署与调试权限' },
-                      { value: 'billing', label: 'Billing', description: '账单与配额查看' },
+                      { value: 'owner', label: 'Owner', description: 'Admin-level access' },
+                      { value: 'developer', label: 'Developer', description: 'Can deploy & debug' },
+                      { value: 'billing', label: 'Billing', description: 'Can view invoices' },
                     ]}
                   />
                 </div>
@@ -399,8 +397,8 @@ export const ShadcnCardsExample: React.FC = () => {
 
         {/* Card 4: Share this document */}
         <TactileCard
-          title="分享工程与访问令牌 (Share this document)"
-          description="任何持有该轻拟物密钥链接的成员均可按权限检视组件"
+          title="Share this document"
+          description="Anyone with the link can view this document."
         >
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
@@ -417,19 +415,19 @@ export const ShadcnCardsExample: React.FC = () => {
                 )
               }
             >
-              {copiedShare ? '已复制' : '复制'}
+              {copiedShare ? 'Copied' : 'Copy Link'}
             </TactileButton>
           </div>
 
           <div className="pt-2 border-t border-white/[0.06] flex flex-col gap-3">
-            <div className="text-xs font-medium text-zinc-300">默认访问级别 (Access Level)</div>
+            <div className="text-xs font-medium text-zinc-300">Default Access Level</div>
             <TactileRadioGroup
               name="shareAccess"
               value={accessLevel}
               onChange={setAccessLevel}
               options={[
-                { value: 'write', label: '读写权限 (Read & Write)' },
-                { value: 'read', label: '仅只读预览 (Read Only)' },
+                { value: 'write', label: 'Can edit (Read & Write)' },
+                { value: 'read', label: 'Can view (Read Only)' },
               ]}
             />
           </div>
@@ -437,27 +435,27 @@ export const ShadcnCardsExample: React.FC = () => {
 
         {/* Card 5: Notifications */}
         <TactileCard
-          title="通知订阅策略 (Notifications)"
-          description="选择您需要接收的物理音效与系统告警级别"
+          title="Notifications"
+          description="Choose what you want to be notified about."
         >
           <div className="flex flex-col gap-2">
             {[
               {
                 id: 'all',
-                title: '全部实时动态 (Everything)',
-                desc: '所有节点部署、告警与提及均推送通知',
+                title: 'Everything',
+                desc: 'Email digest, mentions & all activity.',
                 icon: <Bell className="w-4 h-4" />,
               },
               {
                 id: 'mentions',
-                title: '仅提及与高优告警 (Available)',
-                desc: '仅在被 @提及 或集群负载超阈值时提醒',
+                title: 'Available',
+                desc: 'Only mentions and comments.',
                 icon: <Sparkles className="w-4 h-4" />,
               },
               {
                 id: 'none',
-                title: '静默免打扰 (Ignoring)',
-                desc: '关闭所有弹窗提示，仅保留后台日志记录',
+                title: 'Ignoring',
+                desc: 'Turn off all notifications.',
                 icon: <BellOff className="w-4 h-4" />,
               },
             ].map((item) => {
@@ -497,8 +495,8 @@ export const ShadcnCardsExample: React.FC = () => {
             <TactileCheckbox
               checked={pushNotif}
               onChange={setPushNotif}
-              label="同时开启 Web Audio 机械微动合成音效"
-              hint="点击按钮或拨动开关时发出真实物理微动声"
+              label="Enable Web Audio physical micro-switch synthesis"
+              hint="Play subtle tactile click acoustics when pressing buttons or switches"
             />
           </div>
         </TactileCard>
@@ -508,28 +506,28 @@ export const ShadcnCardsExample: React.FC = () => {
       <div className="flex flex-col gap-6">
         {/* Card 6: Cookie & Optical Preferences */}
         <TactileCard
-          title="隐私与光学偏好 (Cookie & Optical Settings)"
-          description="管理本地存储权限与硬件高光着色渲染开关"
+          title="Cookie & Optical Settings"
+          description="Manage your cookie and hardware shader preferences."
           badge={<TactileBadge dotColor="amber">Preferences</TactileBadge>}
         >
           <div className="flex flex-col gap-3">
             <TactileSwitch
               checked={cookieNecessary}
               onChange={setCookieNecessary}
-              label="核心安全凭据 (Strictly Necessary)"
-              hint="维持会话鉴权与防跨站请求伪造所必需的存储"
+              label="Strictly Necessary"
+              hint="Essential cookies required for authentication and security."
             />
             <TactileSwitch
               checked={cookieFunctional}
               onChange={setCookieFunctional}
-              label="个性化风格记忆 (Functional)"
-              hint="记住您选择的暗色轻拟物或金属材质配置"
+              label="Functional Cookies"
+              hint="Remember your selected Dark Tactile or WebGL Metal theme."
             />
             <TactileSwitch
               checked={cookieSpecular}
               onChange={setCookieSpecular}
-              label="135° 对角双高光渲染 (Specular Rim)"
-              hint="启用左上主高光与右下环境反光的微立体倒角"
+              label="135° Dual-Specular Rim"
+              hint="Enable top-left primary gleam and bottom-right ambient bounce."
             />
           </div>
 
@@ -538,46 +536,46 @@ export const ShadcnCardsExample: React.FC = () => {
             className="w-full"
             onClick={() =>
               toast({
-                title: '偏好设置已保存',
-                description: '您的隐私与光学配置已更新至本地',
+                title: 'Preferences Saved',
+                description: 'Your privacy and optical settings have been updated',
                 type: 'success',
               })
             }
           >
-            保存偏好设置 (Save preferences)
+            Save preferences
           </TactileButton>
         </TactileCard>
 
         {/* Card 7: Report an Issue */}
         <TactileCard
-          title="提交工单反馈 (Report an issue)"
-          description="遇到渲染异常或需要定制新组件？请告诉我们"
+          title="Report an issue"
+          description="What area are you having problems with?"
         >
           <div className="grid grid-cols-2 gap-3">
             <TactileSelect
-              label="所属模块 (Area)"
+              label="Area"
               value={issueArea}
               onChange={setIssueArea}
               options={[
-                { value: 'billing', label: 'Billing (账单结算)' },
-                { value: 'webgl', label: 'WebGL 着色器' },
-                { value: 'components', label: 'UI 组件交互' },
+                { value: 'billing', label: 'Billing' },
+                { value: 'webgl', label: 'WebGL Shaders' },
+                { value: 'components', label: 'UI Components' },
               ]}
             />
             <TactileSelect
-              label="严重级别 (Severity)"
+              label="Security Level"
               value={issueSeverity}
               onChange={setIssueSeverity}
               options={[
-                { value: '1', label: 'Severity 1 (最高)' },
-                { value: '2', label: 'Severity 2 (中等)' },
-                { value: '3', label: 'Severity 3 (建议)' },
+                { value: '1', label: 'Severity 1 (Highest)' },
+                { value: '2', label: 'Severity 2 (Medium)' },
+                { value: '3', label: 'Severity 3 (Low)' },
               ]}
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-zinc-300">工单标题 (Subject)</label>
+            <label className="text-xs font-medium text-zinc-300">Subject</label>
             <TactileInput
               value={issueSubject}
               onChange={(e) => setIssueSubject(e.target.value)}
@@ -586,11 +584,11 @@ export const ShadcnCardsExample: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-zinc-300">详细描述 (Description)</label>
+            <label className="text-xs font-medium text-zinc-300">Description</label>
             <TactileTextarea
               value={issueDesc}
               onChange={(e) => setIssueDesc(e.target.value)}
-              placeholder="请描述复现步骤或期望的拟物光影效果..."
+              placeholder="Please include all information relevant to your issue."
             />
           </div>
 
@@ -602,27 +600,27 @@ export const ShadcnCardsExample: React.FC = () => {
                 setIssueDesc('');
               }}
             >
-              取消 (Cancel)
+              Cancel
             </TactileButton>
             <TactileButton
               variant="metallic"
               onClick={() =>
                 toast({
-                  title: '工单已提交',
-                  description: '工程团队将在 15 分钟内响应您的反馈',
+                  title: 'Issue Submitted',
+                  description: 'Our engineering team will review your report shortly',
                   type: 'success',
                 })
               }
             >
-              提交工单 (Submit)
+              Submit
             </TactileButton>
           </div>
         </TactileCard>
 
         {/* Card 8: Compute Goal & Telemetry */}
         <TactileCard
-          title="算力配额调节 (Compute Goal)"
-          description="动态调节每日 GPU 推理吞吐配额上限"
+          title="Compute Goal"
+          description="Set your daily GPU inference throughput target."
         >
           <div className="flex items-center justify-between py-1">
             <TactileButton
@@ -667,7 +665,7 @@ export const ShadcnCardsExample: React.FC = () => {
           </div>
 
           <TactileSlider
-            label="快捷滑块调节"
+            label="Quick Target Slider"
             value={computeGoal}
             min={100}
             max={800}
@@ -691,27 +689,27 @@ export const ShadcnDashboardExample: React.FC = () => {
 
   const kpis = [
     {
-      title: '算力总营收 (Total Revenue)',
+      title: 'Total Revenue',
       value: '$45,231.89',
-      change: '+20.1% 较上月同比增长',
+      change: '+20.1% from last month',
       icon: <DollarSign className="w-4 h-4" />,
     },
     {
-      title: '活跃订阅节点 (Subscriptions)',
+      title: 'Subscriptions',
       value: '+2,350',
-      change: '+180.1% 集群扩缩容增长',
+      change: '+180.1% from last month',
       icon: <Users className="w-4 h-4" />,
     },
     {
-      title: '每秒令牌吞吐 (Token/s)',
+      title: 'Token Throughput / s',
       value: '12,234',
-      change: '+19% 硬件着色加速提升',
+      change: '+19% from last month',
       icon: <Zap className="w-4 h-4" />,
     },
     {
-      title: '在线算力实例 (Active Now)',
+      title: 'Active Now',
       value: '+573',
-      change: '+201 过去一小时新增',
+      change: '+201 since last hour',
       icon: <Activity className="w-4 h-4" />,
     },
   ];
@@ -724,16 +722,16 @@ export const ShadcnDashboardExample: React.FC = () => {
             activeId={rangeTab}
             onChange={setRangeTab}
             tabs={[
-              { id: 'overview', label: 'Overview (总览)' },
-              { id: 'analytics', label: 'Analytics (分析)' },
-              { id: 'reports', label: 'Reports (报表)' },
+              { id: 'overview', label: 'Overview' },
+              { id: 'analytics', label: 'Analytics' },
+              { id: 'reports', label: 'Reports' },
             ]}
           />
         </div>
         <div className="flex items-center gap-2.5">
-          <TactileBadge dotColor="green">集群状态：健康</TactileBadge>
+          <TactileBadge dotColor="green">Cluster Healthy</TactileBadge>
           <TactileButton variant="metallic" size="sm">
-            导出遥测报告 (Download)
+            Download Report
           </TactileButton>
         </div>
       </div>
@@ -764,8 +762,8 @@ export const ShadcnDashboardExample: React.FC = () => {
       {/* Main Chart + Recent Deployments */}
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
         <TactileCard
-          title="月度算力吞吐趋势 (Overview)"
-          description="过去 12 个月各集群推理负载与光追渲染吞吐量"
+          title="Overview"
+          description="Monthly compute throughput & shader workload across regions"
           className="lg:col-span-4"
         >
           <div className="h-64 flex items-end justify-between gap-2.5 pt-6 px-2">
@@ -799,8 +797,8 @@ export const ShadcnDashboardExample: React.FC = () => {
         </TactileCard>
 
         <TactileCard
-          title="近期节点调用记录 (Recent Deployments)"
-          description="本月已完成 265 次高可用算力结算"
+          title="Recent Sales & Deployments"
+          description="You made 265 enterprise deployments this month."
           className="lg:col-span-3"
         >
           <div className="flex flex-col gap-4">
@@ -865,8 +863,8 @@ export const ShadcnPlaygroundExample: React.FC = () => {
 
   return (
     <TactileCard
-      title="AI 光学推理工作台 (Playground)"
-      description="复刻 shadcn/ui Playground 布局，实时体验多行文本域、滑块与选择器协同手感"
+      title="AI Optical Playground"
+      description="Inspired by the shadcn/ui Playground — test recessed textareas, tactile sliders, and selectors."
       badge={<TactileBadge dotColor="amber">Interactive</TactileBadge>}
     >
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -883,20 +881,20 @@ export const ShadcnPlaygroundExample: React.FC = () => {
                 icon={<Play className="w-3.5 h-3.5" />}
                 onClick={() =>
                   toast({
-                    title: '推理任务已提交',
-                    description: `模型 ${model} · Temperature ${(temp / 100).toFixed(2)}`,
+                    title: 'Inference Submitted',
+                    description: `Model ${model} · Temperature ${(temp / 100).toFixed(2)}`,
                     type: 'success',
                   })
                 }
               >
-                执行生成 (Submit)
+                Submit
               </TactileButton>
               <TactileButton
                 variant="recessed"
                 icon={<RotateCcw className="w-3.5 h-3.5" />}
                 onClick={() => setPromptText('')}
               >
-                清空画布
+                Reset
               </TactileButton>
             </div>
             <span className="text-xs font-mono text-zinc-500">
@@ -907,18 +905,18 @@ export const ShadcnPlaygroundExample: React.FC = () => {
 
         <div className="flex flex-col gap-5">
           <TactileSelect
-            label="基础模型 (Model)"
+            label="Model"
             value={model}
             onChange={setModel}
             options={[
-              { value: 'grok-metal', label: 'tactile-metal-v3', description: '高反差拟物推理内核' },
-              { value: 'linear-fast', label: 'linear-instant-v2', description: '极速低延迟生成' },
-              { value: 'obsidian-pro', label: 'obsidian-codex', description: '代码与着色器生成' },
+              { value: 'grok-metal', label: 'tactile-metal-v3', description: 'High-contrast reasoning kernel' },
+              { value: 'linear-fast', label: 'linear-instant-v2', description: 'Ultra-low latency generation' },
+              { value: 'obsidian-pro', label: 'obsidian-codex', description: 'Code & GLSL shader synthesis' },
             ]}
           />
 
           <TactileSlider
-            label="采样温度 (Temperature)"
+            label="Temperature"
             value={temp}
             min={0}
             max={100}
@@ -927,7 +925,7 @@ export const ShadcnPlaygroundExample: React.FC = () => {
           />
 
           <TactileSlider
-            label="最大长度 (Max Length)"
+            label="Maximum Length"
             value={maxLen}
             min={256}
             max={4096}
@@ -937,7 +935,7 @@ export const ShadcnPlaygroundExample: React.FC = () => {
           />
 
           <TactileSlider
-            label="核采样阈值 (Top P)"
+            label="Top P"
             value={topP}
             min={10}
             max={100}
@@ -948,8 +946,8 @@ export const ShadcnPlaygroundExample: React.FC = () => {
           <TactileSwitch
             checked={streamMode}
             onChange={setStreamMode}
-            label="流式响应输出"
-            hint="60fps 实时渲染生成结果"
+            label="Stream Response"
+            hint="Render token output at 60fps in real time"
           />
         </div>
       </div>

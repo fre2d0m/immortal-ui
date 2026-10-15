@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Code2, Layers, Play } from 'lucide-react';
+import { Copy, Check, Code2, Layers } from 'lucide-react';
 import {
   TactileButton,
   TactileInput,
@@ -41,16 +41,19 @@ export const ComponentDocs: React.FC = () => {
   const components: DocItem[] = [
     {
       id: 'button',
-      name: '按钮 (Tactile Button + Hover 流光旋转)',
+      name: 'Tactile Button',
       category: 'buttons',
-      description: '采用凸起微弧度背景与 135° 对角双高光边框；利用 CSS @property 在 Hover 滑入时让对角高光旋转指定角度（如 90°、180°、360°）。',
+      description:
+        'Convex micro-curved surface with a 1px 135° dual-specular rim. Supports optional hover angular sweep (90°, 180°, 360°) and physical metal shaders.',
       preview: (
         <div className="flex flex-wrap items-center gap-3">
-          <TactileButton variant="default">默认流光 (+180°)</TactileButton>
-          <TactileButton variant="default" sweepDeg={360}>整圈流光 (+360°)</TactileButton>
-          <TactileButton variant="metallic">银钛高光 (Metallic)</TactileButton>
-          <TactileButton variant="recessed">凹陷次级 (Recessed)</TactileButton>
-          <TactileButton variant="danger">危险操作 (Danger)</TactileButton>
+          <TactileButton variant="default">Default Rim</TactileButton>
+          <TactileButton variant="default" sweepDeg={360}>
+            Orbit Sweep (+360°)
+          </TactileButton>
+          <TactileButton variant="metallic">Metallic Primary</TactileButton>
+          <TactileButton variant="recessed">Recessed Secondary</TactileButton>
+          <TactileButton variant="danger">Danger Action</TactileButton>
           <TactileButton
             variant="default"
             loading={btnLoading}
@@ -59,37 +62,37 @@ export const ComponentDocs: React.FC = () => {
               setTimeout(() => setBtnLoading(false), 1500);
             }}
           >
-            {btnLoading ? '加载中...' : '点击测加载'}
+            {btnLoading ? 'Processing...' : 'Test Loading'}
           </TactileButton>
         </div>
       ),
-      reactSnippet: `// React / TSX 引入使用 (支持 sweepDeg 独立指定 Hover 旋转度数)
+      reactSnippet: `// React / TSX Usage (supports per-button material and sweepDeg props)
 import { TactileButton } from "@/components/TactileComponents";
 
 export function ButtonDemo() {
   return (
     <div className="flex gap-3">
-      {/* 默认跟随全局 --hover-sweep (180° 对角互换) */}
-      <TactileButton variant="default">对角高光互换</TactileButton>
+      {/* Default 135° static dual-specular rim */}
+      <TactileButton variant="default">Default Button</TactileButton>
 
-      {/* 独立指定 Hover 滑入时高光旋转整整一圈 (360°) */}
-      <TactileButton variant="default" sweepDeg={360}>Hover 转一圈 (360°)</TactileButton>
+      {/* Optional 360° angular specular sweep on hover */}
+      <TactileButton variant="default" sweepDeg={360}>Hover Orbit (360°)</TactileButton>
 
-      {/* 独立指定 Hover 滑入时微转 90° */}
-      <TactileButton variant="default" sweepDeg={90}>Hover 转 90°</TactileButton>
+      {/* Specific WebGL physical metal override */}
+      <TactileButton variant="default" material="gold">24K Gold</TactileButton>
       
-      {/* 银钛镜面主按钮 */}
-      <TactileButton variant="metallic">立即部署</TactileButton>
+      {/* High-contrast metallic primary button */}
+      <TactileButton variant="metallic">Deploy Now</TactileButton>
     </div>
   );
 }`,
-      htmlSnippet: `<!-- 原生 HTML & CSS 写法 (利用 CSS @property 实现对角高光在 Hover 时平滑旋转指定度数) -->
-<button class="skeuo-btn">默认旋转 180° (对角互换)</button>
-<button class="skeuo-btn" style="--hover-sweep: 360deg;">Hover 旋转整圈 (360°)</button>
-<button class="skeuo-btn" style="--hover-sweep: 90deg;">Hover 微转 90°</button>
+      htmlSnippet: `<!-- Vanilla HTML & CSS (uses CSS @property for smooth angular specular sweep) -->
+<button class="skeuo-btn">Default 135° Rim</button>
+<button class="skeuo-btn" style="--hover-sweep: 360deg;">Hover Orbit (360°)</button>
+<button class="skeuo-btn" style="--hover-sweep: 90deg;">Hover Sweep (90°)</button>
 
 <style>
-/* 1. 注册 CSS Houdini 角度属性，使 linear-gradient 内部的度数支持丝滑 transition 动画 */
+/* 1. Register CSS Houdini angle property for smooth gradient rotation */
 @property --local-rim-angle {
   syntax: '<angle>';
   inherits: true;
@@ -97,9 +100,9 @@ export function ButtonDemo() {
 }
 
 :root {
-  --rim-angle: 135deg;       /* 默认静息对角高光角度 */
-  --hover-sweep: 180deg;     /* Hover 滑入时旋转的角距离 (可改为 90deg / 180deg / 360deg) */
-  --sweep-duration: 600ms;   /* 高光旋转过渡时长 */
+  --rim-angle: 135deg;       /* Resting diagonal specular angle */
+  --hover-sweep: 0deg;       /* Optional angular sweep on hover (0deg / 90deg / 180deg / 360deg) */
+  --sweep-duration: 600ms;   /* Transition duration */
 }
 
 .skeuo-btn {
@@ -114,10 +117,10 @@ export function ButtonDemo() {
     linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%),
     linear-gradient(
       var(--local-rim-angle),
-      rgba(255,255,255,0.48) 0%,
-      rgba(255,255,255,0.06) 40%,
-      rgba(255,255,255,0.03) 60%,
-      rgba(255,255,255,0.26) 100%
+      rgba(255,255,255,0.42) 0%,
+      rgba(255,255,255,0.06) 38%,
+      rgba(255,255,255,0.03) 62%,
+      rgba(255,255,255,0.22) 100%
     );
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
@@ -129,7 +132,6 @@ export function ButtonDemo() {
     box-shadow 0.2s ease;
 }
 
-/* 2. 鼠标滑入时，高光角度累加 --hover-sweep，沿圆角边框平滑旋转（无位移弹跳） */
 .skeuo-btn:hover {
   --local-rim-angle: calc(var(--rim-angle) + var(--hover-sweep));
   box-shadow: 0 8px 18px rgba(0,0,0,0.85), inset 0 1px 0.5px rgba(255,255,255,0.28);
@@ -143,13 +145,14 @@ export function ButtonDemo() {
     },
     {
       id: 'input',
-      name: '输入框 (Tactile Input)',
+      name: 'Tactile Input',
       category: 'inputs',
-      description: '深凹槽内阴影营造物理嵌槽感，聚焦态对角高光环绕，支持快捷键标签与自定义前置图标。',
+      description:
+        'Deep recessed inner shadow creates a carved physical slot with a focused diagonal specular rim, leading icon, and keyboard shortcut badge.',
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
           <TactileInput
-            placeholder="搜索节点或执行指令..."
+            placeholder="Search nodes or run a command..."
             kbd="⌘K"
             icon={
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -160,27 +163,26 @@ export function ButtonDemo() {
           />
           <TactileInput
             type="password"
-            placeholder="输入加密密钥..."
+            placeholder="Enter secret token..."
             defaultValue="sk-production-tactile-key"
           />
         </div>
       ),
-      reactSnippet: `// React / TSX 引入使用
-import { TactileInput } from "@/components/TactileComponents";
+      reactSnippet: `import { TactileInput } from "@/components/TactileComponents";
 import { Search } from "lucide-react";
 
 export function InputDemo() {
   return (
     <TactileInput
-      placeholder="搜索或输入全局指令..."
+      placeholder="Search or enter global command..."
       icon={<Search className="w-4 h-4" />}
       kbd="⌘K"
     />
   );
 }`,
-      htmlSnippet: `<!-- 原生 HTML & CSS 写法 -->
+      htmlSnippet: `<!-- Vanilla HTML & CSS -->
 <div class="input-wrapper">
-  <input type="text" class="input-field" placeholder="搜索或输入指令..." />
+  <input type="text" class="input-field" placeholder="Search or enter command..." />
   <span class="kbd-badge">⌘K</span>
 </div>
 
@@ -210,16 +212,17 @@ export function InputDemo() {
     },
     {
       id: 'switch',
-      name: '开关拨杆 (Tactile Switch)',
+      name: 'Tactile Switch',
       category: 'controls',
-      description: '修复了灰色叠加问题：内部使用纯净曜石黑不透明渐变，中央带有发光状态宝石指示灯。',
+      description:
+        'Pure opaque obsidian subcard backing prevents grey bleed-through, paired with a recessed track and an illuminated jewel indicator thumb.',
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
           <TactileSwitch
             checked={switchVal}
             onChange={setSwitchVal}
-            label="135° 拟物光线追踪渲染"
-            hint="开启实时材质边缘反光与内高光"
+            label="135° Specular Ray-Traced Rim"
+            hint="Enable real-time edge reflections and inner highlights"
           />
         </div>
       ),
@@ -233,16 +236,16 @@ export function SwitchDemo() {
     <TactileSwitch
       checked={enabled}
       onChange={setEnabled}
-      label="硬件加速渲染模式"
-      hint="开启后启用全动态高光计算"
+      label="Hardware Accelerated Shading"
+      hint="Enable dynamic diagonal specular rim reflections"
     />
   );
 }`,
-      htmlSnippet: `<!-- 原生 HTML & CSS 写法 (已修复灰色透光问题) -->
+      htmlSnippet: `<!-- Vanilla HTML & CSS -->
 <div class="control-row">
   <div class="control-label">
-    <span class="control-title">硬件加速渲染模式</span>
-    <span class="control-hint">开启后启用全动态高光计算</span>
+    <span class="control-title">Hardware Accelerated Shading</span>
+    <span class="control-hint">Enable dynamic diagonal specular rim reflections</span>
   </div>
   <label class="switch">
     <input type="checkbox" checked />
@@ -258,7 +261,7 @@ export function SwitchDemo() {
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid transparent;
-  /* 关键：不透明深色渐变杜绝底框高光透出产生灰雾 */
+  /* Opaque dark gradient prevents border-box highlight bleed-through */
   background-image: 
     linear-gradient(145deg, #101013 0%, #070709 60%, #0c0c0f 100%),
     linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.12) 100%);
@@ -270,19 +273,32 @@ export function SwitchDemo() {
     },
     {
       id: 'select',
-      name: '下拉选择 (Tactile Select)',
+      name: 'Tactile Select',
       category: 'inputs',
-      description: '带有浮动倒角边框、高深度投影及流畅展开收起动画的暗色轻拟物下拉菜单。',
+      description:
+        'Custom dark skeuomorphic dropdown with a floating beveled popover, deep ambient shadow, and option descriptions.',
       preview: (
         <div className="max-w-md w-full">
           <TactileSelect
-            label="渲染内核选择 (Engine Kernel)"
+            label="Engine Kernel"
             value={selectVal}
             onChange={setSelectVal}
             options={[
-              { value: 'v1', label: 'Grok-3 极速推理金属引擎', description: '低延迟、硬件光栅加速' },
-              { value: 'v2', label: 'Linear 本地极速管线', description: '毫秒级响应、本地离线就绪' },
-              { value: 'v3', label: 'Raycast 桌面原生引擎', description: '全局快捷唤醒与热键' },
+              {
+                value: 'v1',
+                label: 'Grok-3 Metal Reasoning Engine',
+                description: 'Low-latency hardware raster acceleration',
+              },
+              {
+                value: 'v2',
+                label: 'Linear Instant Pipeline',
+                description: 'Sub-millisecond local-first sync',
+              },
+              {
+                value: 'v3',
+                label: 'Raycast Native Runtime',
+                description: 'Global hotkey launcher & extensions',
+              },
             ]}
           />
         </div>
@@ -295,31 +311,32 @@ export function SelectDemo() {
 
   return (
     <TactileSelect
-      label="选择处理引擎"
+      label="Processing Engine"
       value={model}
       onChange={setModel}
       options={[
-        { value: "v1", label: "Grok-3 极速推理引擎" },
-        { value: "v2", label: "Linear 极速工作流" }
+        { value: "v1", label: "Grok-3 Metal Reasoning Engine" },
+        { value: "v2", label: "Linear Instant Pipeline" }
       ]}
     />
   );
 }`,
-      htmlSnippet: `<!-- 参见 TactileSelect 完整实现 -->`,
+      htmlSnippet: `<!-- See TactileSelect component source for full accessible dropdown implementation -->`,
     },
     {
       id: 'controls',
-      name: '复选框与单选框 (Checkbox & Radio)',
+      name: 'Checkbox & Radio Group',
       category: 'controls',
-      description: '凹陷物理底座，勾选后呈现高对比度明亮微银反光与圆润单选点。',
+      description:
+        'Recessed physical sockets that illuminate with high-contrast metallic silver or active alloy accents when checked.',
       preview: (
         <div className="flex flex-col gap-4 max-w-md w-full">
           <div className="flex gap-4">
             <TactileCheckbox
               checked={checkVal}
               onChange={setCheckVal}
-              label="持久化存储状态"
-              hint="本地存储偏好设定"
+              label="Persist session state"
+              hint="Save preferences in local storage"
             />
           </div>
           <TactileRadioGroup
@@ -327,8 +344,8 @@ export function SelectDemo() {
             value={radioVal}
             onChange={setRadioVal}
             options={[
-              { value: 'raycast', label: '曜石黑 (Obsidian)' },
-              { value: 'titanium', label: '钛金属 (Titanium)' },
+              { value: 'raycast', label: 'Obsidian Dark' },
+              { value: 'titanium', label: 'Brushed Titanium' },
             ]}
           />
         </div>
@@ -342,20 +359,20 @@ export function ControlsDemo() {
 
   return (
     <>
-      <TactileCheckbox checked={remember} onChange={setRemember} label="记住设定" />
+      <TactileCheckbox checked={remember} onChange={setRemember} label="Remember settings" />
       <TactileRadioGroup
         name="theme"
         value={theme}
         onChange={setTheme}
         options={[
-          { value: "dark", label: "曜石黑" },
-          { value: "metal", label: "钛金属" }
+          { value: "dark", label: "Obsidian Dark" },
+          { value: "metal", label: "Brushed Titanium" }
         ]}
       />
     </>
   );
 }`,
-      htmlSnippet: `<!-- 复选框 HTML -->
+      htmlSnippet: `<!-- Checkbox HTML -->
 <label class="check-item">
   <input type="checkbox" checked />
   <span class="check-box">
@@ -363,18 +380,19 @@ export function ControlsDemo() {
       <polyline points="20 6 9 17 4 12" />
     </svg>
   </span>
-  <span>自动保存</span>
+  <span>Auto-save configuration</span>
 </label>`,
     },
     {
       id: 'slider',
-      name: '滑块 (Tactile Slider)',
+      name: 'Tactile Slider',
       category: 'controls',
-      description: '内凹滑轨配合凸起球体旋钮，拖动时带有平滑的金属高光位移与实时数值显示。',
+      description:
+        'Recessed groove track paired with a spherical metallic thumb knob and real-time monospace value readout.',
       preview: (
         <div className="max-w-md w-full">
           <TactileSlider
-            label="高光反射阻尼 (Specular Damping)"
+            label="Specular Damping"
             value={sliderVal}
             onChange={setSliderVal}
           />
@@ -386,26 +404,27 @@ import { useState } from "react";
 export function SliderDemo() {
   const [val, setVal] = useState(65);
   return (
-    <TactileSlider label="反射率" value={val} onChange={setVal} />
+    <TactileSlider label="Reflectance" value={val} onChange={setVal} />
   );
 }`,
-      htmlSnippet: `<!-- 滑块 HTML -->
+      htmlSnippet: `<!-- Range Slider HTML -->
 <input type="range" min="0" max="100" value="65" class="range-slider" />`,
     },
     {
       id: 'tabs',
-      name: '分段标签页 (Tactile Tabs)',
+      name: 'Tactile Tabs (Segmented)',
       category: 'controls',
-      description: '沉浸凹陷轨道底盘 + 凸起激活滑块，提供极高辨识度的切换体验。',
+      description:
+        'Carved concave pill tray with an elevated convex active indicator tab.',
       preview: (
         <div className="max-w-md w-full">
           <TactileTabs
             activeId={activeTab}
             onChange={setActiveTab}
             tabs={[
-              { id: 'code', label: '源码视图' },
-              { id: 'preview', label: '实时预览' },
-              { id: 'logs', label: '终端日志' },
+              { id: 'code', label: 'Source Code' },
+              { id: 'preview', label: 'Live Preview' },
+              { id: 'logs', label: 'Terminal Logs' },
             ]}
           />
         </div>
@@ -421,30 +440,31 @@ export function TabsDemo() {
       activeId={tab}
       onChange={setTab}
       tabs={[
-        { id: "overview", label: "概览视图" },
-        { id: "metrics", label: "实时指标" },
-        { id: "settings", label: "系统配置" }
+        { id: "overview", label: "Overview" },
+        { id: "metrics", label: "Live Metrics" },
+        { id: "settings", label: "Settings" }
       ]}
     />
   );
 }`,
-      htmlSnippet: `<!-- 分段控制器 HTML -->
+      htmlSnippet: `<!-- Segmented Control HTML -->
 <div class="tabs-bar">
-  <button class="tab-btn active">概览视图</button>
-  <button class="tab-btn">实时指标</button>
+  <button class="tab-btn active">Overview</button>
+  <button class="tab-btn">Live Metrics</button>
 </div>`,
     },
     {
       id: 'badge',
-      name: '徽章与状态 (Tactile Badges)',
+      name: 'Tactile Badges',
       category: 'surfaces',
-      description: '轻微凸起的胶囊底座配合发光宝石指示灯，用于表示系统就绪、警示或版本号。',
+      description:
+        'Subtly elevated capsule pill with a glowing LED status dot for system health, alerts, or version tags.',
       preview: (
         <div className="flex flex-wrap items-center gap-3">
-          <TactileBadge dotColor="white">Tactile v2.4</TactileBadge>
-          <TactileBadge dotColor="green">节点在线 (99.98%)</TactileBadge>
-          <TactileBadge dotColor="amber">延迟波动 (42ms)</TactileBadge>
-          <TactileBadge dotColor="crimson">熔断告警</TactileBadge>
+          <TactileBadge dotColor="white">Tactile v3.0</TactileBadge>
+          <TactileBadge dotColor="green">Node Online (99.98%)</TactileBadge>
+          <TactileBadge dotColor="amber">Latency Spike (42ms)</TactileBadge>
+          <TactileBadge dotColor="crimson">Circuit Open</TactileBadge>
         </div>
       ),
       reactSnippet: `import { TactileBadge } from "@/components/TactileComponents";
@@ -452,13 +472,13 @@ export function TabsDemo() {
 export function BadgeDemo() {
   return (
     <div className="flex gap-2">
-      <TactileBadge dotColor="green">集群正常</TactileBadge>
-      <TactileBadge dotColor="amber">高负载</TactileBadge>
+      <TactileBadge dotColor="green">Cluster Healthy</TactileBadge>
+      <TactileBadge dotColor="amber">High Load</TactileBadge>
     </div>
   );
 }`,
-      htmlSnippet: `<!-- 徽章 HTML -->
-<span class="badge"><span class="status-dot green"></span>集群正常</span>`,
+      htmlSnippet: `<!-- Badge HTML -->
+<span class="badge"><span class="status-dot green"></span>Cluster Healthy</span>`,
     },
   ];
 
@@ -469,8 +489,8 @@ export function BadgeDemo() {
     navigator.clipboard.writeText(code);
     setCopied(true);
     toast({
-      title: '代码已复制到剪贴板',
-      description: `${currentItem.name} 的 ${codeTab.toUpperCase()} 代码随时可粘贴使用`,
+      title: 'Code Copied to Clipboard',
+      description: `${currentItem.name} (${codeTab.toUpperCase()}) snippet is ready to paste`,
       type: 'success',
     });
     setTimeout(() => setCopied(false), 2000);
@@ -481,10 +501,10 @@ export function BadgeDemo() {
       <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
-            shadcn/ui 风格组件文档与代码生成器
+            Component Documentation & Code Generator
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-            选择组件查看实时交互效果，并一键获取生产可用的 React TSX 与标准 HTML/CSS 代码
+            Inspect interactive previews and copy production-ready React (TSX) or vanilla HTML/CSS code.
           </p>
         </div>
       </div>
@@ -603,7 +623,7 @@ export function BadgeDemo() {
 
               <TactileButton variant="recessed" size="sm" onClick={copyCode} className="h-7 text-xs">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? '已复制' : '复制组件代码'}</span>
+                <span>{copied ? 'Copied' : 'Copy Code'}</span>
               </TactileButton>
             </div>
 

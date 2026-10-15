@@ -62,7 +62,7 @@ export const TactileModal: React.FC<TactileModalProps> = ({
           ) : (
             <>
               <TactileButton variant="recessed" size="sm" onClick={onClose}>
-                取消 (Cancel)
+                Cancel
               </TactileButton>
               <TactileButton
                 variant="metallic"
@@ -72,7 +72,7 @@ export const TactileModal: React.FC<TactileModalProps> = ({
                   onClose();
                 }}
               >
-                确认操作 (Confirm)
+                Confirm
               </TactileButton>
             </>
           )}

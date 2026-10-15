@@ -203,40 +203,35 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
   }
 
   /* -----------------------------------------------------------------------
-     MODE B: Solution C WebGL Flowing Metal Button (When a metal is chosen)
+     MODE B: Solution C WebGL Flowing Metal Button (1px hairline micro-bezel)
      ----------------------------------------------------------------------- */
-  const effectiveBezel =
-    bezelPx !== undefined
-      ? bezelPx
-      : variant === 'recessed'
-      ? Math.max(1.25, globalBezel * 0.75)
-      : globalBezel;
+  const effectiveBezel = bezelPx !== undefined ? bezelPx : globalBezel;
 
   const getOuterSizeClasses = () => {
     switch (size) {
       case 'sm':
-        return 'h-8 rounded-[10px] text-xs';
+        return 'h-8 rounded-lg text-xs';
       case 'lg':
-        return 'h-12 rounded-[15px] text-sm font-medium';
+        return 'h-12 rounded-2xl text-sm font-medium';
       case 'icon':
-        return 'w-10 h-10 rounded-[13px]';
+        return 'w-10 h-10 rounded-xl';
       case 'md':
       default:
-        return 'h-10 rounded-[13px] text-xs sm:text-sm';
+        return 'h-10 rounded-xl text-xs sm:text-sm';
     }
   };
 
   const getInnerPadClasses = () => {
     switch (size) {
       case 'sm':
-        return 'px-3 rounded-[8.5px]';
+        return 'px-3 rounded-[7px] gap-1.5';
       case 'lg':
-        return 'px-6 rounded-[13px]';
+        return 'px-6 rounded-[15px] gap-2.5';
       case 'icon':
         return 'p-0 rounded-[11px] justify-center';
       case 'md':
       default:
-        return 'px-4 rounded-[11px]';
+        return 'px-4 rounded-[11px] gap-2';
     }
   };
 
@@ -250,28 +245,27 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
             : '#09090b',
         fontWeight: 600,
         boxShadow:
-          'inset 0 1px 1px rgba(255,255,255,0.65), inset 0 -1px 2px rgba(0,0,0,0.45)',
+          'inset 0 1px 1px rgba(255,255,255,0.55), inset 0 -1px 2px rgba(0,0,0,0.45)',
       };
     }
     if (variant === 'danger') {
       return {
-        background: 'linear-gradient(155deg, #281014 0%, #110608 65%, #1d0b0e 100%)',
+        background: 'linear-gradient(145deg, #2a1216 0%, #13080a 60%, #1f0d10 100%)',
         color: '#fda4af',
-        boxShadow:
-          'inset 0 1px 0.5px rgba(253,164,175,0.28), inset 0 -2px 4px rgba(0,0,0,0.9)',
+        boxShadow: 'inset 0 -1px 2px rgba(0,0,0,0.85)',
       };
     }
     if (variant === 'recessed') {
       return {
-        background: 'linear-gradient(180deg, #050507 0%, #0b0b0e 100%)',
-        color: hovered ? matPreset.accentHex : '#d4d4d8',
+        background: 'linear-gradient(180deg, #040405 0%, #0b0b0d 100%)',
+        color: hovered ? matPreset.accentHex : '#a1a1aa',
         boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.92)',
       };
     }
     return {
       background: matPreset.capGradient,
       color: hovered ? matPreset.accentHex : '#f4f4f6',
-      boxShadow: `inset 0 1px 0.5px ${matPreset.bevelHighlight}, inset 0 -2px 4px rgba(0,0,0,0.9)`,
+      boxShadow: 'inset 0 -1px 1.5px rgba(0,0,0,0.85)',
     };
   };
 
@@ -287,7 +281,7 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
         boxShadow:
           variant === 'recessed'
             ? 'inset 0 2px 5px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.05)'
-            : '0 8px 20px -4px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.8)',
+            : '0 4px 10px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.8)',
         ...style,
       }}
       className={`
@@ -411,7 +405,7 @@ export const TactileInput: React.FC<TactileInputProps> = ({
     );
   }
 
-  const pad = Math.max(1.5, Math.min(3.5, bezelWidth * 0.85));
+  const pad = Math.max(1, bezelWidth);
 
   return (
     <div
@@ -419,10 +413,10 @@ export const TactileInput: React.FC<TactileInputProps> = ({
       onMouseLeave={() => setHovered(false)}
       style={{
         padding: `${pad}px`,
-        boxShadow: '0 6px 16px rgba(0,0,0,0.8)',
+        boxShadow: 'inset 0 2px 5px rgba(0, 0, 0, 0.92), 0 1px 0 rgba(255, 255, 255, 0.05)',
         ...style,
       }}
-      className={`group relative flex items-center w-full rounded-[13px] overflow-hidden ${className}`}
+      className={`group relative flex items-center w-full rounded-xl overflow-hidden ${className}`}
     >
       <WebGLBezelCanvas
         material={effectiveMaterial}
@@ -527,7 +521,7 @@ export const TactileTextarea: React.FC<TactileTextareaProps> = ({
     );
   }
 
-  const pad = Math.max(1.5, Math.min(3.5, bezelWidth * 0.85));
+  const pad = Math.max(1, bezelWidth);
 
   return (
     <div
@@ -535,10 +529,10 @@ export const TactileTextarea: React.FC<TactileTextareaProps> = ({
       onMouseLeave={() => setHovered(false)}
       style={{
         padding: `${pad}px`,
-        boxShadow: '0 6px 16px rgba(0,0,0,0.8)',
+        boxShadow: 'inset 0 2px 5px rgba(0, 0, 0, 0.92), 0 1px 0 rgba(255, 255, 255, 0.05)',
         ...style,
       }}
-      className={`relative w-full rounded-[13px] overflow-hidden ${className}`}
+      className={`relative w-full rounded-xl overflow-hidden ${className}`}
     >
       <WebGLBezelCanvas
         material={effectiveMaterial}
@@ -695,7 +689,7 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
         }
       }}
       style={{
-        padding: `${Math.max(1.5, bezelWidth * 0.75)}px`,
+        padding: `${Math.max(1, bezelWidth)}px`,
       }}
       className="relative inline-flex items-center w-12 h-7 cursor-pointer shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-full overflow-hidden"
     >
@@ -866,7 +860,7 @@ export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
       }`}
     >
       <div
-        style={{ padding: '1.5px' }}
+        style={{ padding: '1px' }}
         className="relative w-5 h-5 rounded-md overflow-hidden shrink-0 mt-0.5"
       >
         <WebGLBezelCanvas
@@ -998,7 +992,7 @@ export const TactileRadioGroup: React.FC<{
             className="inline-flex items-center gap-2.5 cursor-pointer select-none group"
           >
             <div
-              style={{ padding: '1.5px' }}
+              style={{ padding: '1px' }}
               className="relative w-5 h-5 rounded-full overflow-hidden shrink-0"
             >
               <WebGLBezelCanvas
@@ -1128,7 +1122,7 @@ export const TactileSelect: React.FC<{
   label?: string;
   placeholder?: string;
   material?: MetalMaterialId;
-}> = ({ options, value, onChange, label, placeholder = '选择一个选项...', material }) => {
+}> = ({ options, value, onChange, label, placeholder = 'Select an option...', material }) => {
   const { material: globalMaterial, bezelWidth } = useMetalConfig();
   const [isOpen, setIsOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -1256,10 +1250,10 @@ export const TactileSelect: React.FC<{
           setIsOpen(!isOpen);
         }}
         style={{
-          padding: `${bezelWidth}px`,
-          boxShadow: '0 6px 16px rgba(0,0,0,0.8)',
+          padding: `${Math.max(1, bezelWidth)}px`,
+          boxShadow: '0 4px 10px rgba(0,0,0,0.75)',
         }}
-        className="relative w-full h-10 rounded-[13px] overflow-hidden cursor-pointer select-none focus:outline-none"
+        className="relative w-full h-10 rounded-xl overflow-hidden cursor-pointer select-none focus:outline-none"
       >
         <WebGLBezelCanvas
           material={effectiveMaterial}
@@ -1292,7 +1286,7 @@ export const TactileSelect: React.FC<{
       {isOpen && (
         <div
           style={{
-            padding: `${Math.max(1.5, bezelWidth * 0.75)}px`,
+            padding: `${Math.max(1, bezelWidth)}px`,
             boxShadow: `0 20px 40px rgba(0, 0, 0, 0.96)`,
           }}
           className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 rounded-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
@@ -1440,7 +1434,7 @@ export const TactileTabs: React.FC<{
               onChange(tab.id);
             }}
             style={{
-              padding: isActive ? `${Math.max(1.5, bezelWidth * 0.75)}px` : '0px',
+              padding: isActive ? `${Math.max(1, bezelWidth)}px` : '0px',
             }}
             className={`
               relative flex-1 h-8 sm:h-9 rounded-lg overflow-hidden text-xs sm:text-sm font-medium
@@ -1525,7 +1519,7 @@ export const TactileBadge: React.FC<{
 
   return (
     <span
-      style={{ padding: '1.5px' }}
+      style={{ padding: '1px' }}
       className={`relative inline-flex items-center rounded-full overflow-hidden select-none shadow-sm ${className}`}
     >
       <WebGLBezelCanvas

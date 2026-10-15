@@ -64,7 +64,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               transform: pressed ? 'translateY(1px) scale(0.97)' : 'translateY(0) scale(1)',
             }}
             className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] border-[1.5px] border-transparent cursor-pointer flex items-center justify-center transition-all duration-150 select-none focus:outline-none"
-            title="1:1 还原参考图的经典暗色轻拟物按钮 · 点击体验物理微动反馈"
+            title="1:1 Reference Classic Dark Tactile Button · Click to feel physical switch feedback"
           >
             <svg
               viewBox="0 0 24 24"
@@ -105,12 +105,12 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               onMouseUp={() => setPressed(false)}
               onClick={handlePress}
               style={{
-                padding: `${Math.max(2, bezelWidth * 1.15)}px`,
+                padding: `${Math.max(1.5, bezelWidth * 1.5)}px`,
                 boxShadow: '0 22px 48px rgba(0, 0, 0, 0.96), 0 4px 12px rgba(0, 0, 0, 0.85)',
                 transform: pressed ? 'scale(0.97)' : 'scale(1)',
               }}
               className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] overflow-hidden cursor-pointer flex items-center justify-center transition-transform duration-150 select-none focus:outline-none"
-              title="WebGL GLSL 物理金属按钮"
+              title="WebGL GLSL Physical Metal Button"
             >
               <WebGLBezelCanvas
                 material={material}
@@ -122,9 +122,9 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               <div
                 style={{
                   background: matPreset.capGradient,
-                  boxShadow: `inset 0 1.5px 1px ${matPreset.bevelHighlight}, inset 0 -3px 6px rgba(0,0,0,0.9)`,
+                  boxShadow: 'inset 0 -3px 6px rgba(0,0,0,0.9)',
                 }}
-                className="relative z-10 w-full h-full rounded-[24px] flex items-center justify-center"
+                className="relative z-10 w-full h-full rounded-[26.5px] flex items-center justify-center"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -149,11 +149,11 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
         )}
 
         <span className="text-[11px] font-mono text-zinc-400 bg-zinc-900/80 px-3 py-0.5 rounded-full border border-white/10">
-          当前全局风格：
+          Active Style:
           <strong style={{ color: matPreset.accentHex }} className="ml-1">
-            {matPreset.name} ({matPreset.enName})
+            {matPreset.name}
           </strong>
-          {clickCount > 0 && ` · 按压 × ${clickCount}`}
+          {clickCount > 0 && ` · Pressed × ${clickCount}`}
         </span>
       </div>
     </div>

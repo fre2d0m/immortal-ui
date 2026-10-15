@@ -44,8 +44,8 @@ export const LightingLab: React.FC = () => {
     audioEngine.enabled = true;
     audioEngine.playClick('button');
     toast({
-      title: '已恢复初始默认风格：经典暗色轻拟物',
-      description: '1px 135° 对角双高光 · 凸起与凹陷曜石黑立体质感',
+      title: 'Restored Default Style: Classic Dark Tactile',
+      description: '1px 135° dual-specular micro-bevel with convex & concave obsidian surfaces',
       type: 'info',
     });
   };
@@ -73,16 +73,16 @@ export const LightingLab: React.FC = () => {
           </div>
           <div>
             <h4 className="text-xs sm:text-sm font-semibold text-zinc-100 flex items-center gap-2">
-              全局风格与金属材质切换引擎 (Style & Metal Customizer)
+              Style & Physical Metal Customizer
               <span
                 style={{ color: activePreset.accentHex }}
                 className="text-[10px] font-normal font-mono bg-zinc-900 px-2 py-0.5 rounded border border-white/10"
               >
-                当前：{activePreset.name}
+                Active: {activePreset.name}
               </span>
             </h4>
             <p className="text-[11px] text-zinc-400 mt-0.5">
-              默认采用最初的「经典暗色轻拟物 (Pure CSS 135° 对角双高光)」，点击任意金属材质即可一键切换至 WebGL 物理流光金属
+              Defaults to Classic Dark Tactile (Pure CSS 135° dual-specular rim). Select any metal to switch to WebGL physical shaders.
             </p>
           </div>
         </div>
@@ -92,24 +92,24 @@ export const LightingLab: React.FC = () => {
             type="button"
             onClick={toggleSound}
             className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-1.5 cursor-pointer transition-all"
-            title="音效开关"
+            title="Toggle Tactile Sound"
           >
             {soundOn ? (
               <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
             ) : (
               <VolumeX className="w-3.5 h-3.5 text-zinc-500" />
             )}
-            <span>{soundOn ? '触感音效开启' : '音效静音'}</span>
+            <span>{soundOn ? 'Sound On' : 'Muted'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleReset}
             className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer transition-all flex items-center gap-1"
-            title="恢复默认经典暗色轻拟物风格"
+            title="Reset to default Classic Dark Tactile style"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>恢复默认轻拟物</span>
+            <span>Reset Default</span>
           </button>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const LightingLab: React.FC = () => {
         <div className="flex items-center justify-between text-xs text-zinc-300 font-medium">
           <span className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-            选择全局渲染风格：经典暗色轻拟物 (默认) 或 6 种 WebGL 物理金属材质
+            Global Rendering Style: Classic Dark Tactile (Default) or 6 WebGL Physical Metals
           </span>
           <span className="text-[11px] text-zinc-400 font-mono hidden sm:inline">
             {activePreset.name} · {activePreset.description}
@@ -138,10 +138,10 @@ export const LightingLab: React.FC = () => {
                   audioEngine.playClick(isMatClassic ? 'button' : 'metal');
                   setMaterial(mat.id as MetalMaterialId);
                   toast({
-                    title: `已切换全局风格：${mat.name}`,
+                    title: `Global Style: ${mat.name}`,
                     description: isMatClassic
-                      ? '已恢复初始纯 CSS 135° 对角双高光暗色轻拟物风格'
-                      : `已启用方案 C WebGL ${mat.enName} 物理金属材质`,
+                      ? 'Switched to default Pure CSS 135° dual-specular Dark Tactile style'
+                      : `Enabled Solution C WebGL ${mat.enName} physical metal shader`,
                     type: 'success',
                   });
                 }}
@@ -156,7 +156,7 @@ export const LightingLab: React.FC = () => {
                         boxShadow: `var(--shadow-convex-sm)`,
                       }
                     : {
-                        padding: isSelected ? '2px' : '1.5px',
+                        padding: isSelected ? '1.5px' : '1px',
                       }
                 }
                 className={`relative h-14 rounded-xl overflow-hidden cursor-pointer transition-all text-left focus:outline-none ${
@@ -181,7 +181,7 @@ export const LightingLab: React.FC = () => {
                   className={
                     isMatClassic
                       ? 'w-full h-full flex items-center gap-2'
-                      : 'relative z-10 w-full h-full px-2.5 py-2 rounded-[10px] flex items-center gap-2'
+                      : 'relative z-10 w-full h-full px-2.5 py-2 rounded-[10.5px] flex items-center gap-2'
                   }
                 >
                   <span
@@ -200,7 +200,7 @@ export const LightingLab: React.FC = () => {
                       {mat.name}
                     </div>
                     <div className="text-[9px] text-zinc-500 font-mono truncate">
-                      {isSelected ? '✓ 当前生效' : isMatClassic ? 'Default CSS' : mat.enName}
+                      {isSelected ? '✓ Active' : isMatClassic ? 'Default CSS' : mat.enName}
                     </div>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export const LightingLab: React.FC = () => {
         {/* 1. Dispersion */}
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-xs text-zinc-300 font-medium">
-            <span>棱镜色散强度 (Dispersion)</span>
+            <span>Prismatic Dispersion</span>
             <span className="font-mono text-amber-300">{dispersion}%</span>
           </div>
           <input
@@ -227,14 +227,14 @@ export const LightingLab: React.FC = () => {
             className="w-full h-2 rounded-full appearance-none cursor-pointer bg-zinc-900 border border-white/10"
           />
           <span className="text-[10px] text-zinc-500">
-            0% 呈现纯粹金属本色；调高激发彩虹色散边
+            0% preserves pure metal reflectance; higher values add iridescent dispersion
           </span>
         </div>
 
         {/* 2. Liquid Warp */}
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-xs text-zinc-300 font-medium">
-            <span>液态水银扭曲 (Liquid Warp)</span>
+            <span>Liquid Mercury Warp</span>
             <span className="font-mono text-sky-300">{liquidWarp}%</span>
           </div>
           <input
@@ -246,33 +246,33 @@ export const LightingLab: React.FC = () => {
             className="w-full h-2 rounded-full appearance-none cursor-pointer bg-zinc-900 border border-white/10"
           />
           <span className="text-[10px] text-zinc-500">
-            0% 为锐利镜面高光；调高产生液态水银波纹
+            0% keeps crisp mirror reflections; higher values create liquid ripples
           </span>
         </div>
 
         {/* 3. Bezel Width */}
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-xs text-zinc-300 font-medium">
-            <span>金属倒角厚度 (Bezel Width)</span>
+            <span>Metallic Bezel Width</span>
             <span className="font-mono text-zinc-200">{bezelWidth}px</span>
           </div>
           <input
             type="range"
-            min={1}
-            max={6}
-            step={0.5}
+            min={0.75}
+            max={4}
+            step={0.25}
             value={bezelWidth}
             onChange={(e) => setBezelWidth(Number(e.target.value))}
             className="w-full h-2 rounded-full appearance-none cursor-pointer bg-zinc-900 border border-white/10"
           />
           <span className="text-[10px] text-zinc-500">
-            推荐 2px 精致金属边，或 4px 重工宽体金属圈
+            Defaults to 1px hairline matching Classic CSS; increase for heavier bezels
           </span>
         </div>
 
         {/* 4. Fluid Animation Mode */}
         <div className="flex flex-col justify-between gap-1.5">
-          <span className="text-xs text-zinc-300 font-medium">默认流光模式</span>
+          <span className="text-xs text-zinc-300 font-medium">Ambient Rim Motion</span>
           <button
             type="button"
             onClick={() => {
@@ -285,7 +285,7 @@ export const LightingLab: React.FC = () => {
                 : 'bg-zinc-950 border-white/10 text-zinc-300 hover:text-white'
             }`}
           >
-            <span>{autoFlow ? '已开启持续旋转流光' : '静态 135° 对角双高光 (默认)'}</span>
+            <span>{autoFlow ? 'Continuous Flow Enabled' : 'Static 135° Dual Rim (Default)'}</span>
             <span
               className={`w-2.5 h-2.5 rounded-full ${
                 autoFlow
@@ -295,7 +295,7 @@ export const LightingLab: React.FC = () => {
             />
           </button>
           <span className="text-[10px] text-zinc-500">
-            默认关闭自动流转，保持界面克制干净
+            Auto-rotation is off by default for a clean, distraction-free interface
           </span>
         </div>
       </div>
@@ -304,15 +304,15 @@ export const LightingLab: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
         <div className="flex items-center gap-2 text-zinc-400">
           <Orbit className="w-3.5 h-3.5 text-zinc-300" />
-          <span>全局按钮 Hover 表现（默认不旋转，仅原地提亮）：</span>
+          <span>Global Hover Behavior (In-place specular boost by default):</span>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           {[
-            { label: '0° 不旋转·仅原地提亮 (默认)', deg: 0 },
-            { label: '+90° 微转四分之一圈', deg: 90 },
-            { label: '+180° 对角高光互换', deg: 180 },
-            { label: '+360° 完整转一圈', deg: 360 },
-            { label: '-180° 逆向旋转', deg: -180 },
+            { label: '0° Static · In-Place Boost (Default)', deg: 0 },
+            { label: '+90° Quarter Turn', deg: 90 },
+            { label: '+180° Diagonal Swap', deg: 180 },
+            { label: '+360° Full Orbit', deg: 360 },
+            { label: '-180° Reverse Sweep', deg: -180 },
           ].map((p) => (
             <button
               key={p.deg}
