@@ -1,0 +1,238 @@
+export interface ComponentInfo {
+  id: string;
+  name: string;
+  category: "Actions" | "Forms" | "Navigation" | "Display" | "Feedback";
+  summary: string;
+  exportName: string;
+  source: string;
+  props: [name: string, type: string, defaultValue: string][];
+  related: string[];
+}
+
+const core = "src/components/ImmortalComponents.tsx";
+const material: [string, string, string] = [
+  "material",
+  "MetalMaterialId",
+  "Global material",
+];
+export const componentGroups = [
+  "Actions",
+  "Forms",
+  "Navigation",
+  "Display",
+  "Feedback",
+] as const;
+export const componentCatalog: ComponentInfo[] = [
+  {
+    id: "button",
+    name: "Button",
+    category: "Actions",
+    summary: "Convex buttons, material overrides, and physical press feedback.",
+    exportName: "ImmortalButton",
+    source: core,
+    props: [
+      ["variant", "default | metallic | recessed | danger | ghost", "default"],
+      ["size", "sm | md | lg | icon", "md"],
+      ["loading", "boolean", "false"],
+      ["sweepDeg", "number", "Global hover sweep (90° by default)"],
+      ["bezelPx", "number", "Global bezel width"],
+      ["icon", "ReactNode", "—"],
+      ["soundType", "button | metal | switch | select", "button"],
+      material,
+    ],
+    related: ["input", "modal", "card"],
+  },
+  {
+    id: "input",
+    name: "Input",
+    category: "Forms",
+    summary: "Recessed text fields with icons and keyboard shortcut hints.",
+    exportName: "ImmortalInput",
+    source: core,
+    props: [
+      ["icon", "ReactNode", "—"],
+      ["kbd", "string", "—"],
+      ["onClear", "() => void", "—"],
+      material,
+      ["…props", "InputHTMLAttributes", "Native input defaults"],
+    ],
+    related: ["textarea", "select", "button"],
+  },
+  {
+    id: "textarea",
+    name: "Textarea",
+    category: "Forms",
+    summary: "A recessed surface for longer messages and multi-line text.",
+    exportName: "ImmortalTextarea",
+    source: core,
+    props: [
+      material,
+      ["…props", "TextareaHTMLAttributes", "Native textarea defaults"],
+    ],
+    related: ["input", "card", "button"],
+  },
+  {
+    id: "select",
+    name: "Select",
+    category: "Forms",
+    summary: "A beveled dropdown with labels and option descriptions.",
+    exportName: "ImmortalSelect",
+    source: core,
+    props: [
+      ["options", "{ value, label, description? }[]", "Required"],
+      ["value", "string", "Required"],
+      ["onChange", "(value: string) => void", "Required"],
+      ["label", "string", "—"],
+      ["placeholder", "string", "Select an option…"],
+      material,
+    ],
+    related: ["radio-group", "input", "tabs"],
+  },
+  {
+    id: "switch",
+    name: "Switch",
+    category: "Forms",
+    summary: "A recessed toggle track with an illuminated metallic thumb.",
+    exportName: "ImmortalSwitch",
+    source: core,
+    props: [
+      ["checked", "boolean", "Required"],
+      ["onChange", "(checked: boolean) => void", "Required"],
+      ["label / hint", "string", "—"],
+      ["id", "string", "—"],
+      ["ariaLabel", "string", "Uses label when omitted"],
+      ["className", "string", "—"],
+      material,
+    ],
+    related: ["checkbox", "slider", "card"],
+  },
+  {
+    id: "checkbox",
+    name: "Checkbox",
+    category: "Forms",
+    summary: "An independent on-or-off choice in a physical recessed socket.",
+    exportName: "ImmortalCheckbox",
+    source: core,
+    props: [
+      ["checked", "boolean", "Required"],
+      ["onChange", "(checked: boolean) => void", "Required"],
+      ["label / hint", "string", "—"],
+      ["disabled", "boolean", "false"],
+      material,
+    ],
+    related: ["radio-group", "switch", "button"],
+  },
+  {
+    id: "radio-group",
+    name: "Radio Group",
+    category: "Forms",
+    summary: "Choose one value from a set of labeled options.",
+    exportName: "ImmortalRadioGroup",
+    source: core,
+    props: [
+      ["name", "string", "Required"],
+      ["options", "{ value, label, hint? }[]", "Required"],
+      ["value", "string", "Required"],
+      ["onChange", "(value: string) => void", "Required"],
+      ["direction", "row | column", "row"],
+      material,
+    ],
+    related: ["checkbox", "select", "tabs"],
+  },
+  {
+    id: "slider",
+    name: "Slider",
+    category: "Forms",
+    summary: "A grooved track, a metallic thumb, and a live numeric readout.",
+    exportName: "ImmortalSlider",
+    source: core,
+    props: [
+      ["value", "number", "Required"],
+      ["onChange", "(value: number) => void", "Required"],
+      ["min / max / step", "number", "0 / 100 / 1"],
+      ["label", "string", "—"],
+      ["unit", "string", "%"],
+      material,
+    ],
+    related: ["switch", "input", "card"],
+  },
+  {
+    id: "tabs",
+    name: "Tabs",
+    category: "Navigation",
+    summary: "Segmented navigation on a concave tray with a raised active tab.",
+    exportName: "ImmortalTabs",
+    source: core,
+    props: [
+      ["tabs", "{ id, label, icon? }[]", "Required"],
+      ["activeId", "string", "Required"],
+      ["onChange", "(id: string) => void", "Required"],
+      ["className", "string", "—"],
+      material,
+    ],
+    related: ["radio-group", "button", "card"],
+  },
+  {
+    id: "badge",
+    name: "Badge",
+    category: "Display",
+    summary: "Compact status labels with a glowing indicator dot.",
+    exportName: "ImmortalBadge",
+    source: core,
+    props: [
+      ["children", "ReactNode", "Required"],
+      ["dotColor", "white | green | amber | crimson", "white"],
+      ["className", "string", "—"],
+      material,
+    ],
+    related: ["card", "toast", "button"],
+  },
+  {
+    id: "card",
+    name: "Card",
+    category: "Display",
+    summary: "An elevated surface for composing content and controls.",
+    exportName: "ImmortalCard",
+    source: core,
+    props: [
+      ["children", "ReactNode", "Required"],
+      ["title / description", "string", "—"],
+      ["badge / headerAction", "ReactNode", "—"],
+      ["className", "string", "—"],
+    ],
+    related: ["badge", "button", "input"],
+  },
+  {
+    id: "modal",
+    name: "Modal",
+    category: "Feedback",
+    summary: "A focused dialog with a title, content, and footer actions.",
+    exportName: "ImmortalModal",
+    source: "src/components/ImmortalModal.tsx",
+    props: [
+      ["isOpen", "boolean", "Required"],
+      ["onClose", "() => void", "Required"],
+      ["title", "string", "Required"],
+      ["description", "string", "—"],
+      ["children", "ReactNode", "Required"],
+      ["footer", "ReactNode", "Cancel / Confirm buttons"],
+    ],
+    related: ["button", "card", "toast"],
+  },
+  {
+    id: "toast",
+    name: "Toast",
+    category: "Feedback",
+    summary: "Brief feedback messages for actions and status changes.",
+    exportName: "useToast",
+    source: "src/components/ImmortalToast.tsx",
+    props: [
+      ["title", "string", "Required"],
+      ["description", "string", "—"],
+      ["type", "success | info | warning | error", "Success appearance"],
+    ],
+    related: ["button", "modal", "badge"],
+  },
+];
+export const componentById = (id: string) =>
+  componentCatalog.find((item) => item.id === id);

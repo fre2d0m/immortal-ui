@@ -37,6 +37,9 @@ export interface MetalMaterialPreset {
   darkRGB: [number, number, number];
   /** UI preview swatch CSS gradient */
   swatchGradient: string;
+  /** Highlight / body / shadow stops for filled metallic button faces. */
+  surfaceStops?: [string, string, string];
+  surfaceMidpoint?: number;
   /** Subtle inner cap background gradient */
   capGradient: string;
   /** Inner top bevel specular highlight CSS color */
@@ -79,6 +82,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.82, 0.58, 0.10],
     darkRGB: [0.12, 0.08, 0.02],
     swatchGradient: 'linear-gradient(135deg, #fef08a 0%, #eab308 50%, #422006 100%)',
+    surfaceStops: ['#fef08a', '#eab308', '#422006'],
     capGradient: 'linear-gradient(145deg, #1c1810 0%, #090806 55%, #14110b 100%)',
     bevelHighlight: 'rgba(253, 224, 71, 0.16)',
     accentHex: '#fde047',
@@ -97,6 +101,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.64, 0.67, 0.73],
     darkRGB: [0.06, 0.06, 0.08],
     swatchGradient: 'linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #18181b 100%)',
+    surfaceStops: ['#ffffff', '#a1a1aa', '#18181b'],
     capGradient: 'linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%)',
     bevelHighlight: 'rgba(255, 255, 255, 0.16)',
     accentHex: '#f4f4f6',
@@ -115,6 +120,8 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.28, 0.30, 0.34],
     darkRGB: [0.04, 0.04, 0.05],
     swatchGradient: 'linear-gradient(135deg, #a1a1aa 0%, #3f3f46 45%, #09090b 100%)',
+    surfaceStops: ['#a1a1aa', '#3f3f46', '#09090b'],
+    surfaceMidpoint: 45,
     capGradient: 'linear-gradient(145deg, #141418 0%, #070709 55%, #0e0e12 100%)',
     bevelHighlight: 'rgba(161, 161, 170, 0.14)',
     accentHex: '#d4d4d8',
@@ -133,6 +140,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.18, 0.48, 0.90],
     darkRGB: [0.03, 0.07, 0.16],
     swatchGradient: 'linear-gradient(135deg, #bae6fd 0%, #2563eb 50%, #08142c 100%)',
+    surfaceStops: ['#bae6fd', '#2563eb', '#08142c'],
     capGradient: 'linear-gradient(145deg, #111827 0%, #070a10 55%, #0c121e 100%)',
     bevelHighlight: 'rgba(125, 211, 252, 0.16)',
     accentHex: '#7dd3fc',
@@ -151,6 +159,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.82, 0.38, 0.38],
     darkRGB: [0.14, 0.04, 0.06],
     swatchGradient: 'linear-gradient(135deg, #ffe4e6 0%, #fb7185 50%, #3b0813 100%)',
+    surfaceStops: ['#ffe4e6', '#fb7185', '#3b0813'],
     capGradient: 'linear-gradient(145deg, #1d1215 0%, #0a0608 55%, #150d10 100%)',
     bevelHighlight: 'rgba(253, 164, 175, 0.16)',
     accentHex: '#fda4af',
@@ -169,6 +178,7 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
     midRGB: [0.10, 0.66, 0.44],
     darkRGB: [0.02, 0.11, 0.07],
     swatchGradient: 'linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #032217 100%)',
+    surfaceStops: ['#a7f3d0', '#10b981', '#032217'],
     capGradient: 'linear-gradient(145deg, #0f1d17 0%, #060b09 55%, #0b1511 100%)',
     bevelHighlight: 'rgba(110, 231, 183, 0.16)',
     accentHex: '#6ee7b7',
@@ -178,6 +188,24 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
       'linear-gradient(var(--rim-angle, 135deg), rgba(110,231,183,0.25) 0%, rgba(16,185,129,0.05) 42%, rgba(5,150,105,0.02) 62%, rgba(52,211,153,0.14) 100%)',
   },
 };
+
+export const DEFAULT_SURFACE_GRADIENT_AMPLITUDE = 35;
+export const DEFAULT_HOVER_SWEEP_DEG = 90;
+
+/** Compress the face gradient around its body color; leave the WebGL rim untouched. */
+export function getMetalSurfaceGradient(preset: MetalMaterialPreset, amplitude: number): string {
+  if (!preset.surfaceStops) return preset.swatchGradient;
+  const [highlight, body, shadow] = preset.surfaceStops;
+  const amount = Math.min(100, Math.max(0,
+    Number.isFinite(amplitude) ? amplitude : DEFAULT_SURFACE_GRADIENT_AMPLITUDE,
+  )) / 100;
+  const rgb = (hex: string) => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
+  const center = rgb(body);
+  const blend = (hex: string) => rgb(hex)
+    .map((value, channel) => Math.round(center[channel] + (value - center[channel]) * amount))
+    .join(', ');
+  return `linear-gradient(var(--rim-angle, 135deg), rgb(${blend(highlight)}) 0%, ${body} ${preset.surfaceMidpoint ?? 50}%, rgb(${blend(shadow)}) 100%)`;
+}
 
 /** Helper list of only the 6 WebGL physical metals */
 export const WEBGL_METAL_IDS: MetalMaterialId[] = [
@@ -196,6 +224,8 @@ export const WEBGL_METAL_IDS: MetalMaterialId[] = [
 export interface MetalConfigContextType {
   material: MetalMaterialId;
   setMaterial: (m: MetalMaterialId) => void;
+  surfaceGradientAmplitude: number;
+  setSurfaceGradientAmplitude: (value: number) => void;
   dispersion: number;
   setDispersion: (d: number) => void;
   liquidWarp: number;
@@ -216,6 +246,8 @@ export interface MetalConfigContextType {
 const DEFAULT_METAL_CONFIG: MetalConfigContextType = {
   material: 'classic',
   setMaterial: () => {},
+  surfaceGradientAmplitude: DEFAULT_SURFACE_GRADIENT_AMPLITUDE,
+  setSurfaceGradientAmplitude: () => {},
   dispersion: 0,
   setDispersion: () => {},
   liquidWarp: 0,
@@ -226,7 +258,7 @@ const DEFAULT_METAL_CONFIG: MetalConfigContextType = {
   setAutoFlow: () => {},
   flowSpeed: 1.0,
   setFlowSpeed: () => {},
-  hoverSweepDeg: 0,
+  hoverSweepDeg: DEFAULT_HOVER_SWEEP_DEG,
   setHoverSweepDeg: () => {},
   baseAngleDeg: 135,
   setBaseAngleDeg: () => {},
@@ -237,6 +269,14 @@ const MetalConfigContext = createContext<MetalConfigContextType>(DEFAULT_METAL_C
 
 export const useMetalConfig = () => {
   return useContext(MetalConfigContext);
+};
+
+/** Inherit the site's optical settings while choosing a finish for one demo.
+ * Unlike MetalConfigProvider, this scope never changes document CSS or the
+ * shared engine's global configuration. */
+export const MetalMaterialScope: React.FC<{ material: MetalMaterialId; children: ReactNode }> = ({ material, children }) => {
+  const parent = useMetalConfig();
+  return <MetalConfigContext.Provider value={{ ...parent, material }}>{children}</MetalConfigContext.Provider>;
 };
 
 /* =========================================================================
@@ -401,7 +441,7 @@ class SharedWebGLShaderEngine {
     bezelWidth: 1,
     autoFlow: false,
     flowSpeed: 1.0,
-    hoverSweepDeg: 0,
+    hoverSweepDeg: DEFAULT_HOVER_SWEEP_DEG,
     baseAngleDeg: 135,
   };
 
@@ -572,12 +612,13 @@ export const sharedMetalEngine = new SharedWebGLShaderEngine();
    ========================================================================= */
 export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [material, setMaterial] = useState<MetalMaterialId>('classic');
+  const [surfaceGradientAmplitude, setSurfaceGradientAmplitude] = useState(DEFAULT_SURFACE_GRADIENT_AMPLITUDE);
   const [dispersion, setDispersion] = useState<number>(0);
   const [liquidWarp, setLiquidWarp] = useState<number>(0);
   const [bezelWidth, setBezelWidth] = useState<number>(1);
   const [autoFlow, setAutoFlow] = useState<boolean>(false);
   const [flowSpeed, setFlowSpeed] = useState<number>(1.0);
-  const [hoverSweepDeg, setHoverSweepDeg] = useState<number>(0);
+  const [hoverSweepDeg, setHoverSweepDeg] = useState<number>(DEFAULT_HOVER_SWEEP_DEG);
   const [baseAngleDeg, setBaseAngleDeg] = useState<number>(135);
 
   sharedMetalEngine.globalConfig = {
@@ -603,12 +644,13 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
 
   const resetDefaults = () => {
     setMaterial('classic');
+    setSurfaceGradientAmplitude(DEFAULT_SURFACE_GRADIENT_AMPLITUDE);
     setDispersion(0);
     setLiquidWarp(0);
     setBezelWidth(1);
     setAutoFlow(false);
     setFlowSpeed(1.0);
-    setHoverSweepDeg(0);
+    setHoverSweepDeg(DEFAULT_HOVER_SWEEP_DEG);
     setBaseAngleDeg(135);
   };
 
@@ -617,6 +659,8 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
       value={{
         material,
         setMaterial,
+        surfaceGradientAmplitude,
+        setSurfaceGradientAmplitude,
         dispersion,
         setDispersion,
         liquidWarp,

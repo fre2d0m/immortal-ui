@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ImmortalMark } from './ImmortalMark';
 import { audioEngine } from './AudioEngine';
 import { METAL_MATERIALS, useMetalConfig, WebGLBezelCanvas } from './WebGLMetalEngine';
 
@@ -16,16 +17,6 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
     setClickCount((prev) => prev + 1);
   };
 
-  const toHex = (rgb: [number, number, number]) =>
-    '#' +
-    rgb
-      .map((v) =>
-        Math.round(Math.min(1, Math.max(0, v)) * 255)
-          .toString(16)
-          .padStart(2, '0')
-      )
-      .join('');
-
   return (
     <div
       className={`relative flex flex-col items-center justify-center w-full ${
@@ -38,7 +29,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
       {/* 1:1 Hero Button (Classic Dark by default, or WebGL Metal when selected) */}
       <div className="relative z-10 flex flex-col items-center gap-3">
         {isClassic ? (
-          /* Original 1:1 Pure CSS Dark Light-Skeuomorphic X Button */
+          /* Classic Dark emblem with the shared Immortal UI mark */
           <button
             type="button"
             onMouseDown={() => setPressed(true)}
@@ -64,25 +55,10 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               transform: pressed ? 'translateY(1px) scale(0.97)' : 'translateY(0) scale(1)',
             }}
             className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] border-[1.5px] border-transparent cursor-pointer flex items-center justify-center transition-all duration-150 select-none focus:outline-none"
-            title="1:1 Reference Classic Dark Button · Click to feel physical switch feedback"
+            aria-label="Immortal UI emblem"
+            title="Immortal UI · Click to feel physical switch feedback"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="w-11 h-11 sm:w-13 sm:h-13 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]"
-            >
-              <defs>
-                <linearGradient id="emblemMetalClassic" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#ffffff" />
-                  <stop offset="50%" stopColor="#e4e4e7" />
-                  <stop offset="100%" stopColor="#71717a" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                fill="url(#emblemMetalClassic)"
-              />
-            </svg>
+            <ImmortalMark className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]" />
           </button>
         ) : (
           /* WebGL Flowing Metal Mode */
@@ -110,7 +86,8 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
                 transform: pressed ? 'scale(0.97)' : 'scale(1)',
               }}
               className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] overflow-hidden cursor-pointer flex items-center justify-center transition-transform duration-150 select-none focus:outline-none"
-              title="WebGL GLSL Physical Metal Button"
+              aria-label="Immortal UI emblem"
+              title="Immortal UI · WebGL physical metal emblem"
             >
               <WebGLBezelCanvas
                 material={material}
@@ -126,23 +103,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
                 }}
                 className="relative z-10 w-full h-full rounded-[26.5px] flex items-center justify-center"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="w-11 h-11 sm:w-13 sm:h-13 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
-                >
-                  <defs>
-                    <linearGradient id="emblemMetalDynamic" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor={toHex(matPreset.highRGB)} />
-                      <stop offset="55%" stopColor={toHex(matPreset.midRGB)} />
-                      <stop offset="100%" stopColor="#52525b" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                    fill="url(#emblemMetalDynamic)"
-                  />
-                </svg>
+                <ImmortalMark className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" />
               </div>
             </button>
           </div>

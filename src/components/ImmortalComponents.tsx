@@ -5,6 +5,7 @@ import {
   MetalMaterialId,
   METAL_MATERIALS,
   useMetalConfig,
+  getMetalSurfaceGradient,
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
 
@@ -78,6 +79,7 @@ export const ImmortalButton: React.FC<ImmortalButtonProps> = ({
     material: globalMaterial,
     bezelWidth: globalBezel,
     hoverSweepDeg: globalHoverSweep,
+    surfaceGradientAmplitude,
   } = useMetalConfig();
   const [hovered, setHovered] = useState(false);
 
@@ -238,7 +240,7 @@ export const ImmortalButton: React.FC<ImmortalButtonProps> = ({
   const getCapStyle = (): React.CSSProperties => {
     if (variant === 'metallic') {
       return {
-        background: matPreset.swatchGradient,
+        background: getMetalSurfaceGradient(matPreset, surfaceGradientAmplitude),
         color:
           effectiveMaterial === 'obsidian' || effectiveMaterial === 'cobalt'
             ? '#ffffff'
@@ -572,6 +574,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
    ========================================================================= */
 export interface ImmortalSwitchProps {
   id?: string;
+  ariaLabel?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
   label?: string;
@@ -582,6 +585,7 @@ export interface ImmortalSwitchProps {
 
 export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
   id,
+  ariaLabel,
   checked,
   onChange,
   label,
@@ -607,6 +611,7 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
       <div
         onClick={toggle}
         role="switch"
+        aria-label={ariaLabel || label}
         aria-checked={checked}
         tabIndex={0}
         onKeyDown={(e) => {
@@ -680,6 +685,7 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
     <div
       onClick={toggle}
       role="switch"
+        aria-label={ariaLabel || label}
       aria-checked={checked}
       tabIndex={0}
       onKeyDown={(e) => {

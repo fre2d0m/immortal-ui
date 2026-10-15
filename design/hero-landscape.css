@@ -1,0 +1,42 @@
+/* Archived landscape experiment; not loaded by the homepage. */
+.hero-landscape { position:relative; height:590px; max-width:1440px; margin:24px auto 0; }
+.hero-landscape-glow { position:absolute; inset:-40px 5% 0; background:radial-gradient(ellipse at 50% 55%, #a1a5840d, transparent 65%); pointer-events:none; }
+.hero-scene-poster { position:absolute; z-index:3; inset:0; pointer-events:none; mask-image:linear-gradient(#000 70%,transparent 97%); }
+.hero-scene-poster img { position:absolute; left:0; top:50%; width:100%; height:auto; transform:translateY(-50%); }
+.hero-landscape[data-renderer="webgl"] .hero-scene-poster { display:none; }
+.hero-landscape:not([data-renderer="webgl"]) .hero-landscape-canvas { visibility:hidden; }
+.hero-workspace-image {
+  position:absolute;
+  z-index:1;
+  top:25px;
+  left:50%;
+  width:1050px;
+  max-width:82%;
+  transform:translateX(-50%) perspective(1800px) rotateX(5deg) rotateY(-5deg) rotateZ(-2deg);
+  transform-origin:center top;
+  border-radius:15px;
+  box-shadow:0 -1px 0 #ffffff0a,0 0 90px #0009;
+  mask-image:linear-gradient(#000 30%, #000b 65%, transparent 98%);
+  pointer-events:none;
+}
+.hero-workspace-image img { display:block; width:100%; height:auto; border-radius:15px; outline:1px solid #ffffff0a; outline-offset:-1px; }
+.hero-landscape-canvas { position:absolute; z-index:3; top:0; left:0; width:100%; height:100%; pointer-events:none; mask-image:linear-gradient(#000 70%,transparent 97%); }
+.hero-meadow { position:absolute; width:96%; height:auto; left:2%; top:var(--meadow-ground-y,72%); transform:translateY(-74%); pointer-events:none; }
+.hero-meadow-back { z-index:2; filter:brightness(.70) saturate(.72); }
+.hero-meadow-front { z-index:4; filter:brightness(.65) saturate(.72); mask-image:linear-gradient(transparent 70%,#000 88%,#000); }
+.hero-landscape-mist { position:absolute; z-index:4; inset:auto -5% 0; height:160px; background:linear-gradient(transparent,#080809 85%); pointer-events:none; }
+@media (min-width:1440px) { .hero-landscape { height:640px; } .hero-workspace-image { width:1120px; } }
+@media (max-width:767px) {
+  .hero-landscape { height:440px; width:750px; max-width:none; left:50%; margin-left:-375px; margin-top:28px; }
+  .hero-workspace-image { top:20px; width:580px; max-width:none; transform:translateX(-50%) perspective(1600px) rotateX(4deg) rotateY(-5deg) rotateZ(-2deg); }
+  .hero-landscape-mist { height:120px; }
+}
+body { margin:0; padding:0; background:#080809; }
+.hero-landscape { width:1280px; max-width:none; height:590px; margin:0; }
+.hero-scene-poster { display:none; }
+html[data-export="foreground"],html[data-export="foreground"] body { background:transparent; overflow:hidden; scrollbar-width:none; }
+html[data-export="foreground"] .hero-workspace-image,
+html[data-export="foreground"] .hero-landscape-glow,
+html[data-export="foreground"] .hero-meadow,
+html[data-export="foreground"] .hero-landscape-mist { visibility:hidden; }
+html[data-export="foreground"] .hero-landscape-canvas { mask-image:none; }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { Volume2, VolumeX, RotateCcw, Sparkles, Orbit, Gem, Layers } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 import {
@@ -8,12 +8,15 @@ import {
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
 import { useToast } from './ImmortalToast';
+import { ImmortalButton } from './ImmortalComponents';
 
 export const LightingLab: React.FC = () => {
   const { toast } = useToast();
   const {
     material,
     setMaterial,
+    surfaceGradientAmplitude,
+    setSurfaceGradientAmplitude,
     dispersion,
     setDispersion,
     liquidWarp,
@@ -27,6 +30,7 @@ export const LightingLab: React.FC = () => {
     resetDefaults,
   } = useMetalConfig();
 
+  const surfaceGradientId = useId();
   const [soundOn, setSoundOn] = useState(true);
   const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
   const isClassic = !activePreset.isWebGLMetal;
@@ -210,6 +214,35 @@ export const LightingLab: React.FC = () => {
         </div>
       </div>
 
+      {/* Filled metal faces have their own contrast, independent of the diagonal rim. */}
+      <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] items-center gap-6 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
+        <div className="flex min-w-0 flex-col gap-3">
+          <div className="flex items-center justify-between gap-4 text-xs font-medium text-zinc-300">
+            <label htmlFor={surfaceGradientId}>Surface Gradient Amplitude</label>
+            <output htmlFor={surfaceGradientId} className="font-mono text-zinc-200">{surfaceGradientAmplitude}%</output>
+          </div>
+          <input
+            id={surfaceGradientId}
+            aria-describedby={`${surfaceGradientId}-hint`}
+            type="range"
+            min={0}
+            max={100}
+            step={5}
+            value={surfaceGradientAmplitude}
+            onChange={(event) => setSurfaceGradientAmplitude(Number(event.target.value))}
+            className="w-full h-2 rounded-full appearance-none cursor-pointer bg-zinc-900 border border-white/10"
+          />
+          <div className="flex justify-between text-[10px] text-zinc-500"><span>0% · Flat finish</span><span>100% · Full contrast</span></div>
+          <p id={`${surfaceGradientId}-hint`} className="text-[10px] leading-relaxed text-zinc-500">
+            Soften bright-to-dark transitions on filled metal buttons. Defaults to 35%; diagonal rim highlights stay unchanged.
+          </p>
+        </div>
+        <div className="flex flex-col items-center gap-2 px-3">
+          <span className="text-[10px] text-zinc-500">Live surface preview{isClassic ? ' · Gold' : ''}</span>
+          <ImmortalButton variant="metallic" size="sm" material={isClassic ? 'gold' : undefined} aria-label="Metallic surface preview">Metallic Primary</ImmortalButton>
+        </div>
+      </div>
+
       {/* Section 2: 4 Core WebGL Shader Controls */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
         {/* 1. Dispersion */}
@@ -304,12 +337,12 @@ export const LightingLab: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
         <div className="flex items-center gap-2 text-zinc-400">
           <Orbit className="w-3.5 h-3.5 text-zinc-300" />
-          <span>Global Hover Behavior (In-place specular boost by default):</span>
+          <span>Global Hover Behavior (+90° Quarter Turn by default):</span>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           {[
-            { label: '0° Static · In-Place Boost (Default)', deg: 0 },
-            { label: '+90° Quarter Turn', deg: 90 },
+            { label: '0° Static · In-Place Boost', deg: 0 },
+            { label: '+90° Quarter Turn (Default)', deg: 90 },
             { label: '+180° Diagonal Swap', deg: 180 },
             { label: '+360° Full Orbit', deg: 360 },
             { label: '-180° Reverse Sweep', deg: -180 },
@@ -317,6 +350,7 @@ export const LightingLab: React.FC = () => {
             <button
               key={p.deg}
               type="button"
+              aria-pressed={hoverSweepDeg === p.deg}
               onClick={() => {
                 audioEngine.playClick('select');
                 setHoverSweepDeg(p.deg);

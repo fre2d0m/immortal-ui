@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { Copy, Check, Code2, Layers } from 'lucide-react';
+import React, { useState } from "react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { CodeBlock } from "./CodeBlock";
+import { componentCatalog, componentById } from "../content/components";
+import { ImmortalModal } from "./ImmortalModal";
 import {
   ImmortalButton,
   ImmortalInput,
+  ImmortalTextarea,
+  ImmortalCard,
   ImmortalSwitch,
   ImmortalCheckbox,
   ImmortalRadioGroup,
@@ -10,41 +15,41 @@ import {
   ImmortalSelect,
   ImmortalTabs,
   ImmortalBadge,
-} from './ImmortalComponents';
-import { useToast } from './ImmortalToast';
+} from "./ImmortalComponents";
+import { useToast } from "./ImmortalToast";
 
 interface DocItem {
   id: string;
   name: string;
   description: string;
-  category: 'buttons' | 'inputs' | 'controls' | 'surfaces';
+  category: "buttons" | "inputs" | "controls" | "surfaces";
   preview: React.ReactNode;
   reactSnippet: string;
   htmlSnippet: string;
 }
 
-export const ComponentDocs: React.FC = () => {
+export const ComponentDocs: React.FC<{ componentId: string }> = ({
+  componentId,
+}) => {
   const { toast } = useToast();
-  const [activeComponent, setActiveComponent] = useState<string>('button');
-  const [codeTab, setCodeTab] = useState<'react' | 'html'>('react');
-  const [copied, setCopied] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Demo states for previews
   const [btnLoading, setBtnLoading] = useState(false);
   const [switchVal, setSwitchVal] = useState(true);
   const [checkVal, setCheckVal] = useState(true);
-  const [radioVal, setRadioVal] = useState('raycast');
+  const [radioVal, setRadioVal] = useState("raycast");
   const [sliderVal, setSliderVal] = useState(65);
-  const [selectVal, setSelectVal] = useState('v1');
-  const [activeTab, setActiveTab] = useState('code');
+  const [selectVal, setSelectVal] = useState("v1");
+  const [activeTab, setActiveTab] = useState("code");
 
   const components: DocItem[] = [
     {
-      id: 'button',
-      name: 'Immortal Button',
-      category: 'buttons',
+      id: "button",
+      name: "Immortal Button",
+      category: "buttons",
       description:
-        'Convex micro-curved surface with a 1px 135° dual-specular rim. Supports optional hover angular sweep (90°, 180°, 360°) and physical metal shaders.',
+        "Convex micro-curved surface with a 1px 135° dual-specular rim. Supports optional hover angular sweep (90°, 180°, 360°) and physical metal shaders.",
       preview: (
         <div className="flex flex-wrap items-center gap-3">
           <ImmortalButton variant="default">Default Rim</ImmortalButton>
@@ -62,12 +67,12 @@ export const ComponentDocs: React.FC = () => {
               setTimeout(() => setBtnLoading(false), 1500);
             }}
           >
-            {btnLoading ? 'Processing...' : 'Test Loading'}
+            {btnLoading ? "Processing..." : "Test Loading"}
           </ImmortalButton>
         </div>
       ),
       reactSnippet: `// React / TSX Usage (supports per-button material and sweepDeg props)
-import { ImmortalButton } from "@/components/ImmortalComponents";
+import { ImmortalButton } from "./components/ImmortalComponents";
 
 export function ButtonDemo() {
   return (
@@ -144,18 +149,24 @@ export function ButtonDemo() {
 </style>`,
     },
     {
-      id: 'input',
-      name: 'Immortal Input',
-      category: 'inputs',
+      id: "input",
+      name: "Immortal Input",
+      category: "inputs",
       description:
-        'Deep recessed inner shadow creates a carved physical slot with a focused diagonal specular rim, leading icon, and keyboard shortcut badge.',
+        "Deep recessed inner shadow creates a carved physical slot with a focused diagonal specular rim, leading icon, and keyboard shortcut badge.",
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
           <ImmortalInput
             placeholder="Search nodes or run a command..."
             kbd="⌘K"
             icon={
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
               </svg>
@@ -168,7 +179,7 @@ export function ButtonDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { ImmortalInput } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalInput } from "./components/ImmortalComponents";
 import { Search } from "lucide-react";
 
 export function InputDemo() {
@@ -211,11 +222,11 @@ export function InputDemo() {
 </style>`,
     },
     {
-      id: 'switch',
-      name: 'Immortal Switch',
-      category: 'controls',
+      id: "switch",
+      name: "Immortal Switch",
+      category: "controls",
       description:
-        'Pure opaque obsidian subcard backing prevents grey bleed-through, paired with a recessed track and an illuminated jewel indicator thumb.',
+        "Pure opaque obsidian subcard backing prevents grey bleed-through, paired with a recessed track and an illuminated jewel indicator thumb.",
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
           <ImmortalSwitch
@@ -226,7 +237,7 @@ export function InputDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { ImmortalSwitch } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalSwitch } from "./components/ImmortalComponents";
 import { useState } from "react";
 
 export function SwitchDemo() {
@@ -272,11 +283,11 @@ export function SwitchDemo() {
 </style>`,
     },
     {
-      id: 'select',
-      name: 'Immortal Select',
-      category: 'inputs',
+      id: "select",
+      name: "Immortal Select",
+      category: "inputs",
       description:
-        'Custom dark skeuomorphic dropdown with a floating beveled popover, deep ambient shadow, and option descriptions.',
+        "Custom dark skeuomorphic dropdown with a floating beveled popover, deep ambient shadow, and option descriptions.",
       preview: (
         <div className="max-w-md w-full">
           <ImmortalSelect
@@ -285,25 +296,25 @@ export function SwitchDemo() {
             onChange={setSelectVal}
             options={[
               {
-                value: 'v1',
-                label: 'Grok-3 Metal Reasoning Engine',
-                description: 'Low-latency hardware raster acceleration',
+                value: "v1",
+                label: "Grok-3 Metal Reasoning Engine",
+                description: "Low-latency hardware raster acceleration",
               },
               {
-                value: 'v2',
-                label: 'Linear Instant Pipeline',
-                description: 'Sub-millisecond local-first sync',
+                value: "v2",
+                label: "Linear Instant Pipeline",
+                description: "Sub-millisecond local-first sync",
               },
               {
-                value: 'v3',
-                label: 'Raycast Native Runtime',
-                description: 'Global hotkey launcher & extensions',
+                value: "v3",
+                label: "Raycast Native Runtime",
+                description: "Global hotkey launcher & extensions",
               },
             ]}
           />
         </div>
       ),
-      reactSnippet: `import { ImmortalSelect } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalSelect } from "./components/ImmortalComponents";
 import { useState } from "react";
 
 export function SelectDemo() {
@@ -324,71 +335,60 @@ export function SelectDemo() {
       htmlSnippet: `<!-- See ImmortalSelect component source for full accessible dropdown implementation -->`,
     },
     {
-      id: 'controls',
-      name: 'Checkbox & Radio Group',
-      category: 'controls',
+      id: "checkbox",
+      name: "Immortal Checkbox",
+      category: "controls",
       description:
-        'Recessed physical sockets that illuminate with high-contrast metallic silver or active alloy accents when checked.',
+        "An independent selection with a recessed socket and an illuminated check.",
       preview: (
-        <div className="flex flex-col gap-4 max-w-md w-full">
-          <div className="flex gap-4">
-            <ImmortalCheckbox
-              checked={checkVal}
-              onChange={setCheckVal}
-              label="Persist session state"
-              hint="Save preferences in local storage"
-            />
-          </div>
-          <ImmortalRadioGroup
-            name="demo-radio"
-            value={radioVal}
-            onChange={setRadioVal}
-            options={[
-              { value: 'raycast', label: 'Obsidian Dark' },
-              { value: 'titanium', label: 'Brushed Titanium' },
-            ]}
-          />
-        </div>
+        <ImmortalCheckbox
+          checked={checkVal}
+          onChange={setCheckVal}
+          label="Remember my preferences"
+          hint="A controlled checkbox"
+        />
       ),
-      reactSnippet: `import { ImmortalCheckbox, ImmortalRadioGroup } from "@/components/ImmortalComponents";
-import { useState } from "react";
+      reactSnippet: `import { useState } from 'react';
+import { ImmortalCheckbox } from './components/ImmortalComponents';
 
-export function ControlsDemo() {
-  const [remember, setRemember] = useState(true);
-  const [theme, setTheme] = useState("dark");
-
-  return (
-    <>
-      <ImmortalCheckbox checked={remember} onChange={setRemember} label="Remember settings" />
-      <ImmortalRadioGroup
-        name="theme"
-        value={theme}
-        onChange={setTheme}
-        options={[
-          { value: "dark", label: "Obsidian Dark" },
-          { value: "metal", label: "Brushed Titanium" }
-        ]}
-      />
-    </>
-  );
+export function CheckboxDemo() {
+  const [checked, setChecked] = useState(true);
+  return <ImmortalCheckbox checked={checked} onChange={setChecked} label="Remember my preferences" />;
 }`,
-      htmlSnippet: `<!-- Checkbox HTML -->
-<label class="check-item">
-  <input type="checkbox" checked />
-  <span class="check-box">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  </span>
-  <span>Auto-save configuration</span>
-</label>`,
+      htmlSnippet: "",
     },
     {
-      id: 'slider',
-      name: 'Immortal Slider',
-      category: 'controls',
+      id: "radio-group",
+      name: "Immortal Radio Group",
+      category: "controls",
+      description: "Select one option from a controlled group.",
+      preview: (
+        <ImmortalRadioGroup
+          name="docs-theme"
+          value={radioVal}
+          onChange={setRadioVal}
+          options={[
+            { value: "raycast", label: "Obsidian Dark" },
+            { value: "titanium", label: "Brushed Titanium" },
+          ]}
+        />
+      ),
+      reactSnippet: `import { useState } from 'react';
+import { ImmortalRadioGroup } from './components/ImmortalComponents';
+
+export function RadioDemo() {
+  const [value, setValue] = useState('dark');
+  return <ImmortalRadioGroup name="theme" value={value} onChange={setValue}
+    options={[{ value: 'dark', label: 'Obsidian Dark' }, { value: 'metal', label: 'Brushed Titanium' }]} />;
+}`,
+      htmlSnippet: "",
+    },
+    {
+      id: "slider",
+      name: "Immortal Slider",
+      category: "controls",
       description:
-        'Recessed groove track paired with a spherical metallic thumb knob and real-time monospace value readout.',
+        "Recessed groove track paired with a spherical metallic thumb knob and real-time monospace value readout.",
       preview: (
         <div className="max-w-md w-full">
           <ImmortalSlider
@@ -398,7 +398,7 @@ export function ControlsDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { ImmortalSlider } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalSlider } from "./components/ImmortalComponents";
 import { useState } from "react";
 
 export function SliderDemo() {
@@ -411,25 +411,25 @@ export function SliderDemo() {
 <input type="range" min="0" max="100" value="65" class="range-slider" />`,
     },
     {
-      id: 'tabs',
-      name: 'Immortal Tabs (Segmented)',
-      category: 'controls',
+      id: "tabs",
+      name: "Immortal Tabs (Segmented)",
+      category: "controls",
       description:
-        'Carved concave pill tray with an elevated convex active indicator tab.',
+        "Carved concave pill tray with an elevated convex active indicator tab.",
       preview: (
         <div className="max-w-md w-full">
           <ImmortalTabs
             activeId={activeTab}
             onChange={setActiveTab}
             tabs={[
-              { id: 'code', label: 'Source Code' },
-              { id: 'preview', label: 'Live Preview' },
-              { id: 'logs', label: 'Terminal Logs' },
+              { id: "code", label: "Source Code" },
+              { id: "preview", label: "Live Preview" },
+              { id: "logs", label: "Terminal Logs" },
             ]}
           />
         </div>
       ),
-      reactSnippet: `import { ImmortalTabs } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalTabs } from "./components/ImmortalComponents";
 import { useState } from "react";
 
 export function TabsDemo() {
@@ -454,11 +454,11 @@ export function TabsDemo() {
 </div>`,
     },
     {
-      id: 'badge',
-      name: 'Immortal Badges',
-      category: 'surfaces',
+      id: "badge",
+      name: "Immortal Badges",
+      category: "surfaces",
       description:
-        'Subtly elevated capsule pill with a glowing LED status dot for system health, alerts, or version tags.',
+        "Subtly elevated capsule pill with a glowing LED status dot for system health, alerts, or version tags.",
       preview: (
         <div className="flex flex-wrap items-center gap-3">
           <ImmortalBadge dotColor="white">Immortal v3.0</ImmortalBadge>
@@ -467,7 +467,7 @@ export function TabsDemo() {
           <ImmortalBadge dotColor="crimson">Circuit Open</ImmortalBadge>
         </div>
       ),
-      reactSnippet: `import { ImmortalBadge } from "@/components/ImmortalComponents";
+      reactSnippet: `import { ImmortalBadge } from "./components/ImmortalComponents";
 
 export function BadgeDemo() {
   return (
@@ -480,162 +480,318 @@ export function BadgeDemo() {
       htmlSnippet: `<!-- Badge HTML -->
 <span class="badge"><span class="status-dot green"></span>Cluster Healthy</span>`,
     },
+    {
+      id: "textarea",
+      name: "Immortal Textarea",
+      category: "inputs",
+      description:
+        "A recessed multi-line field using the same shared surface and material system.",
+      preview: (
+        <div className="w-full max-w-md">
+          <ImmortalTextarea
+            aria-label="Message"
+            rows={4}
+            placeholder="Write a message to your team…"
+          />
+        </div>
+      ),
+      reactSnippet: `import { ImmortalTextarea } from './components/ImmortalComponents';
+
+export function TextareaDemo() {
+  return <ImmortalTextarea aria-label="Message" rows={4} placeholder="Write a message…" />;
+}`,
+      htmlSnippet: "",
+    },
+    {
+      id: "card",
+      name: "Immortal Card",
+      category: "surfaces",
+      description:
+        "Compose headings, badges, content, and actions on the original elevated surface.",
+      preview: (
+        <div className="w-full max-w-md">
+          <ImmortalCard
+            title="Project overview"
+            description="Your workspace is ready."
+            badge={<ImmortalBadge dotColor="green">Active</ImmortalBadge>}
+          >
+            <p className="text-sm leading-7 text-zinc-400">
+              A shared surface for content and controls.
+            </p>
+            <div>
+              <ImmortalButton size="sm">Open workspace</ImmortalButton>
+            </div>
+          </ImmortalCard>
+        </div>
+      ),
+      reactSnippet: `import { ImmortalCard, ImmortalBadge, ImmortalButton } from './components/ImmortalComponents';
+
+export function CardDemo() {
+  return (
+    <ImmortalCard title="Project overview" description="Your workspace is ready."
+      badge={<ImmortalBadge dotColor="green">Active</ImmortalBadge>}>
+      <p>A shared surface for content and controls.</p>
+      <ImmortalButton size="sm">Open workspace</ImmortalButton>
+    </ImmortalCard>
+  );
+}`,
+      htmlSnippet: "",
+    },
+    {
+      id: "modal",
+      name: "Immortal Modal",
+      category: "surfaces",
+      description:
+        "A focused dialog with the existing beveled frame and standard footer actions.",
+      preview: (
+        <>
+          <ImmortalButton onClick={() => setModalOpen(true)}>
+            Open modal
+          </ImmortalButton>
+          <ImmortalModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            title="Project settings"
+            description="A focused space for your next action."
+          >
+            <p>Your modal content goes here.</p>
+          </ImmortalModal>
+        </>
+      ),
+      reactSnippet: `import { useState } from 'react';
+import { ImmortalButton } from './components/ImmortalComponents';
+import { ImmortalModal } from './components/ImmortalModal';
+
+export function ModalDemo() {
+  const [open, setOpen] = useState(false);
+  return <>
+    <ImmortalButton onClick={() => setOpen(true)}>Open modal</ImmortalButton>
+    <ImmortalModal isOpen={open} onClose={() => setOpen(false)} title="Project settings">
+      <p>Your modal content goes here.</p>
+    </ImmortalModal>
+  </>;
+}`,
+      htmlSnippet: "",
+    },
+    {
+      id: "toast",
+      name: "Toast notifications",
+      category: "surfaces",
+      description:
+        "Use the existing ToastProvider to show brief feedback after an action.",
+      preview: (
+        <div className="flex flex-wrap gap-3">
+          <ImmortalButton
+            onClick={() =>
+              toast({
+                title: "Changes saved",
+                description: "Your workspace is up to date.",
+                type: "success",
+              })
+            }
+          >
+            Show success
+          </ImmortalButton>
+          <ImmortalButton
+            variant="recessed"
+            onClick={() =>
+              toast({ title: "Something needs attention", type: "warning" })
+            }
+          >
+            Show warning
+          </ImmortalButton>
+        </div>
+      ),
+      reactSnippet: `import { ImmortalButton } from './components/ImmortalComponents';
+import { useToast } from './components/ImmortalToast';
+
+// Render this component inside ToastProvider.
+export function ToastDemo() {
+  const { toast } = useToast();
+  return <ImmortalButton onClick={() => toast({
+    title: 'Changes saved',
+    description: 'Your workspace is up to date.',
+    type: 'success',
+  })}>Save changes</ImmortalButton>;
+}`,
+      htmlSnippet: "",
+    },
   ];
 
-  const currentItem = components.find((c) => c.id === activeComponent) || components[0];
-
-  const copyCode = () => {
-    const code = codeTab === 'react' ? currentItem.reactSnippet : currentItem.htmlSnippet;
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    toast({
-      title: 'Code Copied to Clipboard',
-      description: `${currentItem.name} (${codeTab.toUpperCase()}) snippet is ready to paste`,
-      type: 'success',
-    });
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const currentItem = components.find((c) => c.id === componentId)!;
+  const info = componentById(componentId)!;
+  const index = componentCatalog.findIndex((c) => c.id === componentId);
+  const previous = componentCatalog[index - 1];
+  const next = componentCatalog[index + 1];
 
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col gap-6">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
-            Component Documentation & Code Generator
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-            Inspect interactive previews and copy production-ready React (TSX) or vanilla HTML/CSS code.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Component Navigation Sidebar */}
-        <div className="lg:col-span-3 flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-none">
-          {components.map((comp) => {
-            const isSelected = comp.id === activeComponent;
-            return (
-              <button
-                key={comp.id}
-                type="button"
-                onClick={() => setActiveComponent(comp.id)}
-                style={
-                  isSelected
-                    ? {
-                        backgroundImage: `var(--bg-subcard), var(--border-rim)`,
-                        backgroundOrigin: 'padding-box, border-box',
-                        backgroundClip: 'padding-box, border-box',
-                        boxShadow: `0 4px 12px rgba(0,0,0,0.65)`,
-                      }
-                    : {}
-                }
-                className={`
-                  px-3.5 py-2.5 rounded-xl border border-transparent text-left text-xs sm:text-sm font-medium
-                  transition-all duration-150 whitespace-nowrap cursor-pointer flex items-center justify-between
-                  ${
-                    isSelected
-                      ? 'text-zinc-100 font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]'
-                  }
-                `}
-              >
-                <span>{comp.name}</span>
-                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white/80 ml-2" />}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Right Preview and Code Area */}
-        <div className="lg:col-span-9 flex flex-col gap-5">
-          {/* Component Live Stage */}
-          <div
-            style={{
-              backgroundImage: `var(--bg-card), var(--border-rim-subtle)`,
-              backgroundOrigin: 'padding-box, border-box',
-              backgroundClip: 'padding-box, border-box',
-              boxShadow: `var(--shadow-convex)`,
-            }}
-            className="p-6 rounded-2xl sm:rounded-3xl border border-transparent flex flex-col gap-4"
+    <article className="doc-article min-w-0">
+      <header className="mb-8">
+        <p className="site-eyebrow">
+          <a href="#/components" className="hover:text-zinc-200">
+            COMPONENTS
+          </a>{" "}
+          / {info.category.toUpperCase()}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+          <h1 className="site-page-title">{info.name}</h1>
+          <a
+            href={`https://github.com/fre2d0m/immortal-ui/blob/main/${info.source}`}
+            target="_blank"
+            rel="noreferrer"
+            className="site-text-link text-xs"
           >
-            <div className="flex items-start justify-between border-b border-white/[0.06] pb-3">
-              <div>
-                <h3 className="text-base font-semibold text-zinc-100">{currentItem.name}</h3>
-                <p className="text-xs text-zinc-400 mt-0.5">{currentItem.description}</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] font-mono text-zinc-500 bg-zinc-900 px-2 py-0.5 rounded border border-white/5">
-                  Live Preview
-                </span>
-              </div>
-            </div>
-
-            {/* Stage Box */}
-            <div
-              style={{
-                backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%), var(--bg-concave)`,
-                boxShadow: `var(--shadow-concave)`,
-              }}
-              className="min-h-[160px] p-8 rounded-xl border border-white/5 flex items-center justify-center relative overflow-hidden"
+            View source <ExternalLink size={13} />
+          </a>
+        </div>
+        <p className="site-page-description">{info.summary}</p>
+      </header>
+      <section id="preview" className="scroll-mt-24">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-sm font-medium text-zinc-300">Preview</h2>
+          <span className="site-eyebrow">INTERACTIVE</span>
+        </div>
+        <div
+          style={{
+            backgroundImage: "var(--bg-card), var(--border-rim-subtle)",
+            backgroundOrigin: "padding-box, border-box",
+            backgroundClip: "padding-box, border-box",
+            boxShadow: "var(--shadow-convex)",
+          }}
+          className="flex min-h-[230px] items-center justify-center rounded-2xl border border-transparent px-5 py-9 sm:px-8"
+        >
+          {currentItem.preview}
+        </div>
+        <p className="mt-3 text-xs leading-6 text-zinc-500">
+          {currentItem.description}
+        </p>
+      </section>
+      <section id="usage" className="doc-section">
+        <h2>Usage</h2>
+        <p>
+          Import from your copied component files. The paths below assume this
+          example lives in <code>src/App.tsx</code>.
+        </p>
+        <CodeBlock
+          code={currentItem.reactSnippet}
+          label={`React / TSX · ${info.exportName}`}
+        />
+        {currentItem.htmlSnippet && (
+          <details className="mt-4 rounded-xl border border-white/[0.08] p-4">
+            <summary className="cursor-pointer text-xs text-zinc-400">
+              HTML / CSS style reference
+            </summary>
+            <p className="my-3 text-xs leading-6 text-zinc-500">
+              A visual reference from the original showcase. Use the React
+              implementation for interactive behavior and the full material
+              system.
+            </p>
+            <CodeBlock
+              code={currentItem.htmlSnippet}
+              label="HTML / CSS reference"
+            />
+          </details>
+        )}
+      </section>
+      <section id="setup" className="doc-section">
+        <h2>Setup & dependencies</h2>
+        <p>
+          Copy <code>{info.source}</code> together with{" "}
+          <code>AudioEngine.ts</code> and <code>WebGLMetalEngine.tsx</code>.
+          Modal also uses <code>ImmortalComponents.tsx</code>; Toast requires{" "}
+          <code>ToastProvider</code> around your interface.
+        </p>
+        <p>
+          Use React, <code>lucide-react</code>, Tailwind CSS 4, and the shared
+          stylesheet. Wrap previews in <code>MetalConfigProvider</code> to
+          choose the global material.
+        </p>
+        <a href="#/docs/getting-started" className="site-text-link">
+          Follow the complete setup guide <ArrowRight size={14} />
+        </a>
+      </section>
+      <section id="api" className="doc-section">
+        <h2>API reference</h2>
+        <p>
+          {componentId === "toast" ? (
+            <>
+              Options passed to the <code>toast()</code> function returned by{" "}
+              <code>useToast()</code>.
+            </>
+          ) : (
+            <>
+              Component-specific props for <code>{info.exportName}</code>.
+              Input, Textarea, and Button also accept their native HTML
+              attributes.
+            </>
+          )}
+        </p>
+        <div className="overflow-x-auto rounded-xl border border-white/10">
+          <table className="doc-api-table">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type</th>
+                <th>Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              {info.props.map(([name, type, defaultValue]) => (
+                <tr key={name}>
+                  <td>
+                    <code>{name}</code>
+                  </td>
+                  <td>{type}</td>
+                  <td>{defaultValue}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="related" className="doc-section">
+        <h2>Explore further</h2>
+        <p>
+          See components together in a complete layout, or continue with a
+          related component.
+        </p>
+        <a href="#/examples/cards" className="site-text-link">
+          View card examples <ArrowRight size={14} />
+        </a>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {info.related.map((id) => (
+            <a
+              key={id}
+              href={`#/components/${id}`}
+              className="rounded-lg border border-white/10 px-3 py-2 text-xs text-zinc-300 transition-colors hover:bg-white/[0.04]"
             >
-              {currentItem.preview}
-            </div>
-          </div>
-
-          {/* Code Viewer Panel */}
-          <div
-            style={{
-              backgroundImage: `var(--bg-subcard), var(--border-rim-subtle)`,
-              backgroundOrigin: 'padding-box, border-box',
-              backgroundClip: 'padding-box, border-box',
-              boxShadow: `0 8px 24px rgba(0,0,0,0.8)`,
-            }}
-            className="rounded-2xl border border-transparent overflow-hidden"
-          >
-            {/* Header / Tabs */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-zinc-950/40">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setCodeTab('react')}
-                  className={`px-3 py-1 text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
-                    codeTab === 'react'
-                      ? 'bg-zinc-800 text-white font-medium border border-white/10'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <Code2 className="w-3.5 h-3.5" />
-                  React (TSX)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCodeTab('html')}
-                  className={`px-3 py-1 text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
-                    codeTab === 'html'
-                      ? 'bg-zinc-800 text-white font-medium border border-white/10'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <Layers className="w-3.5 h-3.5" />
-                  HTML / CSS
-                </button>
-              </div>
-
-              <ImmortalButton variant="recessed" size="sm" onClick={copyCode} className="h-7 text-xs">
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? 'Copied' : 'Copy Code'}</span>
-              </ImmortalButton>
-            </div>
-
-            {/* Code Block */}
-            <div className="p-4 bg-[#050507] overflow-x-auto text-xs font-mono text-zinc-300 leading-relaxed max-h-[360px] scrollbar-thin">
-              <pre>
-                <code>{codeTab === 'react' ? currentItem.reactSnippet : currentItem.htmlSnippet}</code>
-              </pre>
-            </div>
-          </div>
+              {componentById(id)?.name}
+            </a>
+          ))}
         </div>
-      </div>
-    </div>
+      </section>
+      <nav
+        aria-label="Previous and next component"
+        className="mt-12 grid grid-cols-2 gap-4 border-t border-white/10 pt-7"
+      >
+        {previous ? (
+          <a href={`#/components/${previous.id}`} className="site-text-link">
+            <ArrowLeft size={14} />
+            {previous.name}
+          </a>
+        ) : (
+          <span />
+        )}
+        {next && (
+          <a
+            href={`#/components/${next.id}`}
+            className="site-text-link justify-self-end"
+          >
+            {next.name}
+            <ArrowRight size={14} />
+          </a>
+        )}
+      </nav>
+    </article>
   );
 };

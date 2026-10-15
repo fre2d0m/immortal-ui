@@ -10,7 +10,7 @@
 :root {
   /* Dynamic light controls (default 135deg top-left to bottom-right) */
   --rim-angle: 135deg;
-  --hover-sweep: 180deg;
+  --hover-sweep: 90deg;
   --sweep-duration: 650ms;
   --local-rim-angle: 135deg;
   --specular-opacity: 0.45;
@@ -96,7 +96,7 @@
 
 .immortal-rim-sweep:hover,
 .group:hover .immortal-rim-sweep {
-  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 180deg));
+  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 90deg));
 }
 
 :root[data-sweep-mode="infinite"] .immortal-rim-sweep:hover,
@@ -151,7 +151,7 @@
 
 .chrome-dispersion-surface:hover,
 .group:hover .chrome-dispersion-surface {
-  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 180deg));
+  --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 90deg));
 }
 
 .chrome-dispersion-surface[data-auto-flow="true"] {
