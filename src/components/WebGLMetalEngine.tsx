@@ -52,7 +52,7 @@ export interface MetalMaterialPreset {
 export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
   classic: {
     id: 'classic',
-    name: 'Classic Dark Tactile',
+    name: 'Classic Dark',
     enName: 'Classic CSS',
     description: 'Default style · 1px 135° dual-specular micro-bevel with convex & concave obsidian surfaces',
     isWebGLMetal: false,
@@ -316,7 +316,7 @@ const FRAGMENT_SHADER_SRC = `
     vec3 baseMetal = mix(lowerMetal, cHigh, smoothstep(0.55, 0.98, t));
 
     // Restrained luminance envelope so resting state is never glaring,
-    // matching the subtle sophistication of Classic Dark Tactile CSS mode
+    // matching the subtle sophistication of Classic Dark CSS mode
     float restingExposure = mix(0.66, 0.90, hoverBoost);
     baseMetal *= restingExposure;
 

@@ -9,7 +9,7 @@ import {
 } from './WebGLMetalEngine';
 
 /* =========================================================================
-   Dynamic CSS Specular Rim Helpers (for 'classic' Dark Tactile Mode)
+   Dynamic CSS Specular Rim Helpers (for 'classic' Classic Dark Mode)
    ========================================================================= */
 const CLASSIC_RIM_DEFAULT = `linear-gradient(
   var(--local-rim-angle, var(--rim-angle, 135deg)),
@@ -42,12 +42,12 @@ const CLASSIC_RIM_DANGER = `linear-gradient(
 )`;
 
 /* =========================================================================
-   1. TactileButton
+   1. ImmortalButton
    - Default ('classic'): Earliest pure CSS Dark Light-Skeuomorphism
    - Metal selected ('gold', 'platinum', 'obsidian', 'cobalt', 'rosegold', 'emerald'):
      Solution C WebGL GLSL Flowing Metal Shader
    ========================================================================= */
-export interface TactileButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ImmortalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'default' | 'metallic' | 'recessed' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   material?: MetalMaterialId;
@@ -58,7 +58,7 @@ export interface TactileButtonProps extends React.ButtonHTMLAttributes<HTMLButto
   bezelPx?: number;
 }
 
-export const TactileButton: React.FC<TactileButtonProps> = ({
+export const ImmortalButton: React.FC<ImmortalButtonProps> = ({
   children,
   variant = 'default',
   size = 'md',
@@ -106,7 +106,7 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
   }
 
   /* -----------------------------------------------------------------------
-     MODE A: Classic Pure CSS Dark Tactile Skeuomorphic Button (Default)
+     MODE A: Classic Pure CSS Classic Dark Skeuomorphic Button (Default)
      ----------------------------------------------------------------------- */
   if (isClassic) {
     const getClassicVariantStyle = (): React.CSSProperties => {
@@ -183,7 +183,7 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
           ...style,
         }}
         className={`
-          tactile-rim-sweep relative inline-flex items-center justify-center border border-transparent
+          immortal-rim-sweep relative inline-flex items-center justify-center border border-transparent
           font-medium select-none cursor-pointer
           active:translate-y-[1px] active:scale-[0.985]
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40
@@ -325,16 +325,16 @@ export const TactileButton: React.FC<TactileButtonProps> = ({
 };
 
 /* =========================================================================
-   2. TactileInput
+   2. ImmortalInput
    ========================================================================= */
-export interface TactileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface ImmortalInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode;
   kbd?: string;
   material?: MetalMaterialId;
   onClear?: () => void;
 }
 
-export const TactileInput: React.FC<TactileInputProps> = ({
+export const ImmortalInput: React.FC<ImmortalInputProps> = ({
   icon,
   kbd,
   material,
@@ -473,13 +473,13 @@ export const TactileInput: React.FC<TactileInputProps> = ({
 };
 
 /* =========================================================================
-   3. TactileTextarea
+   3. ImmortalTextarea
    ========================================================================= */
-export interface TactileTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface ImmortalTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   material?: MetalMaterialId;
 }
 
-export const TactileTextarea: React.FC<TactileTextareaProps> = ({
+export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
   material,
   className = '',
   style,
@@ -568,9 +568,9 @@ export const TactileTextarea: React.FC<TactileTextareaProps> = ({
 };
 
 /* =========================================================================
-   4. TactileSwitch
+   4. ImmortalSwitch
    ========================================================================= */
-export interface TactileSwitchProps {
+export interface ImmortalSwitchProps {
   id?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
@@ -580,7 +580,7 @@ export interface TactileSwitchProps {
   className?: string;
 }
 
-export const TactileSwitch: React.FC<TactileSwitchProps> = ({
+export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
   id,
   checked,
   onChange,
@@ -772,9 +772,9 @@ export const TactileSwitch: React.FC<TactileSwitchProps> = ({
 };
 
 /* =========================================================================
-   5. TactileCheckbox
+   5. ImmortalCheckbox
    ========================================================================= */
-export interface TactileCheckboxProps {
+export interface ImmortalCheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   label?: string;
@@ -783,7 +783,7 @@ export interface TactileCheckboxProps {
   disabled?: boolean;
 }
 
-export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
+export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
   checked,
   onChange,
   label,
@@ -911,17 +911,17 @@ export const TactileCheckbox: React.FC<TactileCheckboxProps> = ({
 };
 
 /* =========================================================================
-   6. TactileRadioGroup
+   6. ImmortalRadioGroup
    ========================================================================= */
-export interface TactileRadioOption {
+export interface ImmortalRadioOption {
   value: string;
   label: string;
   hint?: string;
 }
 
-export const TactileRadioGroup: React.FC<{
+export const ImmortalRadioGroup: React.FC<{
   name: string;
-  options: TactileRadioOption[];
+  options: ImmortalRadioOption[];
   value: string;
   onChange: (val: string) => void;
   material?: MetalMaterialId;
@@ -1031,9 +1031,9 @@ export const TactileRadioGroup: React.FC<{
 };
 
 /* =========================================================================
-   7. TactileSlider
+   7. ImmortalSlider
    ========================================================================= */
-export interface TactileSliderProps {
+export interface ImmortalSliderProps {
   value: number;
   min?: number;
   max?: number;
@@ -1044,7 +1044,7 @@ export interface TactileSliderProps {
   material?: MetalMaterialId;
 }
 
-export const TactileSlider: React.FC<TactileSliderProps> = ({
+export const ImmortalSlider: React.FC<ImmortalSliderProps> = ({
   value,
   min = 0,
   max = 100,
@@ -1107,16 +1107,16 @@ export const TactileSlider: React.FC<TactileSliderProps> = ({
 };
 
 /* =========================================================================
-   8. TactileSelect
+   8. ImmortalSelect
    ========================================================================= */
-export interface TactileSelectOption {
+export interface ImmortalSelectOption {
   value: string;
   label: string;
   description?: string;
 }
 
-export const TactileSelect: React.FC<{
-  options: TactileSelectOption[];
+export const ImmortalSelect: React.FC<{
+  options: ImmortalSelectOption[];
   value: string;
   onChange: (val: string) => void;
   label?: string;
@@ -1343,16 +1343,16 @@ export const TactileSelect: React.FC<{
 };
 
 /* =========================================================================
-   9. TactileTabs (Segmented Control)
+   9. ImmortalTabs (Segmented Control)
    ========================================================================= */
-export interface TactileTabItem {
+export interface ImmortalTabItem {
   id: string;
   label: string;
   icon?: ReactNode;
 }
 
-export const TactileTabs: React.FC<{
-  tabs: TactileTabItem[];
+export const ImmortalTabs: React.FC<{
+  tabs: ImmortalTabItem[];
   activeId: string;
   onChange: (id: string) => void;
   material?: MetalMaterialId;
@@ -1473,9 +1473,9 @@ export const TactileTabs: React.FC<{
 };
 
 /* =========================================================================
-   10. TactileBadge
+   10. ImmortalBadge
    ========================================================================= */
-export const TactileBadge: React.FC<{
+export const ImmortalBadge: React.FC<{
   children: ReactNode;
   dotColor?: 'white' | 'green' | 'amber' | 'crimson';
   material?: MetalMaterialId;
@@ -1540,9 +1540,9 @@ export const TactileBadge: React.FC<{
 };
 
 /* =========================================================================
-   11. TactileCard
+   11. ImmortalCard
    ========================================================================= */
-export const TactileCard: React.FC<{
+export const ImmortalCard: React.FC<{
   title?: string;
   description?: string;
   badge?: ReactNode;

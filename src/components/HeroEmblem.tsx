@@ -35,7 +35,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
       {/* Background glowing horizontal rail line */}
       <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent top-1/2 -translate-y-4 pointer-events-none" />
 
-      {/* 1:1 Hero Button (Classic Dark Tactile by default, or WebGL Metal when selected) */}
+      {/* 1:1 Hero Button (Classic Dark by default, or WebGL Metal when selected) */}
       <div className="relative z-10 flex flex-col items-center gap-3">
         {isClassic ? (
           /* Original 1:1 Pure CSS Dark Light-Skeuomorphic X Button */
@@ -64,7 +64,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               transform: pressed ? 'translateY(1px) scale(0.97)' : 'translateY(0) scale(1)',
             }}
             className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] border-[1.5px] border-transparent cursor-pointer flex items-center justify-center transition-all duration-150 select-none focus:outline-none"
-            title="1:1 Reference Classic Dark Tactile Button · Click to feel physical switch feedback"
+            title="1:1 Reference Classic Dark Button · Click to feel physical switch feedback"
           >
             <svg
               viewBox="0 0 24 24"

@@ -49,7 +49,7 @@
     rgba(255, 255, 255, 0.55) 100%
   );
 
-  /* Tactile Shadows */
+  /* Immortal Shadows */
   --shadow-convex:
     0 12px 28px -6px rgba(0, 0, 0, 0.9),
     0 2px 6px rgba(0, 0, 0, 0.75),
@@ -85,7 +85,7 @@
   }
 }
 
-.tactile-rim-sweep {
+.immortal-rim-sweep {
   --local-rim-angle: var(--rim-angle, 135deg);
   transition:
     --local-rim-angle var(--sweep-duration, 650ms) cubic-bezier(0.22, 1, 0.36, 1),
@@ -94,13 +94,13 @@
     color 0.18s ease;
 }
 
-.tactile-rim-sweep:hover,
-.group:hover .tactile-rim-sweep {
+.immortal-rim-sweep:hover,
+.group:hover .immortal-rim-sweep {
   --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 180deg));
 }
 
-:root[data-sweep-mode="infinite"] .tactile-rim-sweep:hover,
-:root[data-sweep-mode="infinite"] .group:hover .tactile-rim-sweep {
+:root[data-sweep-mode="infinite"] .immortal-rim-sweep:hover,
+:root[data-sweep-mode="infinite"] .group:hover .immortal-rim-sweep {
   animation: rimContinuousOrbit var(--sweep-duration, 1200ms) linear infinite;
 }
 
@@ -160,7 +160,7 @@
 
 body {
   background-color: var(--bg-canvas);
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
     radial-gradient(rgba(255, 255, 255, 0.065) 1px, transparent 1px);
   background-size: 100% 100%, 18px 18px;

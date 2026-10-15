@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "immortal-ui",
+  "description": "Immortal UI — dark skeuomorphic React components with CSS and WebGL metal materials.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

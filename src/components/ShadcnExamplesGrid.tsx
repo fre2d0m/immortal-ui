@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import {
-  TactileButton,
-  TactileInput,
-  TactileTextarea,
-  TactileSwitch,
-  TactileCheckbox,
-  TactileRadioGroup,
-  TactileSlider,
-  TactileSelect,
-  TactileTabs,
-  TactileBadge,
-  TactileCard,
-} from './TactileComponents';
+  ImmortalButton,
+  ImmortalInput,
+  ImmortalTextarea,
+  ImmortalSwitch,
+  ImmortalCheckbox,
+  ImmortalRadioGroup,
+  ImmortalSlider,
+  ImmortalSelect,
+  ImmortalTabs,
+  ImmortalBadge,
+  ImmortalCard,
+} from './ImmortalComponents';
 import {
   METAL_MATERIALS,
   useMetalConfig,
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
 import { audioEngine } from './AudioEngine';
-import { useToast } from './TactileToast';
+import { useToast } from './ImmortalToast';
 import {
   CreditCard,
   Wallet,
@@ -63,7 +63,7 @@ export const ShadcnCardsExample: React.FC = () => {
   const [roleIsabella, setRoleIsabella] = useState('billing');
 
   // Card 4: Share Document
-  const [shareUrl] = useState('https://ui.tactile.dev/share/9f8c-dark-skeuo');
+  const [shareUrl] = useState('https://example.com/immortal-ui/share/9f8c-dark-skeuo');
   const [copiedShare, setCopiedShare] = useState(false);
   const [accessLevel, setAccessLevel] = useState('write');
 
@@ -102,13 +102,13 @@ export const ShadcnCardsExample: React.FC = () => {
       {/* ==================== COLUMN 1 ==================== */}
       <div className="flex flex-col gap-6">
         {/* Card 1: Create an account */}
-        <TactileCard
+        <ImmortalCard
           title="Create an account"
           description="Enter your email below to create your account"
-          badge={<TactileBadge dotColor="white">Auth</TactileBadge>}
+          badge={<ImmortalBadge dotColor="white">Auth</ImmortalBadge>}
         >
           <div className="grid grid-cols-2 gap-3">
-            <TactileButton
+            <ImmortalButton
               variant="default"
               onClick={() =>
                 toast({ title: 'GitHub OAuth initiated', type: 'info' })
@@ -120,8 +120,8 @@ export const ShadcnCardsExample: React.FC = () => {
               }
             >
               GitHub
-            </TactileButton>
-            <TactileButton
+            </ImmortalButton>
+            <ImmortalButton
               variant="default"
               onClick={() =>
                 toast({ title: 'X Corp OAuth initiated', type: 'info' })
@@ -133,7 +133,7 @@ export const ShadcnCardsExample: React.FC = () => {
               }
             >
               X Corp
-            </TactileButton>
+            </ImmortalButton>
           </div>
 
           <div className="relative flex items-center justify-center my-0.5">
@@ -147,7 +147,7 @@ export const ShadcnCardsExample: React.FC = () => {
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-zinc-300">Email</label>
-              <TactileInput
+              <ImmortalInput
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -156,7 +156,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-zinc-300">Password</label>
-              <TactileInput
+              <ImmortalInput
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -164,7 +164,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </div>
           </div>
 
-          <TactileButton
+          <ImmortalButton
             variant="metallic"
             className="w-full"
             onClick={() =>
@@ -176,11 +176,11 @@ export const ShadcnCardsExample: React.FC = () => {
             }
           >
             Create account
-          </TactileButton>
-        </TactileCard>
+          </ImmortalButton>
+        </ImmortalCard>
 
         {/* Card 2: Payment Method */}
-        <TactileCard
+        <ImmortalCard
           title="Payment Method"
           description="Add a new payment method to your account."
         >
@@ -258,7 +258,7 @@ export const ShadcnCardsExample: React.FC = () => {
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-zinc-300">Name</label>
-              <TactileInput
+              <ImmortalInput
                 value={cardName}
                 onChange={(e) => setCardName(e.target.value)}
                 placeholder="First Last"
@@ -267,7 +267,7 @@ export const ShadcnCardsExample: React.FC = () => {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-medium text-zinc-300">Card number</label>
-              <TactileInput
+              <ImmortalInput
                 value={cardNumber}
                 onChange={(e) => setCardNumber(e.target.value)}
                 kbd="VISA"
@@ -275,7 +275,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-2.5">
-              <TactileSelect
+              <ImmortalSelect
                 label="Expires"
                 value={expMonth}
                 onChange={setExpMonth}
@@ -286,7 +286,7 @@ export const ShadcnCardsExample: React.FC = () => {
                   { value: '12', label: 'Dec (12)' },
                 ]}
               />
-              <TactileSelect
+              <ImmortalSelect
                 label="Year"
                 value={expYear}
                 onChange={setExpYear}
@@ -299,7 +299,7 @@ export const ShadcnCardsExample: React.FC = () => {
               />
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-zinc-400">CVC</label>
-                <TactileInput
+                <ImmortalInput
                   value={cvc}
                   onChange={(e) => setCvc(e.target.value)}
                   maxLength={4}
@@ -308,7 +308,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </div>
           </div>
 
-          <TactileButton
+          <ImmortalButton
             variant="default"
             className="w-full"
             onClick={() =>
@@ -320,17 +320,17 @@ export const ShadcnCardsExample: React.FC = () => {
             }
           >
             Continue
-          </TactileButton>
-        </TactileCard>
+          </ImmortalButton>
+        </ImmortalCard>
       </div>
 
       {/* ==================== COLUMN 2 ==================== */}
       <div className="flex flex-col gap-6">
         {/* Card 3: Team Members */}
-        <TactileCard
+        <ImmortalCard
           title="Team Members"
           description="Invite your team members to collaborate."
-          badge={<TactileBadge dotColor="green">3 Active</TactileBadge>}
+          badge={<ImmortalBadge dotColor="green">3 Active</ImmortalBadge>}
         >
           <div className="flex flex-col gap-3.5">
             {[
@@ -380,7 +380,7 @@ export const ShadcnCardsExample: React.FC = () => {
                   </div>
                 </div>
                 <div className="w-36 shrink-0">
-                  <TactileSelect
+                  <ImmortalSelect
                     value={member.role}
                     onChange={member.setRole}
                     options={[
@@ -393,18 +393,18 @@ export const ShadcnCardsExample: React.FC = () => {
               </div>
             ))}
           </div>
-        </TactileCard>
+        </ImmortalCard>
 
         {/* Card 4: Share this document */}
-        <TactileCard
+        <ImmortalCard
           title="Share this document"
           description="Anyone with the link can view this document."
         >
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
-              <TactileInput value={shareUrl} readOnly />
+              <ImmortalInput value={shareUrl} readOnly />
             </div>
-            <TactileButton
+            <ImmortalButton
               variant="default"
               onClick={handleCopyShare}
               icon={
@@ -416,12 +416,12 @@ export const ShadcnCardsExample: React.FC = () => {
               }
             >
               {copiedShare ? 'Copied' : 'Copy Link'}
-            </TactileButton>
+            </ImmortalButton>
           </div>
 
           <div className="pt-2 border-t border-white/[0.06] flex flex-col gap-3">
             <div className="text-xs font-medium text-zinc-300">Default Access Level</div>
-            <TactileRadioGroup
+            <ImmortalRadioGroup
               name="shareAccess"
               value={accessLevel}
               onChange={setAccessLevel}
@@ -431,10 +431,10 @@ export const ShadcnCardsExample: React.FC = () => {
               ]}
             />
           </div>
-        </TactileCard>
+        </ImmortalCard>
 
         {/* Card 5: Notifications */}
-        <TactileCard
+        <ImmortalCard
           title="Notifications"
           description="Choose what you want to be notified about."
         >
@@ -492,38 +492,38 @@ export const ShadcnCardsExample: React.FC = () => {
           </div>
 
           <div className="pt-2 border-t border-white/[0.06]">
-            <TactileCheckbox
+            <ImmortalCheckbox
               checked={pushNotif}
               onChange={setPushNotif}
               label="Enable Web Audio physical micro-switch synthesis"
               hint="Play subtle tactile click acoustics when pressing buttons or switches"
             />
           </div>
-        </TactileCard>
+        </ImmortalCard>
       </div>
 
       {/* ==================== COLUMN 3 ==================== */}
       <div className="flex flex-col gap-6">
         {/* Card 6: Cookie & Optical Preferences */}
-        <TactileCard
+        <ImmortalCard
           title="Cookie & Optical Settings"
           description="Manage your cookie and hardware shader preferences."
-          badge={<TactileBadge dotColor="amber">Preferences</TactileBadge>}
+          badge={<ImmortalBadge dotColor="amber">Preferences</ImmortalBadge>}
         >
           <div className="flex flex-col gap-3">
-            <TactileSwitch
+            <ImmortalSwitch
               checked={cookieNecessary}
               onChange={setCookieNecessary}
               label="Strictly Necessary"
               hint="Essential cookies required for authentication and security."
             />
-            <TactileSwitch
+            <ImmortalSwitch
               checked={cookieFunctional}
               onChange={setCookieFunctional}
               label="Functional Cookies"
-              hint="Remember your selected Dark Tactile or WebGL Metal theme."
+              hint="Remember your selected Classic Dark or WebGL Metal theme."
             />
-            <TactileSwitch
+            <ImmortalSwitch
               checked={cookieSpecular}
               onChange={setCookieSpecular}
               label="135° Dual-Specular Rim"
@@ -531,7 +531,7 @@ export const ShadcnCardsExample: React.FC = () => {
             />
           </div>
 
-          <TactileButton
+          <ImmortalButton
             variant="recessed"
             className="w-full"
             onClick={() =>
@@ -543,16 +543,16 @@ export const ShadcnCardsExample: React.FC = () => {
             }
           >
             Save preferences
-          </TactileButton>
-        </TactileCard>
+          </ImmortalButton>
+        </ImmortalCard>
 
         {/* Card 7: Report an Issue */}
-        <TactileCard
+        <ImmortalCard
           title="Report an issue"
           description="What area are you having problems with?"
         >
           <div className="grid grid-cols-2 gap-3">
-            <TactileSelect
+            <ImmortalSelect
               label="Area"
               value={issueArea}
               onChange={setIssueArea}
@@ -562,7 +562,7 @@ export const ShadcnCardsExample: React.FC = () => {
                 { value: 'components', label: 'UI Components' },
               ]}
             />
-            <TactileSelect
+            <ImmortalSelect
               label="Security Level"
               value={issueSeverity}
               onChange={setIssueSeverity}
@@ -576,7 +576,7 @@ export const ShadcnCardsExample: React.FC = () => {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-zinc-300">Subject</label>
-            <TactileInput
+            <ImmortalInput
               value={issueSubject}
               onChange={(e) => setIssueSubject(e.target.value)}
               placeholder="I need help with..."
@@ -585,7 +585,7 @@ export const ShadcnCardsExample: React.FC = () => {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-zinc-300">Description</label>
-            <TactileTextarea
+            <ImmortalTextarea
               value={issueDesc}
               onChange={(e) => setIssueDesc(e.target.value)}
               placeholder="Please include all information relevant to your issue."
@@ -593,7 +593,7 @@ export const ShadcnCardsExample: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between gap-3 pt-1">
-            <TactileButton
+            <ImmortalButton
               variant="recessed"
               onClick={() => {
                 setIssueSubject('');
@@ -601,8 +601,8 @@ export const ShadcnCardsExample: React.FC = () => {
               }}
             >
               Cancel
-            </TactileButton>
-            <TactileButton
+            </ImmortalButton>
+            <ImmortalButton
               variant="metallic"
               onClick={() =>
                 toast({
@@ -613,23 +613,23 @@ export const ShadcnCardsExample: React.FC = () => {
               }
             >
               Submit
-            </TactileButton>
+            </ImmortalButton>
           </div>
-        </TactileCard>
+        </ImmortalCard>
 
         {/* Card 8: Compute Goal & Telemetry */}
-        <TactileCard
+        <ImmortalCard
           title="Compute Goal"
           description="Set your daily GPU inference throughput target."
         >
           <div className="flex items-center justify-between py-1">
-            <TactileButton
+            <ImmortalButton
               variant="recessed"
               size="icon"
               onClick={() => setComputeGoal(Math.max(100, computeGoal - 50))}
             >
               -
-            </TactileButton>
+            </ImmortalButton>
             <div className="text-center">
               <div
                 style={{ color: matPreset.accentHex }}
@@ -641,16 +641,16 @@ export const ShadcnCardsExample: React.FC = () => {
                 TFLOPS / DAY
               </div>
             </div>
-            <TactileButton
+            <ImmortalButton
               variant="recessed"
               size="icon"
               onClick={() => setComputeGoal(Math.min(800, computeGoal + 50))}
             >
               +
-            </TactileButton>
+            </ImmortalButton>
           </div>
 
-          {/* Mini Tactile Bar Chart */}
+          {/* Mini Immortal Bar Chart */}
           <div className="flex items-end justify-between gap-1.5 h-16 px-2 pt-2">
             {[45, 70, 52, 88, 64, 95, 78, 60, 84, 92, 68, 80].map((v, i) => (
               <div
@@ -664,7 +664,7 @@ export const ShadcnCardsExample: React.FC = () => {
             ))}
           </div>
 
-          <TactileSlider
+          <ImmortalSlider
             label="Quick Target Slider"
             value={computeGoal}
             min={100}
@@ -673,7 +673,7 @@ export const ShadcnCardsExample: React.FC = () => {
             unit=" TF"
             onChange={setComputeGoal}
           />
-        </TactileCard>
+        </ImmortalCard>
       </div>
     </div>
   );
@@ -718,7 +718,7 @@ export const ShadcnDashboardExample: React.FC = () => {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="w-full sm:w-96">
-          <TactileTabs
+          <ImmortalTabs
             activeId={rangeTab}
             onChange={setRangeTab}
             tabs={[
@@ -729,17 +729,17 @@ export const ShadcnDashboardExample: React.FC = () => {
           />
         </div>
         <div className="flex items-center gap-2.5">
-          <TactileBadge dotColor="green">Cluster Healthy</TactileBadge>
-          <TactileButton variant="metallic" size="sm">
+          <ImmortalBadge dotColor="green">Cluster Healthy</ImmortalBadge>
+          <ImmortalButton variant="metallic" size="sm">
             Download Report
-          </TactileButton>
+          </ImmortalButton>
         </div>
       </div>
 
       {/* 4 KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {kpis.map((kpi) => (
-          <TactileCard key={kpi.title}>
+          <ImmortalCard key={kpi.title}>
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-zinc-400">{kpi.title}</span>
               <span style={{ color: matPreset.accentHex }} className="opacity-80">
@@ -755,13 +755,13 @@ export const ShadcnDashboardExample: React.FC = () => {
               </div>
               <p className="text-[11px] text-zinc-500 mt-1">{kpi.change}</p>
             </div>
-          </TactileCard>
+          </ImmortalCard>
         ))}
       </div>
 
       {/* Main Chart + Recent Deployments */}
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
-        <TactileCard
+        <ImmortalCard
           title="Overview"
           description="Monthly compute throughput & shader workload across regions"
           className="lg:col-span-4"
@@ -794,9 +794,9 @@ export const ShadcnDashboardExample: React.FC = () => {
               </div>
             ))}
           </div>
-        </TactileCard>
+        </ImmortalCard>
 
-        <TactileCard
+        <ImmortalCard
           title="Recent Sales & Deployments"
           description="You made 265 enterprise deployments this month."
           className="lg:col-span-3"
@@ -841,7 +841,7 @@ export const ShadcnDashboardExample: React.FC = () => {
               </div>
             ))}
           </div>
-        </TactileCard>
+        </ImmortalCard>
       </div>
     </div>
   );
@@ -862,21 +862,21 @@ export const ShadcnPlaygroundExample: React.FC = () => {
   );
 
   return (
-    <TactileCard
+    <ImmortalCard
       title="AI Optical Playground"
       description="Inspired by the shadcn/ui Playground — test recessed textareas, tactile sliders, and selectors."
-      badge={<TactileBadge dotColor="amber">Interactive</TactileBadge>}
+      badge={<ImmortalBadge dotColor="amber">Interactive</ImmortalBadge>}
     >
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3 flex flex-col gap-4">
-          <TactileTextarea
+          <ImmortalTextarea
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
             className="min-h-[240px] font-mono text-xs"
           />
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <TactileButton
+              <ImmortalButton
                 variant="metallic"
                 icon={<Play className="w-3.5 h-3.5" />}
                 onClick={() =>
@@ -888,14 +888,14 @@ export const ShadcnPlaygroundExample: React.FC = () => {
                 }
               >
                 Submit
-              </TactileButton>
-              <TactileButton
+              </ImmortalButton>
+              <ImmortalButton
                 variant="recessed"
                 icon={<RotateCcw className="w-3.5 h-3.5" />}
                 onClick={() => setPromptText('')}
               >
                 Reset
-              </TactileButton>
+              </ImmortalButton>
             </div>
             <span className="text-xs font-mono text-zinc-500">
               Tokens: {Math.max(1, Math.round(promptText.length / 4))} / {maxLen}
@@ -904,18 +904,18 @@ export const ShadcnPlaygroundExample: React.FC = () => {
         </div>
 
         <div className="flex flex-col gap-5">
-          <TactileSelect
+          <ImmortalSelect
             label="Model"
             value={model}
             onChange={setModel}
             options={[
-              { value: 'grok-metal', label: 'tactile-metal-v3', description: 'High-contrast reasoning kernel' },
+              { value: 'grok-metal', label: 'immortal-metal-v3', description: 'High-contrast reasoning kernel' },
               { value: 'linear-fast', label: 'linear-instant-v2', description: 'Ultra-low latency generation' },
               { value: 'obsidian-pro', label: 'obsidian-codex', description: 'Code & GLSL shader synthesis' },
             ]}
           />
 
-          <TactileSlider
+          <ImmortalSlider
             label="Temperature"
             value={temp}
             min={0}
@@ -924,7 +924,7 @@ export const ShadcnPlaygroundExample: React.FC = () => {
             onChange={setTemp}
           />
 
-          <TactileSlider
+          <ImmortalSlider
             label="Maximum Length"
             value={maxLen}
             min={256}
@@ -934,7 +934,7 @@ export const ShadcnPlaygroundExample: React.FC = () => {
             onChange={setMaxLen}
           />
 
-          <TactileSlider
+          <ImmortalSlider
             label="Top P"
             value={topP}
             min={10}
@@ -943,7 +943,7 @@ export const ShadcnPlaygroundExample: React.FC = () => {
             onChange={setTopP}
           />
 
-          <TactileSwitch
+          <ImmortalSwitch
             checked={streamMode}
             onChange={setStreamMode}
             label="Stream Response"
@@ -951,6 +951,6 @@ export const ShadcnPlaygroundExample: React.FC = () => {
           />
         </div>
       </div>
-    </TactileCard>
+    </ImmortalCard>
   );
 };

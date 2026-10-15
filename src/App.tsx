@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import {
-  TactileButton,
-  TactileInput,
-  TactileTextarea,
-  TactileSwitch,
-  TactileCheckbox,
-  TactileRadioGroup,
-  TactileSlider,
-  TactileSelect,
-  TactileTabs,
-  TactileBadge,
-  TactileCard,
-} from './components/TactileComponents';
+  ImmortalButton,
+  ImmortalInput,
+  ImmortalTextarea,
+  ImmortalSwitch,
+  ImmortalCheckbox,
+  ImmortalRadioGroup,
+  ImmortalSlider,
+  ImmortalSelect,
+  ImmortalTabs,
+  ImmortalBadge,
+  ImmortalCard,
+} from './components/ImmortalComponents';
 import { HeroEmblem } from './components/HeroEmblem';
 import { LightingLab } from './components/LightingLab';
 import { LiquidChromeLab } from './components/LiquidChromeLab';
@@ -21,8 +21,8 @@ import {
   ShadcnDashboardExample,
   ShadcnPlaygroundExample,
 } from './components/ShadcnExamplesGrid';
-import { ToastProvider, useToast } from './components/TactileToast';
-import { TactileModal } from './components/TactileModal';
+import { ToastProvider, useToast } from './components/ImmortalToast';
+import { ImmortalModal } from './components/ImmortalModal';
 import { audioEngine } from './components/AudioEngine';
 import {
   MetalConfigProvider,
@@ -71,8 +71,8 @@ function AppContent() {
   // Toggle for expanded Optical & Shader Customizer drawer
   const [showCustomizer, setShowCustomizer] = useState(false);
 
-  // CLI copy state
-  const [copiedCli, setCopiedCli] = useState(false);
+  // Development command copy state
+  const [copiedCommand, setCopiedCommand] = useState(false);
 
   // Modal demo state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,7 +91,7 @@ function AppContent() {
   const [themeMode, setThemeMode] = useState('obsidian');
 
   // Composite Form example state
-  const [formName, setFormName] = useState('Tactile-Worker-01');
+  const [formName, setFormName] = useState('Immortal-Worker-01');
   const [formEngine, setFormEngine] = useState('linear');
   const [formMaxTokens, setFormMaxTokens] = useState(4096);
   const [formCache, setFormCache] = useState(true);
@@ -106,16 +106,16 @@ function AppContent() {
     });
   };
 
-  const handleCopyCli = () => {
-    navigator.clipboard.writeText('npx tactile-ui@latest init');
-    setCopiedCli(true);
+  const handleCopyCommand = () => {
+    navigator.clipboard.writeText('npm run dev');
+    setCopiedCommand(true);
     audioEngine.playClick('button');
     toast({
-      title: 'CLI Command Copied',
-      description: 'npx tactile-ui@latest init',
+      title: 'Development Command Copied',
+      description: 'npm run dev',
       type: 'success',
     });
-    setTimeout(() => setCopiedCli(false), 2000);
+    setTimeout(() => setCopiedCommand(false), 2000);
   };
 
   const handleQuickMaterialSwitch = (matId: MetalMaterialId) => {
@@ -126,7 +126,7 @@ function AppContent() {
       title: `Global Style: ${mat.name}`,
       description:
         matId === 'classic'
-          ? 'Restored default Pure CSS 135° dual-specular Dark Tactile style'
+          ? 'Restored default Pure CSS 135° dual-specular Classic Dark style'
           : `Applied WebGL ${mat.enName} physical metal shader across all components`,
       type: 'success',
     });
@@ -163,7 +163,7 @@ function AppContent() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-sm sm:text-base text-zinc-100 tracking-tight">
-                  tactile/ui
+                  Immortal UI
                 </span>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-white/10 hidden sm:inline-block">
                   v3.0
@@ -250,21 +250,21 @@ function AppContent() {
                 type="button"
                 onClick={() => handleQuickMaterialSwitch('classic')}
                 className="h-8 px-2.5 rounded-lg bg-zinc-900 border border-white/10 text-[11px] text-zinc-300 hover:text-white cursor-pointer flex items-center gap-1 transition-colors"
-                title="Switch back to default Classic Dark Tactile style"
+                title="Switch back to default Classic Dark style"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span className="hidden sm:inline">Reset Default</span>
               </button>
             )}
 
-            <TactileButton
+            <ImmortalButton
               variant="metallic"
               size="sm"
               onClick={() => setIsModalOpen(true)}
               className="hidden sm:inline-flex"
             >
               Modal Demo
-            </TactileButton>
+            </ImmortalButton>
           </div>
         </div>
       </header>
@@ -289,7 +289,7 @@ function AppContent() {
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-transparent text-xs text-zinc-300 hover:text-white mb-5 cursor-pointer transition-all"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <span>Default Classic Dark Tactile (1px 135° Dual-Specular Rim)</span>
+                <span>Default Classic Dark (1px 135° Dual-Specular Rim)</span>
                 <span className="text-zinc-600">|</span>
                 <span style={{ color: activePreset.accentHex }} className="font-medium flex items-center gap-1">
                   Switchable to 6 WebGL Physical Metals <ArrowRight className="w-3 h-3" />
@@ -297,35 +297,35 @@ function AppContent() {
               </button>
 
               <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-400 leading-[1.15]">
-                Build your tactile component library.
+                Build with Immortal UI.
               </h1>
 
               <p className="text-sm sm:text-base text-zinc-400 mt-4 max-w-2xl leading-relaxed">
                 Beautifully crafted, copy-and-paste dark skeuomorphic components inspired by{' '}
                 <span className="text-zinc-200 font-medium">shadcn/ui</span>, Linear, and X.
-                Defaults to <span className="text-zinc-100 font-medium">Classic Dark Tactile (1px 135° dual-specular micro-bevels + convex/concave obsidian depth)</span>,
+                Defaults to <span className="text-zinc-100 font-medium">Classic Dark (1px 135° dual-specular micro-bevels + convex/concave obsidian depth)</span>,
                 with built-in <span className="text-amber-300 font-medium">WebGL GLSL physical metal shaders</span> for 24K Gold, Platinum, Obsidian Titanium, and Cobalt Blue.
               </p>
 
-              {/* Hero CTA Buttons + CLI Snippet */}
+              {/* Hero CTA Buttons + Development Command */}
               <div className="flex flex-wrap items-center gap-3 mt-6">
-                <TactileButton
+                <ImmortalButton
                   variant="metallic"
                   onClick={() => setActiveTab('docs')}
                 >
                   Get Started
-                </TactileButton>
+                </ImmortalButton>
 
-                <TactileButton
+                <ImmortalButton
                   variant="default"
                   onClick={() => setActiveTab('components')}
                 >
                   Browse Components
-                </TactileButton>
+                </ImmortalButton>
 
                 <button
                   type="button"
-                  onClick={handleCopyCli}
+                  onClick={handleCopyCommand}
                   style={{
                     backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
                     backgroundOrigin: 'padding-box, border-box',
@@ -335,8 +335,8 @@ function AppContent() {
                   className="h-10 px-3.5 rounded-xl border border-transparent font-mono text-xs text-zinc-400 hover:text-zinc-200 flex items-center gap-2.5 cursor-pointer transition-colors"
                 >
                   <Terminal className="w-3.5 h-3.5 text-zinc-500" />
-                  <span>npx tactile-ui@latest init</span>
-                  {copiedCli ? (
+                  <span>npm run dev</span>
+                  {copiedCommand ? (
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
                     <Copy className="w-3.5 h-3.5 text-zinc-500" />
@@ -360,7 +360,7 @@ function AppContent() {
                 <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
                 <span className="font-medium text-zinc-200">Global Style & Material Preset:</span>
                 <span className="hidden sm:inline text-zinc-500">
-                  (Classic Dark Tactile by default — click any metal to switch live)
+                  (Classic Dark by default — click any metal to switch live)
                 </span>
               </div>
 
@@ -478,7 +478,7 @@ function AppContent() {
           <div className="hidden lg:flex items-center gap-2 text-xs text-zinc-500 font-mono">
             <span>Renderer:</span>
             <span style={{ color: activePreset.accentHex }} className="font-semibold">
-              {isClassic ? 'Pure CSS Dark Tactile (Default)' : `WebGL GLSL (${activePreset.enName})`}
+              {isClassic ? 'Pure CSS Classic Dark (Default)' : `WebGL GLSL (${activePreset.enName})`}
             </span>
           </div>
         </div>
@@ -505,20 +505,20 @@ function AppContent() {
           <div className="flex flex-col gap-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Card 1: Buttons */}
-              <TactileCard
+              <ImmortalCard
                 title="Buttons & Micro-Interactions"
                 description="Convex surfaces, 1px 135° dual-specular rims, and tactile press feedback"
-                badge={<TactileBadge dotColor="white">Tactile</TactileBadge>}
+                badge={<ImmortalBadge dotColor="white">Immortal</ImmortalBadge>}
               >
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400">
                     Primary Variants (Active Style: {activePreset.name})
                   </div>
                   <div className="flex flex-wrap gap-2.5">
-                    <TactileButton variant="default">Default Rim</TactileButton>
-                    <TactileButton variant="metallic">Metallic Primary</TactileButton>
-                    <TactileButton variant="recessed">Recessed</TactileButton>
-                    <TactileButton variant="danger">Danger</TactileButton>
+                    <ImmortalButton variant="default">Default Rim</ImmortalButton>
+                    <ImmortalButton variant="metallic">Metallic Primary</ImmortalButton>
+                    <ImmortalButton variant="recessed">Recessed</ImmortalButton>
+                    <ImmortalButton variant="danger">Danger</ImmortalButton>
                   </div>
                 </div>
 
@@ -529,24 +529,24 @@ function AppContent() {
                     <span className="text-[10px] font-mono text-zinc-500">Mixable</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <TactileButton size="sm" material="classic">
+                    <ImmortalButton size="sm" material="classic">
                       Classic CSS
-                    </TactileButton>
-                    <TactileButton size="sm" material="gold">
+                    </ImmortalButton>
+                    <ImmortalButton size="sm" material="gold">
                       24K Gold
-                    </TactileButton>
-                    <TactileButton size="sm" material="platinum">
+                    </ImmortalButton>
+                    <ImmortalButton size="sm" material="platinum">
                       Platinum
-                    </TactileButton>
-                    <TactileButton size="sm" material="obsidian">
+                    </ImmortalButton>
+                    <ImmortalButton size="sm" material="obsidian">
                       Obsidian
-                    </TactileButton>
-                    <TactileButton size="sm" material="cobalt">
+                    </ImmortalButton>
+                    <ImmortalButton size="sm" material="cobalt">
                       Cobalt Blue
-                    </TactileButton>
-                    <TactileButton size="sm" material="rosegold">
+                    </ImmortalButton>
+                    <ImmortalButton size="sm" material="rosegold">
                       Rose Gold
-                    </TactileButton>
+                    </ImmortalButton>
                   </div>
                 </div>
 
@@ -557,15 +557,15 @@ function AppContent() {
                     <span className="text-[10px] font-mono text-zinc-500">Hover to test</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <TactileButton variant="default" size="sm" sweepDeg={90}>
+                    <ImmortalButton variant="default" size="sm" sweepDeg={90}>
                       Sweep 90°
-                    </TactileButton>
-                    <TactileButton variant="default" size="sm" sweepDeg={180}>
+                    </ImmortalButton>
+                    <ImmortalButton variant="default" size="sm" sweepDeg={180}>
                       Sweep 180°
-                    </TactileButton>
-                    <TactileButton variant="default" size="sm" sweepDeg={360}>
+                    </ImmortalButton>
+                    <ImmortalButton variant="default" size="sm" sweepDeg={360}>
                       Sweep 360°
-                    </TactileButton>
+                    </ImmortalButton>
                   </div>
                 </div>
 
@@ -573,7 +573,7 @@ function AppContent() {
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400">Icon Buttons & Sizes</div>
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <TactileButton
+                    <ImmortalButton
                       variant="default"
                       size="icon"
                       aria-label="X Emblem"
@@ -582,17 +582,17 @@ function AppContent() {
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
-                    </TactileButton>
+                    </ImmortalButton>
 
-                    <TactileButton variant="default" size="icon" aria-label="Settings">
+                    <ImmortalButton variant="default" size="icon" aria-label="Settings">
                       <Settings className="w-4 h-4 text-zinc-300" />
-                    </TactileButton>
+                    </ImmortalButton>
 
-                    <TactileButton variant="recessed" size="sm">
+                    <ImmortalButton variant="recessed" size="sm">
                       Small (Sm)
-                    </TactileButton>
+                    </ImmortalButton>
 
-                    <TactileButton
+                    <ImmortalButton
                       variant="default"
                       size="sm"
                       loading={btnLoading}
@@ -602,14 +602,14 @@ function AppContent() {
                       }}
                     >
                       {btnLoading ? 'Loading' : 'Async Action'}
-                    </TactileButton>
+                    </ImmortalButton>
                   </div>
                 </div>
 
                 {/* Segmented Tabs */}
                 <div className="flex flex-col gap-2">
                   <div className="text-xs font-medium text-zinc-400">Segmented Tabs</div>
-                  <TactileTabs
+                  <ImmortalTabs
                     activeId={activeSegmentTab}
                     onChange={setActiveSegmentTab}
                     tabs={[
@@ -619,19 +619,19 @@ function AppContent() {
                     ]}
                   />
                 </div>
-              </TactileCard>
+              </ImmortalCard>
 
               {/* Card 2: Recessed Inputs */}
-              <TactileCard
+              <ImmortalCard
                 title="Recessed Inputs & Select"
                 description="Carved inner shadow slots with focused diagonal specular rims"
-                badge={<TactileBadge dotColor="amber">Form</TactileBadge>}
+                badge={<ImmortalBadge dotColor="amber">Form</ImmortalBadge>}
               >
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">
                     Command Search Input
                   </label>
-                  <TactileInput
+                  <ImmortalInput
                     placeholder="Search components, commands, or docs..."
                     kbd="⌘K"
                     value={searchVal}
@@ -641,7 +641,7 @@ function AppContent() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <TactileSelect
+                  <ImmortalSelect
                     label="Custom Select Dropdown"
                     value={selectedEngine}
                     onChange={setSelectedEngine}
@@ -668,9 +668,9 @@ function AppContent() {
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">Masked Secret Input</label>
                   <div className="relative">
-                    <TactileInput
+                    <ImmortalInput
                       type={showPassword ? 'text' : 'password'}
-                      defaultValue="tactile_live_token_7709"
+                      defaultValue="immortal_live_token_7709"
                       icon={<Terminal className="w-4 h-4" />}
                     />
                     <button
@@ -685,18 +685,18 @@ function AppContent() {
 
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-400">Multi-line Textarea</label>
-                  <TactileTextarea placeholder="Enter system prompt or custom micro-tactile CSS rules..." />
+                  <ImmortalTextarea placeholder="Enter system prompt or custom micro-tactile CSS rules..." />
                 </div>
-              </TactileCard>
+              </ImmortalCard>
 
               {/* Card 3: Controls */}
-              <TactileCard
+              <ImmortalCard
                 title="Switches, Sliders & Checks"
                 description="Recessed tracks paired with illuminated metallic thumbs"
-                badge={<TactileBadge dotColor="green">Interactive</TactileBadge>}
+                badge={<ImmortalBadge dotColor="green">Interactive</ImmortalBadge>}
               >
                 <div className="flex flex-col gap-3">
-                  <TactileSwitch
+                  <ImmortalSwitch
                     id="sw-rt"
                     checked={enableRayTracing}
                     onChange={setEnableRayTracing}
@@ -704,7 +704,7 @@ function AppContent() {
                     hint="Enable real-time 135° diagonal edge reflections"
                   />
 
-                  <TactileSwitch
+                  <ImmortalSwitch
                     id="sw-lp"
                     checked={enableLowPower}
                     onChange={setEnableLowPower}
@@ -714,7 +714,7 @@ function AppContent() {
                 </div>
 
                 <div className="flex flex-col gap-2 pt-1">
-                  <TactileSlider
+                  <ImmortalSlider
                     label="Edge Specular Intensity"
                     value={specularStrength}
                     onChange={setSpecularStrength}
@@ -726,12 +726,12 @@ function AppContent() {
                     Checkboxes & Radio Group
                   </div>
                   <div className="flex flex-wrap gap-4">
-                    <TactileCheckbox
+                    <ImmortalCheckbox
                       checked={saveTokenCheck}
                       onChange={setSaveTokenCheck}
                       label="Auto-save tokens"
                     />
-                    <TactileCheckbox
+                    <ImmortalCheckbox
                       checked={hapticCheck}
                       onChange={setHapticCheck}
                       label="Acoustic feedback"
@@ -739,7 +739,7 @@ function AppContent() {
                   </div>
 
                   <div className="pt-2 border-t border-white/[0.04]">
-                    <TactileRadioGroup
+                    <ImmortalRadioGroup
                       name="themeModeGroup"
                       value={themeMode}
                       onChange={setThemeMode}
@@ -750,38 +750,38 @@ function AppContent() {
                     />
                   </div>
                 </div>
-              </TactileCard>
+              </ImmortalCard>
             </div>
 
             {/* Composite Real-World Form Card */}
-            <TactileCard
+            <ImmortalCard
               title="Composite Example: AI Compute Node Configuration"
               description="Showcasing buttons, recessed inputs, sliders, and switches working together in a production form"
-              badge={<TactileBadge dotColor="white">Production Ready</TactileBadge>}
+              badge={<ImmortalBadge dotColor="white">Production Ready</ImmortalBadge>}
               headerAction={
-                <TactileButton
+                <ImmortalButton
                   variant="recessed"
                   size="sm"
                   onClick={() => setIsModalOpen(true)}
                 >
                   Advanced Optics
-                </TactileButton>
+                </ImmortalButton>
               }
             >
               <form onSubmit={handleSaveForm} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-medium text-zinc-400">Node Service Identifier</label>
-                    <TactileInput
+                    <ImmortalInput
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
-                      placeholder="worker-tactile-instance"
+                      placeholder="worker-immortal-instance"
                       icon={<Cpu className="w-4 h-4" />}
                     />
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <TactileSelect
+                    <ImmortalSelect
                       label="Scheduling Engine"
                       value={formEngine}
                       onChange={setFormEngine}
@@ -795,7 +795,7 @@ function AppContent() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <TactileSlider
+                  <ImmortalSlider
                     label="Max Context Tokens"
                     value={formMaxTokens}
                     min={1024}
@@ -805,7 +805,7 @@ function AppContent() {
                     onChange={setFormMaxTokens}
                   />
 
-                  <TactileSwitch
+                  <ImmortalSwitch
                     checked={formCache}
                     onChange={setFormCache}
                     label="High-Speed KV Cache Warmup"
@@ -820,12 +820,12 @@ function AppContent() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <TactileButton
+                    <ImmortalButton
                       type="button"
                       variant="recessed"
                       size="sm"
                       onClick={() => {
-                        setFormName('Tactile-Worker-01');
+                        setFormName('Immortal-Worker-01');
                         setFormEngine('linear');
                         setFormMaxTokens(4096);
                         setFormCache(true);
@@ -836,14 +836,14 @@ function AppContent() {
                       }}
                     >
                       Reset
-                    </TactileButton>
-                    <TactileButton type="submit" variant="metallic" size="sm">
+                    </ImmortalButton>
+                    <ImmortalButton type="submit" variant="metallic" size="sm">
                       Save & Deploy
-                    </TactileButton>
+                    </ImmortalButton>
                   </div>
                 </div>
               </form>
-            </TactileCard>
+            </ImmortalCard>
           </div>
         )}
 
@@ -858,29 +858,29 @@ function AppContent() {
         {activeTab === 'docs' && <ComponentDocs />}
       </main>
 
-      {/* Tactile Modal Component */}
-      <TactileModal
+      {/* Immortal Modal Component */}
+      <ImmortalModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Advanced Tactile Optics"
+        title="Advanced Immortal Optics"
         description="Fine-tune diagonal specular sharpness and bevel curvature for high-DPI displays."
       >
         <div className="flex flex-col gap-4 py-2">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-zinc-400">Environment Configuration</label>
-            <TactileInput defaultValue="DARK_SKEUOMORPHIC_SPECULAR_ENABLE=true" />
+            <ImmortalInput defaultValue="DARK_SKEUOMORPHIC_SPECULAR_ENABLE=true" />
           </div>
 
-          <TactileSwitch
+          <ImmortalSwitch
             checked={true}
             onChange={() => {}}
             label="Secondary Ambient Bounce"
             hint="Simulate natural bottom-right bounce light across beveled rims"
           />
 
-          <TactileSlider label="Convex Surface Depth" value={74} onChange={() => {}} />
+          <ImmortalSlider label="Convex Surface Depth" value={74} onChange={() => {}} />
         </div>
-      </TactileModal>
+      </ImmortalModal>
     </div>
   );
 }

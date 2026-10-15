@@ -1,6 +1,6 @@
 {
-  "name": "Dark Tactile UI",
-  "description": "Dark skeuomorphic component system inspired by Linear and X, featuring dual diagonal specular rims, tactile buttons, recessed inputs, and interactive controls.",
+  "name": "Immortal UI",
+  "description": "Immortal UI is a dark skeuomorphic React component system with diagonal specular rims, tactile controls, and six WebGL metal materials.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

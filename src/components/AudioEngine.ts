@@ -1,7 +1,7 @@
 // Web Audio API based mechanical tactile sound synthesizer
 // Generates soft clicks, mechanical clacks, and tactile switch sounds without external audio assets
 
-class TactileAudioEngine {
+class ImmortalAudioEngine {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
 
@@ -87,4 +87,4 @@ class TactileAudioEngine {
   }
 }
 
-export const audioEngine = new TactileAudioEngine();
+export const audioEngine = new ImmortalAudioEngine();

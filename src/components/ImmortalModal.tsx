@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { X } from 'lucide-react';
-import { TactileButton } from './TactileComponents';
+import { ImmortalButton } from './ImmortalComponents';
 import { audioEngine } from './AudioEngine';
 
-export interface TactileModalProps {
+export interface ImmortalModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -12,7 +12,7 @@ export interface TactileModalProps {
   footer?: ReactNode;
 }
 
-export const TactileModal: React.FC<TactileModalProps> = ({
+export const ImmortalModal: React.FC<ImmortalModalProps> = ({
   isOpen,
   onClose,
   title,
@@ -61,10 +61,10 @@ export const TactileModal: React.FC<TactileModalProps> = ({
             footer
           ) : (
             <>
-              <TactileButton variant="recessed" size="sm" onClick={onClose}>
+              <ImmortalButton variant="recessed" size="sm" onClick={onClose}>
                 Cancel
-              </TactileButton>
-              <TactileButton
+              </ImmortalButton>
+              <ImmortalButton
                 variant="metallic"
                 size="sm"
                 onClick={() => {
@@ -73,7 +73,7 @@ export const TactileModal: React.FC<TactileModalProps> = ({
                 }}
               >
                 Confirm
-              </TactileButton>
+              </ImmortalButton>
             </>
           )}
         </div>

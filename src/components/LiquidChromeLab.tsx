@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Copy, Check, Code2, Sparkles, Search, RotateCcw } from 'lucide-react';
 import {
-  TactileButton,
-  TactileBadge,
-  TactileInput,
-  TactileSwitch,
-} from './TactileComponents';
+  ImmortalButton,
+  ImmortalBadge,
+  ImmortalInput,
+  ImmortalSwitch,
+} from './ImmortalComponents';
 import {
   METAL_MATERIALS,
   MetalMaterialId,
@@ -14,7 +14,7 @@ import {
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
 import { audioEngine } from './AudioEngine';
-import { useToast } from './TactileToast';
+import { useToast } from './ImmortalToast';
 
 /* =========================================================================
    Large Showcase Button for a Specific Metal Material (Squircle or Circle)
@@ -189,7 +189,7 @@ void main() {
       title: `Global Style: ${mat.name}`,
       description:
         matId === 'classic'
-          ? 'Restored default Pure CSS Classic Dark Tactile style'
+          ? 'Restored default Pure CSS Classic Dark style'
           : `All buttons, inputs, switches, badges, and cards updated to ${mat.enName}`,
       type: 'success',
     });
@@ -209,9 +209,9 @@ void main() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.07] pb-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <TactileBadge dotColor="amber">
+              <ImmortalBadge dotColor="amber">
                 Solution C · WebGL Physical Metal System
-              </TactileBadge>
+              </ImmortalBadge>
               <span className="text-xs font-mono text-zinc-400">
                 Active Global Style:
                 <strong style={{ color: activePreset.accentHex }} className="ml-1">
@@ -223,11 +223,11 @@ void main() {
               style={{ color: activePreset.accentHex }}
               className="text-lg sm:text-xl font-bold tracking-tight mt-2"
             >
-              Classic Dark Tactile (Default) & 6 Physical Metal Materials
+              Classic Dark (Default) & 6 Physical Metal Materials
             </h2>
           </div>
 
-          <TactileButton
+          <ImmortalButton
             variant={activeMaterial === 'classic' ? 'metallic' : 'default'}
             size="sm"
             material="classic"
@@ -235,9 +235,9 @@ void main() {
             onClick={() => handleSelectGlobalMaterial('classic')}
           >
             {activeMaterial === 'classic'
-              ? '✓ Active: Classic Dark Tactile (Default)'
-              : 'Restore Classic Dark Tactile (Default)'}
-          </TactileButton>
+              ? '✓ Active: Classic Dark (Default)'
+              : 'Restore Classic Dark (Default)'}
+          </ImmortalButton>
         </div>
 
         {/* Live Global Material Interactive Preview Bar */}
@@ -266,24 +266,24 @@ void main() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-            <TactileButton variant="default" size="sm">
+            <ImmortalButton variant="default" size="sm">
               Default Button
-            </TactileButton>
-            <TactileButton variant="metallic" size="sm">
+            </ImmortalButton>
+            <ImmortalButton variant="metallic" size="sm">
               Metallic Primary
-            </TactileButton>
-            <TactileButton variant="recessed" size="sm">
+            </ImmortalButton>
+            <ImmortalButton variant="recessed" size="sm">
               Recessed Secondary
-            </TactileButton>
+            </ImmortalButton>
             <div className="w-44">
-              <TactileInput
+              <ImmortalInput
                 placeholder="Live global input..."
                 value={previewText}
                 onChange={(e) => setPreviewText(e.target.value)}
                 icon={<Search className="w-3.5 h-3.5" />}
               />
             </div>
-            <TactileSwitch
+            <ImmortalSwitch
               checked={previewSwitch}
               onChange={setPreviewSwitch}
             />
@@ -389,14 +389,14 @@ void main() {
               <Code2 className="w-4 h-4" style={{ color: activePreset.accentHex }} />
               <span>Solution C · Multi-Metal WebGL GLSL Fragment Shader Source</span>
             </div>
-            <TactileButton variant="recessed" size="sm" onClick={handleCopy}>
+            <ImmortalButton variant="recessed" size="sm" onClick={handleCopy}>
               {copied ? (
                 <Check className="w-3.5 h-3.5 text-emerald-400" />
               ) : (
                 <Copy className="w-3.5 h-3.5" />
               )}
               <span>{copied ? 'Copied GLSL' : 'Copy Shader Source'}</span>
-            </TactileButton>
+            </ImmortalButton>
           </div>
           <div className="p-4 overflow-x-auto text-xs font-mono text-zinc-300 leading-relaxed max-h-[280px]">
             <pre>

@@ -7,7 +7,7 @@ import {
   useMetalConfig,
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
-import { useToast } from './TactileToast';
+import { useToast } from './ImmortalToast';
 
 export const LightingLab: React.FC = () => {
   const { toast } = useToast();
@@ -44,7 +44,7 @@ export const LightingLab: React.FC = () => {
     audioEngine.enabled = true;
     audioEngine.playClick('button');
     toast({
-      title: 'Restored Default Style: Classic Dark Tactile',
+      title: 'Restored Default Style: Classic Dark',
       description: '1px 135° dual-specular micro-bevel with convex & concave obsidian surfaces',
       type: 'info',
     });
@@ -82,7 +82,7 @@ export const LightingLab: React.FC = () => {
               </span>
             </h4>
             <p className="text-[11px] text-zinc-400 mt-0.5">
-              Defaults to Classic Dark Tactile (Pure CSS 135° dual-specular rim). Select any metal to switch to WebGL physical shaders.
+              Defaults to Classic Dark (Pure CSS 135° dual-specular rim). Select any metal to switch to WebGL physical shaders.
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const LightingLab: React.FC = () => {
             type="button"
             onClick={toggleSound}
             className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-1.5 cursor-pointer transition-all"
-            title="Toggle Tactile Sound"
+            title="Toggle Immortal Sound"
           >
             {soundOn ? (
               <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -106,7 +106,7 @@ export const LightingLab: React.FC = () => {
             type="button"
             onClick={handleReset}
             className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer transition-all flex items-center gap-1"
-            title="Reset to default Classic Dark Tactile style"
+            title="Reset to default Classic Dark style"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Default</span>
@@ -119,7 +119,7 @@ export const LightingLab: React.FC = () => {
         <div className="flex items-center justify-between text-xs text-zinc-300 font-medium">
           <span className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" style={{ color: activePreset.accentHex }} />
-            Global Rendering Style: Classic Dark Tactile (Default) or 6 WebGL Physical Metals
+            Global Rendering Style: Classic Dark (Default) or 6 WebGL Physical Metals
           </span>
           <span className="text-[11px] text-zinc-400 font-mono hidden sm:inline">
             {activePreset.name} · {activePreset.description}
@@ -140,7 +140,7 @@ export const LightingLab: React.FC = () => {
                   toast({
                     title: `Global Style: ${mat.name}`,
                     description: isMatClassic
-                      ? 'Switched to default Pure CSS 135° dual-specular Dark Tactile style'
+                      ? 'Switched to default Pure CSS 135° dual-specular Classic Dark style'
                       : `Enabled Solution C WebGL ${mat.enName} physical metal shader`,
                     type: 'success',
                   });

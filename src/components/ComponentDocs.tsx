@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Copy, Check, Code2, Layers } from 'lucide-react';
 import {
-  TactileButton,
-  TactileInput,
-  TactileSwitch,
-  TactileCheckbox,
-  TactileRadioGroup,
-  TactileSlider,
-  TactileSelect,
-  TactileTabs,
-  TactileBadge,
-} from './TactileComponents';
-import { useToast } from './TactileToast';
+  ImmortalButton,
+  ImmortalInput,
+  ImmortalSwitch,
+  ImmortalCheckbox,
+  ImmortalRadioGroup,
+  ImmortalSlider,
+  ImmortalSelect,
+  ImmortalTabs,
+  ImmortalBadge,
+} from './ImmortalComponents';
+import { useToast } from './ImmortalToast';
 
 interface DocItem {
   id: string;
@@ -41,20 +41,20 @@ export const ComponentDocs: React.FC = () => {
   const components: DocItem[] = [
     {
       id: 'button',
-      name: 'Tactile Button',
+      name: 'Immortal Button',
       category: 'buttons',
       description:
         'Convex micro-curved surface with a 1px 135° dual-specular rim. Supports optional hover angular sweep (90°, 180°, 360°) and physical metal shaders.',
       preview: (
         <div className="flex flex-wrap items-center gap-3">
-          <TactileButton variant="default">Default Rim</TactileButton>
-          <TactileButton variant="default" sweepDeg={360}>
+          <ImmortalButton variant="default">Default Rim</ImmortalButton>
+          <ImmortalButton variant="default" sweepDeg={360}>
             Orbit Sweep (+360°)
-          </TactileButton>
-          <TactileButton variant="metallic">Metallic Primary</TactileButton>
-          <TactileButton variant="recessed">Recessed Secondary</TactileButton>
-          <TactileButton variant="danger">Danger Action</TactileButton>
-          <TactileButton
+          </ImmortalButton>
+          <ImmortalButton variant="metallic">Metallic Primary</ImmortalButton>
+          <ImmortalButton variant="recessed">Recessed Secondary</ImmortalButton>
+          <ImmortalButton variant="danger">Danger Action</ImmortalButton>
+          <ImmortalButton
             variant="default"
             loading={btnLoading}
             onClick={() => {
@@ -63,26 +63,26 @@ export const ComponentDocs: React.FC = () => {
             }}
           >
             {btnLoading ? 'Processing...' : 'Test Loading'}
-          </TactileButton>
+          </ImmortalButton>
         </div>
       ),
       reactSnippet: `// React / TSX Usage (supports per-button material and sweepDeg props)
-import { TactileButton } from "@/components/TactileComponents";
+import { ImmortalButton } from "@/components/ImmortalComponents";
 
 export function ButtonDemo() {
   return (
     <div className="flex gap-3">
       {/* Default 135° static dual-specular rim */}
-      <TactileButton variant="default">Default Button</TactileButton>
+      <ImmortalButton variant="default">Default Button</ImmortalButton>
 
       {/* Optional 360° angular specular sweep on hover */}
-      <TactileButton variant="default" sweepDeg={360}>Hover Orbit (360°)</TactileButton>
+      <ImmortalButton variant="default" sweepDeg={360}>Hover Orbit (360°)</ImmortalButton>
 
       {/* Specific WebGL physical metal override */}
-      <TactileButton variant="default" material="gold">24K Gold</TactileButton>
-      
+      <ImmortalButton variant="default" material="gold">24K Gold</ImmortalButton>
+
       {/* High-contrast metallic primary button */}
-      <TactileButton variant="metallic">Deploy Now</TactileButton>
+      <ImmortalButton variant="metallic">Deploy Now</ImmortalButton>
     </div>
   );
 }`,
@@ -113,7 +113,7 @@ export function ButtonDemo() {
   border-radius: 12px;
   color: #f4f4f6;
   border: 1px solid transparent;
-  background-image: 
+  background-image:
     linear-gradient(145deg, #1b1b1f 0%, #09090b 55%, #141418 100%),
     linear-gradient(
       var(--local-rim-angle),
@@ -126,7 +126,7 @@ export function ButtonDemo() {
   background-clip: padding-box, border-box;
   box-shadow: 0 4px 10px rgba(0,0,0,0.75), inset 0 1px 0.5px rgba(255,255,255,0.16);
   cursor: pointer;
-  transition: 
+  transition:
     --local-rim-angle var(--sweep-duration) cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.2s ease;
@@ -145,13 +145,13 @@ export function ButtonDemo() {
     },
     {
       id: 'input',
-      name: 'Tactile Input',
+      name: 'Immortal Input',
       category: 'inputs',
       description:
         'Deep recessed inner shadow creates a carved physical slot with a focused diagonal specular rim, leading icon, and keyboard shortcut badge.',
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
-          <TactileInput
+          <ImmortalInput
             placeholder="Search nodes or run a command..."
             kbd="⌘K"
             icon={
@@ -161,19 +161,19 @@ export function ButtonDemo() {
               </svg>
             }
           />
-          <TactileInput
+          <ImmortalInput
             type="password"
             placeholder="Enter secret token..."
-            defaultValue="sk-production-tactile-key"
+            defaultValue="sk-production-immortal-key"
           />
         </div>
       ),
-      reactSnippet: `import { TactileInput } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalInput } from "@/components/ImmortalComponents";
 import { Search } from "lucide-react";
 
 export function InputDemo() {
   return (
-    <TactileInput
+    <ImmortalInput
       placeholder="Search or enter global command..."
       icon={<Search className="w-4 h-4" />}
       kbd="⌘K"
@@ -192,7 +192,7 @@ export function InputDemo() {
   align-items: center;
   border-radius: 12px;
   border: 1px solid transparent;
-  background-image: 
+  background-image:
     linear-gradient(180deg, #040405 0%, #0b0b0d 100%),
     linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.12) 100%);
   background-origin: padding-box, border-box;
@@ -212,13 +212,13 @@ export function InputDemo() {
     },
     {
       id: 'switch',
-      name: 'Tactile Switch',
+      name: 'Immortal Switch',
       category: 'controls',
       description:
         'Pure opaque obsidian subcard backing prevents grey bleed-through, paired with a recessed track and an illuminated jewel indicator thumb.',
       preview: (
         <div className="flex flex-col gap-3 max-w-md w-full">
-          <TactileSwitch
+          <ImmortalSwitch
             checked={switchVal}
             onChange={setSwitchVal}
             label="135° Specular Ray-Traced Rim"
@@ -226,14 +226,14 @@ export function InputDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { TactileSwitch } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalSwitch } from "@/components/ImmortalComponents";
 import { useState } from "react";
 
 export function SwitchDemo() {
   const [enabled, setEnabled] = useState(true);
 
   return (
-    <TactileSwitch
+    <ImmortalSwitch
       checked={enabled}
       onChange={setEnabled}
       label="Hardware Accelerated Shading"
@@ -262,7 +262,7 @@ export function SwitchDemo() {
   border-radius: 12px;
   border: 1px solid transparent;
   /* Opaque dark gradient prevents border-box highlight bleed-through */
-  background-image: 
+  background-image:
     linear-gradient(145deg, #101013 0%, #070709 60%, #0c0c0f 100%),
     linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.12) 100%);
   background-origin: padding-box, border-box;
@@ -273,13 +273,13 @@ export function SwitchDemo() {
     },
     {
       id: 'select',
-      name: 'Tactile Select',
+      name: 'Immortal Select',
       category: 'inputs',
       description:
         'Custom dark skeuomorphic dropdown with a floating beveled popover, deep ambient shadow, and option descriptions.',
       preview: (
         <div className="max-w-md w-full">
-          <TactileSelect
+          <ImmortalSelect
             label="Engine Kernel"
             value={selectVal}
             onChange={setSelectVal}
@@ -303,14 +303,14 @@ export function SwitchDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { TactileSelect } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalSelect } from "@/components/ImmortalComponents";
 import { useState } from "react";
 
 export function SelectDemo() {
   const [model, setModel] = useState("v1");
 
   return (
-    <TactileSelect
+    <ImmortalSelect
       label="Processing Engine"
       value={model}
       onChange={setModel}
@@ -321,7 +321,7 @@ export function SelectDemo() {
     />
   );
 }`,
-      htmlSnippet: `<!-- See TactileSelect component source for full accessible dropdown implementation -->`,
+      htmlSnippet: `<!-- See ImmortalSelect component source for full accessible dropdown implementation -->`,
     },
     {
       id: 'controls',
@@ -332,14 +332,14 @@ export function SelectDemo() {
       preview: (
         <div className="flex flex-col gap-4 max-w-md w-full">
           <div className="flex gap-4">
-            <TactileCheckbox
+            <ImmortalCheckbox
               checked={checkVal}
               onChange={setCheckVal}
               label="Persist session state"
               hint="Save preferences in local storage"
             />
           </div>
-          <TactileRadioGroup
+          <ImmortalRadioGroup
             name="demo-radio"
             value={radioVal}
             onChange={setRadioVal}
@@ -350,7 +350,7 @@ export function SelectDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { TactileCheckbox, TactileRadioGroup } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalCheckbox, ImmortalRadioGroup } from "@/components/ImmortalComponents";
 import { useState } from "react";
 
 export function ControlsDemo() {
@@ -359,8 +359,8 @@ export function ControlsDemo() {
 
   return (
     <>
-      <TactileCheckbox checked={remember} onChange={setRemember} label="Remember settings" />
-      <TactileRadioGroup
+      <ImmortalCheckbox checked={remember} onChange={setRemember} label="Remember settings" />
+      <ImmortalRadioGroup
         name="theme"
         value={theme}
         onChange={setTheme}
@@ -385,26 +385,26 @@ export function ControlsDemo() {
     },
     {
       id: 'slider',
-      name: 'Tactile Slider',
+      name: 'Immortal Slider',
       category: 'controls',
       description:
         'Recessed groove track paired with a spherical metallic thumb knob and real-time monospace value readout.',
       preview: (
         <div className="max-w-md w-full">
-          <TactileSlider
+          <ImmortalSlider
             label="Specular Damping"
             value={sliderVal}
             onChange={setSliderVal}
           />
         </div>
       ),
-      reactSnippet: `import { TactileSlider } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalSlider } from "@/components/ImmortalComponents";
 import { useState } from "react";
 
 export function SliderDemo() {
   const [val, setVal] = useState(65);
   return (
-    <TactileSlider label="Reflectance" value={val} onChange={setVal} />
+    <ImmortalSlider label="Reflectance" value={val} onChange={setVal} />
   );
 }`,
       htmlSnippet: `<!-- Range Slider HTML -->
@@ -412,13 +412,13 @@ export function SliderDemo() {
     },
     {
       id: 'tabs',
-      name: 'Tactile Tabs (Segmented)',
+      name: 'Immortal Tabs (Segmented)',
       category: 'controls',
       description:
         'Carved concave pill tray with an elevated convex active indicator tab.',
       preview: (
         <div className="max-w-md w-full">
-          <TactileTabs
+          <ImmortalTabs
             activeId={activeTab}
             onChange={setActiveTab}
             tabs={[
@@ -429,14 +429,14 @@ export function SliderDemo() {
           />
         </div>
       ),
-      reactSnippet: `import { TactileTabs } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalTabs } from "@/components/ImmortalComponents";
 import { useState } from "react";
 
 export function TabsDemo() {
   const [tab, setTab] = useState("overview");
 
   return (
-    <TactileTabs
+    <ImmortalTabs
       activeId={tab}
       onChange={setTab}
       tabs={[
@@ -455,25 +455,25 @@ export function TabsDemo() {
     },
     {
       id: 'badge',
-      name: 'Tactile Badges',
+      name: 'Immortal Badges',
       category: 'surfaces',
       description:
         'Subtly elevated capsule pill with a glowing LED status dot for system health, alerts, or version tags.',
       preview: (
         <div className="flex flex-wrap items-center gap-3">
-          <TactileBadge dotColor="white">Tactile v3.0</TactileBadge>
-          <TactileBadge dotColor="green">Node Online (99.98%)</TactileBadge>
-          <TactileBadge dotColor="amber">Latency Spike (42ms)</TactileBadge>
-          <TactileBadge dotColor="crimson">Circuit Open</TactileBadge>
+          <ImmortalBadge dotColor="white">Immortal v3.0</ImmortalBadge>
+          <ImmortalBadge dotColor="green">Node Online (99.98%)</ImmortalBadge>
+          <ImmortalBadge dotColor="amber">Latency Spike (42ms)</ImmortalBadge>
+          <ImmortalBadge dotColor="crimson">Circuit Open</ImmortalBadge>
         </div>
       ),
-      reactSnippet: `import { TactileBadge } from "@/components/TactileComponents";
+      reactSnippet: `import { ImmortalBadge } from "@/components/ImmortalComponents";
 
 export function BadgeDemo() {
   return (
     <div className="flex gap-2">
-      <TactileBadge dotColor="green">Cluster Healthy</TactileBadge>
-      <TactileBadge dotColor="amber">High Load</TactileBadge>
+      <ImmortalBadge dotColor="green">Cluster Healthy</ImmortalBadge>
+      <ImmortalBadge dotColor="amber">High Load</ImmortalBadge>
     </div>
   );
 }`,
@@ -621,10 +621,10 @@ export function BadgeDemo() {
                 </button>
               </div>
 
-              <TactileButton variant="recessed" size="sm" onClick={copyCode} className="h-7 text-xs">
+              <ImmortalButton variant="recessed" size="sm" onClick={copyCode} className="h-7 text-xs">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Code'}</span>
-              </TactileButton>
+              </ImmortalButton>
             </div>
 
             {/* Code Block */}
