@@ -63,3 +63,20 @@ npm run dev
 # 3. Build for production
 npm run build
 ```
+
+---
+
+## 🌐 Deploying to GitHub Pages (`github.io`)
+
+This repository is pre-configured with relative asset paths (`base: './'` in `vite.config.ts`) and an automated GitHub Actions workflow (`.github/workflows/deploy.yml`).
+
+### 3-Step Setup on GitHub:
+1. **Push to GitHub**: Click the **GitHub** button in the top-right toolbar (or run `git push`) to push this repository to your GitHub account.
+2. **Enable GitHub Actions for Pages**:
+   - Open your repository on GitHub and click **Settings** (top tab bar).
+   - In the left sidebar, click **Pages**.
+   - Under **Build and deployment** → **Source**, change the dropdown from `Deploy from a branch` to **`GitHub Actions`**.
+3. **Automatic Deployment**:
+   - Go to the **Actions** tab in your GitHub repository. The **`Deploy to GitHub Pages`** workflow will run automatically on every push to `main` (or you can click **Run workflow** manually).
+   - Once the workflow finishes (~1 minute), your live site URL (`https://<your-username>.github.io/<your-repo-name>/`) will be displayed right inside the Actions summary and under **Settings → Pages**.
+
