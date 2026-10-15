@@ -56,7 +56,7 @@ export function GettingStarted() {
           </span>
         </div>
       </header>
-      <div className="mb-10 rounded-xl border border-white/10 bg-white/[0.025] p-5 text-sm leading-7 text-zinc-400">
+      <div className="immortal-container mb-10 rounded-xl border border-white/10 bg-white/[0.025] p-5 text-sm leading-7 text-zinc-400">
         <strong className="text-zinc-200">Choose your starting point.</strong>{" "}
         To explore this repository, clone it and run the showcase. To add
         components to an existing React app, follow the manual integration steps
@@ -142,7 +142,7 @@ export function GettingStarted() {
           <code>src/components/</code>.
         </p>
         <CodeBlock code={firstComponent} label="src/App.tsx" />
-        <div className="mt-5 flex items-start gap-3 rounded-xl border border-white/10 p-4 text-sm leading-7 text-zinc-400">
+        <div className="immortal-container mt-5 flex items-start gap-3 rounded-xl border border-white/10 p-4 text-sm leading-7 text-zinc-400">
           <Check size={16} className="mt-1 shrink-0 text-zinc-200" />
           <p>
             You're ready. Start with the default CSS material, or add{" "}
@@ -150,7 +150,7 @@ export function GettingStarted() {
           </p>
         </div>
       </section>
-      <div className="mt-12 grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-2">
+      <div className="immortal-container mt-12 grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-2">
         <a href="#/components/button" className="doc-next-link">
           <FileCode2 size={18} />
           <span>

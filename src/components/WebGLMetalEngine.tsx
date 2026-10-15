@@ -1,11 +1,14 @@
 import React, {
   createContext,
+  useCallback,
+  useSyncExternalStore,
   useContext,
   useEffect,
   useRef,
   useState,
   ReactNode,
 } from 'react';
+import { audioEngine, type MaterialSoundKind } from './AudioEngine';
 
 /* =========================================================================
    1. Style & Physical Metal Material Definitions
@@ -189,6 +192,10 @@ export const METAL_MATERIALS: Record<MetalMaterialId, MetalMaterialPreset> = {
   },
 };
 
+export const getSweepingRim = (gradient: string) => gradient.replace(
+  'var(--rim-angle, 135deg)', 'var(--local-rim-angle, var(--rim-angle, 135deg))',
+);
+
 export const DEFAULT_SURFACE_GRADIENT_AMPLITUDE = 35;
 export const DEFAULT_HOVER_SWEEP_DEG = 90;
 
@@ -270,6 +277,19 @@ const MetalConfigContext = createContext<MetalConfigContextType>(DEFAULT_METAL_C
 export const useMetalConfig = () => {
   return useContext(MetalConfigContext);
 };
+
+/** Resolve sound from the same local material context as the rendered control. */
+export function useMaterialSound(material?: MetalMaterialId) {
+  const { material: inheritedMaterial } = useMetalConfig();
+  const effectiveMaterial = material || inheritedMaterial;
+  return useCallback((kind: MaterialSoundKind = 'button') => {
+    audioEngine.playClick(kind, effectiveMaterial);
+  }, [effectiveMaterial]);
+}
+
+export function useSoundEnabled() {
+  return useSyncExternalStore(audioEngine.subscribe, audioEngine.getEnabled, audioEngine.getEnabled);
+}
 
 /** Inherit the site's optical settings while choosing a finish for one demo.
  * Unlike MetalConfigProvider, this scope never changes document CSS or the
@@ -422,6 +442,9 @@ interface RegisteredSurface {
   };
   currentHoverRad: number;
   currentHoverIntensity: number;
+  visible: boolean;
+  dirty: boolean;
+  lastRenderKey?: string;
 }
 
 class SharedWebGLShaderEngine {
@@ -433,6 +456,30 @@ class SharedWebGLShaderEngine {
   private animId: number | null = null;
   private lastTime = 0;
   private globalTime = 0;
+  private intersection: IntersectionObserver | null = null;
+  private surfaceIds = new WeakMap<Element, string>();
+
+  private wake = () => {
+    if (this.animId !== null || document.hidden || ![...this.surfaces.values()].some(s => s.visible)) return;
+    this.lastTime = performance.now();
+    this.animId = requestAnimationFrame(this.tick);
+  };
+
+  /** State changes wake one shared loop; settled and offscreen surfaces keep their last frame. */
+  public invalidate(id?: string) {
+    if (id) {
+      const surface = this.surfaces.get(id);
+      if (surface) surface.dirty = true;
+    } else this.surfaces.forEach(surface => { surface.dirty = true; });
+    this.wake();
+  }
+
+  private visibilityChanged = () => {
+    if (document.hidden && this.animId !== null) {
+      cancelAnimationFrame(this.animId);
+      this.animId = null;
+    } else this.wake();
+  };
 
   public globalConfig = {
     material: 'classic' as MetalMaterialId,
@@ -452,9 +499,10 @@ class SharedWebGLShaderEngine {
     this.glCanvas.height = 256;
 
     const gl = this.glCanvas.getContext('webgl', {
-      antialias: true,
+      antialias: false,
       alpha: false,
-      preserveDrawingBuffer: true,
+      preserveDrawingBuffer: false,
+      powerPreference: 'low-power',
     });
     if (!gl) return;
     this.gl = gl;
@@ -509,38 +557,58 @@ class SharedWebGLShaderEngine {
   }
 
   public register(surface: RegisteredSurface) {
-    this.initGL();
-    this.surfaces.set(surface.id, surface);
-    if (this.animId === null) {
-      this.lastTime = performance.now();
-      this.animId = requestAnimationFrame(this.tick);
+    if (!this.intersection) {
+      this.intersection = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const id = this.surfaceIds.get(entry.target);
+          const surface = id ? this.surfaces.get(id) : undefined;
+          if (!surface) return;
+          surface.visible = entry.isIntersecting;
+          if (surface.visible) surface.dirty = true;
+        });
+        this.wake();
+      });
+      document.addEventListener('visibilitychange', this.visibilityChanged);
     }
+    this.surfaces.set(surface.id, surface);
+    this.surfaceIds.set(surface.canvas, surface.id);
+    this.intersection.observe(surface.canvas);
   }
 
   public unregister(id: string) {
+    const surface = this.surfaces.get(id);
+    if (surface) this.intersection?.unobserve(surface.canvas);
     this.surfaces.delete(id);
-    if (this.surfaces.size === 0 && this.animId !== null) {
-      cancelAnimationFrame(this.animId);
+    if (this.surfaces.size === 0) {
+      if (this.animId !== null) cancelAnimationFrame(this.animId);
       this.animId = null;
+      this.intersection?.disconnect();
+      this.intersection = null;
+      document.removeEventListener('visibilitychange', this.visibilityChanged);
     }
   }
 
   private tick = (now: number) => {
+    this.animId = null;
+    if (document.hidden) return;
     const dt = Math.min(0.05, (now - this.lastTime) * 0.001);
     this.lastTime = now;
 
     const cfg = this.globalConfig;
-    if (cfg.autoFlow) {
+    const visibleSurfaces = [...this.surfaces.values()].filter(surface => surface.visible);
+    if (!visibleSurfaces.length) return;
+    if (visibleSurfaces.some(surface => surface.getState().autoFlowOverride ?? cfg.autoFlow)) {
       this.globalTime += dt * 1.1 * cfg.flowSpeed;
     }
-
+    this.initGL();
+    let animating = false;
     const gl = this.gl;
     const glCanvas = this.glCanvas;
 
     if (gl && glCanvas && this.program) {
       const baseRad = ((cfg.baseAngleDeg - 135) * Math.PI) / 180 + (3 * Math.PI) / 4;
 
-      this.surfaces.forEach((surf) => {
+      visibleSurfaces.forEach((surf) => {
         const st = surf.getState();
         const isActive = st.hovered || st.focused;
 
@@ -553,6 +621,9 @@ class SharedWebGLShaderEngine {
           (targetHoverRad - surf.currentHoverRad) * Math.min(1, dt * 8.0);
         surf.currentHoverIntensity +=
           (targetHoverIntensity - surf.currentHoverIntensity) * Math.min(1, dt * 10.0);
+        if (Math.abs(targetHoverRad - surf.currentHoverRad) < 0.001) surf.currentHoverRad = targetHoverRad;
+        if (Math.abs(targetHoverIntensity - surf.currentHoverIntensity) < 0.001) surf.currentHoverIntensity = targetHoverIntensity;
+        const transitioning = surf.currentHoverRad !== targetHoverRad || surf.currentHoverIntensity !== targetHoverIntensity;
 
         const matId = st.materialOverride || cfg.material;
         const mat = METAL_MATERIALS[matId] || METAL_MATERIALS.classic;
@@ -576,6 +647,12 @@ class SharedWebGLShaderEngine {
         const useAutoFlow =
           st.autoFlowOverride !== undefined ? st.autoFlowOverride : cfg.autoFlow;
         const tVal = useAutoFlow ? this.globalTime : 0.0;
+        animating ||= transitioning || useAutoFlow;
+        const key = [matId, st.dimmed, surf.currentHoverRad, surf.currentHoverIntensity,
+          cfg.baseAngleDeg, cfg.dispersion, cfg.liquidWarp, tVal, w, h].join('|');
+        if (!surf.dirty && surf.lastRenderKey === key) return;
+        surf.dirty = false;
+        surf.lastRenderKey = key;
 
         gl.viewport(0, 0, glCanvas.width, glCanvas.height);
         gl.uniform1f(this.uniforms.u_time, tVal);
@@ -591,12 +668,11 @@ class SharedWebGLShaderEngine {
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-        surf.ctx2d.clearRect(0, 0, w, h);
         surf.ctx2d.drawImage(glCanvas, 0, 0, w, h);
       });
     }
 
-    if (this.surfaces.size > 0) {
+    if (animating) {
       this.animId = requestAnimationFrame(this.tick);
     } else {
       this.animId = null;
@@ -641,6 +717,10 @@ export const MetalConfigProvider: React.FC<{ children: ReactNode }> = ({ childre
     root.style.setProperty('--border-rim-subtle', preset.cssBorderRimSubtle);
     root.style.setProperty('--metal-accent', preset.accentHex);
   }, [material, baseAngleDeg, hoverSweepDeg]);
+
+  useEffect(() => {
+    sharedMetalEngine.invalidate();
+  }, [material, dispersion, liquidWarp, bezelWidth, autoFlow, flowSpeed, hoverSweepDeg, baseAngleDeg]);
 
   const resetDefaults = () => {
     setMaterial('classic');
@@ -714,12 +794,13 @@ export const WebGLBezelCanvas: React.FC<WebGLBezelSurfaceProps> = ({
   canvasHeight = 80,
   className = '',
 }) => {
-  const { material: globalMaterial } = useMetalConfig();
+  const { material: globalMaterial, hoverSweepDeg: globalHoverSweep } = useMetalConfig();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const idRef = useRef(`webgl-surf-${Math.random().toString(36).substring(2, 9)}`);
 
   const effectiveMaterial = material || globalMaterial;
 
+  const interactionRef = useRef({ hovered: false, focused: false });
   const stateRef = useRef({
     hovered,
     focused,
@@ -753,18 +834,42 @@ export const WebGLBezelCanvas: React.FC<WebGLBezelSurfaceProps> = ({
       id,
       canvas,
       ctx2d,
-      getState: () => stateRef.current,
+      getState: () => ({
+        ...stateRef.current,
+        hovered: stateRef.current.hovered || interactionRef.current.hovered,
+        focused: stateRef.current.focused || interactionRef.current.focused,
+      }),
       currentHoverRad: 0,
       currentHoverIntensity: 0,
+      visible: false,
+      dirty: true,
     });
-
+    // Track the actual control, including keyboard focus and radio/checkbox labels.
+    const owner = canvas.parentElement?.closest<HTMLElement>('button, [role="switch"], .group') || canvas.parentElement;
+    const update = (event?: Event) => {
+      interactionRef.current = {
+        hovered: event?.type === 'pointerleave' ? false : event?.type === 'pointerenter' ? true : owner?.matches(':hover') ?? false,
+        focused: event?.type === 'focusout' ? owner?.contains((event as FocusEvent).relatedTarget as Node | null) ?? false : owner?.matches(':focus-within') ?? false,
+      };
+      sharedMetalEngine.invalidate(id);
+    };
+    const events = ['pointerenter', 'pointerleave', 'focusin', 'focusout'] as const;
+    events.forEach(event => owner?.addEventListener(event, update));
+    update();
     return () => {
+      events.forEach(event => owner?.removeEventListener(event, update));
       sharedMetalEngine.unregister(id);
     };
   }, []);
 
+  useEffect(() => {
+    sharedMetalEngine.invalidate(idRef.current);
+  }, [hovered, focused, effectiveMaterial, sweepDeg, autoFlow, dimmed, canvasWidth, canvasHeight]);
+
   return (
     <canvas
+      data-metal-surface=""
+      data-sweep-deg={sweepDeg ?? globalHoverSweep}
       ref={canvasRef}
       width={canvasWidth}
       height={canvasHeight}

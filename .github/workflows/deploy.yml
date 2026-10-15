@@ -34,6 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Check types and interaction regressions
+        run: |
+          npm run lint
+          npm test
+
       - name: Build static site with Vite
         run: npm run build
 

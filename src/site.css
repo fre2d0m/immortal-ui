@@ -4,7 +4,7 @@
   overflow: hidden;
   isolation: isolate;
   background: #080809;
-  border-bottom: 1px solid #ffffff0a;
+  border-bottom: var(--container-border-width) solid #ffffff0a;
 }
 .hero-intro {
   position: relative;
@@ -269,7 +269,7 @@
 }
 .doc-api-table td {
   padding: 14px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: var(--container-border-width) solid rgba(255, 255, 255, 0.07);
   font-size: 11px;
   line-height: 1.9;
   color: #a1a1aa;
@@ -333,7 +333,7 @@
     position: static;
     max-height: none;
     padding: 24px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: var(--container-border-width) solid rgba(255, 255, 255, 0.08);
   }
   .docs-main {
     padding-block: 32px 56px;

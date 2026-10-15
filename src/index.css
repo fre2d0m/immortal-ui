@@ -9,6 +9,7 @@
 
 :root {
   /* Dynamic light controls (default 135deg top-left to bottom-right) */
+  --container-border-width: 1px;
   --rim-angle: 135deg;
   --hover-sweep: 90deg;
   --sweep-duration: 650ms;
@@ -95,6 +96,7 @@
 }
 
 .immortal-rim-sweep:hover,
+.immortal-rim-sweep:focus-within,
 .group:hover .immortal-rim-sweep {
   --local-rim-angle: calc(var(--rim-angle, 135deg) + var(--hover-sweep, 90deg));
 }
@@ -199,4 +201,17 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
+}
+
+/* Hairline containment is opt-in; buttons, fields and selection controls keep 1px rims. */
+@media (min-resolution: 2dppx) {
+  :root { --container-border-width: 0.5px; }
+}
+.immortal-container.border { border-width: var(--container-border-width); }
+:is(.immortal-container, .immortal-divider).border-t { border-top-width: var(--container-border-width); }
+:is(.immortal-container, .immortal-divider).border-b { border-bottom-width: var(--container-border-width); }
+.immortal-container.border-l { border-left-width: var(--container-border-width); }
+.immortal-container.border-r { border-right-width: var(--container-border-width); }
+@media (prefers-reduced-motion: reduce) {
+  .immortal-rim-sweep, .chrome-dispersion-surface { transition-duration: 0s; animation: none !important; }
 }

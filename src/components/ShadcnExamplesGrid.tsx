@@ -15,7 +15,10 @@ import {
 import {
   METAL_MATERIALS,
   useMetalConfig,
+  useMaterialSound,
+  useSoundEnabled,
   WebGLBezelCanvas,
+  getSweepingRim,
 } from './WebGLMetalEngine';
 import { audioEngine } from './AudioEngine';
 import { useToast } from './ImmortalToast';
@@ -41,6 +44,8 @@ import {
    ========================================================================= */
 export const ShadcnCardsExample: React.FC = () => {
   const { toast } = useToast();
+  const playSound = useMaterialSound();
+  const soundEnabled = useSoundEnabled();
   const { material } = useMetalConfig();
   const matPreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
@@ -69,7 +74,6 @@ export const ShadcnCardsExample: React.FC = () => {
 
   // Card 5: Notifications
   const [notifMode, setNotifMode] = useState<'all' | 'mentions' | 'none'>('all');
-  const [pushNotif, setPushNotif] = useState(true);
 
   // Card 6: Cookie Settings
   const [cookieNecessary, setCookieNecessary] = useState(true);
@@ -88,7 +92,6 @@ export const ShadcnCardsExample: React.FC = () => {
   const handleCopyShare = () => {
     navigator.clipboard.writeText(shareUrl);
     setCopiedShare(true);
-    audioEngine.playClick('metal');
     toast({
       title: 'Share Link Copied',
       description: shareUrl,
@@ -137,11 +140,11 @@ export const ShadcnCardsExample: React.FC = () => {
           </div>
 
           <div className="relative flex items-center justify-center my-0.5">
-            <div className="border-t border-white/[0.07] w-full" />
+            <div className="immortal-divider border-t border-white/[0.07] w-full" />
             <span className="bg-[#0b0b0e] px-2.5 text-[10px] uppercase tracking-wider text-zinc-500 shrink-0">
               Or continue with
             </span>
-            <div className="border-t border-white/[0.07] w-full" />
+            <div className="immortal-divider border-t border-white/[0.07] w-full" />
           </div>
 
           <div className="flex flex-col gap-3">
@@ -197,7 +200,7 @@ export const ShadcnCardsExample: React.FC = () => {
                   key={item.id}
                   type="button"
                   onClick={() => {
-                    audioEngine.playClick('select');
+                    playSound('select');
                     setPayMethod(item.id as 'card' | 'paypal' | 'apple');
                   }}
                   style={
@@ -205,16 +208,16 @@ export const ShadcnCardsExample: React.FC = () => {
                       ? {
                           backgroundImage: `${
                             active ? 'var(--bg-convex-hover)' : 'var(--bg-subcard)'
-                          }, ${active ? 'var(--border-rim-focus)' : 'var(--border-rim-subtle)'}`,
+                          }, ${getSweepingRim(active ? matPreset.cssBorderRim : matPreset.cssBorderRimSubtle)}`,
                           backgroundOrigin: 'padding-box, border-box',
                           backgroundClip: 'padding-box, border-box',
                           boxShadow: active ? 'var(--shadow-convex-sm)' : 'none',
                         }
                       : {
-                          padding: active ? '1.5px' : '1px',
+                          padding: '1px',
                         }
                   }
-                  className={`relative h-20 rounded-xl overflow-hidden cursor-pointer transition-all flex flex-col items-center justify-center gap-1.5 ${
+                  className={`immortal-rim-sweep relative h-20 rounded-xl overflow-hidden cursor-pointer transition-[color,background-color,box-shadow,opacity,transform] flex flex-col items-center justify-center gap-1.5 ${
                     isClassic ? 'border border-transparent' : ''
                   }`}
                 >
@@ -222,8 +225,7 @@ export const ShadcnCardsExample: React.FC = () => {
                     <WebGLBezelCanvas
                       material={material}
                       dimmed={!active}
-                      hovered={active}
-                      sweepDeg={0}
+                      hovered={false}
                       canvasWidth={120}
                       canvasHeight={80}
                     />
@@ -419,7 +421,7 @@ export const ShadcnCardsExample: React.FC = () => {
             </ImmortalButton>
           </div>
 
-          <div className="pt-2 border-t border-white/[0.06] flex flex-col gap-3">
+          <div className="immortal-divider pt-2 border-t border-white/[0.06] flex flex-col gap-3">
             <div className="text-xs font-medium text-zinc-300">Default Access Level</div>
             <ImmortalRadioGroup
               name="shareAccess"
@@ -464,17 +466,17 @@ export const ShadcnCardsExample: React.FC = () => {
                 <div
                   key={item.id}
                   onClick={() => {
-                    audioEngine.playClick('select');
+                    playSound('select');
                     setNotifMode(item.id as 'all' | 'mentions' | 'none');
                   }}
                   style={{
                     backgroundImage: `${
                       active ? 'var(--bg-convex)' : 'var(--bg-subcard)'
-                    }, ${active ? 'var(--border-rim)' : 'var(--border-rim-subtle)'}`,
+                    }, ${getSweepingRim(active ? matPreset.cssBorderRim : matPreset.cssBorderRimSubtle)}`,
                     backgroundOrigin: 'padding-box, border-box',
                     backgroundClip: 'padding-box, border-box',
                   }}
-                  className="p-3 rounded-xl border border-transparent flex items-start gap-3 cursor-pointer transition-all"
+                  className="immortal-rim-sweep p-3 rounded-xl border border-transparent flex items-start gap-3 cursor-pointer transition-[color,background-color,box-shadow,opacity,transform]"
                 >
                   <span
                     style={{ color: active ? matPreset.accentHex : '#71717a' }}
@@ -491,12 +493,12 @@ export const ShadcnCardsExample: React.FC = () => {
             })}
           </div>
 
-          <div className="pt-2 border-t border-white/[0.06]">
+          <div className="immortal-divider pt-2 border-t border-white/[0.06]">
             <ImmortalCheckbox
-              checked={pushNotif}
-              onChange={setPushNotif}
-              label="Enable Web Audio physical micro-switch synthesis"
-              hint="Play subtle tactile click acoustics when pressing buttons or switches"
+              checked={soundEnabled}
+              onChange={(enabled) => { audioEngine.enabled = enabled; if (enabled) playSound('switch'); }}
+              label="Metal interaction sounds"
+              hint="Each metal has its own tone. Classic Dark stays silent."
             />
           </div>
         </ImmortalCard>
@@ -659,7 +661,7 @@ export const ShadcnCardsExample: React.FC = () => {
                   height: `${Math.min(100, Math.round((v * computeGoal) / 400))}%`,
                   background: matPreset.swatchGradient,
                 }}
-                className="flex-1 rounded-t-sm opacity-85 transition-all duration-300"
+                className="flex-1 rounded-t-sm opacity-85 transition-[color,background-color,box-shadow,opacity,transform] duration-300"
               />
             ))}
           </div>
@@ -788,7 +790,7 @@ export const ShadcnDashboardExample: React.FC = () => {
                     background: matPreset.swatchGradient,
                     boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.6), 0 4px 12px rgba(0,0,0,0.8)',
                   }}
-                  className="w-full rounded-t-md transition-all duration-300 hover:opacity-100 opacity-90"
+                  className="w-full rounded-t-md transition-[color,background-color,box-shadow,opacity,transform] duration-300 hover:opacity-100 opacity-90"
                 />
                 <span className="text-[10px] font-mono text-zinc-500">{bar.m}</span>
               </div>

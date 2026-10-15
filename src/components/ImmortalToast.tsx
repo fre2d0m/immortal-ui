@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
-import { audioEngine } from './AudioEngine';
 
 export interface ToastItem {
   id: string;
@@ -26,7 +25,6 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const addToast = (item: Omit<ToastItem, 'id'>) => {
     const id = Math.random().toString(36).substring(2, 9);
-    audioEngine.playClick(item.type === 'error' ? 'button' : 'switch');
     setToasts((prev) => [...prev, { ...item, id }]);
 
     setTimeout(() => {
@@ -52,7 +50,7 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
               backgroundClip: 'padding-box, border-box',
               boxShadow: `0 14px 30px rgba(0, 0, 0, 0.9), var(--shadow-convex-sm)`,
             }}
-            className="pointer-events-auto p-4 rounded-xl border border-transparent flex items-start gap-3 animate-in slide-in-from-bottom-5 fade-in duration-200"
+            className="immortal-container pointer-events-auto p-4 rounded-xl border border-transparent flex items-start gap-3 animate-in slide-in-from-bottom-5 fade-in duration-200"
           >
             <div className="mt-0.5 shrink-0">
               {t.type === 'error' ? (

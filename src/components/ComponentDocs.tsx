@@ -658,7 +658,7 @@ export function ToastDemo() {
             backgroundClip: "padding-box, border-box",
             boxShadow: "var(--shadow-convex)",
           }}
-          className="flex min-h-[230px] items-center justify-center rounded-2xl border border-transparent px-5 py-9 sm:px-8"
+          className="immortal-container flex min-h-[230px] items-center justify-center rounded-2xl border border-transparent px-5 py-9 sm:px-8"
         >
           {currentItem.preview}
         </div>
@@ -726,7 +726,7 @@ export function ToastDemo() {
             </>
           )}
         </p>
-        <div className="overflow-x-auto rounded-xl border border-white/10">
+        <div className="immortal-container overflow-x-auto rounded-xl border border-white/10">
           <table className="doc-api-table">
             <thead>
               <tr>

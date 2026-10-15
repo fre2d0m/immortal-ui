@@ -41,7 +41,7 @@ export function HomePage() {
         </div>
         <ShadcnCardsExample />
       </section>
-      <section className="site-container border-t border-white/[0.07] py-12 sm:py-16">
+      <section className="immortal-container site-container border-t border-white/[0.07] py-12 sm:py-16">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div>
             <p className="site-eyebrow">YOUR FIRST COMPONENT</p>

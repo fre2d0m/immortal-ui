@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ImmortalMark } from './ImmortalMark';
-import { audioEngine } from './AudioEngine';
-import { METAL_MATERIALS, useMetalConfig, WebGLBezelCanvas } from './WebGLMetalEngine';
+import { METAL_MATERIALS, useMetalConfig, useMaterialSound, WebGLBezelCanvas } from './WebGLMetalEngine';
 
 export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false }) => {
   const { material, bezelWidth } = useMetalConfig();
+  const playSound = useMaterialSound();
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [clickCount, setClickCount] = useState(0);
@@ -13,7 +13,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
   const isClassic = !matPreset.isWebGLMetal;
 
   const handlePress = () => {
-    audioEngine.playClick('metal');
+    playSound('metal');
     setClickCount((prev) => prev + 1);
   };
 
@@ -54,7 +54,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
                 : `0 22px 48px rgba(0, 0, 0, 0.95), 0 4px 12px rgba(0, 0, 0, 0.8), inset 0 1.5px 1px rgba(255, 255, 255, 0.22), inset 0 -3px 6px rgba(0, 0, 0, 0.9)`,
               transform: pressed ? 'translateY(1px) scale(0.97)' : 'translateY(0) scale(1)',
             }}
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] border-[1.5px] border-transparent cursor-pointer flex items-center justify-center transition-all duration-150 select-none focus:outline-none"
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] border border-transparent cursor-pointer flex items-center justify-center transition-[color,box-shadow,transform] duration-150 select-none focus:outline-none"
             aria-label="Immortal UI emblem"
             title="Immortal UI · Click to feel physical switch feedback"
           >
@@ -81,7 +81,7 @@ export const HeroEmblem: React.FC<{ compact?: boolean }> = ({ compact = false })
               onMouseUp={() => setPressed(false)}
               onClick={handlePress}
               style={{
-                padding: `${Math.max(1.5, bezelWidth * 1.5)}px`,
+                padding: `${Math.max(1, bezelWidth)}px`,
                 boxShadow: '0 22px 48px rgba(0, 0, 0, 0.96), 0 4px 12px rgba(0, 0, 0, 0.85)',
                 transform: pressed ? 'scale(0.97)' : 'scale(1)',
               }}

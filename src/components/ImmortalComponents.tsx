@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
-import { audioEngine } from './AudioEngine';
 import { Loader2 } from 'lucide-react';
 import {
   MetalMaterialId,
   METAL_MATERIALS,
   useMetalConfig,
+  useMaterialSound,
   getMetalSurfaceGradient,
   WebGLBezelCanvas,
+  getSweepingRim,
 } from './WebGLMetalEngine';
 
 /* =========================================================================
@@ -34,6 +35,8 @@ const CLASSIC_RIM_METALLIC = `linear-gradient(
   #a1a1aa 50%,
   #e4e4e7 100%
 )`;
+
+const CLASSIC_RIM_FOCUS = `linear-gradient(var(--local-rim-angle, var(--rim-angle, 135deg)), rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.55) 100%)`;
 
 const CLASSIC_RIM_DANGER = `linear-gradient(
   var(--local-rim-angle, var(--rim-angle, 135deg)),
@@ -86,10 +89,11 @@ export const ImmortalButton: React.FC<ImmortalButtonProps> = ({
   const effectiveMaterial: MetalMaterialId = material || globalMaterial;
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
+  const playSound = useMaterialSound(!isClassic && variant === 'danger' && !material ? 'rosegold' : effectiveMaterial);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled || loading) return;
-    audioEngine.playClick(variant === 'metallic' || !isClassic ? 'metal' : soundType);
+    playSound(variant === 'metallic' ? 'metal' : soundType);
     if (onClick) onClick(e);
   };
 
@@ -350,15 +354,17 @@ export const ImmortalInput: React.FC<ImmortalInputProps> = ({
   const [focused, setFocused] = useState(false);
 
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
   if (isClassic) {
     return (
       <div
+        onPointerDown={() => playSound('select')}
         style={{
           backgroundImage: `var(--bg-concave), ${
-            focused ? 'var(--border-rim-focus)' : 'var(--border-rim-subtle)'
+            focused ? CLASSIC_RIM_FOCUS : CLASSIC_RIM_SUBTLE
           }`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
@@ -367,7 +373,7 @@ export const ImmortalInput: React.FC<ImmortalInputProps> = ({
             : `var(--shadow-concave)`,
           ...style,
         }}
-        className={`group relative flex items-center w-full rounded-xl border border-transparent transition-all duration-200 ${className}`}
+        className={`group relative flex items-center w-full rounded-xl immortal-rim-sweep border border-transparent transition-[color,background-color,box-shadow,opacity,transform] duration-200 ${className}`}
       >
         {icon && (
           <span
@@ -394,11 +400,11 @@ export const ImmortalInput: React.FC<ImmortalInputProps> = ({
         {kbd && (
           <span
             style={{
-              backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+              backgroundImage: `var(--bg-convex), ${CLASSIC_RIM_SUBTLE}`,
               backgroundOrigin: 'padding-box, border-box',
               backgroundClip: 'padding-box, border-box',
             }}
-            className="mr-2.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-zinc-400 rounded-md border border-transparent shadow-sm select-none"
+            className="immortal-container mr-2.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-zinc-400 rounded-md immortal-rim-sweep border border-transparent shadow-sm select-none"
           >
             {kbd}
           </span>
@@ -411,6 +417,7 @@ export const ImmortalInput: React.FC<ImmortalInputProps> = ({
 
   return (
     <div
+      onPointerDown={() => playSound('select')}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -425,7 +432,6 @@ export const ImmortalInput: React.FC<ImmortalInputProps> = ({
         dimmed={!focused && !hovered}
         hovered={hovered}
         focused={focused}
-        sweepDeg={0}
         canvasWidth={320}
         canvasHeight={64}
       />
@@ -492,6 +498,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
   const [focused, setFocused] = useState(false);
 
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
@@ -499,6 +506,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
     return (
       <textarea
         {...props}
+        onPointerDown={(event) => { playSound('select'); props.onPointerDown?.(event); }}
         onFocus={(e) => {
           setFocused(true);
           if (props.onFocus) props.onFocus(e);
@@ -509,7 +517,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
         }}
         style={{
           backgroundImage: `var(--bg-concave), ${
-            focused ? 'var(--border-rim-focus)' : 'var(--border-rim-subtle)'
+            focused ? CLASSIC_RIM_FOCUS : CLASSIC_RIM_SUBTLE
           }`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
@@ -518,7 +526,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
             : `var(--shadow-concave)`,
           ...style,
         }}
-        className={`w-full min-h-[86px] p-3.5 rounded-xl border border-transparent outline-none text-zinc-100 placeholder:text-zinc-600 text-xs sm:text-sm font-normal resize-y transition-all duration-200 leading-relaxed ${className}`}
+        className={`w-full min-h-[86px] p-3.5 rounded-xl immortal-rim-sweep border border-transparent outline-none text-zinc-100 placeholder:text-zinc-600 text-xs sm:text-sm font-normal resize-y transition-[color,background-color,box-shadow,opacity,transform] duration-200 leading-relaxed ${className}`}
       />
     );
   }
@@ -527,6 +535,7 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
 
   return (
     <div
+      onPointerDown={() => playSound('select')}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -541,7 +550,6 @@ export const ImmortalTextarea: React.FC<ImmortalTextareaProps> = ({
         dimmed={!focused && !hovered}
         hovered={hovered}
         focused={focused}
-        sweepDeg={0}
         canvasWidth={320}
         canvasHeight={120}
       />
@@ -598,11 +606,12 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
   const switchId = id || `switch-${Math.random().toString(36).substring(2, 9)}`;
 
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
   const toggle = () => {
-    audioEngine.playClick('switch');
+    playSound('switch');
     onChange(!checked);
   };
 
@@ -625,12 +634,12 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
             checked
               ? 'linear-gradient(180deg, #121216 0%, #1c1c22 100%)'
               : 'var(--bg-concave)'
-          }, var(--border-rim-subtle)`,
+          }, ${CLASSIC_RIM_SUBTLE}`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
           boxShadow: `var(--shadow-concave)`,
         }}
-        className="relative inline-flex items-center w-12 h-7 rounded-full border border-transparent cursor-pointer shrink-0 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        className="relative inline-flex items-center w-12 h-7 rounded-full immortal-rim-sweep border border-transparent cursor-pointer shrink-0 transition-[color,background-color,box-shadow,opacity,transform] duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
         <div
           style={{
@@ -638,7 +647,7 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
               checked
                 ? 'linear-gradient(145deg, #ffffff 0%, #d4d4d8 100%)'
                 : 'linear-gradient(145deg, #27272a 0%, #121215 100%)'
-            }, var(--border-rim)`,
+            }, ${CLASSIC_RIM_DEFAULT}`,
             backgroundOrigin: 'padding-box, border-box',
             backgroundClip: 'padding-box, border-box',
             boxShadow: checked
@@ -646,10 +655,10 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
               : '0 2px 4px rgba(0, 0, 0, 0.9), inset 0 1px 0.5px rgba(255, 255, 255, 0.25)',
             transform: checked ? 'translateX(22px)' : 'translateX(3px)',
           }}
-          className="w-5 h-5 rounded-full border border-transparent transition-all duration-300 flex items-center justify-center"
+          className="w-5 h-5 rounded-full immortal-rim-sweep border border-transparent transition-[color,background-color,box-shadow,opacity,transform] duration-300 flex items-center justify-center"
         >
           <span
-            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+            className={`w-1.5 h-1.5 rounded-full transition-[color,background-color,box-shadow,opacity,transform] duration-300 ${
               checked
                 ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.9)]'
                 : 'bg-zinc-600'
@@ -664,12 +673,12 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
     return (
       <div
         style={{
-          backgroundImage: `var(--bg-subcard), var(--border-rim-subtle)`,
+          backgroundImage: `var(--bg-subcard), ${CLASSIC_RIM_SUBTLE}`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
           boxShadow: `inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 12px rgba(0, 0, 0, 0.6)`,
         }}
-        className={`flex items-center justify-between p-3.5 rounded-xl border border-transparent transition-all duration-200 select-none ${className}`}
+        className={`immortal-container flex items-center justify-between p-3.5 rounded-xl immortal-rim-sweep border border-transparent transition-[color,background-color,box-shadow,opacity,transform] duration-200 select-none ${className}`}
       >
         <label htmlFor={switchId} onClick={toggle} className="cursor-pointer pr-4 flex-1">
           <div className="text-xs sm:text-sm font-medium text-zinc-100">{label}</div>
@@ -703,7 +712,6 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
         material={effectiveMaterial}
         dimmed={!checked && !hovered}
         hovered={hovered}
-        sweepDeg={0}
         canvasWidth={96}
         canvasHeight={56}
       />
@@ -734,7 +742,7 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
               backgroundColor: checked ? '#09090b' : matPreset.accentHex,
               opacity: checked ? 1 : 0.6,
             }}
-            className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+            className="w-1.5 h-1.5 rounded-full transition-[color,background-color,box-shadow,opacity,transform] duration-300"
           />
         </div>
       </div>
@@ -748,16 +756,15 @@ export const ImmortalSwitch: React.FC<ImmortalSwitchProps> = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        padding: `${Math.max(1, bezelWidth * 0.65)}px`,
+        padding: `calc(var(--container-border-width) * ${Math.max(1, bezelWidth * 0.65)})`,
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.65)',
       }}
-      className={`relative rounded-xl overflow-hidden select-none ${className}`}
+      className={`immortal-container relative rounded-xl overflow-hidden select-none ${className}`}
     >
       <WebGLBezelCanvas
         material={effectiveMaterial}
         dimmed={!checked && !hovered}
         hovered={hovered}
-        sweepDeg={0}
         canvasWidth={280}
         canvasHeight={72}
       />
@@ -800,12 +807,13 @@ export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
   const { material: globalMaterial } = useMetalConfig();
   const [hovered, setHovered] = useState(false);
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
   const toggle = () => {
     if (disabled) return;
-    audioEngine.playClick('button');
+    playSound('button');
     onChange(!checked);
   };
 
@@ -820,15 +828,15 @@ export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
         <div
           style={{
             backgroundImage: checked
-              ? `linear-gradient(145deg, #f4f4f6 0%, #a1a1aa 100%), var(--border-rim)`
-              : `var(--bg-concave), var(--border-rim-subtle)`,
+              ? `linear-gradient(145deg, #f4f4f6 0%, #a1a1aa 100%), ${CLASSIC_RIM_DEFAULT}`
+              : `var(--bg-concave), ${CLASSIC_RIM_SUBTLE}`,
             backgroundOrigin: 'padding-box, border-box',
             backgroundClip: 'padding-box, border-box',
             boxShadow: checked
               ? `0 3px 8px rgba(0, 0, 0, 0.8), inset 0 1px 0.5px #ffffff`
               : `var(--shadow-concave)`,
           }}
-          className="w-5 h-5 rounded-md border border-transparent flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
+          className="w-5 h-5 rounded-md immortal-rim-sweep border border-transparent flex items-center justify-center shrink-0 mt-0.5 transition-[color,background-color,box-shadow,opacity,transform] duration-200"
         >
           <svg
             viewBox="0 0 24 24"
@@ -837,7 +845,7 @@ export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
             strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`w-3.5 h-3.5 transition-all duration-200 ${
+            className={`w-3.5 h-3.5 transition-[color,background-color,box-shadow,opacity,transform] duration-200 ${
               checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
             }`}
           >
@@ -873,7 +881,6 @@ export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
           material={effectiveMaterial}
           dimmed={!checked && !hovered}
           hovered={hovered}
-          sweepDeg={0}
           canvasWidth={48}
           canvasHeight={48}
         />
@@ -896,7 +903,7 @@ export const ImmortalCheckbox: React.FC<ImmortalCheckboxProps> = ({
             strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`w-3 h-3 transition-all duration-200 ${
+            className={`w-3 h-3 transition-[color,background-color,box-shadow,opacity,transform] duration-200 ${
               checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
             }`}
           >
@@ -935,6 +942,7 @@ export const ImmortalRadioGroup: React.FC<{
 }> = ({ options, value, onChange, material, direction = 'row' }) => {
   const { material: globalMaterial } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
@@ -947,7 +955,7 @@ export const ImmortalRadioGroup: React.FC<{
             <div
               key={opt.value}
               onClick={() => {
-                audioEngine.playClick('select');
+                playSound('select');
                 onChange(opt.value);
               }}
               className="inline-flex items-center gap-2.5 cursor-pointer select-none group"
@@ -955,13 +963,13 @@ export const ImmortalRadioGroup: React.FC<{
               <div
                 style={{
                   backgroundImage: `var(--bg-concave), ${
-                    isSelected ? 'var(--border-rim)' : 'var(--border-rim-subtle)'
+                    isSelected ? CLASSIC_RIM_DEFAULT : CLASSIC_RIM_SUBTLE
                   }`,
                   backgroundOrigin: 'padding-box, border-box',
                   backgroundClip: 'padding-box, border-box',
                   boxShadow: `var(--shadow-concave)`,
                 }}
-                className="w-5 h-5 rounded-full border border-transparent flex items-center justify-center shrink-0 transition-all duration-200"
+                className="w-5 h-5 rounded-full immortal-rim-sweep border border-transparent flex items-center justify-center shrink-0 transition-[color,background-color,box-shadow,opacity,transform] duration-200"
               >
                 <div
                   style={{
@@ -970,7 +978,7 @@ export const ImmortalRadioGroup: React.FC<{
                     background: 'radial-gradient(circle at 35% 35%, #ffffff, #a1a1aa)',
                     boxShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
                   }}
-                  className="w-2.5 h-2.5 rounded-full transition-all duration-200"
+                  className="w-2.5 h-2.5 rounded-full transition-[color,background-color,box-shadow,opacity,transform] duration-200"
                 />
               </div>
               <div className="text-xs sm:text-sm text-zinc-300 group-hover:text-zinc-100 transition-colors">
@@ -992,7 +1000,7 @@ export const ImmortalRadioGroup: React.FC<{
           <div
             key={opt.value}
             onClick={() => {
-              audioEngine.playClick('select');
+              playSound('select');
               onChange(opt.value);
             }}
             className="inline-flex items-center gap-2.5 cursor-pointer select-none group"
@@ -1004,7 +1012,6 @@ export const ImmortalRadioGroup: React.FC<{
               <WebGLBezelCanvas
                 material={effectiveMaterial}
                 dimmed={!isSelected}
-                sweepDeg={0}
                 canvasWidth={48}
                 canvasHeight={48}
               />
@@ -1021,7 +1028,7 @@ export const ImmortalRadioGroup: React.FC<{
                     background: matPreset.swatchGradient,
                     boxShadow: `0 0 6px ${matPreset.accentHex}88`,
                   }}
-                  className="w-2.5 h-2.5 rounded-full transition-all duration-200"
+                  className="w-2.5 h-2.5 rounded-full transition-[color,background-color,box-shadow,opacity,transform] duration-200"
                 />
               </div>
             </div>
@@ -1062,6 +1069,7 @@ export const ImmortalSlider: React.FC<ImmortalSliderProps> = ({
 }) => {
   const { material: globalMaterial } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
   const percentage = Math.round(((value - min) / (max - min)) * 100);
@@ -1090,17 +1098,22 @@ export const ImmortalSlider: React.FC<ImmortalSliderProps> = ({
           onChange={(e) => {
             onChange(Number(e.target.value));
           }}
-          onMouseDown={() => audioEngine.playClick('select')}
+          onPointerDown={() => playSound('select')}
+          onKeyDown={(event) => {
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key)) playSound('select');
+          }}
           style={{
-            background: isClassic
+            backgroundImage: `${isClassic
               ? `linear-gradient(90deg, #e4e4e7 0%, #71717a ${percentage}%, #050507 ${percentage}%, #09090b 100%)`
-              : `linear-gradient(90deg, ${matPreset.accentHex} 0%, ${matPreset.accentHex}99 ${percentage}%, #050507 ${percentage}%, #09090b 100%)`,
+              : `linear-gradient(90deg, ${matPreset.accentHex} 0%, ${matPreset.accentHex}99 ${percentage}%, #050507 ${percentage}%, #09090b 100%)`}, ${getSweepingRim(matPreset.cssBorderRim)}`,
+            backgroundOrigin: 'padding-box, border-box',
+            backgroundClip: 'padding-box, border-box',
             boxShadow: `var(--shadow-concave)`,
           }}
           className="
-            w-full h-2 rounded-full appearance-none cursor-pointer border border-white/10 outline-none
+            immortal-rim-sweep w-full h-2 rounded-full appearance-none cursor-pointer border border-transparent outline-none
             [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5
-            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-[1.5px] [&::-webkit-slider-thumb]:border-white/80
+            [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-white/80
             [&::-webkit-slider-thumb]:bg-[radial-gradient(circle_at_35%_35%,_#3f3f46,_#09090b)]
             [&::-webkit-slider-thumb]:shadow-[0_3px_8px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.4)]
             [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150
@@ -1135,6 +1148,7 @@ export const ImmortalSelect: React.FC<{
   const containerRef = useRef<HTMLDivElement>(null);
 
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
   const selectedOption = options.find((o) => o.value === value);
@@ -1156,18 +1170,18 @@ export const ImmortalSelect: React.FC<{
         <button
           type="button"
           onClick={() => {
-            audioEngine.playClick('select');
+            playSound('select');
             setIsOpen(!isOpen);
           }}
           style={{
             backgroundImage: `var(--bg-convex), ${
-              isOpen ? 'var(--border-rim-focus)' : 'var(--border-rim)'
+              isOpen ? CLASSIC_RIM_FOCUS : CLASSIC_RIM_DEFAULT
             }`,
             backgroundOrigin: 'padding-box, border-box',
             backgroundClip: 'padding-box, border-box',
             boxShadow: `var(--shadow-convex-sm)`,
           }}
-          className="w-full h-10 px-3.5 rounded-xl border border-transparent flex items-center justify-between text-xs sm:text-sm text-zinc-100 cursor-pointer select-none transition-all duration-200 focus:outline-none"
+          className="w-full h-10 px-3.5 rounded-xl immortal-rim-sweep border border-transparent flex items-center justify-between text-xs sm:text-sm text-zinc-100 cursor-pointer select-none transition-[color,background-color,box-shadow,opacity,transform] duration-200 focus:outline-none"
         >
           <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
           <svg
@@ -1186,12 +1200,12 @@ export const ImmortalSelect: React.FC<{
         {isOpen && (
           <div
             style={{
-              backgroundImage: `linear-gradient(160deg, #16161a 0%, #09090b 100%), var(--border-rim)`,
+              backgroundImage: `linear-gradient(160deg, #16161a 0%, #09090b 100%), ${CLASSIC_RIM_DEFAULT}`,
               backgroundOrigin: 'padding-box, border-box',
               backgroundClip: 'padding-box, border-box',
               boxShadow: `0 20px 40px rgba(0, 0, 0, 0.95), inset 0 1px 0.5px rgba(255, 255, 255, 0.2)`,
             }}
-            className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 p-1.5 rounded-xl border border-transparent flex flex-col gap-1 animate-in fade-in zoom-in-95 duration-150"
+            className="immortal-container absolute top-[calc(100%+6px)] left-0 right-0 z-50 p-1.5 rounded-xl immortal-rim-sweep border border-transparent flex flex-col gap-1 animate-in fade-in zoom-in-95 duration-150"
           >
             {options.map((opt) => {
               const isSelected = opt.value === value;
@@ -1199,20 +1213,20 @@ export const ImmortalSelect: React.FC<{
                 <div
                   key={opt.value}
                   onClick={() => {
-                    audioEngine.playClick('select');
+                    playSound('select');
                     onChange(opt.value);
                     setIsOpen(false);
                   }}
                   style={
                     isSelected
                       ? {
-                          backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+                          backgroundImage: `var(--bg-convex), ${CLASSIC_RIM_SUBTLE}`,
                           backgroundOrigin: 'padding-box, border-box',
                           backgroundClip: 'padding-box, border-box',
                         }
                       : {}
                   }
-                  className={`flex items-center justify-between px-3 py-2 rounded-lg border border-transparent text-xs sm:text-sm cursor-pointer transition-all ${
+                  className={`flex items-center justify-between px-3 py-2 rounded-lg immortal-rim-sweep border border-transparent text-xs sm:text-sm cursor-pointer transition-[color,background-color,box-shadow,opacity,transform] ${
                     isSelected
                       ? 'text-zinc-100 font-medium'
                       : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
@@ -1252,7 +1266,7 @@ export const ImmortalSelect: React.FC<{
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={() => {
-          audioEngine.playClick('select');
+          playSound('select');
           setIsOpen(!isOpen);
         }}
         style={{
@@ -1264,7 +1278,6 @@ export const ImmortalSelect: React.FC<{
         <WebGLBezelCanvas
           material={effectiveMaterial}
           hovered={hovered || isOpen}
-          sweepDeg={0}
           canvasWidth={300}
           canvasHeight={64}
         />
@@ -1292,7 +1305,7 @@ export const ImmortalSelect: React.FC<{
       {isOpen && (
         <div
           style={{
-            padding: `${Math.max(1, bezelWidth)}px`,
+            padding: `calc(var(--container-border-width) * ${Math.max(1, bezelWidth)})`,
             boxShadow: `0 20px 40px rgba(0, 0, 0, 0.96)`,
           }}
           className="absolute top-[calc(100%+6px)] left-0 right-0 z-50 rounded-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
@@ -1300,7 +1313,6 @@ export const ImmortalSelect: React.FC<{
           <WebGLBezelCanvas
             material={effectiveMaterial}
             hovered={false}
-            sweepDeg={0}
             canvasWidth={300}
             canvasHeight={180}
           />
@@ -1311,7 +1323,7 @@ export const ImmortalSelect: React.FC<{
                 <div
                   key={opt.value}
                   onClick={() => {
-                    audioEngine.playClick('select');
+                    playSound('select');
                     onChange(opt.value);
                     setIsOpen(false);
                   }}
@@ -1366,6 +1378,7 @@ export const ImmortalTabs: React.FC<{
 }> = ({ tabs, activeId, onChange, material, className = '' }) => {
   const { material: globalMaterial, bezelWidth } = useMetalConfig();
   const effectiveMaterial = material || globalMaterial;
+  const playSound = useMaterialSound(effectiveMaterial);
   const matPreset = METAL_MATERIALS[effectiveMaterial] || METAL_MATERIALS.classic;
   const isClassic = !matPreset.isWebGLMetal;
 
@@ -1373,12 +1386,12 @@ export const ImmortalTabs: React.FC<{
     return (
       <div
         style={{
-          backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
+          backgroundImage: `var(--bg-concave), ${CLASSIC_RIM_SUBTLE}`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
           boxShadow: `var(--shadow-concave)`,
         }}
-        className={`p-1 rounded-xl border border-transparent flex gap-1 ${className}`}
+        className={`immortal-container p-1 rounded-xl immortal-rim-sweep border border-transparent flex gap-1 ${className}`}
       >
         {tabs.map((tab) => {
           const isActive = tab.id === activeId;
@@ -1387,13 +1400,13 @@ export const ImmortalTabs: React.FC<{
               key={tab.id}
               type="button"
               onClick={() => {
-                audioEngine.playClick('button');
+                playSound('button');
                 onChange(tab.id);
               }}
               style={
                 isActive
                   ? {
-                      backgroundImage: `var(--bg-convex), var(--border-rim)`,
+                      backgroundImage: `var(--bg-convex), ${CLASSIC_RIM_DEFAULT}`,
                       backgroundOrigin: 'padding-box, border-box',
                       backgroundClip: 'padding-box, border-box',
                       boxShadow: `var(--shadow-convex-sm)`,
@@ -1401,8 +1414,8 @@ export const ImmortalTabs: React.FC<{
                   : {}
               }
               className={`
-                flex-1 h-8 sm:h-9 px-3 rounded-lg border border-transparent text-xs sm:text-sm font-medium
-                flex items-center justify-center gap-1.5 transition-all duration-200 select-none cursor-pointer
+                flex-1 h-8 sm:h-9 px-3 rounded-lg immortal-rim-sweep border border-transparent text-xs sm:text-sm font-medium
+                flex items-center justify-center gap-1.5 transition-[color,background-color,box-shadow,opacity,transform] duration-200 select-none cursor-pointer
                 ${
                   isActive
                     ? 'text-zinc-100 font-semibold'
@@ -1422,12 +1435,12 @@ export const ImmortalTabs: React.FC<{
   return (
     <div
       style={{
-        backgroundImage: `var(--bg-concave), var(--border-rim-subtle)`,
+        backgroundImage: `var(--bg-concave), ${CLASSIC_RIM_SUBTLE}`,
         backgroundOrigin: 'padding-box, border-box',
         backgroundClip: 'padding-box, border-box',
         boxShadow: `var(--shadow-concave)`,
       }}
-      className={`p-1 rounded-xl border border-transparent flex gap-1 ${className}`}
+      className={`immortal-container p-1 rounded-xl immortal-rim-sweep border border-transparent flex gap-1 ${className}`}
     >
       {tabs.map((tab) => {
         const isActive = tab.id === activeId;
@@ -1436,7 +1449,7 @@ export const ImmortalTabs: React.FC<{
             key={tab.id}
             type="button"
             onClick={() => {
-              audioEngine.playClick('button');
+              playSound('button');
               onChange(tab.id);
             }}
             style={{
@@ -1452,7 +1465,6 @@ export const ImmortalTabs: React.FC<{
               <WebGLBezelCanvas
                 material={effectiveMaterial}
                 hovered={false}
-                sweepDeg={0}
                 canvasWidth={140}
                 canvasHeight={48}
               />
@@ -1510,12 +1522,12 @@ export const ImmortalBadge: React.FC<{
     return (
       <span
         style={{
-          backgroundImage: `var(--bg-convex), var(--border-rim-subtle)`,
+          backgroundImage: `var(--bg-convex), ${CLASSIC_RIM_SUBTLE}`,
           backgroundOrigin: 'padding-box, border-box',
           backgroundClip: 'padding-box, border-box',
           boxShadow: `var(--shadow-convex-sm)`,
         }}
-        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-medium text-zinc-300 rounded-full border border-transparent select-none ${className}`}
+        className={`immortal-container inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-medium text-zinc-300 rounded-full border border-transparent select-none ${className}`}
       >
         <span className={`w-1.5 h-1.5 rounded-full ${getDotStyle()}`} />
         {children}
@@ -1525,8 +1537,8 @@ export const ImmortalBadge: React.FC<{
 
   return (
     <span
-      style={{ padding: '1px' }}
-      className={`relative inline-flex items-center rounded-full overflow-hidden select-none shadow-sm ${className}`}
+      style={{ padding: 'var(--container-border-width)' }}
+      className={`immortal-container relative inline-flex items-center rounded-full overflow-hidden select-none shadow-sm ${className}`}
     >
       <WebGLBezelCanvas
         material={effectiveMaterial}
@@ -1563,15 +1575,15 @@ export const ImmortalCard: React.FC<{
   return (
     <div
       style={{
-        backgroundImage: `var(--bg-card), ${matPreset.cssBorderRimSubtle}`,
+        backgroundImage: `var(--bg-card), ${getSweepingRim(matPreset.cssBorderRimSubtle)}`,
         backgroundOrigin: 'padding-box, border-box',
         backgroundClip: 'padding-box, border-box',
         boxShadow: `var(--shadow-convex)`,
       }}
-      className={`rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-transparent flex flex-col gap-5 transition-colors duration-200 ${className}`}
+      className={`immortal-card immortal-container rounded-2xl sm:rounded-3xl p-5 sm:p-6 immortal-rim-sweep border border-transparent flex flex-col gap-5 transition-colors duration-200 ${className}`}
     >
       {(title || badge || headerAction) && (
-        <div className="flex items-start justify-between border-b border-white/[0.06] pb-3.5">
+        <div className="immortal-divider flex items-start justify-between border-b border-white/[0.06] pb-3.5">
           <div>
             {title && (
               <h3

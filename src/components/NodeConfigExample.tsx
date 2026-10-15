@@ -11,7 +11,6 @@ import {
 } from "./ImmortalComponents";
 import { ImmortalModal } from "./ImmortalModal";
 import { useToast } from "./ImmortalToast";
-import { audioEngine } from "./AudioEngine";
 
 export function NodeConfigExample() {
   const { toast } = useToast();
@@ -24,7 +23,6 @@ export function NodeConfigExample() {
 
   const handleSaveForm = (e: React.FormEvent) => {
     e.preventDefault();
-    audioEngine.playClick("metal");
     toast({
       title: "Configuration Saved",
       description: `Node [${formName}] tactile parameters synced to local environment`,
@@ -104,7 +102,7 @@ export function NodeConfigExample() {
             />
           </div>
 
-          <div className="md:col-span-2 flex items-center justify-between pt-4 border-t border-white/[0.06]">
+          <div className="immortal-container md:col-span-2 flex items-center justify-between pt-4 border-t border-white/[0.06]">
             <div className="flex items-center gap-2 text-xs text-zinc-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>System Ready · 1 pending change</span>

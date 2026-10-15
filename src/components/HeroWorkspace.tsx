@@ -23,7 +23,7 @@ import {
   ImmortalTabs,
 } from "./ImmortalComponents";
 import { ImmortalMark } from "./ImmortalMark";
-import { METAL_MATERIALS, MetalMaterialScope } from "./WebGLMetalEngine";
+import { METAL_MATERIALS, MetalMaterialScope, useMaterialSound } from "./WebGLMetalEngine";
 import { useToast } from "./ImmortalToast";
 import "./HeroWorkspace.css";
 
@@ -160,6 +160,7 @@ function TaskCheckbox({
   label: string;
   onChange: (checked: boolean) => void;
 }) {
+  const playSound = useMaterialSound();
   return (
     <div
       className="hero-task-toggle"
@@ -168,11 +169,12 @@ function TaskCheckbox({
       aria-checked={checked}
       aria-label={label}
       onClick={(event) => {
-        if (event.target === event.currentTarget) onChange(!checked);
+        if (event.target === event.currentTarget) { playSound('button'); onChange(!checked); }
       }}
       onKeyDown={(event) => {
         if (event.key === " " || event.key === "Enter") {
           event.preventDefault();
+          playSound('button');
           onChange(!checked);
         }
       }}
@@ -512,6 +514,7 @@ function NewProjectDialog({
 
 export function HeroWorkspace() {
   const [finish, setFinish] = useState<Finish>("platinum");
+  const playSound = useMaterialSound(finish);
   const [view, setView] = useState<View>("overview");
   const [period, setPeriod] = useState<keyof typeof PERIODS>("month");
   const [metric, setMetric] = useState("revenue");
@@ -691,6 +694,7 @@ export function HeroWorkspace() {
                   <button
                     key={project.id}
                     onClick={() => {
+                      playSound('select');
                       setView("projects");
                       setQuery(project.name);
                       setStatusFilter("all");
@@ -704,7 +708,7 @@ export function HeroWorkspace() {
                 ))}
               </div>
               <div className="hero-workspace-sidebar-bottom">
-                <button className="hero-workspace-reset" onClick={reset}>
+                <button className="hero-workspace-reset" onClick={() => { playSound('select'); reset(); }}>
                   <RotateCcw size={13} />
                   Reset demo
                 </button>

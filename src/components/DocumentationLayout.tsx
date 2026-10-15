@@ -40,7 +40,7 @@ export function DocumentationLayout({
   }
   return (
     <div className="site-container">
-      <div className="border-b border-white/[0.07] py-3 md:hidden">
+      <div className="immortal-container border-b border-white/[0.07] py-3 md:hidden">
         <button
           type="button"
           aria-expanded={mobileOpen}
@@ -166,7 +166,7 @@ export function DocumentationLayout({
                 {name}
               </button>
             ))}
-            <div className="mt-6 border-t border-white/[0.07] pt-5">
+            <div className="immortal-container mt-6 border-t border-white/[0.07] pt-5">
               <a
                 href="#/docs/getting-started"
                 className="text-xs leading-6 text-zinc-400 hover:text-white"

@@ -18,6 +18,7 @@ import { DocumentationLayout } from "./components/DocumentationLayout";
 import { ImmortalMark } from "./components/ImmortalMark";
 import { HomePage } from "./pages/HomePage";
 import { useSiteRoute } from "./lib/navigation";
+import { audioEngine } from "./components/AudioEngine";
 import "./site.css";
 
 const navItems = [
@@ -96,7 +97,7 @@ function AppContent() {
       >
         Skip to content
       </a>
-      <header className="site-header sticky top-0 z-40 border-b border-white/[0.07] bg-[#070708]/95 backdrop-blur-md">
+      <header className="immortal-container site-header sticky top-0 z-40 border-b border-white/[0.07] bg-[#070708]/95 backdrop-blur-md">
         <div className="site-container flex h-16 items-center justify-between gap-3">
           <div className="flex items-center gap-8">
             <a
@@ -157,7 +158,7 @@ function AppContent() {
               {styleOpen && (
                 <div
                   id="material-menu"
-                  className="absolute right-0 top-12 z-50 w-60 rounded-xl border border-white/15 bg-[#0d0d10] p-2 shadow-2xl"
+                  className="immortal-container absolute right-0 top-12 z-50 w-60 rounded-xl border border-white/15 bg-[#0d0d10] p-2 shadow-2xl"
                 >
                   <p className="px-3 py-2 text-[10px] font-medium tracking-wider text-zinc-600">
                     GLOBAL MATERIAL
@@ -168,6 +169,7 @@ function AppContent() {
                       type="button"
                       aria-pressed={mat.id === material}
                       onClick={() => {
+                        audioEngine.playClick('select', mat.id);
                         setMaterial(mat.id);
                         setStyleOpen(false);
                       }}
@@ -319,7 +321,7 @@ function AppContent() {
           </div>
         </main>
       )}
-      <footer className="border-t border-white/[0.07]">
+      <footer className="immortal-container border-t border-white/[0.07]">
         <div className="site-container flex flex-wrap items-center justify-between gap-4 py-7 text-[11px] text-zinc-600">
           <span>Immortal UI · React components, sculpted with light.</span>
           <div className="flex gap-5">

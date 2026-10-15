@@ -20,6 +20,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000). The showcase runs entirely in the browser and does not require an API key.
 
 ```bash
+npm test         # Audio and renderer regression tests
 npm run lint     # TypeScript checks
 npm run build    # Production assets in dist/
 npm run preview  # Preview the production build locally
@@ -31,7 +32,23 @@ npm run preview  # Preview the production build locally
 - **Six WebGL metals** are available globally or through a component's `material` prop: Royal Gold (`gold`), Platinum Chrome (`platinum`), Obsidian Titanium (`obsidian`), Cobalt Blue (`cobalt`), Rose Gold (`rosegold`), and Emerald Titanium (`emerald`).
 - **Optical controls** adjust the rim angle, bevel width, highlight intensity, and hover sweep. The default hover behavior is **+90° Quarter Turn**, including after resetting defaults. Buttons support per-component overrides such as `sweepDeg={0}`, `sweepDeg={180}`, and `sweepDeg={360}`.
 - **Surface Gradient Amplitude** controls the bright-to-dark range on filled metallic buttons: 0% is flat, 100% is full contrast, and the default is 35%. Adjust it in the Style & Physical Metal Customizer, or use `surfaceGradientAmplitude` and `setSurfaceGradientAmplitude` from `useMetalConfig`. It follows the rim angle while leaving the WebGL edge highlights and Classic Dark buttons unchanged.
-- **Audio feedback** uses synthesized Web Audio clicks for buttons, switches, and other controls, with no external audio assets.
+- **Responsive hairlines** use 0.5 CSS pixels for cards, panels, menus, and dividers at device pixel ratios of 2 or above; controls retain 1px borders. Lower-density screens use 1px throughout.
+- **On-demand metal rendering** draws visible surfaces when their appearance changes, animates hover/focus transitions until settled, and runs continuously only for visible surfaces with Auto Flow enabled. Offscreen and background-tab surfaces stop drawing. Classic controls share the default Quarter Turn, while passive badges stay static.
+- **Material sound** keeps Classic Dark silent, including its metallic-looking buttons. Metal controls use their actual global, local, or per-component finish for a short synthesized impact, with no external audio assets.
+
+## Material sound
+
+Chrome is bright and precise; gold is warm and rounded; black titanium is low and tightly damped. Cobalt has a crisp, cool strike, rose gold a softer copper-like resonance, and emerald titanium a light, clear ring. These are designed sonic identities. Buttons, selections, and switches share the material's tone with different weight and decay; typing, hover, and passive notifications are quiet.
+
+The material lab's sound toggle and the examples' **Metal interaction sounds** checkbox share one master mute preference. It survives page navigation and material resets within the session; it also silences local metal workspaces. The Classic Dark toggle displays **Silent · Classic**. Selecting a metal auditions its own tone when sound is enabled.
+
+`useMaterialSound(material?)` resolves the same material context as the visible control. Direct callers must pass the material explicitly, for example `audioEngine.playClick('select', 'gold')`; omitting the material stays silent. `useSoundEnabled()` subscribes to the shared mute state, and `audioEngine.enabled = false` mutes every finish. One lazily created AudioContext reuses cached PCM buffers, limits overlapping voices, drops stale autoplay unlock requests, and disconnects finished sources.
+
+Export the production sounds and a six-material comparison (button, selection, switch for each finish) with Node.js 22.22 or later:
+
+```bash
+node design/scripts/export-sounds.cjs ./design/audio
+```
 
 ## Brand mark
 
@@ -145,7 +162,7 @@ src/
     ImmortalModal.tsx              Modal dialog
     ImmortalToast.tsx              Toast provider and hook
     WebGLMetalEngine.tsx           Material presets, context, and shaders
-    AudioEngine.ts                 Synthesized interaction sounds
+    AudioEngine.ts                 Material-specific modal impact synthesis
     ComponentDocs.tsx              Component detail pages and live previews
     DocumentationLayout.tsx        Shared directory, sidebar, and page outline
     CodeBlock.tsx                  Copyable documentation code blocks

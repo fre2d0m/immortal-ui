@@ -1,10 +1,12 @@
-import React, { useId, useState } from 'react';
+import React, { useId } from 'react';
 import { Volume2, VolumeX, RotateCcw, Sparkles, Orbit, Gem, Layers } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 import {
   METAL_MATERIALS,
   MetalMaterialId,
   useMetalConfig,
+  useMaterialSound,
+  useSoundEnabled,
   WebGLBezelCanvas,
 } from './WebGLMetalEngine';
 import { useToast } from './ImmortalToast';
@@ -31,22 +33,19 @@ export const LightingLab: React.FC = () => {
   } = useMetalConfig();
 
   const surfaceGradientId = useId();
-  const [soundOn, setSoundOn] = useState(true);
+  const soundOn = useSoundEnabled();
+  const playSound = useMaterialSound();
   const activePreset = METAL_MATERIALS[material] || METAL_MATERIALS.classic;
   const isClassic = !activePreset.isWebGLMetal;
 
   const toggleSound = () => {
     const next = !soundOn;
-    setSoundOn(next);
     audioEngine.enabled = next;
-    if (next) audioEngine.playClick('switch');
+    if (next) playSound('switch');
   };
 
   const handleReset = () => {
     resetDefaults();
-    setSoundOn(true);
-    audioEngine.enabled = true;
-    audioEngine.playClick('button');
     toast({
       title: 'Restored Default Style: Classic Dark',
       description: '1px 135° dual-specular micro-bevel with convex & concave obsidian surfaces',
@@ -64,14 +63,14 @@ export const LightingLab: React.FC = () => {
         backgroundClip: 'padding-box, border-box',
         boxShadow: `inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 24px rgba(0, 0, 0, 0.75)`,
       }}
-      className="w-full max-w-6xl mx-auto p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-transparent mb-8 select-none flex flex-col gap-5 transition-all duration-200"
+      className="immortal-container w-full max-w-6xl mx-auto p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-transparent mb-8 select-none flex flex-col gap-5 transition-[color,box-shadow,opacity,transform] duration-200"
     >
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/[0.06] pb-4">
+      <div className="immortal-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/[0.06] pb-4">
         <div className="flex items-center gap-3">
           <div
             style={{ color: activePreset.accentHex }}
-            className="w-9 h-9 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center"
+            className="immortal-container w-9 h-9 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center"
           >
             {isClassic ? <Layers className="w-4 h-4" /> : <Gem className="w-4 h-4" />}
           </div>
@@ -95,21 +94,23 @@ export const LightingLab: React.FC = () => {
           <button
             type="button"
             onClick={toggleSound}
-            className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-1.5 cursor-pointer transition-all"
-            title="Toggle Immortal Sound"
+            disabled={isClassic}
+            aria-pressed={!isClassic && soundOn}
+            className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-1.5 cursor-pointer disabled:cursor-default disabled:opacity-60 transition-[color,box-shadow,opacity,transform]"
+            title={isClassic ? 'Classic Dark is always silent. Select a metal to hear its tone.' : 'Mute or enable all metal interaction sounds'}
           >
-            {soundOn ? (
+            {!isClassic && soundOn ? (
               <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
             ) : (
               <VolumeX className="w-3.5 h-3.5 text-zinc-500" />
             )}
-            <span>{soundOn ? 'Sound On' : 'Muted'}</span>
+            <span>{isClassic ? 'Silent · Classic' : soundOn ? 'Sound On' : 'Muted'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleReset}
-            className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer transition-all flex items-center gap-1"
+            className="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer transition-[color,box-shadow,opacity,transform] flex items-center gap-1"
             title="Reset to default Classic Dark style"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -139,7 +140,7 @@ export const LightingLab: React.FC = () => {
                 key={mat.id}
                 type="button"
                 onClick={() => {
-                  audioEngine.playClick(isMatClassic ? 'button' : 'metal');
+                  audioEngine.playClick('metal', mat.id as MetalMaterialId);
                   setMaterial(mat.id as MetalMaterialId);
                   toast({
                     title: `Global Style: ${mat.name}`,
@@ -160,10 +161,10 @@ export const LightingLab: React.FC = () => {
                         boxShadow: `var(--shadow-convex-sm)`,
                       }
                     : {
-                        padding: isSelected ? '1.5px' : '1px',
+                        padding: '1px',
                       }
                 }
-                className={`relative h-14 rounded-xl overflow-hidden cursor-pointer transition-all text-left focus:outline-none ${
+                className={`relative h-14 rounded-xl overflow-hidden cursor-pointer transition-[color,box-shadow,opacity,transform] text-left focus:outline-none ${
                   isMatClassic ? 'border border-transparent px-2.5 py-2 flex items-center gap-2' : ''
                 } ${
                   isSelected
@@ -174,8 +175,7 @@ export const LightingLab: React.FC = () => {
                 {!isMatClassic && (
                   <WebGLBezelCanvas
                     material={mat.id as MetalMaterialId}
-                    hovered={isSelected}
-                    sweepDeg={0}
+                    hovered={false}
                     canvasWidth={150}
                     canvasHeight={64}
                   />
@@ -215,7 +215,7 @@ export const LightingLab: React.FC = () => {
       </div>
 
       {/* Filled metal faces have their own contrast, independent of the diagonal rim. */}
-      <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] items-center gap-6 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
+      <div className="immortal-container grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] items-center gap-6 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
         <div className="flex min-w-0 flex-col gap-3">
           <div className="flex items-center justify-between gap-4 text-xs font-medium text-zinc-300">
             <label htmlFor={surfaceGradientId}>Surface Gradient Amplitude</label>
@@ -244,7 +244,7 @@ export const LightingLab: React.FC = () => {
       </div>
 
       {/* Section 2: 4 Core WebGL Shader Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
+      <div className="immortal-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-2xl bg-black/45 border border-white/[0.06]">
         {/* 1. Dispersion */}
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-xs text-zinc-300 font-medium">
@@ -309,7 +309,7 @@ export const LightingLab: React.FC = () => {
           <button
             type="button"
             onClick={() => {
-              audioEngine.playClick('switch');
+              playSound('switch');
               setAutoFlow(!autoFlow);
             }}
             className={`h-9 px-3 rounded-xl border text-xs font-medium flex items-center justify-between cursor-pointer transition-colors ${
@@ -352,7 +352,7 @@ export const LightingLab: React.FC = () => {
               type="button"
               aria-pressed={hoverSweepDeg === p.deg}
               onClick={() => {
-                audioEngine.playClick('select');
+                playSound('select');
                 setHoverSweepDeg(p.deg);
               }}
               className={`px-2.5 py-1 rounded-lg text-[11px] cursor-pointer transition-colors ${

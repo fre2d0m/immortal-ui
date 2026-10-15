@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { ImmortalButton } from './ImmortalComponents';
-import { audioEngine } from './AudioEngine';
+import { useMaterialSound } from './WebGLMetalEngine';
 
 export interface ImmortalModalProps {
   isOpen: boolean;
@@ -20,6 +20,7 @@ export const ImmortalModal: React.FC<ImmortalModalProps> = ({
   children,
   footer,
 }) => {
+  const playSound = useMaterialSound();
   if (!isOpen) return null;
 
   return (
@@ -31,9 +32,9 @@ export const ImmortalModal: React.FC<ImmortalModalProps> = ({
           backgroundClip: 'padding-box, border-box',
           boxShadow: `0 24px 50px rgba(0, 0, 0, 0.95), var(--shadow-convex)`,
         }}
-        className="w-full max-w-lg rounded-2xl sm:rounded-3xl border border-transparent p-6 flex flex-col gap-5 animate-in zoom-in-95 duration-200"
+        className="immortal-container w-full max-w-lg rounded-2xl sm:rounded-3xl border border-transparent p-6 flex flex-col gap-5 animate-in zoom-in-95 duration-200"
       >
-        <div className="flex items-start justify-between border-b border-white/[0.08] pb-4">
+        <div className="immortal-container flex items-start justify-between border-b border-white/[0.08] pb-4">
           <div>
             <h3 className="text-base sm:text-lg font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
               {title}
@@ -45,7 +46,7 @@ export const ImmortalModal: React.FC<ImmortalModalProps> = ({
           <button
             type="button"
             onClick={() => {
-              audioEngine.playClick('button');
+              playSound('button');
               onClose();
             }}
             className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
@@ -56,7 +57,7 @@ export const ImmortalModal: React.FC<ImmortalModalProps> = ({
 
         <div className="py-1 text-sm text-zinc-300">{children}</div>
 
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
+        <div className="immortal-container flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
           {footer ? (
             footer
           ) : (
@@ -68,7 +69,6 @@ export const ImmortalModal: React.FC<ImmortalModalProps> = ({
                 variant="metallic"
                 size="sm"
                 onClick={() => {
-                  audioEngine.playClick('metal');
                   onClose();
                 }}
               >

@@ -25,8 +25,8 @@ export function CodeBlock({
     }
   }
   return (
-    <div className="min-w-0 overflow-hidden rounded-xl border border-white/10 bg-[#08080a]">
-      <div className="flex items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-2 text-[11px] text-zinc-500">
+    <div className="immortal-container min-w-0 overflow-hidden rounded-xl border border-white/10 bg-[#08080a]">
+      <div className="immortal-container flex items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-2 text-[11px] text-zinc-500">
         <span className="font-mono">{label}</span>
         <button
           type="button"

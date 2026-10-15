@@ -57,8 +57,8 @@ const MetalEmblemShowcaseButton: React.FC<{
         }}
         onMouseDown={() => setPressed(true)}
         onMouseUp={() => setPressed(false)}
-        onClick={() => {
-          audioEngine.playClick('metal');
+        onClick={(event) => {
+          event.stopPropagation();
           onSelect();
         }}
         style={{
@@ -183,7 +183,7 @@ void main() {
 
   const handleSelectGlobalMaterial = (matId: MetalMaterialId) => {
     const mat = METAL_MATERIALS[matId];
-    audioEngine.playClick(matId === 'classic' ? 'button' : 'metal');
+    audioEngine.playClick('metal', matId);
     setMaterial(matId);
     toast({
       title: `Global Style: ${mat.name}`,
@@ -204,9 +204,9 @@ void main() {
           backgroundClip: 'padding-box, border-box',
           boxShadow: `var(--shadow-convex)`,
         }}
-        className="p-6 sm:p-7 rounded-3xl border border-transparent flex flex-col gap-6 transition-all duration-200"
+        className="immortal-container p-6 sm:p-7 rounded-3xl border border-transparent flex flex-col gap-6 transition-[color,background-color,border-color,box-shadow,opacity,transform] duration-200"
       >
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.07] pb-4">
+        <div className="immortal-container flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.07] pb-4">
           <div>
             <div className="flex items-center gap-2.5">
               <ImmortalBadge dotColor="amber">
@@ -247,7 +247,7 @@ void main() {
             backgroundOrigin: 'padding-box, border-box',
             backgroundClip: 'padding-box, border-box',
           }}
-          className="p-4 rounded-2xl border border-transparent flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4"
+          className="immortal-container p-4 rounded-2xl border border-transparent flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4"
         >
           <div className="flex items-center gap-2.5 shrink-0">
             <span
@@ -306,7 +306,7 @@ void main() {
                   backgroundOrigin: 'padding-box, border-box',
                   backgroundClip: 'padding-box, border-box',
                 }}
-                className={`p-4 rounded-2xl border border-transparent transition-all flex flex-col justify-between gap-4 cursor-pointer ${
+                className={`p-4 rounded-2xl border border-transparent transition-[color,background-color,border-color,box-shadow,opacity,transform] flex flex-col justify-between gap-4 cursor-pointer ${
                   isSelected
                     ? 'shadow-[0_0_28px_rgba(255,255,255,0.08)]'
                     : 'opacity-90 hover:opacity-100'
@@ -342,7 +342,7 @@ void main() {
                           }
                         : {}
                     }
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono cursor-pointer transition-all shrink-0 ${
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-mono cursor-pointer transition-[color,background-color,border-color,box-shadow,opacity,transform] shrink-0 ${
                       isSelected
                         ? 'font-bold shadow-sm'
                         : 'bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/15'
@@ -355,7 +355,7 @@ void main() {
                 {/* Dark Squircle + Light Circle in this Metal */}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-around py-3 px-2 rounded-xl bg-[#050507] border border-white/[0.04]"
+                  className="immortal-container flex items-center justify-around py-3 px-2 rounded-xl bg-[#050507] border border-white/[0.04]"
                 >
                   <div className="flex flex-col items-center gap-1.5">
                     <MetalEmblemShowcaseButton
@@ -383,8 +383,8 @@ void main() {
         </div>
 
         {/* WebGL GLSL Source Code Exporter */}
-        <div className="rounded-2xl border border-white/[0.08] overflow-hidden bg-[#050507]">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-zinc-950/80">
+        <div className="immortal-container rounded-2xl border border-white/[0.08] overflow-hidden bg-[#050507]">
+          <div className="immortal-container flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-zinc-950/80">
             <div className="flex items-center gap-2 text-xs font-medium text-zinc-200">
               <Code2 className="w-4 h-4" style={{ color: activePreset.accentHex }} />
               <span>Solution C · Multi-Metal WebGL GLSL Fragment Shader Source</span>

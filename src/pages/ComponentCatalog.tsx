@@ -127,7 +127,7 @@ export function ComponentCatalog({ query = "" }: { query?: string }) {
         </p>
       )}
       {!items.length && (
-        <div className="flex gap-3 rounded-xl border border-white/10 p-6 text-sm text-zinc-400">
+        <div className="immortal-container flex gap-3 rounded-xl border border-white/10 p-6 text-sm text-zinc-400">
           <SearchX size={18} />
           <p>No matching components. Try “button”, “form”, or “feedback”.</p>
         </div>
@@ -149,12 +149,12 @@ export function ComponentCatalog({ query = "" }: { query?: string }) {
                 <a
                   key={item.id}
                   href={`#/components/${item.id}`}
-                  className="catalog-card group min-w-0 overflow-hidden rounded-2xl border border-white/[0.08] transition-colors hover:border-white/20"
+                  className="immortal-container catalog-card group min-w-0 overflow-hidden rounded-2xl border border-white/[0.08] transition-colors hover:border-white/20"
                 >
                   <div
                     inert
                     aria-hidden="true"
-                    className="pointer-events-none flex h-[150px] items-center justify-center border-b border-white/[0.06] bg-black/20 px-5"
+                    className="immortal-container pointer-events-none flex h-[150px] items-center justify-center border-b border-white/[0.06] bg-black/20 px-5"
                   >
                     <div className="w-full max-w-[280px]">
                       <Thumbnail id={item.id} />
