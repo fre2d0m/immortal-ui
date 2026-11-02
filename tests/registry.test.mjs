@@ -116,12 +116,12 @@ test("Graphite ships both modes, state rules and accessibility fallbacks", () =>
   }
   assert.equal(read("public/themes/graphite.css"), read("registry/immortal/styles/graphite.css"));
   for (const [token, value] of Object.entries({
-    "text-xs": "14px",
-    "text-sm": "14px",
-    "text-base": "16px",
-    "text-xs--line-height": "20px",
-    "text-sm--line-height": "20px",
-    "text-base--line-height": "24px",
+    "text-xs": "var(--support-font-size)",
+    "text-sm": "var(--support-font-size)",
+    "text-base": "var(--body-font-size)",
+    "text-xs--line-height": "calc(var(--support-font-size) * 10 / 7)",
+    "text-sm--line-height": "calc(var(--support-font-size) * 10 / 7)",
+    "text-base--line-height": "calc(var(--body-font-size) * 1.5)",
   })) assert.equal(theme.cssVars.theme[token], value, token);
   const css = JSON.stringify(theme.css);
   for (const token of [

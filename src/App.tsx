@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Moon, Sun, CodeXml, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,15 @@ import { DocsPage } from "@/pages/DocsPage";
 import { ThemePage } from "@/pages/ThemePage";
 import { useRoute } from "@/lib/navigation";
 import { catalog } from "@/content/catalog";
+import { useThemeSettings } from "@/hooks/use-theme-settings";
 import "./site.css";
+import "./theme-editor.css";
+
+const ThemePanel = lazy(() =>
+  import("@/components/theme-panel").then((module) => ({
+    default: module.ThemePanel,
+  })),
+);
 
 const nav = [
   { name: "Components", path: "/components" },
@@ -71,16 +79,11 @@ function Sidebar({
 }
 export default function App() {
   const path = useRoute();
-  const [dark, setDark] = useState(() =>
-    document.documentElement.classList.contains("dark"),
-  );
+  const { settings, updateSettings, storageAvailable } = useThemeSettings();
+  const dark = settings.mode === "dark";
+  const [panelOpen, setPanelOpen] = useState(true);
+  const themePage = path === "/theme" || path === "/materials";
   const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-    try {
-      localStorage.setItem("immortal-theme", dark ? "dark" : "light");
-    } catch {}
-  }, [dark]);
   useEffect(() => {
     setMenuOpen(false);
     document.title = `Immortal UI — ${path === "/" ? "Interfaces for the physical world" : (catalog.find((item) => path.endsWith(item.name))?.title ?? "IoT registry")}`;
@@ -93,7 +96,21 @@ export default function App() {
   else if (path === "/blocks") page = <CatalogPage key="blocks" kind="block" />;
   else if (path.startsWith("/components/") || path.startsWith("/blocks/"))
     page = <ItemPage key={path} name={path.split("/")[2]} />;
-  else if (path === "/theme" || path === "/materials") page = <ThemePage />;
+  else if (themePage)
+    page = (
+      <ThemePage
+        settings={settings}
+        panelOpen={panelOpen}
+        onOpen={() => {
+          setPanelOpen(true);
+          requestAnimationFrame(() =>
+            document
+              .querySelector<HTMLInputElement>(".theme-search-bar input")
+              ?.focus(),
+          );
+        }}
+      />
+    );
   else if (path.startsWith("/docs")) page = <DocsPage />;
   else
     page = (
@@ -148,7 +165,7 @@ export default function App() {
               aria-label={
                 dark ? "Switch to light theme" : "Switch to dark theme"
               }
-              onClick={() => setDark(!dark)}
+              onClick={() => updateSettings({ mode: dark ? "light" : "dark" })}
             >
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </Button>
@@ -164,19 +181,40 @@ export default function App() {
           </div>
         </div>
       </header>
-      <div className={home ? "site-home" : "site-layout"}>
-        {!home && (
-          <aside className="site-sidebar">
-            <Sidebar path={path} />
-          </aside>
+      <div className="theme-workspace" data-panel-open={themePage && panelOpen}>
+        <div className={home ? "site-home" : "site-layout"}>
+          {!home && (
+            <aside className="site-sidebar">
+              <Sidebar path={path} />
+            </aside>
+          )}
+          <main
+            id="main"
+            tabIndex={-1}
+            className={home ? "home-main" : "docs-main"}
+          >
+            {page}
+          </main>
+        </div>
+        {themePage && panelOpen && (
+          <Suspense
+            fallback={
+              <aside className="theme-editor" aria-busy="true">
+                正在加载样式配置…
+              </aside>
+            }
+          >
+            <ThemePanel
+              settings={settings}
+              onChange={updateSettings}
+              storageAvailable={storageAvailable}
+              onClose={() => {
+                setPanelOpen(false);
+                document.getElementById("open-theme-editor")?.focus();
+              }}
+            />
+          </Suspense>
         )}
-        <main
-          id="main"
-          tabIndex={-1}
-          className={home ? "home-main" : "docs-main"}
-        >
-          {page}
-        </main>
       </div>
       <footer className="site-footer">
         <a href="#/" className="brand">

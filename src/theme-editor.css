@@ -1,0 +1,393 @@
+/* Editor layout is separate from the exportable material theme. */
+.theme-workspace {
+  min-width: 0;
+}
+.theme-workspace > .site-layout {
+  min-width: 0;
+}
+.theme-editor {
+  /* Keep the editor readable even when the preview colors are experimental. */
+  --popover: #f8f8f6;
+  --foreground: #252525;
+  --border: #d2d2cf;
+  --primary: #303030;
+  --primary-foreground: #fafafa;
+  --secondary: #e7e7e5;
+  --accent: #dededb;
+  --input: #c8c8c4;
+  --field-background: #f6f6f3;
+  --muted-foreground: #646461;
+  --destructive: #b93838;
+  --warning: #ab6a12;
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 40;
+  max-height: 56dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 22px 20px max(20px, env(safe-area-inset-bottom));
+  background: var(--popover);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -16px 48px rgb(0 0 0 / 0.2);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.dark .theme-editor {
+  --popover: #292929;
+  --foreground: #ededeb;
+  --border: #454545;
+  --primary: #dededc;
+  --primary-foreground: #202020;
+  --secondary: #353535;
+  --accent: #414141;
+  --input: #515151;
+  --field-background: #202020;
+  --muted-foreground: #b2b2ae;
+  --destructive: #f28b82;
+  --warning: #f5af60;
+}
+.theme-editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.theme-editor h2 {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.theme-editor-kicker {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+}
+.theme-editor-description {
+  margin: 12px 0 20px;
+  color: var(--muted-foreground);
+  text-wrap: pretty;
+}
+.theme-editor fieldset {
+  margin: 0 0 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  min-width: 0;
+}
+.theme-editor legend {
+  padding-right: 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.theme-editor label {
+  font-size: 14px;
+}
+.theme-editor button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--secondary);
+  color: var(--foreground);
+  font: inherit;
+  transition:
+    background-color 140ms ease-out,
+    scale 100ms ease-out;
+}
+.theme-editor button:active {
+  scale: 0.96;
+}
+@media (hover: hover) {
+  .theme-editor button:hover:not(:active):not([aria-pressed="true"]) {
+    background: var(--accent);
+  }
+}
+.theme-editor .theme-editor-icon {
+  display: grid;
+  place-items: center;
+  min-width: 40px;
+  padding: 0;
+  background: transparent;
+}
+.theme-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.theme-mode button[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+.theme-color-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.theme-color-row input {
+  width: 100%;
+  height: 42px;
+  min-width: 0;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  background: var(--field-background);
+  color: var(--foreground);
+  padding: 8px 10px;
+}
+.theme-color-row input[type="color"] {
+  padding: 4px;
+  cursor: pointer;
+}
+.theme-color-row input[aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+.theme-editor-hint {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.theme-editor .theme-editor-text {
+  border: 0;
+  background: transparent;
+  padding-inline: 0;
+  font-size: 14px;
+}
+.theme-range {
+  margin-bottom: 12px;
+}
+.theme-range > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.theme-range output {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.theme-range input[type="range"] {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.theme-editor .lucide {
+  stroke-width: 2;
+}
+.theme-editor :is(input, select, textarea):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.theme-editor button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.theme-search-bar {
+  display: flex;
+  gap: 6px;
+  padding: 12px 0 0;
+  margin-bottom: 0;
+  background: var(--popover);
+}
+.theme-search-bar input,
+.theme-editor select,
+.theme-number-row input[type="number"],
+.theme-shadow-control textarea {
+  min-width: 0;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid var(--input);
+  border-radius: 8px;
+  background: var(--field-background);
+  color: var(--foreground);
+  font: inherit;
+}
+.theme-search-bar button {
+  flex-shrink: 0;
+}
+.theme-config-group {
+  border-top: 1px solid var(--border);
+}
+.theme-config-group summary {
+  min-height: 48px;
+  align-content: center;
+  cursor: pointer;
+  font-weight: 600;
+}
+.theme-config-group summary span {
+  float: right;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  font-weight: 400;
+}
+.theme-config-group summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+.theme-config-body {
+  padding: 8px 0 16px;
+}
+.theme-config-body > .theme-editor-hint:first-child {
+  margin: 0 0 12px;
+}
+.theme-range > .theme-number-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px 24px;
+  align-items: center;
+  gap: 6px;
+}
+.theme-number-row input[type="number"] {
+  padding-inline: 5px;
+  font-variant-numeric: tabular-nums;
+}
+.theme-number-row > span {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.theme-token-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.theme-editor .theme-token-reset {
+  font-size: 14px;
+  background: transparent;
+  padding: 6px;
+  min-width: 40px;
+}
+.theme-token-color,
+.theme-shadow-control {
+  margin-bottom: 16px;
+}
+.theme-token-color .theme-color-row {
+  margin-top: 0;
+}
+.theme-alpha-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.theme-alpha-row label,
+.theme-alpha-row output {
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.theme-alpha-row input {
+  min-width: 0;
+  flex: 1;
+  height: 40px;
+  accent-color: var(--primary);
+}
+.theme-alpha-row output {
+  min-width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.theme-select-label {
+  display: block;
+  margin: 10px 0 6px;
+}
+.theme-shadow-control textarea {
+  resize: vertical;
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.theme-editor [aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+.theme-check {
+  display: flex;
+  gap: 10px;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.theme-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+.theme-export-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.theme-editor .theme-editor-reset {
+  width: 100%;
+  margin-top: 14px;
+  background: transparent;
+}
+.theme-editor-message {
+  margin-top: 10px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.theme-editor-warning {
+  color: var(--warning);
+  margin-bottom: 16px;
+}
+@media (min-width: 1200px) {
+  .theme-workspace[data-panel-open="true"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    align-items: start;
+  }
+  .theme-editor {
+    position: sticky;
+    top: 72px;
+    max-height: calc(100dvh - 72px);
+    height: calc(100dvh - 72px);
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-editor button {
+    transition: none;
+  }
+  .theme-editor button:active {
+    scale: 1;
+  }
+}
+
+.theme-editor input,
+.theme-editor select,
+.theme-editor textarea {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.theme-editor button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+@media (max-width: 1199px) {
+  .theme-workspace[data-panel-open="true"] {
+    padding-bottom: 56dvh;
+  }
+}
+
+.theme-editor-toolbar {
+  position: sticky;
+  top: -22px;
+  z-index: 2;
+  padding-block: 8px 12px;
+  background: var(--popover);
+}

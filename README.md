@@ -62,6 +62,14 @@ The production build targets `https://immortal.build/r/{name}.json`. Use this or
 
 The 14 local foundation primitives come from the official shadcn CLI. Registry dependencies resolve upstream primitives directly. Custom files use `@components/` and `@lib/` target placeholders to respect consumer aliases. Showcase routes, fixtures, branding, and global providers are not installed as dependencies.
 
+## Theme Studio
+
+Open [Theme](https://immortal.build/#/theme) to use the configuration panel migrated from the Slopevia Design Lab. Changes preview across the showcase and save in this browser. Light/dark palettes remain separate; fonts, dimensions, component radii, spacing, tabs and shadows share the same export logic as the preview. Desktop uses a side panel; narrow screens use a collapsible bottom panel.
+
+Download or copy the full customized CSS for Tailwind v4 + shadcn/ui. Export/import JSON to keep editing elsewhere; older Design Lab v1 JSON is accepted when its values are valid. Body text defaults to 16px, supporting text stays at least 14px, and imports below the 14px body minimum are rejected. Reset restores the current Graphite theme. Controls belonging only to the original Lab's sidebar are omitted from this showcase; existing sidebar tokens in imported JSON remain in exported CSS.
+
+The editor reads `registry/immortal/styles/graphite.css` directly. Its UI, browser storage and settings helpers live under `src/` and are not installed with registry components.
+
 ## Integration contracts
 
 Components receive typed data. `Device` includes identity, location, status, protocol, RSSI, battery, and display-ready last-seen text. Status is always accompanied by a label. RSSI uses dBm; its thresholds are display heuristics to adapt for your radio technology. Use `null` for unavailable RSSI and battery readings.
