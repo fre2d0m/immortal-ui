@@ -1,27 +1,23 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
     "module": "ESNext",
     "types": ["vite/client"],
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/components/iot/*": ["./registry/immortal/components/*"],
+      "@/components/blocks/*": ["./registry/immortal/blocks/*"],
+      "@/*": ["./src/*"],
+      "@/lib/telemetry": ["./registry/immortal/components/telemetry.ts"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "include": ["src", "registry/**/*.ts", "registry/**/*.tsx", "vite.config.ts"]
 }

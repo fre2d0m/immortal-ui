@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signal-strength",
+  "title": "Signal strength",
+  "description": "RSSI bars with a numeric dBm reading and an explicit unavailable state.",
+  "dependencies": [
+    "cn"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/immortal/components/signal-strength.tsx",
+      "content": "import { cn } from \"cn\";\n\n/** RSSI is in dBm. Null means unavailable, never zero signal. */\nexport function SignalStrength({\n  rssi,\n  className,\n}: {\n  rssi: number | null;\n  className?: string;\n}) {\n  const known = rssi !== null && Number.isFinite(rssi);\n  const bars = !known\n    ? 0\n    : rssi >= -55\n      ? 4\n      : rssi >= -67\n        ? 3\n        : rssi >= -80\n          ? 2\n          : 1;\n  const quality = [\"Unavailable\", \"Weak\", \"Fair\", \"Good\", \"Excellent\"][bars];\n  return (\n    <span\n      className={cn(\n        \"inline-flex items-center gap-2.5 text-xs tabular-nums text-muted-foreground\",\n        className,\n      )}\n      aria-label={\n        known ? `${quality} signal, ${rssi} dBm` : \"Signal unavailable\"\n      }\n    >\n      <span className=\"flex h-3.5 items-end gap-0.5\" aria-hidden=\"true\">\n        {[1, 2, 3, 4].map((level) => (\n          <span\n            key={level}\n            className={cn(\n              \"w-1 rounded-[1px]\",\n              level <= bars ? \"bg-current\" : \"bg-current/20\",\n            )}\n            style={{ height: `${level * 25}%` }}\n          />\n        ))}\n      </span>\n      <span aria-hidden=\"true\">{known ? `${rssi} dBm` : \"—\"}</span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/signal-strength.tsx"
+    }
+  ],
+  "categories": [
+    "iot"
+  ],
+  "type": "registry:component"
+}

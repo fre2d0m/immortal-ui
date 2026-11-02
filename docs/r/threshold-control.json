@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "threshold-control",
+  "title": "Threshold control",
+  "description": "A controlled operating range with numeric inputs, keyboard sliders, and validation.",
+  "dependencies": [
+    "cn",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "input",
+    "label",
+    "slider",
+    "https://immortal.build/r/telemetry.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/threshold-control.tsx",
+      "content": "\"use client\";\n\nimport { useId } from \"react\";\nimport { Input } from \"@/components/ui/input\";\nimport { Label } from \"@/components/ui/label\";\nimport { Slider } from \"@/components/ui/slider\";\nimport { isValidThreshold } from \"@/lib/telemetry\";\n\nexport type Threshold = { low: number; high: number };\nexport function ThresholdControl({\n  value,\n  onValueChange,\n  min = 0,\n  max = 100,\n  step = 1,\n  unit = \"\",\n  disabled = false,\n}: {\n  value: Threshold;\n  onValueChange: (value: Threshold) => void;\n  min?: number;\n  max?: number;\n  step?: number;\n  unit?: string;\n  disabled?: boolean;\n}) {\n  const id = useId();\n  const valid = isValidThreshold(value, min, max);\n  const sliderValues = [value.low, value.high]\n    .map((number, index) =>\n      Number.isFinite(number)\n        ? Math.max(min, Math.min(max, number))\n        : index === 0\n          ? min\n          : max,\n    )\n    .sort((a, b) => a - b);\n  return (\n    <fieldset disabled={disabled} className=\"space-y-5\">\n      <legend className=\"mb-4 text-sm font-medium\">\n        Operating range {unit && `(${unit})`}\n      </legend>\n      <Slider\n        min={min}\n        max={max}\n        step={step}\n        minStepsBetweenThumbs={1}\n        value={sliderValues}\n        disabled={disabled}\n        aria-label=\"Operating range\"\n        onValueChange={([low, high]) => onValueChange({ low, high })}\n      />\n      <div className=\"grid grid-cols-2 gap-3\">\n        {([\"low\", \"high\"] as const).map((key) => (\n          <div key={key} className=\"space-y-2\">\n            <Label htmlFor={`${id}-${key}`}>\n              {key === \"low\" ? \"Lower limit\" : \"Upper limit\"}\n            </Label>\n            <Input\n              id={`${id}-${key}`}\n              type=\"number\"\n              min={min}\n              max={max}\n              step={step}\n              value={Number.isFinite(value[key]) ? value[key] : \"\"}\n              aria-invalid={!valid}\n              aria-describedby={!valid ? `${id}-error` : undefined}\n              onChange={(event) =>\n                onValueChange({ ...value, [key]: event.target.valueAsNumber })\n              }\n            />\n          </div>\n        ))}\n      </div>\n      {!valid && (\n        <p id={`${id}-error`} role=\"alert\" className=\"text-xs text-destructive\">\n          Set a lower limit below the upper limit, between {min} and {max}.\n        </p>\n      )}\n    </fieldset>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/threshold-control.tsx"
+    }
+  ],
+  "categories": [
+    "iot"
+  ],
+  "type": "registry:component"
+}

@@ -1,189 +1,126 @@
 # Immortal UI
 
-Dark skeuomorphic React components with sculpted surfaces, diagonal specular rims, and optional WebGL metal materials. Inspired by shadcn/ui, Linear, and X.
+**shadcn/ui + material + IoT.** A source registry for device identity, signal quality, telemetry, operating ranges, fleet operations, and alert review.
 
-Immortal UI includes an interactive component showcase, example layouts, and copyable React and HTML/CSS snippets. The repository is a Vite application with reusable component source; it does not currently ship an npm package or an installation CLI.
+The name and platinum Merkaba mark continue from the previous visual exploration. **Graphite Instrument** adapts the supplied Tailwind v4 / shadcn stylesheet, including its final exported overrides: neutral graphite primary actions, 14px base typography, 32px visual control height, 24px card padding, 8px button corners, 22.4px panel corners, and a 1440px content width. Tab corners are 15px with 14px horizontal / 5px vertical padding. Light and dark modes share the same depth and interaction rules.
 
-Live preview: [immortal.build](https://immortal.build/).
+## Local development
 
-## Quick start
-
-Use **Node.js 22.22 or later in the Node.js 22 release line**, matching the Node.js 22 environment used by the deployment workflow.
+Use Node.js **22.22 or newer**.
 
 ```bash
-git clone https://github.com/fre2d0m/immortal-ui.git
-cd immortal-ui
-npm install --legacy-peer-deps
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The showcase runs entirely in the browser and does not require an API key.
+Open **http://127.0.0.1:4177**. The dev command builds registry dependencies against this local origin, so the install commands displayed in the UI work before publication.
 
 ```bash
-npm test         # Audio and renderer regression tests
-npm run lint     # TypeScript checks
-npm run build    # Production assets in dist/
-npm run preview  # Preview the production build locally
+npm run registry:build  # Official shadcn build → public/r/
+npm run lint            # Strict TypeScript checks
+npm test                # Registry contracts and telemetry regression checks
+npm run build           # Production registry + showcase → dist/
+npm run preview         # Preview dist/ on port 4177; stop dev first
 ```
 
-## Materials and interactions
+Override the generated dependency origin with `REGISTRY_BASE_URL=http://127.0.0.1:4180 npm run registry:build`. The canonical root `registry.json` always uses the production origin; local URL rewriting only affects generated install payloads.
 
-- **Classic Dark** is the default pure CSS material. Convex buttons and cards sit alongside recessed inputs and switch tracks, with 1px diagonal specular rims.
-- **Six WebGL metals** are available globally or through a component's `material` prop: Royal Gold (`gold`), Platinum Chrome (`platinum`), Obsidian Titanium (`obsidian`), Cobalt Blue (`cobalt`), Rose Gold (`rosegold`), and Emerald Titanium (`emerald`).
-- **Optical controls** adjust the rim angle, bevel width, highlight intensity, and hover sweep. The default hover behavior is **+90° Quarter Turn**, including after resetting defaults. Buttons support per-component overrides such as `sweepDeg={0}`, `sweepDeg={180}`, and `sweepDeg={360}`.
-- **Surface Gradient Amplitude** controls the bright-to-dark range on filled metallic buttons: 0% is flat, 100% is full contrast, and the default is 35%. Adjust it in the Style & Physical Metal Customizer, or use `surfaceGradientAmplitude` and `setSurfaceGradientAmplitude` from `useMetalConfig`. It follows the rim angle while leaving the WebGL edge highlights and Classic Dark buttons unchanged.
-- **Responsive hairlines** use 0.5 CSS pixels for cards, panels, menus, and dividers at device pixel ratios of 2 or above; controls retain 1px borders. Lower-density screens use 1px throughout.
-- **On-demand metal rendering** draws visible surfaces when their appearance changes, animates hover/focus transitions until settled, and runs continuously only for visible surfaces with Auto Flow enabled. Offscreen and background-tab surfaces stop drawing. Classic controls share the default Quarter Turn, while passive badges stay static.
-- **Material sound** keeps Classic Dark silent, including its metallic-looking buttons. Metal controls use their actual global, local, or per-component finish for a short synthesized impact, with no external audio assets.
+## Install into a product
 
-## Material sound
-
-Chrome is bright and precise; gold is warm and rounded; black titanium is low and tightly damped. Cobalt has a crisp, cool strike, rose gold a softer copper-like resonance, and emerald titanium a light, clear ring. These are designed sonic identities. Buttons, selections, and switches share the material's tone with different weight and decay; typing, hover, and passive notifications are quiet.
-
-The material lab's sound toggle and the examples' **Metal interaction sounds** checkbox share one master mute preference. It survives page navigation and material resets within the session; it also silences local metal workspaces. The Classic Dark toggle displays **Silent · Classic**. Selecting a metal auditions its own tone when sound is enabled.
-
-`useMaterialSound(material?)` resolves the same material context as the visible control. Direct callers must pass the material explicitly, for example `audioEngine.playClick('select', 'gold')`; omitting the material stays silent. `useSoundEnabled()` subscribes to the shared mute state, and `audioEngine.enabled = false` mutes every finish. One lazily created AudioContext reuses cached PCM buffers, limits overlapping voices, drops stale autoplay unlock requests, and disconnects finished sources.
-
-Export the production sounds and a six-material comparison (button, selection, switch for each finish) with Node.js 22.22 or later:
+Start with a React + Tailwind CSS v4 project and a configured import alias. The showcase uses the current shadcn **Radix Nova** style.
 
 ```bash
-node design/scripts/export-sounds.cjs ./design/audio
+npx shadcn@latest init
+npx shadcn@latest add http://127.0.0.1:4177/r/graphite.json
+npx shadcn@latest add http://127.0.0.1:4177/r/fleet-overview.json
 ```
 
-## Brand mark
+Add `class="dark"` to the HTML root for the dark appearance. Graphite is an explicit global theme installation: it updates tokens and state rules in the stylesheet configured by `components.json`. Components can also be installed without Graphite to use an existing shadcn theme.
 
-The shared mark is a bevelled platinum **Merkaba**, built from two interpenetrating tetrahedral frames. Its three-dimensional geometry, face occlusion, and metallic reflections are projected into SVG for the navigation, emblem previews, and favicon. Only the homepage wordmark uses the same frame geometry in a WebGL scene: a slow 48-second rotation, a smooth 90° reflection sweep on hover, and a moving studio strip while hovered. It pauses offscreen and in background tabs, and uses the static SVG when reduced motion is requested or WebGL is unavailable.
+For a namespace, merge this entry into the consuming application's `components.json`:
 
-Edit `src/lib/merkabaMark.ts` and regenerate `public/immortal-mark.svg` and `public/favicon.svg` with:
+```json
+{
+  "registries": {
+    "@immortal": "http://127.0.0.1:4177/r/{name}.json"
+  }
+}
+```
 
 ```bash
-node --experimental-strip-types design/scripts/export-mark.ts
+npx shadcn@latest add @immortal/telemetry-card
 ```
 
-`design/merkaba-mark.html` is the large master and small-size inspection sheet; `design/merkaba-motion.html` previews the animated homepage version. Both are available through the Vite development server.
+The production build targets `https://immortal.build/r/{name}.json`. Use this origin for production installations and the local URLs during development. Discovery is available at `/r/registry.json`. The manual stylesheet at `/themes/graphite.css` imports `tailwindcss`, `tw-animate-css`, and `shadcn/tailwind.css`.
 
-## Components
+## Registry contents
 
-The core components are exported from `src/components/ImmortalComponents.tsx`:
+- **Style:** `graphite` — material, typography, light/dark colors, interaction states, reduced motion, and forced colors.
+- **Utility:** `telemetry` — gap-aware time-series geometry and operating-range validation.
+- **Components:** `device-status`, `signal-strength`, `telemetry-chart`, `telemetry-card`, `device-card`, `threshold-control`.
+- **Blocks:** `fleet-overview`, `device-control`, `alert-console`.
 
-- `ImmortalButton` — button variants, sizes, loading state, and material overrides.
-- `ImmortalInput` and `ImmortalTextarea` — recessed text fields.
-- `ImmortalSelect` — dropdown with labels and option descriptions.
-- `ImmortalSwitch`, `ImmortalCheckbox`, and `ImmortalRadioGroup` — selection controls.
-- `ImmortalSlider` — numeric slider with optional label and unit.
-- `ImmortalTabs` — segmented navigation.
-- `ImmortalBadge` — capsule badge with a status dot.
-- `ImmortalCard` — container with optional title, description, badge, and header action.
+The 14 local foundation primitives come from the official shadcn CLI. Registry dependencies resolve upstream primitives directly. Custom files use `@components/` and `@lib/` target placeholders to respect consumer aliases. Showcase routes, fixtures, branding, and global providers are not installed as dependencies.
 
-`ImmortalModal` is exported from `src/components/ImmortalModal.tsx`. Toast notifications use `ToastProvider` and `useToast` from `src/components/ImmortalToast.tsx`.
+## Integration contracts
 
-## Use the components
+Components receive typed data. `Device` includes identity, location, status, protocol, RSSI, battery, and display-ready last-seen text. Status is always accompanied by a label. RSSI uses dBm; its thresholds are display heuristics to adapt for your radio technology. Use `null` for unavailable RSSI and battery readings.
 
-Inside this repository, import components from their source files and wrap the interface in `MetalConfigProvider`. Add `ToastProvider` when using toast notifications. The application entry point imports `src/index.css` for the shared surface styles, optical effects, and Tailwind utilities.
+`TelemetryPoint` is `{ timestamp: number; value: number | null }`. Timestamps are epoch milliseconds, displayed in UTC. Missing/non-finite readings split the line; empty and single-point inputs are supported. An optional table exposes readings without requiring a pointer. Aggregate dense streams before passing them to a compact chart.
+
+Configuration and acknowledgement callbacks are async. Reject on failure and update parent data after success. Pending, validation, offline, empty, and error states are included.
 
 ```tsx
-import { ImmortalButton, ImmortalCard } from './components/ImmortalComponents';
-import { ToastProvider, useToast } from './components/ImmortalToast';
-import { MetalConfigProvider } from './components/WebGLMetalEngine';
+import { DeviceControl } from "@/components/blocks/device-control"
 
-function Example() {
-  const { toast } = useToast();
-
-  return (
-    <ImmortalCard title="Immortal UI">
-      <ImmortalButton
-        variant="metallic"
-        material="gold"
-        onClick={() => toast({ title: 'Welcome to Immortal UI', type: 'success' })}
-      >
-        Get started
-      </ImmortalButton>
-    </ImmortalCard>
-  );
-}
-
-export default function App() {
-  return (
-    <MetalConfigProvider>
-      <ToastProvider>
-        <Example />
-      </ToastProvider>
-    </MetalConfigProvider>
-  );
-}
+<DeviceControl
+  deviceId={device.id}
+  deviceName={device.name}
+  online={device.online}
+  configuration={configuration}
+  onApply={async (next) => {
+    await api.saveConfiguration(device.id, next)
+    setConfiguration(next)
+  }}
+/>
 ```
 
-To use Immortal UI in another React project, copy `ImmortalComponents.tsx`, `ImmortalModal.tsx`, `ImmortalToast.tsx`, `AudioEngine.ts`, and `WebGLMetalEngine.tsx`, together with the shared `src/index.css`. Install `lucide-react`, configure Tailwind CSS 4, and retain your application's React setup. The [getting started guide](https://immortal.build/#/docs/getting-started) walks through the complete integration.
+The registry supplies UI and integration boundaries. MQTT transport, authorization, command delivery, and storage belong to the application. Showcase data is a fixed, labelled snapshot and its interactions update local state only.
 
-## Explore the showcase
-
-- **Home**: a concise brand hero and an interactive Forma project workspace, built from the existing components. Try Chrome, Gold, and Black Titanium directly in the workspace. Its local material scope inherits the global optical settings while keeping the site-wide material selection independent.
-- **Components**: one searchable directory for all 13 components. Each detail page includes a live preview, TSX usage, setup requirements, API reference, and related components.
-- **Docs**: a complete manual integration guide, from source files and shared CSS to the first component.
-- **Examples**: Cards, Dashboard, Playground, and the original composite configuration form.
-- **Materials**: the original material previews and optical controls.
-
-The site uses hash routes so every page can be linked, refreshed, and opened directly on GitHub Pages without a server rewrite. For example:
+## Source and authoring
 
 ```text
-#/                              Home
-#/docs/getting-started           Integration guide
-#/components                    Component directory
-#/components/button             Button preview, usage, and API
-#/examples/cards                Card examples
-#/examples/forms                Composite configuration form
-#/materials                     Material lab
+registry/catalog.mjs             Metadata, files, and dependency definitions
+registry/immortal/styles/        Graphite CSS source of truth
+registry/immortal/components/    Installable IoT components and helpers
+registry/immortal/blocks/        Installable operational blocks
+registry.json                   Generated canonical registry
+scripts/build-registry.mjs       CSS schema conversion + official CLI build
+public/r/                       Generated install payloads (gitignored)
+public/themes/                  Generated manual stylesheet (gitignored)
+src/components/ui/              Official shadcn foundation primitives
+src/pages/                      Showcase, previews, theme, and install docs
+src/lib/demo-data.ts             Showcase-only fixtures
+tests/                          Dependency and telemetry regression checks
+docs/                           Checked-in production mirror
 ```
 
-Forms, authentication, payments, and model controls in the showcase are UI demonstrations and are not connected to backend services.
+The showcase imports registry sources directly. Add an entry to `registry/catalog.mjs`, use `immortal:<name>` for a custom dependency, and rebuild. The shorthand expands into an absolute URL before publishing. The CSS parser preserves final exported overrides in `cssVars` and carries material selectors through the supported `css` schema.
 
-The Hero workspace uses local demo data. Change chart metrics and reporting periods, adjust the monthly target, complete tasks, toggle the weekly digest, and create projects through a native dialog. Project creation and completion update the project list, active-project count, and activity timeline. Search, status filters, and a reset action work on the same state; refreshing the page resets the demo. The previous grass-and-rock landscape and its export sources remain available as design experiments, but are not mounted or loaded by the homepage.
+## Backup and delivery
 
-`MetalMaterialScope` in `WebGLMetalEngine.tsx` lets a composed demo inherit optical settings with a local material. It does not write global CSS or change shader defaults. `ImmortalSwitch` also accepts an optional `ariaLabel` for switches whose visible label is outside the component; existing labeled switches use their label as their accessible name.
+The complete previous visual exploration is preserved on GitHub:
 
-## Repository structure
+- Branch: [`backup/visual-exploration-2026-10-28`](https://github.com/fre2d0m/immortal-ui/tree/backup/visual-exploration-2026-10-28)
+- Snapshot: `f5415041e507fe274cb6effecb97e8863d86a787`
+- Refactor branch: `codex/iot-registry`
 
-```text
-src/
-  App.tsx                          Shared site navigation and routed layouts
-  index.css                        Shared styles and optical effects
-  site.css                         Site-only layout and documentation styles
-  lib/navigation.ts                GitHub Pages-compatible hash navigation
-  content/components.ts            Shared component catalog and API metadata
-  pages/
-    HomePage.tsx                   Brand hero and interactive workspace
-    GettingStarted.tsx             Manual integration tutorial
-    ComponentCatalog.tsx           Component directory
-  components/
-    HeroWorkspace.tsx             Interactive business demo and local state
-    HeroWorkspace.css             Responsive workspace layout
-    HeroMark3D.tsx                 Homepage-only rotating metal brand mark
-    ImmortalComponents.tsx         Core components and prop types
-    ImmortalModal.tsx              Modal dialog
-    ImmortalToast.tsx              Toast provider and hook
-    WebGLMetalEngine.tsx           Material presets, context, and shaders
-    AudioEngine.ts                 Material-specific modal impact synthesis
-    ComponentDocs.tsx              Component detail pages and live previews
-    DocumentationLayout.tsx        Shared directory, sidebar, and page outline
-    CodeBlock.tsx                  Copyable documentation code blocks
-    NodeConfigExample.tsx          Original composite form example
-    ShadcnExamplesGrid.tsx         Cards, dashboard, and playground
-    LightingLab.tsx                Global optical controls
-    LiquidChromeLab.tsx            Material lab
-    HeroEmblem.tsx                 Interactive hero emblem
-docs/                              Checked-in static showcase build
-.github/workflows/deploy.yml        GitHub Pages deployment
-```
+The backup includes the WebGL materials, metal audio, rotating mark, and previous hero studies. This branch keeps the brand artwork and uses the new Graphite foundation.
 
-## GitHub Pages
+GitHub Pages runs `npm ci`, type checks, registry tests, and a production build on pushes to `main`/`master`. It publishes `dist/`, including the registry endpoints, under the existing `immortal.build` domain. Hash routes work without static-host rewrites. Refresh the separate `docs/` mirror from `dist/` after a production build.
 
-The deployment workflow builds `dist/` and publishes it through GitHub Actions on pushes to `main` or `master`, or when started manually. In the repository's **Settings → Pages**, set **Source** to **GitHub Actions**.
+## Attribution
 
-Vite uses `base: './'`, so asset URLs remain relative to the deployed repository path. The deployed site URL is shown in the Pages settings and the workflow's deployment result.
+Official shadcn/ui source is MIT licensed; preserve its upstream notice when redistributing those files. Other dependencies retain their own licenses. Graphite was supplied from the owner's Slopevia visual exploration and rebranded for Immortal UI.
 
-The checked-in `docs/` directory is a separate static snapshot. To refresh it after changing the source:
-
-```bash
-npm run build -- --outDir docs
-touch docs/.nojekyll
-```
+Registry format follows the official [getting started guide](https://ui.shadcn.com/docs/registry/getting-started) and [registry item schema](https://ui.shadcn.com/docs/registry/registry-item-json).

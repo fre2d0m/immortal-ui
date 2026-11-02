@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "telemetry-card",
+  "title": "Telemetry card",
+  "description": "A current measurement with units, device status, and optional history.",
+  "dependencies": [
+    "cn",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "card",
+    "https://immortal.build/r/device-status.json",
+    "https://immortal.build/r/telemetry-chart.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/telemetry-card.tsx",
+      "content": "import { Card, CardContent, CardHeader } from \"@/components/ui/card\";\nimport { DeviceStatus, type DeviceState } from \"@/components/iot/device-status\";\nimport {\n  TelemetryChart,\n  type TelemetryPoint,\n} from \"@/components/iot/telemetry-chart\";\nimport { cn } from \"cn\";\n\nexport function TelemetryCard({\n  label,\n  value,\n  unit,\n  description,\n  state = \"online\",\n  data,\n  loading = false,\n  className,\n}: {\n  label: string;\n  value: number | null;\n  unit: string;\n  description?: string;\n  state?: DeviceState;\n  data?: TelemetryPoint[];\n  loading?: boolean;\n  className?: string;\n}) {\n  const available = value !== null && Number.isFinite(value);\n  return (\n    <Card className={className} aria-busy={loading}>\n      <CardHeader>\n        <div className=\"flex items-center justify-between gap-4\">\n          <h3 className=\"font-medium\">{label}</h3>\n          <DeviceStatus state={state} />\n        </div>\n      </CardHeader>\n      <CardContent>\n        <div className=\"surface-inset p-5\">\n          <div\n            className={cn(\n              \"flex items-baseline gap-2 tabular-nums\",\n              loading && \"opacity-40\",\n            )}\n          >\n            <span className=\"text-4xl font-medium tracking-[-0.06em]\">\n              {loading\n                ? \"···\"\n                : available\n                  ? value.toLocaleString(undefined, {\n                      maximumFractionDigits: 2,\n                    })\n                  : \"—\"}\n            </span>\n            <span className=\"text-sm text-muted-foreground\">{unit}</span>\n          </div>\n          <p className=\"mt-2 text-xs text-muted-foreground\">\n            {loading\n              ? \"Loading readings…\"\n              : !available\n                ? \"No reading available\"\n                : description}\n          </p>\n          {data && !loading && (\n            <TelemetryChart\n              data={data}\n              label={label}\n              unit={unit}\n              className=\"mt-6\"\n              showTable={false}\n            />\n          )}\n        </div>\n      </CardContent>\n    </Card>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/telemetry-card.tsx"
+    }
+  ],
+  "categories": [
+    "iot"
+  ],
+  "type": "registry:component"
+}

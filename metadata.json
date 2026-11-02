@@ -1,6 +1,6 @@
 {
   "name": "Immortal UI",
-  "description": "Immortal UI is a dark skeuomorphic React component system with diagonal specular rims, tactile controls, and six WebGL metal materials.",
+  "description": "Immortal UI is a styled shadcn/ui registry for connected devices, telemetry, and IoT workflows.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

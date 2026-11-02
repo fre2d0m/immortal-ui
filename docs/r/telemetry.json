@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "telemetry",
+  "title": "Telemetry utilities",
+  "description": "Gap-aware time-series geometry and operating-range validation.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/immortal/components/telemetry.ts",
+      "content": "export type TelemetryPoint = { timestamp: number; value: number | null };\n\n/** Missing samples split the line instead of implying an observed measurement. */\nexport function createTelemetryGeometry(\n  points: TelemetryPoint[],\n  width = 640,\n  height = 160,\n) {\n  const samples = points\n    .filter((p) => Number.isFinite(p.timestamp))\n    .slice()\n    .sort((a, b) => a.timestamp - b.timestamp);\n  const values = samples.flatMap((p) =>\n    p.value !== null && Number.isFinite(p.value) ? [p.value] : [],\n  );\n  if (!values.length)\n    return {\n      segments: [] as { x: number; y: number; point: TelemetryPoint }[][],\n      min: 0,\n      max: 1,\n    };\n  const low = values.reduce((a, b) => Math.min(a, b)),\n    high = values.reduce((a, b) => Math.max(a, b));\n  const padding = Math.max((high - low) * 0.2, Math.abs(high) * 0.02, 0.1);\n  const min = low - padding,\n    max = high + padding;\n  const start = samples[0].timestamp,\n    range = samples.at(-1)!.timestamp - start;\n  const segments: { x: number; y: number; point: TelemetryPoint }[][] = [];\n  let segment: { x: number; y: number; point: TelemetryPoint }[] = [];\n  for (const point of samples) {\n    if (point.value === null || !Number.isFinite(point.value)) {\n      if (segment.length) segments.push(segment);\n      segment = [];\n    } else\n      segment.push({\n        x: range ? ((point.timestamp - start) / range) * width : width / 2,\n        y: height - ((point.value - min) / (max - min)) * height,\n        point,\n      });\n  }\n  if (segment.length) segments.push(segment);\n  return { segments, min, max };\n}\n\nexport function isValidThreshold(\n  value: { low: number; high: number },\n  min: number,\n  max: number,\n) {\n  return (\n    Number.isFinite(value.low) &&\n    Number.isFinite(value.high) &&\n    value.low >= min &&\n    value.high <= max &&\n    value.low < value.high\n  );\n}\n",
+      "type": "registry:lib",
+      "target": "@lib/telemetry.ts"
+    }
+  ],
+  "categories": [
+    "utilities"
+  ],
+  "type": "registry:lib"
+}

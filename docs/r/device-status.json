@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "device-status",
+  "title": "Device status",
+  "description": "Readable online, attention, offline, and provisioning states.",
+  "dependencies": [
+    "cn"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/immortal/components/device-status.tsx",
+      "content": "import { cn } from \"cn\";\n\nexport type DeviceState = \"online\" | \"warning\" | \"offline\" | \"provisioning\";\nconst labels: Record<DeviceState, string> = {\n  online: \"Online\",\n  warning: \"Attention\",\n  offline: \"Offline\",\n  provisioning: \"Provisioning\",\n};\n\n/** A status always includes text; color is a secondary cue. */\nexport function DeviceStatus({\n  state,\n  label,\n  className,\n}: {\n  state: DeviceState;\n  label?: string;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        \"inline-flex items-center gap-2 whitespace-nowrap text-xs\",\n        className,\n      )}\n    >\n      <span\n        aria-hidden=\"true\"\n        className={cn(\"size-1.5 rounded-full\", {\n          \"bg-success shadow-[0_0_8px_color-mix(in_srgb,var(--success)_35%,transparent)]\":\n            state === \"online\",\n          \"bg-warning\": state === \"warning\",\n          \"bg-muted-foreground\": state === \"offline\",\n          \"border border-current bg-transparent\": state === \"provisioning\",\n        })}\n      />\n      {label ?? labels[state]}\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/device-status.tsx"
+    }
+  ],
+  "categories": [
+    "iot"
+  ],
+  "type": "registry:component"
+}
