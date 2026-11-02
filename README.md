@@ -2,7 +2,7 @@
 
 **shadcn/ui + material + IoT.** A source registry for device identity, signal quality, telemetry, operating ranges, fleet operations, and alert review.
 
-The name and platinum Merkaba mark continue from the previous visual exploration. **Graphite Instrument** adapts the supplied Tailwind v4 / shadcn stylesheet, including its final exported overrides: neutral graphite primary actions, 14px base typography, 32px visual control height, 24px card padding, 8px button corners, 22.4px panel corners, and a 1440px content width. Tab corners are 15px with 14px horizontal / 5px vertical padding. Light and dark modes share the same depth and interaction rules.
+The name and platinum Merkaba mark continue from the previous visual exploration. **Graphite Instrument** adapts the supplied Tailwind v4 / shadcn stylesheet, with consistent type sizing and the exported material settings: neutral graphite primary actions, 16px body typography with a 14px minimum for labels, supporting text, and code, 32px visual control height, 24px card padding, 8px button corners, 22.4px panel corners, and a 1440px content width. Tab corners are 15px with 14px horizontal / 5px vertical padding. Light and dark modes share the same depth and interaction rules.
 
 ## Local development
 

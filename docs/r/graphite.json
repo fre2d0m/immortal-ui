@@ -9,6 +9,12 @@
   ],
   "cssVars": {
     "theme": {
+      "text-xs": "14px",
+      "text-xs--line-height": "20px",
+      "text-sm": "14px",
+      "text-sm--line-height": "20px",
+      "text-base": "16px",
+      "text-base--line-height": "24px",
       "font-sans": "var(--lab-font-sans)",
       "font-heading": "var(--lab-font-heading)",
       "color-background": "var(--background)",
@@ -239,6 +245,7 @@
       "color": "var(--button-ink)",
       "background": "linear-gradient(var(--button-top), var(--button-bottom))",
       "box-shadow": "var(--button-shadow)",
+      "font-size": "var(--text-sm)",
       "font-weight": "500",
       "transition": "border-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out,\n    scale calc(var(--transition-duration, 140ms) * 0.714286) ease-out"
     },
@@ -381,7 +388,7 @@
         "@apply border-border outline-ring/50": {}
       },
       "body": {
-        "@apply bg-background font-sans text-foreground": {},
+        "@apply bg-background font-sans text-base text-foreground": {},
         "font-weight": "var(--body-weight, 400)",
         "line-height": "var(--body-line-height, 1.5)",
         "letter-spacing": "var(--body-letter-spacing, 0)",
@@ -452,6 +459,7 @@
       "padding": "1rem"
     },
     "[data-slot=\"input\"],\n[data-slot=\"textarea\"],\n[data-slot=\"input-group\"]": {
+      "font-size": "var(--text-base)",
       "background": "var(--field-background)",
       "border": "var(--control-border-width, 1px) solid var(--input)",
       "border-radius": "var(--field-radius)",
@@ -815,6 +823,7 @@
       "max-width": "var(--content-width)"
     },
     "[data-slot=\"select-trigger\"]": {
+      "font-size": "var(--text-base)",
       "height": "var(--control-height)",
       "min-height": "var(--control-height)",
       "padding-inline": "var(--field-padding-x, 0.875rem)",

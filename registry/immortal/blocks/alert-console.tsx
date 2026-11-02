@@ -93,11 +93,11 @@ export function AlertConsole({
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <h3 className="text-sm font-medium">{alert.title}</h3>
-                    <span className="text-[10px] text-muted-foreground">
+                    <span className="text-sm text-muted-foreground">
                       {alert.time}
                     </span>
                   </div>
-                  <p className="mt-1 text-[11px] text-muted-foreground">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     {alert.deviceName} · {alert.severity}
                   </p>
                   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">

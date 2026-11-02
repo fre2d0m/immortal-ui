@@ -83,7 +83,7 @@ export function FleetOverview({
           {metrics.map(({ label, value, icon: Icon }) => (
             <div key={label} className="surface-inset p-4">
               <div className="mb-4 flex items-center justify-between gap-2 text-muted-foreground">
-                <span className="text-[11px]">{label}</span>
+                <span className="text-sm">{label}</span>
                 <Icon className="size-3.5" />
               </div>
               <span className="text-3xl font-medium tabular-nums tracking-[-0.05em]">
@@ -139,7 +139,7 @@ export function FleetOverview({
           <div className="overflow-x-auto">
             <table className="w-full min-w-150 text-left text-xs">
               <caption className="sr-only">Device inventory</caption>
-              <thead className="text-[10px] tracking-wider text-muted-foreground uppercase">
+              <thead className="text-sm tracking-wider text-muted-foreground uppercase">
                 <tr>
                   {["Device", "Status", "Protocol", "Signal", "Last seen"].map(
                     (name) => (
@@ -175,7 +175,7 @@ export function FleetOverview({
                           <span className="block font-medium">
                             {device.name}
                           </span>
-                          <span className="mt-1 block text-[10px] text-muted-foreground">
+                          <span className="mt-1 block text-sm text-muted-foreground">
                             {device.id} · {device.location}
                           </span>
                         </span>

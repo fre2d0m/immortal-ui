@@ -89,7 +89,7 @@ export function CatalogPage({ kind }: { kind: "component" | "block" }) {
                     </div>
                   ) : (
                     <div className="surface-inset mt-6 flex items-center justify-between gap-4 p-3">
-                      <span className="text-[11px] text-muted-foreground">
+                      <span className="text-sm text-muted-foreground">
                         {item.name === "threshold-control"
                           ? "10 — 35 °C"
                           : "ENV-001"}

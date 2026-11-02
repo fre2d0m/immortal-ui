@@ -116,7 +116,7 @@ export function TelemetryChart({
         </svg>
       )}
       {points.length > 0 && (
-        <div className="mt-3 flex justify-between text-[11px] tabular-nums text-muted-foreground">
+        <div className="mt-3 flex justify-between text-sm tabular-nums text-muted-foreground">
           <span>{time(points[0].point.timestamp)}</span>
           <span>{time(points.at(-1)!.point.timestamp)}</span>
         </div>

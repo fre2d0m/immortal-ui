@@ -55,7 +55,7 @@ export function DeviceCard({
         </div>
       </CardContent>
       <CardFooter className="justify-between gap-3">
-        <span className="font-mono text-[10px] text-muted-foreground">
+        <span className="font-mono text-sm text-muted-foreground">
           {device.id}
         </span>
         {onOpen && (
