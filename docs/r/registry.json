@@ -4,6 +4,154 @@
   "homepage": "https://immortal.build",
   "items": [
     {
+      "name": "metric-card",
+      "title": "Metric Card",
+      "description": "测量定义、设备来源与实际观测组成完整卡片；趋势和范围是卡片内的可视化，质量与时效是数据上下文。",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/data-freshness.json",
+        "https://immortal.build/r/range-gauge.json",
+        "https://immortal.build/r/telemetry.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/telemetry-sparkline.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/telemetry-sparkline.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/data-card-model.ts",
+          "type": "registry:component",
+          "target": "@components/iot/internal/data-card-model.ts"
+        },
+        {
+          "path": "registry/immortal/components/internal/data-card.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/data-card.tsx"
+        },
+        {
+          "path": "registry/immortal/components/metric-card.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/metric-card.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "data"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "indicator-card",
+      "title": "Indicator Card",
+      "description": "指标定义、计算结果和计算依据组成完整卡片，支持数值、分级状态和结构化结果；计算时间与输入统计窗口分别表达。",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/range-gauge.json",
+        "https://immortal.build/r/telemetry.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/telemetry-sparkline.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/telemetry-sparkline.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/data-card-model.ts",
+          "type": "registry:component",
+          "target": "@components/iot/internal/data-card-model.ts"
+        },
+        {
+          "path": "registry/immortal/components/internal/data-card.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/data-card.tsx"
+        },
+        {
+          "path": "registry/immortal/components/indicator-card.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/indicator-card.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "data"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "description": "Radix tabs with a shared sliding selection indicator, keyboard navigation and reduced-motion support.",
+      "dependencies": [
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1",
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/ui/tabs.tsx"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "iot-icons",
+      "title": "IoT icon extensions",
+      "description": "Ten original SVG icons for flow, air quality, pumps, valves, motors, field buses, pipes, tanks, enclosures and heat. Compatible with Lucide props.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/icons/iot-icons.ts",
+          "type": "registry:component",
+          "target": "@components/icons/iot-icons.ts"
+        }
+      ],
+      "categories": [
+        "icons",
+        "iot"
+      ],
+      "type": "registry:component"
+    },
+    {
       "name": "graphite",
       "title": "Graphite Instrument",
       "description": "A tactile light and dark theme for shadcn/ui. Raised panels, recessed wells, and quiet controls.",
@@ -53,7 +201,9 @@
           "color-sidebar-border": "var(--sidebar-border)",
           "color-sidebar-ring": "var(--sidebar-ring)",
           "color-success": "var(--success)",
+          "color-success-text": "color-mix(\n    in srgb,\n    var(--success) 80%,\n    var(--foreground)\n  )",
           "color-warning": "var(--warning)",
+          "color-warning-text": "color-mix(\n    in srgb,\n    var(--warning) 72%,\n    var(--foreground)\n  )",
           "radius-sm": "var(--small-radius)",
           "radius-md": "var(--field-radius)",
           "radius-lg": "var(--well-radius)",
@@ -63,27 +213,28 @@
           "radius-4xl": "var(--radius-4xl-value)"
         },
         "light": {
-          "lab-font-sans": "\"Geist Variable\", \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "lab-font-sans": "\"Geist Variable\", \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\",\n    sans-serif",
           "lab-font-heading": "var(--lab-font-sans)",
-          "radius-3xl-value": "2rem",
-          "radius-4xl-value": "2.5rem",
+          "radius-3xl-value": "21px",
+          "radius-4xl-value": "27px",
           "popover-top": "#fafaf8",
           "popover-bottom": "#eeeeeb",
           "sidebar-top": "#fafaf8",
           "sidebar-bottom": "#eeeeeb",
           "shadow-overlay": "0 24px 64px -16px rgb(0 0 0 / 0.4)",
-          "radius": "8px",
+          "shadow-menu": "0 8px 16px -8px rgb(0 0 0 / 0.22)",
+          "radius": "6px",
           "font-size-base": "14px",
-          "control-height": "32px",
+          "control-height": "34px",
           "card-padding": "24px",
-          "menu-padding": "4.8px",
-          "button-radius": "8px",
+          "menu-padding": "3.6px",
+          "button-radius": "6px",
           "tab-list-width": "max-content",
           "tab-flex": "0 0 auto",
-          "tab-radius": "15px",
+          "tab-radius": "18px",
           "tab-padding-x": "14px",
-          "tab-padding-y": "5px",
-          "tab-list-padding": "2px",
+          "tab-padding-y": "4px",
+          "tab-list-padding": "4px",
           "content-width": "1440px",
           "background": "#e9e9e7",
           "foreground": "#252525",
@@ -103,11 +254,11 @@
           "border": "#d2d2cf",
           "input": "#c8c8c4",
           "ring": "#686865",
-          "chart-1": "#555b58",
-          "chart-2": "#737b76",
-          "chart-3": "#939b95",
-          "chart-4": "#a9b0a9",
-          "chart-5": "#c1c6bf",
+          "chart-1": "#286bb2",
+          "chart-2": "#996018",
+          "chart-3": "#277567",
+          "chart-4": "#7858a0",
+          "chart-5": "#a24a68",
           "sidebar": "#efefed",
           "sidebar-foreground": "#252525",
           "sidebar-primary": "#303030",
@@ -118,41 +269,87 @@
           "sidebar-ring": "#686865",
           "success": "#25854a",
           "warning": "#ab6a12",
-          "surface-radius": "22.4px",
-          "well-radius": "12.8px",
-          "field-radius": "8px",
-          "small-radius": "3.2px",
-          "popup-radius": "16px",
+          "surface-radius": "12px",
+          "well-radius": "12px",
+          "field-radius": "6px",
+          "small-radius": "12px",
+          "popup-radius": "12px",
           "pill-radius": "999px",
           "thumb-top": "#f5f5f2",
           "thumb-bottom": "#d0d0cc",
-          "surface-top": "#fafaf8",
-          "surface-bottom": "#eeeeeb",
-          "surface-edge": "rgb(0 0 0 / 0.06)",
-          "well-top": "#dededb",
+          "surface-top": "#f9f9f7",
+          "surface-bottom": "#f6f6f4",
+          "surface-edge": "rgb(0 0 0 / 0.14)",
+          "well-top": "#e6e6e3",
           "well-bottom": "#e7e7e4",
           "field-background": "#f6f6f3",
-          "hover-top": "#fdfdfb",
-          "hover-bottom": "#eeeeeb",
+          "hover-top": "#e1e1de",
+          "hover-bottom": "#ddddda",
           "control-top": "#f7f7f5",
           "control-bottom": "#e1e1de",
           "control-edge": "rgb(0 0 0 / 0.08)",
           "control-hover-edge": "rgb(0 0 0 / 0.18)",
           "primary-top": "#454545",
           "primary-bottom": "#292929",
-          "shadow-surface": "inset 0 1px 1px rgb(255 255 255 / 0.95), 0 1px 2px rgb(0 0 0 / 0.06),\n    0 12px 24px -12px rgb(0 0 0 / 0.2)",
-          "shadow-well": "inset 0 2px 4px rgb(0 0 0 / 0.12), inset 0 0 0 1px rgb(0 0 0 / 0.04),\n    0 1px 0 rgb(255 255 255 / 0.9)",
-          "shadow-field": "inset 0 1px 2px rgb(0 0 0 / 0.08), 0 1px 0 rgb(255 255 255 / 0.65)",
-          "shadow-hover": "inset 0 1px 0 rgb(255 255 255 / 0.9), 0 1px 2px rgb(0 0 0 / 0.08)",
+          "shadow-surface": "inset 0 1px 0 rgb(255 255 255 / 0.75), 0 1px 2px rgb(0 0 0 / 0.08),\n    0 3px 6px -4px rgb(0 0 0 / 0.16)",
+          "shadow-well": "inset 0 2px 4px rgb(0 0 0 / 0.07), inset 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "shadow-field": "inset 0 1px 1px rgb(0 0 0 / 0.06)",
+          "shadow-hover": "inset 0 0 0 0.5px rgb(0 0 0 / 0.09)",
           "shadow-control": "inset 0 1px 0 rgb(255 255 255 / 0.95), inset 0 -1px 0 rgb(0 0 0 / 0.03),\n    0 1px 2px rgb(0 0 0 / 0.13), 0 3px 5px -3px rgb(0 0 0 / 0.16)",
           "shadow-primary": "inset 0 1px 0 rgb(255 255 255 / 0.16), 0 1px 2px rgb(0 0 0 / 0.22),\n    0 3px 5px -3px rgb(0 0 0 / 0.22)",
           "shadow-pressed": "inset 0 2px 3px rgb(0 0 0 / 0.22), 0 1px 0 rgb(255 255 255 / 0.25)",
-          "body-font-size": "16px",
+          "body-font-size": "14px",
           "support-font-size": "14px",
+          "pressed-background": "linear-gradient(\n    color-mix(in srgb, var(--hover-top) 96%, black),\n    color-mix(in srgb, var(--hover-bottom) 96%, black)\n  )",
+          "control-pressed-background": "linear-gradient(\n    color-mix(in srgb, var(--control-top) 96%, black),\n    color-mix(in srgb, var(--control-bottom) 96%, black)\n  )",
+          "shadow-press-soft": "inset 0 1px 1px rgb(0 0 0 / 0.1), inset 0 0 0 0.5px var(--control-edge)",
           "spacing": "4px",
-          "container-border-width": "1px"
+          "button-height": "34px",
+          "button-height-xs": "25.5px",
+          "button-height-sm": "29.75px",
+          "button-height-lg": "38.25px",
+          "button-font-size": "14px",
+          "button-icon-size": "16px",
+          "button-gap": "6px",
+          "button-border-width": "0.5px",
+          "input-height": "34px",
+          "input-font-size": "14px",
+          "input-border-width": "0.5px",
+          "select-height": "34px",
+          "select-height-sm": "29.75px",
+          "select-padding-x": "12px",
+          "nav-height": "34px",
+          "nav-padding-x": "12px",
+          "nav-gap": "8px",
+          "nav-radius": "12px",
+          "nav-font-size": "14px",
+          "menu-item-height": "34px",
+          "menu-font-size": "14px",
+          "menu-item-radius": "6px",
+          "tab-height": "34px",
+          "tab-font-size": "14px",
+          "tab-gap": "4px",
+          "tag-height": "24px",
+          "tag-padding-x": "12px",
+          "tag-radius": "18px",
+          "tag-font-size": "12px",
+          "table-row-height": "42.5px",
+          "table-cell-padding-x": "12px",
+          "table-font-size": "14px",
+          "slider-track-height": "5px",
+          "slider-thumb-size": "17px",
+          "avatar-size": "34px",
+          "checkbox-size": "16.73px",
+          "switch-thumb-size": "18.59px",
+          "switch-thumb-size-sm": "14.88px",
+          "container-border-width": "1px",
+          "lab-sidebar-width": "268px",
+          "control-border-width": "0.5px",
+          "focus-width": "0.5px",
+          "control-hit-height": "0px"
         },
         "dark": {
+          "shadow-menu": "0 8px 16px -8px rgb(0 0 0 / 0.55)",
           "popover-top": "#282828",
           "popover-bottom": "#1e1e1e",
           "sidebar-top": "#282828",
@@ -175,11 +372,11 @@
           "border": "#353535",
           "input": "#414141",
           "ring": "#7d7d79",
-          "chart-1": "#a8b6ab",
-          "chart-2": "#8a9e90",
-          "chart-3": "#718276",
-          "chart-4": "#59695f",
-          "chart-5": "#bfc7bf",
+          "chart-1": "#77b5f8",
+          "chart-2": "#e8b86d",
+          "chart-3": "#6bc4af",
+          "chart-4": "#bb9ce4",
+          "chart-5": "#e49db1",
           "sidebar": "#202020",
           "sidebar-foreground": "#ededeb",
           "sidebar-primary": "#dededc",
@@ -190,82 +387,144 @@
           "sidebar-ring": "#7d7d79",
           "success": "#61d991",
           "warning": "#f5af60",
-          "surface-top": "#282828",
-          "surface-bottom": "#1e1e1e",
-          "surface-edge": "rgb(255 255 255 / 0.055)",
-          "well-top": "#161616",
-          "well-bottom": "#1b1b1b",
+          "surface-top": "#252525",
+          "surface-bottom": "#242424",
+          "surface-edge": "rgb(255 255 255 / 0.13)",
+          "well-top": "#181818",
+          "well-bottom": "#191919",
           "field-background": "#202020",
-          "hover-top": "#343434",
-          "hover-bottom": "#2b2b2b",
+          "hover-top": "#2b2b2b",
+          "hover-bottom": "#282828",
           "control-top": "#3b3b3b",
           "control-bottom": "#2c2c2c",
           "control-edge": "rgb(255 255 255 / 0.065)",
           "control-hover-edge": "rgb(255 255 255 / 0.16)",
           "primary-top": "#efefed",
           "primary-bottom": "#ccccca",
-          "shadow-surface": "inset 0 1px 1px rgb(255 255 255 / 0.075),\n    inset 1px 0 0 rgb(255 255 255 / 0.02), 0 1px 2px rgb(0 0 0 / 0.7),\n    0 14px 28px -12px rgb(0 0 0 / 0.65)",
-          "shadow-well": "inset 0 2px 4px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(0 0 0 / 0.24),\n    0 1px 0 rgb(255 255 255 / 0.055)",
-          "shadow-field": "inset 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 0 rgb(255 255 255 / 0.025)",
-          "shadow-hover": "inset 0 1px 0 rgb(255 255 255 / 0.07), 0 1px 2px rgb(0 0 0 / 0.3)",
+          "shadow-surface": "inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(0 0 0 / 0.5),\n    0 3px 6px -4px rgb(0 0 0 / 0.4)",
+          "shadow-well": "inset 0 2px 4px rgb(0 0 0 / 0.07), inset 0 0 0 0.5px rgb(0 0 0 / 0.08)",
+          "shadow-field": "inset 0 1px 1px rgb(0 0 0 / 0.25)",
+          "shadow-hover": "inset 0 0 0 0.5px rgb(255 255 255 / 0.1)",
           "shadow-control": "inset 0 1px 0 rgb(255 255 255 / 0.12), inset 0 -1px 0 rgb(0 0 0 / 0.12),\n    0 1px 2px rgb(0 0 0 / 0.5), 0 3px 5px -3px rgb(0 0 0 / 0.6)",
           "shadow-primary": "inset 0 1px 0 rgb(255 255 255 / 0.85), inset 0 -1px 0 rgb(0 0 0 / 0.12),\n    0 1px 2px rgb(0 0 0 / 0.55), 0 3px 5px -3px rgb(0 0 0 / 0.65)",
           "shadow-pressed": "inset 0 2px 3px rgb(0 0 0 / 0.5), 0 1px 0 rgb(255 255 255 / 0.04)",
-          "lab-font-sans": "\"Geist Variable\", \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "lab-font-sans": "\"Geist Variable\", \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\",\n    sans-serif",
           "lab-font-heading": "var(--lab-font-sans)",
           "font-size-base": "14px",
-          "body-font-size": "16px",
+          "body-font-size": "14px",
           "support-font-size": "14px",
-          "control-height": "32px",
+          "control-height": "34px",
+          "pressed-background": "linear-gradient(\n    color-mix(in srgb, var(--hover-top) 96%, black),\n    color-mix(in srgb, var(--hover-bottom) 96%, black)\n  )",
+          "control-pressed-background": "linear-gradient(\n    color-mix(in srgb, var(--control-top) 96%, black),\n    color-mix(in srgb, var(--control-bottom) 96%, black)\n  )",
+          "shadow-press-soft": "inset 0 1px 1px rgb(0 0 0 / 0.1), inset 0 0 0 0.5px var(--control-edge)",
           "spacing": "4px",
           "card-padding": "24px",
-          "radius": "8px",
-          "small-radius": "3.2px",
-          "field-radius": "8px",
-          "well-radius": "12.8px",
-          "popup-radius": "16px",
-          "surface-radius": "22.4px",
-          "menu-padding": "4.8px",
-          "button-radius": "8px",
+          "radius": "6px",
+          "small-radius": "12px",
+          "field-radius": "6px",
+          "well-radius": "12px",
+          "popup-radius": "12px",
+          "surface-radius": "12px",
+          "menu-padding": "3.6px",
+          "button-radius": "6px",
           "content-width": "1440px",
           "tab-list-width": "max-content",
           "tab-flex": "0 0 auto",
-          "tab-radius": "15px",
+          "tab-radius": "18px",
           "tab-padding-x": "14px",
-          "tab-padding-y": "5px",
-          "tab-list-padding": "2px"
+          "tab-padding-y": "4px",
+          "tab-list-padding": "4px",
+          "button-height": "34px",
+          "button-height-xs": "25.5px",
+          "button-height-sm": "29.75px",
+          "button-height-lg": "38.25px",
+          "button-font-size": "14px",
+          "button-icon-size": "16px",
+          "button-gap": "6px",
+          "button-border-width": "0.5px",
+          "input-height": "34px",
+          "input-font-size": "14px",
+          "input-border-width": "0.5px",
+          "select-height": "34px",
+          "select-height-sm": "29.75px",
+          "select-padding-x": "12px",
+          "nav-height": "34px",
+          "nav-padding-x": "12px",
+          "nav-gap": "8px",
+          "nav-radius": "12px",
+          "nav-font-size": "14px",
+          "menu-item-height": "34px",
+          "menu-font-size": "14px",
+          "menu-item-radius": "6px",
+          "tab-height": "34px",
+          "tab-font-size": "14px",
+          "tab-gap": "4px",
+          "tag-height": "24px",
+          "tag-padding-x": "12px",
+          "tag-radius": "18px",
+          "tag-font-size": "12px",
+          "table-row-height": "42.5px",
+          "table-cell-padding-x": "12px",
+          "table-font-size": "14px",
+          "slider-track-height": "5px",
+          "slider-thumb-size": "17px",
+          "avatar-size": "34px",
+          "checkbox-size": "16.73px",
+          "switch-thumb-size": "18.59px",
+          "switch-thumb-size-sm": "14.88px",
+          "container-border-width": "1px",
+          "lab-sidebar-width": "268px",
+          "control-border-width": "0.5px",
+          "focus-width": "0.5px"
         }
       },
       "css": {
         "@import \"tw-animate-css\"": {},
         "@import \"shadcn/tailwind.css\"": {},
-        ":is(:is(\n  [data-slot=\"button\"],\n  button[data-variant][data-size],\n  a[data-variant][data-size]\n))": {
+        ":is(\n  :is(\n    [data-slot=\"button\"],\n    button[data-variant][data-size],\n    a[data-variant][data-size]\n  )\n)": {
           "--button-top": "var(--primary-top)",
           "--button-bottom": "var(--primary-bottom)",
           "--button-shadow": "var(--shadow-primary)",
           "--button-ink": "var(--primary-foreground)",
-          "min-height": "var(--control-height)",
-          "height": "var(--control-height)",
+          "--button-size-height": "var(--button-height)",
+          "--button-size-icon": "var(--button-icon-size)",
+          "min-height": "max(var(--button-size-height), var(--control-hit-height))",
+          "height": "max(var(--button-size-height), var(--control-hit-height))",
+          "gap": "var(--button-gap)",
           "padding-block": "0",
           "padding-inline": "var(--button-padding-x, 1rem)",
-          "border": "var(--control-border-width, 1px) solid var(--control-edge)",
+          "border": "var(--button-border-width, var(--control-border-width, 1px)) solid\n    var(--control-edge)",
           "border-radius": "var(--button-radius)",
           "color": "var(--button-ink)",
           "background": "linear-gradient(var(--button-top), var(--button-bottom))",
           "box-shadow": "var(--button-shadow)",
-          "font-size": "var(--text-sm)",
+          "font-size": "var(--button-font-size)",
           "font-weight": "500",
           "transition": "border-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out,\n    scale calc(var(--transition-duration, 140ms) * 0.714286) ease-out"
         },
-        "[data-size^=\"icon\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
-          "min-width": "var(--control-height)",
-          "width": "var(--control-height)",
-          "padding": "0"
+        "[data-size=\"xs\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])),[data-size=\"icon-xs\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
+          "--button-size-height": "var(--button-height-xs)",
+          "--button-size-icon": "calc(var(--button-icon-size) * 0.75)",
+          "padding-inline": "calc(var(--button-padding-x, 1rem) * 0.65)"
         },
-        "[data-size=\"lg\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
-          "min-height": "calc(var(--control-height) + 4px)",
-          "height": "calc(var(--control-height) + 4px)",
+        "[data-size=\"sm\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])),[data-size=\"icon-sm\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
+          "--button-size-height": "var(--button-height-sm)",
+          "--button-size-icon": "calc(var(--button-icon-size) * 0.875)",
+          "padding-inline": "calc(var(--button-padding-x, 1rem) * 0.8)"
+        },
+        "[data-size=\"lg\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])),[data-size=\"icon-lg\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
+          "--button-size-height": "var(--button-height-lg)",
           "padding-inline": "calc(var(--button-padding-x, 1rem) * 1.25)"
+        },
+        "[data-size^=\"icon\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))": {
+          "min-width": "max(var(--button-size-height), var(--control-hit-height))",
+          "width": "max(var(--button-size-height), var(--control-hit-height))",
+          "padding": "0",
+          "border-radius": "50%"
+        },
+        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size]))  > svg": {
+          "width": "var(--button-size-icon)",
+          "height": "var(--button-size-icon)"
         },
         ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is([data-variant=\"secondary\"],[data-variant=\"outline\"])": {
           "--button-top": "var(--control-top)",
@@ -286,27 +545,48 @@
           "box-shadow": "none"
         },
         "@media (hover: hover)": {
-          ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled):not([aria-disabled=\"true\"]):hover:not(:active)": {
+          ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled],[aria-pressed=\"true\"],[aria-expanded=\"true\"],:active):hover": {
             "background": "linear-gradient(\n        color-mix(in srgb, var(--button-top) 94%, white),\n        var(--button-bottom)\n      )",
             "border-color": "var(--control-hover-edge)",
             "box-shadow": "var(--button-shadow),\n        0 3px 5px -2px rgb(0 0 0 / 0.2)"
           },
-          "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled):not([aria-disabled=\"true\"]):hover:not(:active)": {
+          "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled],[aria-pressed=\"true\"],[aria-expanded=\"true\"],:active):hover": {
             "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
             "color": "var(--hover-foreground, var(--foreground))",
+            "border-color": "transparent",
             "box-shadow": "var(--shadow-hover)"
+          },
+          "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is([aria-pressed=\"true\"],[aria-expanded=\"true\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active,[aria-haspopup=\"menu\"][aria-expanded=\"true\"]):hover": {
+            "border-color": "var(--control-hover-edge)"
+          },
+          ".data-card [data-slot=\"data-card-details\"] > summary:hover": {
+            "color": "var(--foreground)"
+          },
+          "[data-slot=\"chart-legend-item\"]:hover": {
+            "border-color": "var(--control-hover-edge)"
           },
           "[data-slot=\"input\"]:not(:disabled):not([readonly]):not(:focus-visible):not(\n      [aria-invalid=\"true\"]\n    ):hover,\n  [data-slot=\"textarea\"]:not(:disabled):not([readonly]):not(:focus-visible):not(\n      [aria-invalid=\"true\"]\n    ):hover,\n  [data-slot=\"input-group\"]:not(\n      :has(:disabled, [readonly], :focus-visible, [aria-invalid=\"true\"])\n    ):hover": {
             "border-color": "color-mix(in srgb, var(--input) 60%, var(--ring))"
           },
-          ":is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]):not(:disabled):not([data-state=\"active\"]):hover:not(:active)": {
+          "[aria-selected=\"true\"]:is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active):hover": {
+            "border-color": "var(--control-hover-edge)"
+          },
+          ":is([data-slot=\"tabs-list\"][data-variant] [data-slot=\"tabs-trigger\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],[aria-selected=\"true\"],:active):hover": {
+            "background": "transparent",
+            "color": "color-mix(in srgb, var(--muted-foreground) 65%, var(--foreground))",
+            "box-shadow": "none"
+          },
+          "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:not(:disabled,[aria-disabled=\"true\"],[data-disabled],[aria-expanded=\"true\"],[aria-pressed=\"true\"],:active):hover": {
             "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
-            "color": "var(--hover-foreground, var(--foreground))",
             "box-shadow": "var(--shadow-hover)"
           },
-          "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:not(:disabled):not([aria-disabled=\"true\"]):hover:not(:active)": {
-            "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
-            "box-shadow": "inset 0 1px 0 var(--control-edge)"
+          ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],[aria-current=\"page\"],[aria-pressed=\"true\"],[data-active=\"true\"],[data-state=\"checked\"],:active):hover": {
+            "color": "var(--hover-foreground, var(--foreground))",
+            "background": "color-mix(in srgb, var(--foreground) 5%, transparent)",
+            "box-shadow": "none"
+          },
+          ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):is([aria-current=\"page\"],[aria-pressed=\"true\"],[data-active=\"true\"],[data-state=\"checked\"]):not(:active):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):hover": {
+            "box-shadow": "var(--shadow-control),\n          inset 0 0 0 1px var(--control-hover-edge)"
           },
           ":is([data-slot=\"checkbox\"],[data-slot=\"radio-group-item\"]):not(:disabled):not([data-disabled]):not([data-state=\"checked\"]):not([data-state=\"indeterminate\"]):hover:not(:active)": {
             "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
@@ -319,68 +599,51 @@
           "[data-slot=\"switch\"]:not(:disabled):not([data-disabled]):hover:not(:active)  > [data-slot=\"switch-thumb\"]": {
             "box-shadow": "var(--shadow-primary)"
           },
-          ":is([data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled):not([aria-disabled=\"true\"]):hover:not(:active)": {
-            "background": "var(--sidebar-hover-background, linear-gradient(var(--hover-top), var(--hover-bottom)))",
-            "color": "var(--sidebar-hover-foreground, var(--sidebar-foreground))",
-            "box-shadow": "var(--shadow-hover)"
+          "[data-slot=\"select-trigger\"]:not(:disabled):not([aria-invalid=\"true\"]):hover": {
+            "border-color": "color-mix(in srgb, var(--input) 60%, var(--ring))"
           }
         },
-        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is([aria-pressed=\"true\"],[aria-expanded=\"true\"]):not(:disabled):not([aria-disabled=\"true\"])": {
-          "background": "var(--well-top)",
-          "color": "var(--foreground)",
+        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is([aria-pressed=\"true\"],[aria-expanded=\"true\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active)": {
+          "background": "linear-gradient(\n      color-mix(in srgb, var(--button-top) 96%, black),\n      color-mix(in srgb, var(--button-bottom) 96%, black)\n    )",
+          "color": "var(--button-ink)",
           "border-color": "var(--control-hover-edge)",
-          "box-shadow": "var(--shadow-well)"
+          "box-shadow": "var(--button-shadow), var(--shadow-press-soft)"
         },
-        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled):not([aria-disabled=\"true\"]):active": {
+        "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is([aria-pressed=\"true\"],[aria-expanded=\"true\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active)": {
+          "background": "linear-gradient(var(--control-top), var(--control-bottom))",
+          "border-color": "var(--control-edge)",
+          "box-shadow": "var(--shadow-control)"
+        },
+        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
           "scale": "var(--press-scale, 0.96)",
           "translate": "none",
           "color": "var(--button-ink)",
           "background": "linear-gradient(var(--button-bottom), var(--button-top))",
           "box-shadow": "var(--shadow-pressed)"
         },
-        "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled):not([aria-disabled=\"true\"]):active": {
-          "background": "var(--well-top)"
+        "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
+          "background": "var(--pressed-background)",
+          "border-color": "var(--control-hover-edge)",
+          "box-shadow": "var(--shadow-press-soft)"
         },
-        "[data-variant=\"link\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled):not([aria-disabled=\"true\"]):is(:hover,:active)": {
+        "[data-variant=\"ghost\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active:is([aria-pressed=\"true\"],[aria-expanded=\"true\"])": {
+          "background": "var(--control-pressed-background)",
+          "box-shadow": "var(--shadow-control), var(--shadow-press-soft)"
+        },
+        "[data-variant=\"link\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):is(:hover,:active)": {
           "background": "transparent",
           "border-color": "transparent",
           "box-shadow": "none",
           "scale": "1",
           "text-decoration": "underline"
         },
-        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is(:disabled,[aria-disabled=\"true\"])": {
+        "[data-variant=\"link\"]:is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
+          "text-decoration-thickness": "2px"
+        },
+        ":is(:is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size])):is(:disabled,[aria-disabled=\"true\"],[data-disabled])": {
           "opacity": "var(--disabled-opacity, 0.4)",
           "box-shadow": "none",
           "cursor": "not-allowed"
-        },
-        ":is([data-slot=\"dropdown-menu-content\"])": {
-          "min-width": "var(--menu-min-width, 12.5rem)",
-          "padding": "var(--menu-padding)",
-          "border-radius": "var(--well-radius)",
-          "outline": "none"
-        },
-        ":is(:is(\n  [data-slot=\"dropdown-menu-item\"],\n  [data-slot=\"dropdown-menu-checkbox-item\"],\n  [data-slot=\"dropdown-menu-radio-item\"],\n  [data-slot=\"dropdown-menu-sub-trigger\"]\n))": {
-          "min-height": "var(--control-height)",
-          "padding-block": "0",
-          "padding-inline": "var(--menu-item-padding-x, 10px)",
-          "border-radius": "var(--field-radius)",
-          "outline": "none"
-        },
-        "[data-inset=\"true\"]:is(:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"]))": {
-          "padding-inline-start": "2rem"
-        },
-        ":is(:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"])):is([data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"])": {
-          "padding-inline-end": "2rem"
-        },
-        ":is(:is(\n  [data-slot=\"dropdown-menu-item\"],\n  [data-slot=\"dropdown-menu-checkbox-item\"],\n  [data-slot=\"dropdown-menu-radio-item\"],\n  [data-slot=\"dropdown-menu-sub-trigger\"]\n)[data-highlighted])": {
-          "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
-          "color": "var(--hover-foreground, var(--foreground))",
-          "box-shadow": "var(--shadow-hover)",
-          "outline": "none"
-        },
-        ":is(:is(\n    [data-slot=\"dropdown-menu-item\"],\n    [data-slot=\"dropdown-menu-checkbox-item\"],\n    [data-slot=\"dropdown-menu-radio-item\"],\n    [data-slot=\"dropdown-menu-sub-trigger\"]\n  ):not([data-disabled]):active)": {
-          "background": "var(--well-top)",
-          "box-shadow": "var(--shadow-pressed)"
         },
         ":root": {
           "color-scheme": "light"
@@ -457,9 +720,203 @@
           "font-weight": "var(--heading-weight, 500)",
           "letter-spacing": "-0.02em"
         },
+        "[data-slot=\"panel-header\"]": {
+          "container-type": "inline-size",
+          "container-name": "panel-header"
+        },
+        "[data-slot=\"panel-header\"]:not(:last-child)": {
+          "margin-block-end": "var(--card-padding)"
+        },
+        "[data-panel-layout] > [data-slot=\"panel-header\"]": {
+          "margin-block-end": "0"
+        },
+        "[data-slot=\"panel-meta\"]": {
+          "min-height": "40px"
+        },
+        "@container panel-header (max-width: 360px)": {
+          "[data-slot=\"panel-topline\"]": {
+            "grid-template-columns": "minmax(0, 1fr)"
+          },
+          "[data-slot=\"panel-meta\"]": {
+            "min-height": "0",
+            "margin-inline-start": "52px",
+            "justify-content": "flex-start",
+            "text-align": "start"
+          }
+        },
+        ".data-card [data-slot=\"panel-topline\"]": {
+          "grid-template-columns": "minmax(0, 1fr) auto"
+        },
+        ".data-card [data-slot=\"panel-meta\"]": {
+          "margin-inline-start": "0",
+          "min-height": "40px",
+          "justify-content": "flex-end"
+        },
+        ".data-card [data-slot=\"data-card-details\"] > summary": {
+          "display": "flex",
+          "align-items": "center",
+          "gap": "8px",
+          "min-height": "max(40px, var(--control-hit-height))",
+          "padding": "8px 0",
+          "border-radius": "var(--small-radius)",
+          "list-style": "none",
+          "color": "var(--muted-foreground)",
+          "cursor": "pointer",
+          "transition": "color var(--transition-duration, 140ms) ease-out"
+        },
+        ".data-card [data-slot=\"data-card-details\"] > summary::-webkit-details-marker": {
+          "display": "none"
+        },
+        ".data-card [data-slot=\"data-card-details\"][open] > summary > svg": {
+          "rotate": "90deg"
+        },
+        ".data-card [data-slot=\"data-card-details\"] > summary:active": {
+          "color": "color-mix(in srgb, var(--foreground) 92%, var(--muted-foreground))"
+        },
+        ".data-card [data-slot=\"data-card-details\"] > summary:focus-visible": {
+          "outline": "var(--focus-width, 1px) solid var(--ring)",
+          "outline-offset": "2px"
+        },
+        "[data-slot=\"panel-icon\"].surface-control": {
+          "width": "40px",
+          "height": "40px",
+          "border-radius": "50%",
+          "cursor": "default"
+        },
+        "[data-slot=\"panel-icon\"] > svg": {
+          "width": "16px",
+          "height": "16px"
+        },
+        "[data-slot=\"panel-title\"]": {
+          "margin": "0",
+          "font-size": "max(var(--body-font-size), 16px)",
+          "font-weight": "var(--heading-weight, 500)",
+          "line-height": "1.4",
+          "letter-spacing": "-0.02em",
+          "text-wrap": "pretty"
+        },
+        "[data-slot=\"panel-description\"]": {
+          "margin-top": "4px",
+          "font-size": "var(--support-font-size)",
+          "line-height": "1.5"
+        },
+        "[data-slot=\"chart-legend-item\"]": {
+          "border": "1px solid transparent",
+          "border-radius": "var(--button-radius)",
+          "background": "transparent",
+          "color": "var(--muted-foreground)",
+          "box-shadow": "none",
+          "text-decoration": "line-through"
+        },
+        "[data-slot=\"chart-legend-item\"][aria-pressed=\"true\"]": {
+          "background": "transparent",
+          "color": "var(--foreground)",
+          "text-decoration": "none"
+        },
+        "[data-slot=\"chart-legend-item\"]:active": {
+          "background": "var(--pressed-background)",
+          "box-shadow": "var(--shadow-press-soft)"
+        },
+        "[data-slot=\"chart-legend-item\"][aria-pressed=\"true\"]:active": {
+          "background": "color-mix(in srgb, var(--accent) 96%, black)"
+        },
+        "[data-slot=\"chart-legend-item\"]:focus-visible": {
+          "outline": "2px solid var(--ring)",
+          "outline-offset": "2px"
+        },
+        "@media (forced-colors: active)": {
+          "[data-slot=\"chart-legend-item\"][aria-pressed=\"true\"]": {
+            "border-color": "Highlight"
+          },
+          ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):is([data-highlighted],[data-state=\"open\"]):not([data-disabled],:active)": {
+            "outline": "1px solid Highlight",
+            "outline-offset": "-1px"
+          },
+          ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):focus-visible:not([data-disabled],:active)": {
+            "outline": "2px dotted Highlight",
+            "outline-offset": "-2px"
+          },
+          ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):not([data-disabled]):active": {
+            "box-shadow": "none",
+            "outline": "2px dashed CanvasText",
+            "outline-offset": "-2px"
+          },
+          "[data-slot=\"tabs-list\"]::before": {
+            "display": "none"
+          },
+          "[data-slot=\"card\"],\n  :is(\n    [data-slot=\"button\"],\n    button[data-variant][data-size],\n    a[data-variant][data-size]\n  ),\n  [data-slot=\"input\"],\n  [data-slot=\"textarea\"],\n  [data-slot=\"tabs-list\"],\n  [data-slot=\"tabs-trigger\"],\n  .surface-raised,\n  .surface-inset,\n  .surface-control": {
+            "background-image": "none",
+            "box-shadow": "none",
+            "border": "1px solid CanvasText"
+          },
+          "[data-slot]:focus-visible,\n  [data-slot=\"input-group\"]:has(:focus-visible)": {
+            "outline": "1px solid Highlight",
+            "outline-offset": "-2px"
+          },
+          "[data-slot=\"select-trigger\"],\n  [data-slot=\"select-content\"],\n  [data-slot=\"slider-thumb\"],\n  [data-slot=\"dropdown-menu-content\"],\n  [data-slot=\"dropdown-menu-sub-content\"],\n  [data-slot=\"navigation-link\"],\n  [data-slot=\"filter-chip\"],\n  [data-slot=\"segmented-control-item\"],\n  [data-slot=\"badge\"]": {
+            "background-image": "none",
+            "border": "1px solid CanvasText",
+            "box-shadow": "none !important"
+          },
+          ":is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size],[data-slot=\"tabs-trigger\"],[data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):is([aria-current=\"page\"],[aria-pressed=\"true\"],[aria-expanded=\"true\"],[data-active=\"true\"],[data-state=\"active\"],[data-state=\"checked\"]):not(:active)": {
+            "border-color": "Highlight !important",
+            "outline": "2px solid Highlight",
+            "outline-offset": "-2px"
+          },
+          "@media (hover: hover)": {
+            ":is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size],[data-slot=\"tabs-trigger\"],[data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active):hover": {
+              "text-decoration": "underline",
+              "text-underline-offset": "3px"
+            }
+          },
+          ":is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size],[data-slot=\"tabs-trigger\"],[data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
+            "outline": "2px dashed CanvasText",
+            "outline-offset": "-2px"
+          },
+          ":is([data-slot=\"button\"],button[data-variant][data-size],a[data-variant][data-size],[data-slot=\"tabs-trigger\"],[data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):focus-visible:not(:active)": {
+            "outline": "2px dotted Highlight",
+            "outline-offset": "-2px"
+          },
+          "[data-slot=\"telemetry-plot\"] path[stroke],\n  [data-slot=\"telemetry-plot\"] polyline,\n  [data-slot=\"telemetry-plot\"] rect[stroke],\n  [data-slot=\"chart-legend-item\"] path": {
+            "stroke": "CanvasText"
+          },
+          "[data-slot=\"telemetry-plot\"] circle": {
+            "fill": "CanvasText",
+            "stroke": "Canvas"
+          },
+          "[data-slot=\"telemetry-plot\"] rect": {
+            "fill": "Canvas"
+          },
+          "[data-slot=\"range-position\"],\n  [data-slot=\"interval-bar\"]": {
+            "border-color": "CanvasText"
+          },
+          "[data-slot=\"interval-bar\"]": {
+            "background": "CanvasText"
+          },
+          "[data-slot=\"telemetry-plot\"] .recharts-cartesian-axis-tick-value": {
+            "fill": "CanvasText"
+          },
+          "[data-slot=\"telemetry-plot\"] .recharts-cartesian-grid line,\n  [data-slot=\"telemetry-plot\"] .recharts-reference-line line": {
+            "stroke": "CanvasText"
+          },
+          "[data-slot=\"telemetry-tooltip\"]": {
+            "background": "Canvas",
+            "border-color": "CanvasText",
+            "color": "CanvasText"
+          },
+          "[data-slot=\"telemetry-plot\"] .telemetry-event-label": {
+            "fill": "CanvasText"
+          }
+        },
+        ".surface-inset .surface-inset": {
+          "background": "transparent",
+          "box-shadow": "none",
+          "border": "0",
+          "border-radius": "0"
+        },
         ".surface-inset,\n[data-slot=\"item\"][data-variant=\"muted\"],\n[data-slot=\"tabs-list\"][data-variant=\"default\"]": {
           "background": "linear-gradient(180deg, var(--well-top), var(--well-bottom))",
-          "border": "1px solid transparent",
+          "border": "0",
           "border-radius": "var(--well-radius)",
           "box-shadow": "var(--shadow-well)"
         },
@@ -467,18 +924,18 @@
           "padding": "1rem"
         },
         "[data-slot=\"input\"],\n[data-slot=\"textarea\"],\n[data-slot=\"input-group\"]": {
-          "font-size": "var(--text-base)",
+          "font-size": "var(--input-font-size)",
           "background": "var(--field-background)",
-          "border": "var(--control-border-width, 1px) solid var(--input)",
+          "border": "var(--input-border-width) solid var(--input)",
           "border-radius": "var(--field-radius)",
           "box-shadow": "var(--shadow-field)",
           "transition": "border-color var(--transition-duration, 140ms) ease-out"
         },
         "[data-slot=\"input\"],\n[data-slot=\"input-group\"]": {
-          "min-height": "var(--control-height)"
+          "min-height": "max(var(--input-height), var(--control-hit-height))"
         },
         "[data-slot=\"input\"],\n[data-slot=\"input-group\"]:not(:has(> textarea, > [data-align^=\"block\"]))": {
-          "height": "var(--control-height)"
+          "height": "max(var(--input-height), var(--control-hit-height))"
         },
         "[data-slot=\"input-group\"]:not(:has( > textarea, > [data-align^=\"block\"]))  > input[data-slot=\"input-group-control\"]": {
           "height": "100%",
@@ -494,7 +951,7 @@
           "color": "var(--foreground)",
           "padding-inline": "var(--field-padding-x, 0.875rem)"
         },
-        "[data-slot=\"textarea\"], textarea[data-slot=\"input-group-control\"]": {
+        "[data-slot=\"textarea\"],\ntextarea[data-slot=\"input-group-control\"]": {
           "min-height": "var(--textarea-min-height, 4rem)",
           "padding-block": "var(--textarea-padding-y, 8px)"
         },
@@ -516,6 +973,36 @@
           "border": "1px solid var(--control-edge)",
           "box-shadow": "var(--shadow-control)"
         },
+        "[data-slot=\"tabs-list\"]": {
+          "position": "relative",
+          "isolation": "isolate"
+        },
+        "[data-slot=\"tabs-list\"]::before": {
+          "content": "\"\"",
+          "position": "absolute",
+          "z-index": "-1",
+          "top": "0",
+          "left": "0",
+          "pointer-events": "none",
+          "opacity": "0",
+          "width": "var(--tab-indicator-width)",
+          "height": "var(--tab-indicator-height)",
+          "transform": "translate(var(--tab-indicator-x), var(--tab-indicator-y))",
+          "border": "1px solid var(--control-edge)",
+          "border-radius": "var(--tab-radius)",
+          "background": "linear-gradient(var(--control-top), var(--control-bottom))",
+          "box-shadow": "var(--shadow-control)"
+        },
+        "[data-slot=\"tabs-list\"][data-indicator-ready=\"true\"]::before": {
+          "opacity": "1"
+        },
+        "[data-slot=\"tabs-list\"][data-indicator-motion=\"true\"]::before": {
+          "transition": "transform calc(var(--transition-duration, 140ms) * 1.5)\n      cubic-bezier(0.2, 0, 0, 1),\n    width calc(var(--transition-duration, 140ms) * 1.5)\n      cubic-bezier(0.2, 0, 0, 1),\n    height calc(var(--transition-duration, 140ms) * 1.5)\n      cubic-bezier(0.2, 0, 0, 1)"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"default\"]:has(\n    [data-slot=\"tabs-trigger\"][aria-selected=\"true\"]:active\n  )::before": {
+          "background": "var(--control-pressed-background)",
+          "box-shadow": "var(--shadow-control), var(--shadow-press-soft)"
+        },
         "[data-slot=\"tabs-list\"][data-variant=\"default\"]": {
           "width": "var(--tab-list-width)",
           "max-width": "100%",
@@ -528,39 +1015,78 @@
           "overflow-y": "hidden",
           "scrollbar-width": "thin",
           "padding": "var(--tab-list-padding)",
+          "gap": "var(--tab-gap)",
           "border-radius": "calc(var(--tab-radius) + var(--tab-list-padding))"
         },
         "[data-slot=\"tabs-trigger\"]": {
+          "border-radius": "var(--tab-radius)",
           "box-shadow": "none",
-          "transition": "background-color var(--transition-duration, 140ms) ease-out,\n    border-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out"
+          "transition": "color var(--transition-duration, 140ms) ease-out,\n    background-color var(--transition-duration, 140ms) ease-out,\n    border-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"line\"]": {
+          "height": "auto",
+          "flex-shrink": "0"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"line\"] [data-slot=\"tabs-trigger\"]": {
+          "height": "auto",
+          "min-height": "max(\n    var(--tab-height, var(--control-height, 34px)),\n    var(--control-hit-height, 0px)\n  )",
+          "font-size": "var(--tab-font-size, var(--body-font-size, 14px))"
         },
         "[data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]": {
           "flex": "var(--tab-flex)",
           "min-width": "max-content",
-          "min-height": "0",
+          "min-height": "max(var(--tab-height), var(--control-hit-height))",
+          "font-size": "var(--tab-font-size)",
+          "font-weight": "500",
           "height": "auto",
           "padding": "var(--tab-padding-y) var(--tab-padding-x)",
-          "border-radius": "var(--tab-radius)",
           "background": "transparent",
           "border": "1px solid transparent",
           "color": "var(--muted-foreground)"
         },
-        "[data-state=\"active\"]:is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"])": {
+        "[aria-selected=\"true\"]:is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"])": {
           "background": "linear-gradient(var(--control-top), var(--control-bottom))",
           "border-color": "var(--control-edge)",
           "box-shadow": "var(--shadow-control)",
           "color": "var(--foreground)"
         },
-        ":is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]):not(:disabled):active": {
-          "background": "var(--well-top)",
-          "box-shadow": "var(--shadow-pressed)"
-        },
         ":is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]):focus-visible": {
           "outline-offset": "-3px"
         },
-        ":is([data-slot=\"tabs-list\"][data-variant=\"default\"] [data-slot=\"tabs-trigger\"]):disabled": {
+        ":is([data-slot=\"tabs-list\"][data-variant] [data-slot=\"tabs-trigger\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
+          "background": "color-mix(in srgb, var(--foreground) 8%, transparent)",
+          "color": "var(--foreground)",
+          "box-shadow": "none"
+        },
+        ":is([data-slot=\"tabs-list\"][data-variant] [data-slot=\"tabs-trigger\"]):is(:disabled,[aria-disabled=\"true\"],[data-disabled])": {
           "opacity": "var(--disabled-opacity, 0.4)",
           "box-shadow": "none"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"default\"]\n  [data-slot=\"tabs-trigger\"][aria-selected=\"true\"]:active": {
+          "background": "var(--control-pressed-background)",
+          "box-shadow": "var(--shadow-control), var(--shadow-press-soft)"
+        },
+        "[data-slot=\"tabs-list\"][data-variant][data-indicator-ready=\"true\"]\n  [data-slot=\"tabs-trigger\"][aria-selected=\"true\"],\n[data-slot=\"tabs-list\"][data-variant][data-indicator-ready=\"true\"]\n  [data-slot=\"tabs-trigger\"][aria-selected=\"true\"]:is(\n    :hover,\n    :active,\n    :focus-visible\n  )": {
+          "background": "transparent",
+          "border-color": "transparent",
+          "box-shadow": "none",
+          "color": "var(--foreground)"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"line\"]::before": {
+          "background": "var(--foreground)",
+          "border": "0",
+          "border-radius": "var(--tab-radius)",
+          "box-shadow": "none",
+          "height": "2px",
+          "transform": "translate(\n    var(--tab-indicator-x),\n    calc(var(--tab-indicator-y) + var(--tab-indicator-height) + 3px)\n  )"
+        },
+        "[data-slot=\"tabs-list\"][data-variant=\"line\"][data-orientation=\"vertical\"]::before": {
+          "width": "2px",
+          "height": "var(--tab-indicator-height)",
+          "transform": "translate(\n    calc(var(--tab-indicator-x) + var(--tab-indicator-width) + 3px),\n    var(--tab-indicator-y)\n  )"
+        },
+        "[data-slot=\"tabs-list\"][data-indicator-ready=\"true\"]\n  [data-slot=\"tabs-trigger\"]::after": {
+          "display": "none"
         },
         "[data-slot=\"button-group\"]:has(> [data-variant][data-size])": {
           "border-radius": "var(--button-radius)",
@@ -575,12 +1101,17 @@
         "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > :is([data-variant=\"outline\"],[data-variant=\"secondary\"])": {
           "background": "transparent"
         },
-        "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:not(:disabled):not([aria-disabled=\"true\"]):is(:active,[aria-expanded=\"true\"],[aria-pressed=\"true\"])": {
+        "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:is([aria-expanded=\"true\"],[aria-pressed=\"true\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled],:active)": {
+          "background": "var(--control-pressed-background)",
+          "color": "var(--foreground)",
+          "box-shadow": "var(--shadow-press-soft)"
+        },
+        "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
           "scale": "1",
           "translate": "none",
-          "background": "var(--well-top)",
+          "background": "var(--control-pressed-background)",
           "color": "var(--foreground)",
-          "box-shadow": "var(--shadow-well)"
+          "box-shadow": "var(--shadow-press-soft)"
         },
         "[data-slot=\"button-group\"]:has( > [data-variant][data-size])  > [data-variant][data-size]:focus-visible": {
           "outline-offset": "-3px"
@@ -590,6 +1121,176 @@
         },
         "[data-slot=\"button-group\"][data-orientation=\"vertical\"]\n  > [data-variant][data-size]\n  + [data-variant][data-size]": {
           "border-top": "1px solid var(--control-edge)"
+        },
+        ":is(\n  [data-slot=\"navigation-link\"],\n  [data-slot=\"filter-chip\"],\n  [data-slot=\"segmented-control-item\"],\n  [data-slot=\"navigation-menu-link\"],\n  [data-slot=\"sidebar-menu-button\"],\n  [data-slot=\"sidebar-menu-sub-button\"]\n)": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "gap": "var(--nav-gap)",
+          "min-height": "max(var(--nav-height), var(--control-hit-height))",
+          "height": "auto",
+          "padding": "4px var(--nav-padding-x)",
+          "border": "0",
+          "border-radius": "var(--nav-radius)",
+          "color": "var(--muted-foreground)",
+          "background": "transparent",
+          "box-shadow": "none",
+          "font-size": "var(--nav-font-size)",
+          "font-weight": "400",
+          "text-decoration": "none",
+          "transition": "color var(--transition-duration, 140ms) ease-out,\n    background-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out"
+        },
+        ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):is([aria-current=\"page\"],[aria-pressed=\"true\"],[data-active=\"true\"],[data-state=\"checked\"]):not(:active)": {
+          "color": "var(--foreground)",
+          "background": "linear-gradient(var(--control-top), var(--control-bottom))",
+          "box-shadow": "var(--shadow-control)"
+        },
+        ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active": {
+          "color": "var(--foreground)",
+          "background": "color-mix(in srgb, var(--foreground) 8%, transparent)",
+          "box-shadow": "none"
+        },
+        ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled,[aria-disabled=\"true\"],[data-disabled]):active:is([aria-current=\"page\"],[aria-pressed=\"true\"],[data-active=\"true\"],[data-state=\"checked\"])": {
+          "background": "var(--control-pressed-background)",
+          "box-shadow": "var(--shadow-control), var(--shadow-press-soft)"
+        },
+        ":is([data-slot=\"navigation-link\"],[data-slot=\"filter-chip\"],[data-slot=\"segmented-control-item\"],[data-slot=\"navigation-menu-link\"],[data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):is(:disabled,[aria-disabled=\"true\"],[data-disabled])": {
+          "color": "var(--muted-foreground)",
+          "box-shadow": "none",
+          "opacity": "var(--disabled-opacity, 0.4)",
+          "cursor": "not-allowed"
+        },
+        "[data-slot=\"filter-chip\"]": {
+          "border-radius": "var(--tab-radius)",
+          "padding-inline": "var(--tab-padding-x)"
+        },
+        "[data-slot=\"segmented-control-item\"]": {
+          "padding": "4px var(--nav-padding-x)"
+        },
+        "[data-slot=\"segmented-control-item\"]:has(:focus-visible)": {
+          "outline": "var(--focus-width, 1px) solid var(--ring)",
+          "outline-offset": "-2px"
+        },
+        ":is(\n  [data-slot=\"dropdown-menu-content\"],\n  [data-slot=\"dropdown-menu-sub-content\"],\n  [data-slot=\"select-content\"]\n)": {
+          "min-width": "var(--menu-min-width, 12.5rem)",
+          "max-width": "calc(100vw - 24px)",
+          "padding": "var(--menu-padding)",
+          "color": "var(--popover-foreground)",
+          "background": "linear-gradient(\n    155deg,\n    var(--popover-top),\n    var(--popover-bottom)\n  )",
+          "border": "var(--container-border-width, 1px) solid var(--surface-edge)",
+          "border-radius": "calc(\n    var(--menu-item-radius) + var(--menu-padding) +\n      var(--container-border-width, 1px)\n  )",
+          "box-shadow": "var(--shadow-menu)",
+          "outline": "none"
+        },
+        "[data-slot=\"select-group\"]": {
+          "padding": "0"
+        },
+        ":is(\n  [data-slot=\"dropdown-menu-item\"],\n  [data-slot=\"dropdown-menu-checkbox-item\"],\n  [data-slot=\"dropdown-menu-radio-item\"],\n  [data-slot=\"dropdown-menu-sub-trigger\"],\n  [data-slot=\"select-item\"]\n)": {
+          "min-height": "max(var(--menu-item-height), var(--control-hit-height))",
+          "padding": "4px var(--menu-item-padding-x, 10px)",
+          "border": "0",
+          "border-radius": "var(--menu-item-radius)",
+          "color": "var(--popover-foreground)",
+          "background": "transparent",
+          "box-shadow": "none",
+          "font-size": "var(--menu-font-size)",
+          "outline": "none",
+          "transition": "background-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out"
+        },
+        ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):is([data-slot=\"select-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"])": {
+          "padding-inline-end": "32px"
+        },
+        "[data-inset=\"true\"]:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"])": {
+          "padding-inline-start": "32px"
+        },
+        ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):is([data-state=\"checked\"],[data-state=\"indeterminate\"],[data-state=\"open\"]):not([data-disabled],:active)": {
+          "background": "color-mix(in srgb, var(--accent) 45%, transparent)"
+        },
+        "[data-highlighted]:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):not([data-disabled],:active)": {
+          "color": "var(--accent-foreground)",
+          "background": "var(--accent)"
+        },
+        "[data-variant=\"destructive\"]:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"])": {
+          "color": "var(--destructive)"
+        },
+        "[data-variant=\"destructive\"]:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):is([data-highlighted],:active):not([data-disabled])": {
+          "color": "var(--destructive)",
+          "background": "color-mix(in srgb, var(--destructive) 9%, var(--popover))"
+        },
+        ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):not([data-disabled]):active": {
+          "background": "color-mix(in srgb, var(--accent) 96%, black)",
+          "box-shadow": "var(--shadow-press-soft)"
+        },
+        ":is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"]):focus-visible:not([data-disabled])": {
+          "outline": "var(--focus-width, 1px) solid var(--ring)",
+          "outline-offset": "-2px"
+        },
+        "[data-disabled]:is([data-slot=\"dropdown-menu-item\"],[data-slot=\"dropdown-menu-checkbox-item\"],[data-slot=\"dropdown-menu-radio-item\"],[data-slot=\"dropdown-menu-sub-trigger\"],[data-slot=\"select-item\"])": {
+          "opacity": "var(--disabled-opacity, 0.4)",
+          "cursor": "not-allowed"
+        },
+        ":is([data-slot=\"dropdown-menu-label\"], [data-slot=\"select-label\"])": {
+          "padding": "4px var(--menu-item-padding-x, 10px)",
+          "color": "var(--muted-foreground)",
+          "font-size": "var(--menu-font-size)",
+          "font-weight": "400"
+        },
+        ":is([data-slot=\"dropdown-menu-separator\"], [data-slot=\"select-separator\"])": {
+          "height": "0.5px",
+          "margin": "var(--menu-padding) 4px",
+          "background": "var(--border)"
+        },
+        "[data-slot=\"badge\"]": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "gap": "5px",
+          "min-height": "var(--tag-height)",
+          "height": "auto",
+          "padding": "2px var(--tag-padding-x)",
+          "border": "0",
+          "border-radius": "var(--tag-radius)",
+          "font-size": "var(--tag-font-size)",
+          "line-height": "1.4",
+          "font-weight": "400",
+          "letter-spacing": "0",
+          "color": "var(--primary-foreground)",
+          "background": "var(--primary)",
+          "box-shadow": "none",
+          "font-variant-numeric": "tabular-nums",
+          "transition": "color var(--transition-duration, 140ms) ease-out,\n    background-color var(--transition-duration, 140ms) ease-out"
+        },
+        "[data-slot=\"badge\"][data-variant=\"secondary\"]": {
+          "color": "var(--muted-foreground)",
+          "background": "var(--muted)"
+        },
+        "[data-slot=\"badge\"][data-variant=\"outline\"]": {
+          "color": "var(--muted-foreground)",
+          "background": "transparent",
+          "box-shadow": "inset 0 0 0 0.5px var(--border)"
+        },
+        "[data-slot=\"badge\"]:is([data-variant=\"ghost\"],[data-variant=\"link\"])": {
+          "color": "var(--foreground)",
+          "background": "transparent"
+        },
+        "[data-slot=\"badge\"][data-variant=\"destructive\"]": {
+          "--tag-tone": "var(--destructive)"
+        },
+        "[data-slot=\"badge\"][data-tone=\"success\"]": {
+          "--tag-tone": "var(--success)"
+        },
+        "[data-slot=\"badge\"][data-tone=\"warning\"]": {
+          "--tag-tone": "var(--warning)"
+        },
+        "[data-slot=\"badge\"]:is([data-variant=\"destructive\"],[data-tone=\"success\"],[data-tone=\"warning\"])": {
+          "color": "color-mix(in srgb, var(--tag-tone) 85%, var(--foreground))",
+          "background": "color-mix(in srgb, var(--tag-tone) 9%, var(--card))",
+          "box-shadow": "inset 0 0 0 0.5px\n      color-mix(in srgb, var(--tag-tone) 28%, transparent)"
+        },
+        "[data-slot=\"badge\"]:is(a,button)": {
+          "min-height": "40px"
+        },
+        "[data-slot=\"badge\"]:is(a,button):hover": {
+          "text-decoration": "underline",
+          "text-underline-offset": "3px"
         },
         "[data-slot=\"progress\"]": {
           "height": "var(--progress-height, 0.375rem)",
@@ -621,7 +1322,7 @@
           "box-shadow": "var(--shadow-primary)"
         },
         ":is([data-slot=\"checkbox\"],[data-slot=\"radio-group-item\"]):not(:disabled):not([data-disabled]):active": {
-          "box-shadow": "var(--shadow-pressed)"
+          "box-shadow": "var(--shadow-press-soft)"
         },
         ":is([data-slot=\"checkbox\"],[data-slot=\"radio-group-item\"]):is(:disabled,[data-disabled])": {
           "opacity": "var(--disabled-opacity, 0.4)",
@@ -662,7 +1363,7 @@
           "border-color": "color-mix(in srgb, var(--success) 35%, var(--input))"
         },
         "[data-slot=\"switch\"]:not(:disabled):not([data-disabled]):active > [data-slot=\"switch-thumb\"]": {
-          "box-shadow": "var(--shadow-pressed)"
+          "box-shadow": "var(--shadow-control), var(--shadow-press-soft)"
         },
         "[data-slot=\"switch\"]:is(:disabled,[data-disabled])": {
           "opacity": "var(--disabled-opacity, 0.4)",
@@ -680,12 +1381,12 @@
         "[data-slot=\"switch-thumb\"][data-state=\"checked\"]": {
           "translate": "calc(var(--thumb-size) - 4px) 0"
         },
-        "[data-slot=\"dropdown-menu-content\"],\n[data-slot=\"popover-content\"],\n[data-slot=\"dialog-content\"],\n[data-slot=\"alert-dialog-content\"],\n:is([data-slot=\"sheet-content\"], [data-slot=\"sidebar\"][data-mobile=\"true\"])": {
+        "[data-slot=\"popover-content\"],\n[data-slot=\"dialog-content\"],\n[data-slot=\"alert-dialog-content\"],\n:is([data-slot=\"sheet-content\"], [data-slot=\"sidebar\"][data-mobile=\"true\"])": {
           "color": "var(--popover-foreground)",
           "background": "linear-gradient(\n    155deg,\n    var(--popover-top),\n    var(--popover-bottom)\n  )",
           "border": "1px solid var(--surface-edge)",
           "border-radius": "var(--popup-radius)",
-          "box-shadow": "var(--shadow-surface),\n    var(--shadow-overlay)"
+          "box-shadow": "var(--shadow-surface), var(--shadow-overlay)"
         },
         ":is([data-slot=\"dialog-content\"], [data-slot=\"alert-dialog-content\"])": {
           "max-width": "min(var(--dialog-width, 24rem), calc(100vw - 2rem))",
@@ -700,7 +1401,7 @@
           "border-color": "var(--sidebar-border)"
         },
         "[data-slot=\"sidebar\"][data-mobile=\"true\"]": {
-          "background": "linear-gradient(155deg, var(--sidebar-top), var(--sidebar-bottom))",
+          "background": "linear-gradient(\n    155deg,\n    var(--sidebar-top),\n    var(--sidebar-bottom)\n  )",
           "color": "var(--sidebar-foreground)",
           "border-color": "var(--sidebar-border)",
           "max-width": "calc(100% - 1rem)"
@@ -725,35 +1426,6 @@
         },
         "[data-slot=\"tooltip-content\"]": {
           "border-radius": "var(--field-radius)"
-        },
-        ":is([data-slot=\"sidebar-menu-button\"], [data-slot=\"sidebar-menu-sub-button\"])": {
-          "position": "relative",
-          "border-radius": "var(--field-radius)",
-          "box-shadow": "none",
-          "transition": "background-color var(--transition-duration, 140ms) ease-out,\n    box-shadow var(--transition-duration, 140ms) ease-out"
-        },
-        "[data-active=\"true\"]:is([data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"])": {
-          "background": "var(--sidebar-active-background, var(--well-top))",
-          "color": "var(--sidebar-active-foreground, var(--sidebar-foreground))",
-          "box-shadow": "var(--shadow-well)",
-          "font-weight": "500"
-        },
-        "[data-active=\"true\"]:is([data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"])::before": {
-          "content": "\"\"",
-          "position": "absolute",
-          "inset-block": "25%",
-          "inset-inline-start": "0",
-          "width": "2px",
-          "background": "var(--sidebar-active-foreground, var(--sidebar-foreground))",
-          "border-radius": "var(--pill-radius)"
-        },
-        ":is([data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):not(:disabled):not([aria-disabled=\"true\"]):active": {
-          "background": "var(--well-top)",
-          "box-shadow": "var(--shadow-pressed)"
-        },
-        ":is([data-slot=\"sidebar-menu-button\"],[data-slot=\"sidebar-menu-sub-button\"]):focus-visible": {
-          "outline-offset": "-2px",
-          "outline-color": "var(--sidebar-ring)"
         },
         ".status-led": {
           "display": "inline-block",
@@ -808,64 +1480,154 @@
             "scroll-behavior": "auto !important"
           },
           ":is(\n    [data-slot=\"button\"],\n    button[data-variant][data-size],\n    a[data-variant][data-size]\n  ):active": {
-            "scale": "1"
-          }
-        },
-        "@media (forced-colors: active)": {
-          "[data-slot=\"card\"],\n  :is(\n    [data-slot=\"button\"],\n    button[data-variant][data-size],\n    a[data-variant][data-size]\n  ),\n  [data-slot=\"input\"],\n  [data-slot=\"textarea\"],\n  [data-slot=\"tabs-list\"],\n  [data-slot=\"tabs-trigger\"],\n  .surface-raised,\n  .surface-inset,\n  .surface-control": {
-            "background-image": "none",
-            "box-shadow": "none",
-            "border": "1px solid CanvasText"
+            "scale": "1 !important"
           },
-          "[data-slot]:focus-visible,\n  [data-slot=\"input-group\"]:has(:focus-visible)": {
-            "outline": "1px solid Highlight",
-            "outline-offset": "-2px"
-          },
-          "[data-slot=\"select-trigger\"], [data-slot=\"select-content\"], [data-slot=\"slider-thumb\"]": {
-            "background-image": "none",
-            "border": "1px solid CanvasText",
-            "box-shadow": "none"
+          "[data-slot=\"telemetry-plot\"] .recharts-line-curve": {
+            "transition": "none"
           }
         },
         ".theme-content-width": {
           "max-width": "var(--content-width)"
         },
         "[data-slot=\"select-trigger\"]": {
-          "font-size": "var(--text-base)",
-          "height": "var(--control-height)",
-          "min-height": "var(--control-height)",
-          "padding-inline": "var(--field-padding-x, 0.875rem)",
-          "border": "1px solid var(--input)",
+          "font-size": "var(--input-font-size)",
+          "height": "max(var(--select-height), var(--control-hit-height))",
+          "min-height": "max(var(--select-height), var(--control-hit-height))",
+          "padding-block": "0",
+          "padding-inline": "var(--select-padding-x)",
+          "border": "var(--input-border-width) solid var(--input)",
           "border-radius": "var(--field-radius)",
           "background": "var(--field-background)",
-          "box-shadow": "var(--shadow-field)"
+          "box-shadow": "var(--shadow-field)",
+          "transition": "border-color var(--transition-duration, 140ms) ease-out"
         },
-        "[data-slot=\"select-content\"]": {
-          "background": "linear-gradient(155deg, var(--popover-top), var(--popover-bottom))",
-          "color": "var(--popover-foreground)",
-          "border": "var(--container-border-width) solid var(--surface-edge)",
-          "border-radius": "var(--well-radius)",
-          "box-shadow": "var(--shadow-surface), var(--shadow-overlay)"
+        "[data-slot=\"select-trigger\"]:is(:focus-visible,[data-state=\"open\"]):not([aria-invalid=\"true\"])": {
+          "border-color": "var(--ring)",
+          "outline": "none"
         },
-        "[data-slot=\"select-item\"]": {
-          "min-height": "var(--control-height)",
-          "border-radius": "var(--field-radius)"
-        },
-        "[data-slot=\"select-item\"][data-highlighted]": {
-          "background": "linear-gradient(var(--hover-top), var(--hover-bottom))",
-          "box-shadow": "var(--shadow-hover)"
+        "[data-slot=\"select-trigger\"]:disabled": {
+          "opacity": "var(--disabled-opacity, 0.4)",
+          "box-shadow": "none"
         },
         "[data-slot=\"slider-track\"]": {
+          "height": "var(--slider-track-height)",
+          "border-radius": "var(--pill-radius)",
           "background": "var(--well-top)",
           "box-shadow": "var(--shadow-well)"
         },
+        "[data-slot=\"slider-range\"]": {
+          "border-radius": "inherit"
+        },
         "[data-slot=\"slider-thumb\"]": {
+          "width": "var(--slider-thumb-size)",
+          "height": "var(--slider-thumb-size)",
+          "border-radius": "var(--pill-radius)",
           "background": "linear-gradient(var(--thumb-top), var(--thumb-bottom))",
           "box-shadow": "var(--shadow-control)"
+        },
+        "[data-slot=\"slider\"][data-orientation=\"vertical\"] [data-slot=\"slider-track\"]": {
+          "height": "100%",
+          "width": "var(--slider-track-height)"
+        },
+        "[data-slot=\"select-trigger\"][data-size=\"sm\"]": {
+          "height": "max(var(--select-height-sm), var(--control-hit-height))",
+          "min-height": "max(var(--select-height-sm), var(--control-hit-height))"
+        },
+        ":is(\n  [data-slot=\"navigation-menu-trigger\"],\n  [data-slot=\"menubar-trigger\"],\n  [data-slot=\"toggle\"]\n)": {
+          "min-height": "max(var(--nav-height), var(--control-hit-height))",
+          "padding-inline": "var(--nav-padding-x)",
+          "border-radius": "var(--nav-radius)",
+          "font-size": "var(--nav-font-size)",
+          "font-weight": "400"
+        },
+        ":is([data-slot=\"table-head\"], [data-slot=\"table-cell\"])": {
+          "height": "var(--table-row-height)",
+          "padding": "4px var(--table-cell-padding-x)",
+          "font-size": "var(--table-font-size)"
+        },
+        "[data-slot=\"avatar\"]": {
+          "width": "var(--avatar-size)",
+          "height": "var(--avatar-size)"
+        },
+        "*": {
+          "scrollbar-width": "thin",
+          "scrollbar-color": "color-mix(in srgb, var(--foreground) 22%, transparent)\n    transparent"
+        },
+        "*::-webkit-scrollbar": {
+          "width": "6px",
+          "height": "6px"
+        },
+        "*::-webkit-scrollbar-thumb": {
+          "background": "color-mix(in srgb, var(--foreground) 22%, transparent)",
+          "border-radius": "999px"
+        },
+        "[data-slot=\"control-row\"]": {
+          "align-items": "stretch"
+        },
+        "[data-slot=\"control-row\"]\n  > :is(\n    [data-slot=\"button\"][data-size],\n    [data-slot=\"input\"],\n    [data-slot=\"select-trigger\"],\n    [data-slot=\"tabs-list\"]\n  )": {
+          "height": "auto",
+          "align-self": "stretch"
+        },
+        "[data-slot=\"control-row\"] > [data-slot=\"tabs-list\"]": {
+          "align-items": "stretch"
+        },
+        "[data-slot=\"control-row\"] > [data-slot=\"button\"][data-size^=\"icon\"]": {
+          "height": "max(var(--button-size-height), var(--control-hit-height))",
+          "align-self": "center"
+        },
+        "[data-slot=\"control-row\"]:has(> [data-slot=\"input\"])\n  > [data-slot=\"button\"][data-size^=\"icon\"]": {
+          "height": "max(\n    var(--button-size-height),\n    var(--input-height),\n    var(--control-hit-height)\n  )",
+          "width": "max(\n    var(--button-size-height),\n    var(--input-height),\n    var(--control-hit-height)\n  )"
+        },
+        "@media (pointer: coarse)": {
+          ":root": {
+            "--control-hit-height": "40px"
+          }
         },
         "[data-slot=\"dialog-close\"]": {
           "min-height": "40px",
           "min-width": "40px"
+        },
+        "[data-slot=\"telemetry-plot\"]": {
+          "font-variant-numeric": "tabular-nums"
+        },
+        "[data-slot=\"telemetry-plot\"] .recharts-surface": {
+          "overflow": "visible"
+        },
+        "[data-slot=\"telemetry-plot\"] .recharts-cartesian-axis-tick-value": {
+          "fill": "var(--muted-foreground)"
+        },
+        "[data-slot=\"telemetry-filters\"] > summary:focus-visible": {
+          "outline": "2px solid var(--ring)",
+          "outline-offset": "3px",
+          "border-radius": "var(--radius)"
+        },
+        "[data-slot=\"telemetry-tooltip\"][data-side=\"left\"]": {
+          "left": "12px"
+        },
+        "[data-slot=\"telemetry-tooltip\"][data-side=\"right\"]": {
+          "right": "12px"
+        },
+        "[data-slot=\"telemetry-tooltip\"]": {
+          "box-shadow": "var(--shadow-menu)"
+        },
+        "[data-slot=\"chart-legend-item\"][aria-pressed=\"false\"] svg": {
+          "opacity": "0.35"
+        },
+        "[data-slot=\"telemetry-plot\"] .recharts-line-curve": {
+          "transition": "stroke-opacity 120ms ease-out,\n    stroke-width 120ms ease-out"
+        },
+        "[data-slot=\"telemetry-plot\"] .telemetry-event-label": {
+          "fill": "var(--muted-foreground)"
+        },
+        "@container (max-width: 32rem)": {
+          "[data-slot=\"telemetry-tooltip\"][data-side]": {
+            "position": "relative",
+            "inset": "auto",
+            "width": "100%",
+            "max-width": "none",
+            "margin-top": "12px"
+          }
         }
       },
       "categories": [
@@ -906,7 +1668,8 @@
         }
       ],
       "categories": [
-        "iot"
+        "iot",
+        "devices"
       ],
       "type": "registry:component"
     },
@@ -926,62 +1689,109 @@
         }
       ],
       "categories": [
-        "iot"
+        "iot",
+        "devices"
       ],
       "type": "registry:component"
     },
     {
       "name": "telemetry-chart",
-      "title": "Telemetry chart",
-      "description": "A lightweight SVG time series with real data gaps and an accessible readings table.",
+      "title": "Trend inspector",
+      "description": "多序列共用时间游标，同单位共轴、异单位分图。目标带、事件标记、采样断点和精确数据表一起保留。",
       "dependencies": [
-        "cn"
+        "lucide-react",
+        "cn",
+        "radix-ui@^1.8.1",
+        "recharts@^3.10.1",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
-        "https://immortal.build/r/telemetry.json"
+        "button",
+        "https://immortal.build/r/telemetry.json",
+        "https://immortal.build/r/iot-model.json"
       ],
       "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/telemetry-series-style.ts",
+          "type": "registry:component",
+          "target": "@components/iot/internal/telemetry-series-style.ts"
+        },
+        {
+          "path": "registry/immortal/components/internal/telemetry-plot.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/telemetry-plot.tsx"
+        },
         {
           "path": "registry/immortal/components/telemetry-chart.tsx",
           "type": "registry:component",
           "target": "@components/iot/telemetry-chart.tsx"
         }
       ],
+      "meta": {
+        "internal": true,
+        "replacement": "telemetry-explorer"
+      },
       "categories": [
-        "iot"
+        "iot",
+        "visualization"
       ],
       "type": "registry:component"
     },
     {
       "name": "telemetry-card",
-      "title": "Telemetry card",
-      "description": "A current measurement with units, device status, and optional history.",
+      "title": "Sensor data panel",
+      "description": "指标、测点、读数与单位构成传感器数据面板，质量、采样时效、量程和来源用于判断数据是否可用。",
       "dependencies": [
         "cn",
-        "radix-ui@^1.8.1",
-        "class-variance-authority@^0.7.1"
+        "lucide-react"
       ],
       "registryDependencies": [
-        "card",
         "https://immortal.build/r/device-status.json",
-        "https://immortal.build/r/telemetry-chart.json"
+        "https://immortal.build/r/telemetry-chart.json",
+        "https://immortal.build/r/data-freshness.json",
+        "https://immortal.build/r/iot-model.json"
       ],
       "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
         {
           "path": "registry/immortal/components/telemetry-card.tsx",
           "type": "registry:component",
           "target": "@components/iot/telemetry-card.tsx"
         }
       ],
+      "meta": {
+        "internal": true,
+        "replacement": "metric-card"
+      },
       "categories": [
-        "iot"
+        "iot",
+        "sensors"
       ],
       "type": "registry:component"
     },
     {
       "name": "device-card",
-      "title": "Device card",
-      "description": "A device identity, connectivity, battery, and optional detail action.",
+      "title": "Device overview",
+      "description": "实物图、分类、序列号、型号与用途，连接、电源、位置和生命周期，以及配置与设备服务入口。",
       "dependencies": [
         "lucide-react",
         "radix-ui@^1.8.1",
@@ -989,11 +1799,27 @@
       ],
       "registryDependencies": [
         "button",
-        "card",
+        "badge",
+        "dropdown-menu",
         "https://immortal.build/r/device-status.json",
         "https://immortal.build/r/signal-strength.json"
       ],
       "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/device.ts",
+          "type": "registry:component",
+          "target": "@components/iot/device.ts"
+        },
         {
           "path": "registry/immortal/components/device-card.tsx",
           "type": "registry:component",
@@ -1001,7 +1827,41 @@
         }
       ],
       "categories": [
-        "iot"
+        "iot",
+        "devices"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "device-profile",
+      "title": "Device Profile",
+      "description": "独立的设备档案布局：实物图、名称与分类、序列号与型号、用途、运行摘要，以及配置和服务入口。",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "dropdown-menu",
+        "https://immortal.build/r/device-status.json",
+        "https://immortal.build/r/signal-strength.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/device.ts",
+          "type": "registry:component",
+          "target": "@components/iot/device.ts"
+        },
+        {
+          "path": "registry/immortal/components/device-profile.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/device-profile.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "devices"
       ],
       "type": "registry:component"
     },
@@ -1028,14 +1888,453 @@
         }
       ],
       "categories": [
-        "iot"
+        "iot",
+        "configuration"
       ],
       "type": "registry:component"
     },
     {
+      "name": "data-freshness",
+      "title": "Measurement trust",
+      "description": "分别呈现测量质量和数据年龄，展开来源、采样时间与接收时间。新鲜数据也可能无效，离线数据也可能保留有效历史。",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/data-freshness.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/data-freshness.tsx"
+        }
+      ],
+      "meta": {
+        "internal": true,
+        "replacement": "metric-card"
+      },
+      "categories": [
+        "iot",
+        "sensors"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "range-gauge",
+      "title": "Range gauge",
+      "description": "A position track with a reference range, target interval and explicit out-of-range readings.",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/telemetry.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/range-gauge.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/range-gauge.tsx"
+        }
+      ],
+      "meta": {
+        "internal": true,
+        "replacement": "metric-card"
+      },
+      "categories": [
+        "iot",
+        "visualization"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "daily-histogram",
+      "title": "Interval histogram",
+      "description": "Caller-ordered interval bars with a zero baseline, signed values and an accessible table; no implicit aggregation.",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/telemetry.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/daily-histogram.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/daily-histogram.tsx"
+        }
+      ],
+      "meta": {
+        "internal": true,
+        "replacement": "indicator-card"
+      },
+      "categories": [
+        "iot",
+        "visualization"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "control-mode",
+      "title": "Control mode",
+      "description": "Keyboard-accessible manual and strategy operating mode selection; authority is a separate component.",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/immortal/components/control-mode.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/control-mode.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "command-status",
+      "title": "Command lifecycle",
+      "description": "从发送、接收、执行到回读验证，保留请求 ID、时间和期望值。超时明确标为结果未知，旧回执不能覆盖新指令。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/command-status.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/command-status.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "actuator-switch",
+      "title": "Actuator switch",
+      "description": "Readback-driven binary device control with async acknowledgement, offline, and lock states.",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "switch",
+        "https://immortal.build/r/command-status.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/actuator-switch.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/actuator-switch.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "setpoint-control",
+      "title": "Setpoint editor",
+      "description": "生效值与草稿分开。范围、精度和步进校验在提交前完成；外部更新不会覆盖正在编辑的草稿。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/setpoint-control.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/setpoint-control.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "actuator-control",
+      "title": "Position control",
+      "description": "开、停、关保持固定位置。实际位置和目标分离，加入端限位、未校准、卡滞、控制权限制与反馈时间。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/actuator-control.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/actuator-control.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "alert-card",
+      "title": "Alarm state",
+      "description": "条件是否仍然存在，与人工是否已确认形成四种状态。严重度、来源、发生/恢复/确认时间及确认人分别记录。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/alert-card.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/alert-card.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "events"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "event-timeline",
+      "title": "Event timeline",
+      "description": "An ordered timeline of actors, changes, and device events with an empty state.",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/immortal/components/event-timeline.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/event-timeline.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "events"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "automation-note",
+      "title": "Automation note",
+      "description": "Explainable suggestions with explicit human acceptance or dismissal and failure feedback.",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/automation-note.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/automation-note.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "events"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "data-workflow",
+      "title": "Data processing workflow",
+      "description": "React Flow editor for event triggers, multiple data sources, processing, conditional routing, parallel branches, joins and delivery. Execution is provided by the host application.",
+      "dependencies": [
+        "@xyflow/react@^12.12.1",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/blocks/data-workflow.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/data-workflow.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/workflow-parts.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/workflow-parts.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/workflow-model.ts",
+          "type": "registry:lib",
+          "target": "@components/blocks/workflow-model.ts"
+        },
+        {
+          "path": "registry/immortal/blocks/data-workflow.css",
+          "type": "registry:file",
+          "target": "@components/blocks/data-workflow.css"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "workflows"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "greenhouse-control",
+      "title": "Greenhouse control",
+      "description": "A composable greenhouse workspace for environmental readings, temperature setpoints, pumps, vents, and alerts.",
+      "dependencies": [
+        "lucide-react",
+        "cn"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/device-status.json",
+        "https://immortal.build/r/telemetry-chart.json",
+        "https://immortal.build/r/control-mode.json",
+        "https://immortal.build/r/setpoint-control.json",
+        "https://immortal.build/r/actuator-switch.json",
+        "https://immortal.build/r/actuator-control.json",
+        "https://immortal.build/r/alert-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/greenhouse-control.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/greenhouse-control.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "agriculture"
+      ],
+      "type": "registry:block"
+    },
+    {
       "name": "fleet-overview",
-      "title": "Fleet overview",
-      "description": "Search and filter a device inventory, inspect device details, and view message throughput.",
+      "title": "Device inventory",
+      "description": "Browse devices by status or product, page through the inventory, and inspect a device in context.",
       "dependencies": [
         "lucide-react",
         "cn",
@@ -1044,7 +2343,6 @@
       ],
       "registryDependencies": [
         "button",
-        "card",
         "input",
         "select",
         "dialog",
@@ -1055,6 +2353,16 @@
       ],
       "files": [
         {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
           "path": "registry/immortal/blocks/fleet-overview.tsx",
           "type": "registry:component",
           "target": "@components/blocks/fleet-overview.tsx"
@@ -1062,13 +2370,14 @@
       ],
       "categories": [
         "iot",
-        "blocks"
+        "blocks",
+        "operations"
       ],
       "type": "registry:block"
     },
     {
       "name": "device-control",
-      "title": "Device control",
+      "title": "Device configuration",
       "description": "An editable configuration with pending, offline, validation, and request failure states.",
       "dependencies": [
         "lucide-react",
@@ -1078,7 +2387,6 @@
       ],
       "registryDependencies": [
         "button",
-        "card",
         "input",
         "label",
         "switch",
@@ -1088,6 +2396,16 @@
       ],
       "files": [
         {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
           "path": "registry/immortal/blocks/device-control.tsx",
           "type": "registry:component",
           "target": "@components/blocks/device-control.tsx"
@@ -1095,14 +2413,15 @@
       ],
       "categories": [
         "iot",
-        "blocks"
+        "blocks",
+        "operations"
       ],
       "type": "registry:block"
     },
     {
       "name": "alert-console",
       "title": "Alert console",
-      "description": "Acknowledge device alerts through an async adapter, with open/all filters and empty states.",
+      "description": "Review a filtered alarm queue, inspect its device and event history, then acknowledge or clear via application callbacks.",
       "dependencies": [
         "lucide-react",
         "cn",
@@ -1111,10 +2430,23 @@
       ],
       "registryDependencies": [
         "button",
-        "card",
-        "tabs"
+        "dialog",
+        "select",
+        "https://immortal.build/r/alert-card.json",
+        "https://immortal.build/r/event-timeline.json",
+        "https://immortal.build/r/iot-model.json"
       ],
       "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
         {
           "path": "registry/immortal/blocks/alert-console.tsx",
           "type": "registry:component",
@@ -1123,9 +2455,440 @@
       ],
       "categories": [
         "iot",
-        "blocks"
+        "blocks",
+        "operations"
       ],
       "type": "registry:block"
+    },
+    {
+      "name": "device-detail",
+      "title": "Device detail",
+      "description": "Inspect device identity, connection, measurements, static properties and events.",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/device-profile.json",
+        "button",
+        "badge",
+        "https://immortal.build/r/tabs.json",
+        "https://immortal.build/r/metric-card.json",
+        "https://immortal.build/r/device-status.json",
+        "https://immortal.build/r/event-timeline.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/device-detail.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/device-detail.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "operations"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "telemetry-explorer",
+      "title": "Telemetry explorer",
+      "description": "Query time ranges and metrics, compare trends, inspect raw samples, and optionally export the applied result.",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "https://immortal.build/r/tabs.json",
+        "https://immortal.build/r/telemetry-chart.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/telemetry-explorer.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/telemetry-explorer.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "observation"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "device-groups",
+      "title": "Device groups",
+      "description": "Browse hierarchical device groups and the devices directly assigned to each group.",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "card",
+        "https://immortal.build/r/device-status.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/device-groups.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/device-groups.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "observation"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "soil-profile",
+      "title": "Soil profile",
+      "description": "Locate physical probes by installation depth, inspect layer readings, and open their history.",
+      "dependencies": [
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "https://immortal.build/r/telemetry.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/soil-profile.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/soil-profile.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "observation"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "soil-water-explorer",
+      "title": "Soil water explorer",
+      "description": "Inspect hourly soil moisture across depths and a full year, with shared time windows, interval climate records, concurrent events and raw-data export.",
+      "dependencies": [
+        "echarts@^6.0.0",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "https://immortal.build/r/tabs.json",
+        "https://immortal.build/r/telemetry.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/blocks/soil-water-explorer.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/soil-water-explorer.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/soil-water-model.ts",
+          "type": "registry:lib",
+          "target": "@components/blocks/soil-water-model.ts"
+        },
+        {
+          "path": "registry/immortal/blocks/soil-water-plots.tsx",
+          "type": "registry:component",
+          "target": "@components/blocks/soil-water-plots.tsx"
+        },
+        {
+          "path": "registry/immortal/blocks/soil-water-explorer.css",
+          "type": "registry:file",
+          "target": "@components/blocks/soil-water-explorer.css"
+        }
+      ],
+      "categories": [
+        "iot",
+        "blocks",
+        "agriculture"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "light-control",
+      "title": "Light control",
+      "description": "按设备能力提供开关、亮度、色温、颜色与场景。逐设备结果揭示群组的部分失败，草稿不会冒充设备回读。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "slider",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/light-control.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/light-control.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "thermostat-control",
+      "title": "Thermostat",
+      "description": "实测温度、目标温度、模式与当前运行状态分别显示。支持双设定点、临时覆盖、能力限制和外部更新冲突。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/thermostat-control.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/thermostat-control.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "control-authority",
+      "title": "Control authority",
+      "description": "区分本地/远程、手动/策略、当前持有者和临时覆盖期限。期限到达只提示待确认，不擅自宣告控制权已释放。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/control-authority.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/control-authority.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "interlock-status",
+      "title": "Permissives & interlocks",
+      "description": "将阻止操作的原因拆成可追溯条件，逐项呈现满足、未满足、未知与陈旧。总判定由设备或控制服务提供。",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/interlock-status.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/interlock-status.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "irrigation-run",
+      "title": "Irrigation run",
+      "description": "围绕任务、分区、计划量、累计量和实际流量组织信息。暂停与结束任务分开；缺少总量或累计量时不伪造完成百分比。",
+      "dependencies": [
+        "cn",
+        "lucide-react",
+        "radix-ui@^1.8.1",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://immortal.build/r/command-status.json",
+        "https://immortal.build/r/use-device-command.json",
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/internal/panel-header.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel-header.tsx"
+        },
+        {
+          "path": "registry/immortal/components/internal/panel.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/internal/panel.tsx"
+        },
+        {
+          "path": "registry/immortal/components/irrigation-run.tsx",
+          "type": "registry:component",
+          "target": "@components/iot/irrigation-run.tsx"
+        }
+      ],
+      "categories": [
+        "iot",
+        "controls"
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "iot-model",
+      "title": "IoT state contracts",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/immortal/components/iot-model.ts",
+          "type": "registry:lib",
+          "target": "@lib/iot-model.ts"
+        }
+      ],
+      "categories": [
+        "utilities"
+      ],
+      "type": "registry:lib"
+    },
+    {
+      "name": "use-device-command",
+      "title": "Device command hook",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://immortal.build/r/iot-model.json"
+      ],
+      "files": [
+        {
+          "path": "registry/immortal/components/use-device-command.ts",
+          "type": "registry:hook",
+          "target": "@components/iot/use-device-command.ts"
+        }
+      ],
+      "categories": [
+        "utilities"
+      ],
+      "type": "registry:hook"
     }
   ]
 }

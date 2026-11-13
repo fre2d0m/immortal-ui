@@ -7,6 +7,8 @@ import postcssNesting from "postcss-nesting";
 import { registrySchema } from "shadcn/schema";
 import { items } from "../registry/catalog.mjs";
 
+await import("./build-icons.mjs");
+
 const root = fileURLToPath(new URL("../", import.meta.url));
 const production = "https://immortal.build";
 const base =

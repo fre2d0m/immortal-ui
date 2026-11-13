@@ -1,0 +1,46 @@
+
+> immortal-ui@0.1.0 build
+> npm run registry:build && vite build
+
+
+> immortal-ui@0.1.0 registry:build
+> node scripts/build-registry.mjs
+
+Built 36 SVG icons.
+Built 40 registry items. Dependency origin: https://immortal.build
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2139 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              1.62 kB │ gzip:   0.71 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/WorkflowPreview-DisehM5U.css                    27.07 kB │ gzip:   5.10 kB
+dist/assets/index-DcpZkFCy.css                             177.14 kB │ gzip:  28.87 kB
+dist/assets/x-5d5EZfv2.js                                    0.18 kB │ gzip:   0.17 kB
+dist/assets/info-DD2GptnB.js                                 0.23 kB │ gzip:   0.19 kB
+dist/assets/download-CGRSAmn7.js                             0.26 kB │ gzip:   0.21 kB
+dist/assets/event-timeline-DCLVwx84.js                       1.30 kB │ gzip:   0.61 kB
+dist/assets/actuator-switch-BiDX6_UF.js                      2.98 kB │ gzip:   1.60 kB
+dist/assets/HomePage-Bp1SzDcj.js                             3.52 kB │ gzip:   1.42 kB
+dist/assets/input-E-4gyy1v.js                                5.72 kB │ gzip:   2.38 kB
+dist/assets/ExtractedPreview-D970naWB.js                     6.21 kB │ gzip:   2.89 kB
+dist/assets/ItemPage-CZgvhfx4.js                             7.35 kB │ gzip:   2.69 kB
+dist/assets/dialog-BPsOiqvl.js                               8.44 kB │ gzip:   3.05 kB
+dist/assets/jsx-runtime-CK4DonMK.js                         11.81 kB │ gzip:   4.64 kB
+dist/assets/alert-card-C-ah7Ooh.js                          12.30 kB │ gzip:   4.64 kB
+dist/assets/IconsPage-C-8WpTvO.js                           14.89 kB │ gzip:   6.04 kB
+dist/assets/FirstBatchPreview-BMki0BT5.js                   25.93 kB │ gzip:   8.98 kB
+dist/assets/es2015-B6OJWrqU.js                              26.44 kB │ gzip:   9.42 kB
+dist/assets/BlockPreview-DZNfhZks.js                        31.29 kB │ gzip:   9.94 kB
+dist/assets/demo-data-asyWRl_0.js                           31.95 kB │ gzip:  10.56 kB
+dist/assets/button-D1bbdvoR.js                              36.49 kB │ gzip:  14.51 kB
+dist/assets/theme-panel-Bjo5RzVg.js                         67.62 kB │ gzip:  15.09 kB
+dist/assets/WorkflowPreview-BTCKNiAE.js                    227.92 kB │ gzip:  74.45 kB
+dist/assets/index-CoX994pq.js                              499.35 kB │ gzip: 158.85 kB
+
+✓ built in 306ms

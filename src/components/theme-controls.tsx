@@ -411,7 +411,7 @@ export function AdvancedThemeControls({
             </p>
             {keys.map((key) => {
               const spec = geometryTokens[key];
-              const raw = variables[key] ?? spec.fallback;
+              const raw = variables[key] ? resolve(key) : spec.fallback;
               const value =
                 settings.geometry[key] ??
                 Number(

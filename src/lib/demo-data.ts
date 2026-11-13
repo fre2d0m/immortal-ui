@@ -1,3 +1,4 @@
+import { demoNow } from "@/lib/block-demo-data";
 import type { Device } from "@/components/iot/device-card";
 import type { TelemetryPoint } from "@/components/iot/telemetry-chart";
 import type { DeviceAlert } from "@/components/blocks/alert-console";
@@ -111,4 +112,25 @@ export const demoConfiguration: DeviceConfiguration = {
   interval: 30,
   watchdog: true,
   threshold: { low: 10, high: 35 },
+};
+
+export const greenhouseTemperature = 24.6;
+const lastTemperature = demoTemperature.at(-1)!;
+export const greenhouseHistory = demoTemperature.map((point) => ({
+  timestamp: demoNow - 12_000 + point.timestamp - lastTemperature.timestamp,
+  value: Number(
+    (point.value + greenhouseTemperature - lastTemperature.value).toFixed(1),
+  ),
+}));
+
+export const greenhouseAlert: DeviceAlert = {
+  id: "gh-co2",
+  title: "二氧化碳浓度偏高",
+  deviceName: "一号温室 · ENV-002",
+  severity: "warning",
+  time: "07:29 UTC",
+  description: "最近读数 812 ppm，高于提醒阈值 800 ppm。请核查通风状态。",
+  acknowledged: false,
+  active: true,
+  source: "空气质量监测",
 };

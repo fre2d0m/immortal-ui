@@ -1,0 +1,33 @@
+{
+  "browser": "157.0.8103.52",
+  "checks": [
+    "known input: elapsed-time geometry, shared domain, last-received duplicate, exact pointer/keyboard readings, missing versus absent, table/CSV precision and applied-query context",
+    "single, constant, missing/invalid/empty and extreme datasets; different units split into separate panels",
+    "history light/dark, 320px reflow and 20px text, measured text >=4.5:1 and trace >=3:1",
+    "metric alternate input changes value/path/range together; indicator mean 24.6 = sum / 87, same last result and +0.4 comparison",
+    "live insertion retains inspected timestamp; missing selected sample is explicit; minimum/outlier track markers; signed bars and unknown soil positions",
+    "505px and 288px cards, long labels, all edge figures at 320px/20px, forced system colors and reduced-motion preference",
+    "touch selects an actual sample and 40px previous/next controls work"
+  ],
+  "measurements": [
+    {
+      "mode": "dark",
+      "text": 5.846625865908299,
+      "trace": 7.968905254348346
+    },
+    {
+      "mode": "light",
+      "text": 5.438446114953988,
+      "trace": 6.542775631790989
+    }
+  ],
+  "aggregate": {
+    "value": 24.6,
+    "count": 87,
+    "expected": 90,
+    "sum": 2140.1999999999994,
+    "last": 24.6,
+    "previous": 24.2
+  },
+  "errors": []
+}

@@ -1,0 +1,22 @@
+{
+  "registry/immortal/blocks/data-workflow.tsx": {
+    "sha256": "441262ce827953f6acb9c373ddfb5f2fc1f54810f1180d02d455f8456b53f729",
+    "previewMatchesSource": true
+  },
+  "registry/immortal/blocks/data-workflow.css": {
+    "sha256": "2297cf53986f9b294d0575d7d7ea845df1f8253e3a45db5ddfb5acbcdcb3967c",
+    "previewMatchesSource": true
+  },
+  "registry/immortal/blocks/workflow-model.ts": {
+    "sha256": "f0a548d19be98639cbbf39764e589308c176ac918f395dcc97b532d60cdca4c3",
+    "previewMatchesSource": true
+  },
+  "registry/immortal/blocks/workflow-parts.tsx": {
+    "sha256": "4dfda52607a48ddaa933d1f0b6373f7effa76868cacd48bcacc4f3b9f58f6307",
+    "previewMatchesSource": true
+  },
+  "src/lib/workflow-demo-data.ts": {
+    "sha256": "8c91473db41c265084e9945a4a2a722d6d02bc990ff3514c4b503ff909aebfa0",
+    "previewMatchesSource": true
+  }
+}

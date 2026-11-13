@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-device-command",
+  "title": "Device command hook",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/use-device-command.ts",
+      "content": "\"use client\";\nimport { useEffect, useRef, useState } from \"react\";\nimport {\n  applyCommandEvent,\n  type CommandAction,\n  type CommandRecord,\n} from \"@/lib/iot-model\";\n/** Transport completion means accepted, never verified. */\nexport function useDeviceCommand(timeoutMs = 15000) {\n  const [record, setRecord] = useState<CommandRecord | null>(null);\n  const [busy, setBusy] = useState(false);\n  const current = useRef<{ id: string; controller: AbortController } | null>(\n    null,\n  );\n  useEffect(\n    () => () => {\n      current.current?.controller.abort();\n      current.current = null;\n    },\n    [],\n  );\n  async function run<T>(requested: string, value: T, action: CommandAction<T>) {\n    if (current.current) return;\n    const id = globalThis.crypto.randomUUID();\n    const controller = new AbortController();\n    current.current = { id, controller };\n    const at = Date.now();\n    setRecord({\n      id,\n      requested,\n      phase: \"sending\",\n      events: [{ phase: \"sending\", at }],\n    });\n    setBusy(true);\n    let timer: ReturnType<typeof setTimeout> | undefined;\n    try {\n      const receipt = await Promise.race([\n        action(value, { requestId: id, signal: controller.signal }),\n        new Promise<never>((_, reject) => {\n          timer = setTimeout(() => {\n            controller.abort();\n            reject(\n              new Error(\n                \"等待回执超时；结果未知，请查询设备状态后再决定是否重试。\",\n              ),\n            );\n          }, timeoutMs);\n        }),\n      ]);\n      if (current.current?.id !== id) return;\n      setRecord(\n        (previous) =>\n          previous &&\n          applyCommandEvent(previous, id, {\n            phase: receipt?.phase ?? \"accepted\",\n            at: Date.now(),\n            detail: receipt?.message ?? \"请求已接收；以设备回读为准。\",\n          }),\n      );\n      return receipt ?? { phase: \"accepted\" as const };\n    } catch (error) {\n      if (current.current?.id !== id) return;\n      setRecord(\n        (previous) =>\n          previous &&\n          applyCommandEvent(previous, id, {\n            phase: controller.signal.aborted ? \"timeout\" : \"failed\",\n            at: Date.now(),\n            detail:\n              error instanceof Error\n                ? error.message\n                : \"请求失败，设备回读未改变。\",\n          }),\n      );\n    } finally {\n      clearTimeout(timer);\n      if (current.current?.id === id) {\n        current.current = null;\n        setBusy(false);\n      }\n    }\n  }\n  return { record, busy, run };\n}\n",
+      "type": "registry:hook",
+      "target": "@components/iot/use-device-command.ts"
+    }
+  ],
+  "categories": [
+    "utilities"
+  ],
+  "type": "registry:hook"
+}

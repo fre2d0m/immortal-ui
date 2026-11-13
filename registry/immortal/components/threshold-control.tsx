@@ -15,6 +15,7 @@ export function ThresholdControl({
   step = 1,
   unit = "",
   disabled = false,
+  labels,
 }: {
   value: Threshold;
   onValueChange: (value: Threshold) => void;
@@ -23,6 +24,7 @@ export function ThresholdControl({
   step?: number;
   unit?: string;
   disabled?: boolean;
+  labels?: { range: string; low: string; high: string; invalid: string };
 }) {
   const id = useId();
   const valid = isValidThreshold(value, min, max);
@@ -38,7 +40,7 @@ export function ThresholdControl({
   return (
     <fieldset disabled={disabled} className="space-y-5">
       <legend className="mb-4 text-sm font-medium">
-        Operating range {unit && `(${unit})`}
+        {labels?.range ?? "Operating range"} {unit && `(${unit})`}
       </legend>
       <Slider
         min={min}
@@ -47,14 +49,14 @@ export function ThresholdControl({
         minStepsBetweenThumbs={1}
         value={sliderValues}
         disabled={disabled}
-        aria-label="Operating range"
+        aria-label={labels?.range ?? "Operating range"}
         onValueChange={([low, high]) => onValueChange({ low, high })}
       />
       <div className="grid grid-cols-2 gap-3">
         {(["low", "high"] as const).map((key) => (
           <div key={key} className="space-y-2">
             <Label htmlFor={`${id}-${key}`}>
-              {key === "low" ? "Lower limit" : "Upper limit"}
+              {labels?.[key] ?? (key === "low" ? "Lower limit" : "Upper limit")}
             </Label>
             <Input
               id={`${id}-${key}`}
@@ -62,6 +64,7 @@ export function ThresholdControl({
               min={min}
               max={max}
               step={step}
+              className="min-h-10 tabular-nums"
               value={Number.isFinite(value[key]) ? value[key] : ""}
               aria-invalid={!valid}
               aria-describedby={!valid ? `${id}-error` : undefined}
@@ -74,7 +77,12 @@ export function ThresholdControl({
       </div>
       {!valid && (
         <p id={`${id}-error`} role="alert" className="text-xs text-destructive">
-          Set a lower limit below the upper limit, between {min} and {max}.
+          {labels?.invalid ??
+            "Set a lower limit below the upper limit, between " +
+              min +
+              " and " +
+              max +
+              "."}
         </p>
       )}
     </fieldset>

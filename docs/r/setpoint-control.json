@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "setpoint-control",
+  "title": "Setpoint editor",
+  "description": "生效值与草稿分开。范围、精度和步进校验在提交前完成；外部更新不会覆盖正在编辑的草稿。",
+  "dependencies": [
+    "cn",
+    "lucide-react",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "https://immortal.build/r/command-status.json",
+    "https://immortal.build/r/use-device-command.json",
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/setpoint-control.tsx",
+      "content": "\"use client\";\nimport { useId, useState } from \"react\";\nimport { Minus, Plus } from \"lucide-react\";\nimport { Button } from \"@/components/ui/button\";\nimport { Input } from \"@/components/ui/input\";\nimport { CommandStatus } from \"@/components/iot/command-status\";\nimport { useDeviceCommand } from \"@/components/iot/use-device-command\";\nimport { numericError, type CommandAction } from \"@/lib/iot-model\";\nexport function SetpointControl({\n  label,\n  value,\n  min,\n  max,\n  step = 1,\n  unit,\n  disabled = false,\n  disabledReason,\n  onApply,\n}: {\n  label: string;\n  value: number;\n  min: number;\n  max: number;\n  step?: number;\n  unit: string;\n  disabled?: boolean;\n  disabledReason?: string;\n  onApply: CommandAction<number>;\n}) {\n  const id = useId();\n  const command = useDeviceCommand();\n  const [edit, setEdit] = useState<{ text: string; baseline: number } | null>(\n    null,\n  );\n  const draft = edit?.text ?? (Number.isFinite(value) ? String(value) : \"\");\n  const number = draft.trim() ? Number(draft) : NaN;\n  const error = numericError(number, min, max, step);\n  const conflict =\n    edit !== null && !Object.is(edit.baseline, value) && number !== value;\n  const update = (text: string) =>\n    setEdit({ text, baseline: edit?.baseline ?? value });\n  return (\n    <form\n      className=\"space-y-5\"\n      noValidate\n      onSubmit={(event) => {\n        event.preventDefault();\n        if (error || conflict || disabled || command.busy || number === value)\n          return;\n        void command.run(`${number} ${unit}`, number, onApply);\n      }}\n    >\n      <div className=\"flex flex-wrap justify-between gap-2\">\n        <label htmlFor={id} className=\"text-sm font-medium\">\n          {label}\n        </label>\n        <span className=\"text-sm text-muted-foreground tabular-nums\">\n          {min}–{max} {unit} · 步进 {step}\n        </span>\n      </div>\n      <fieldset disabled={disabled || command.busy} className=\"space-y-4\">\n        <div data-slot=\"control-row\" className=\"flex gap-3\">\n          <Button\n            type=\"button\"\n            size=\"icon\"\n            variant=\"secondary\"\n            aria-label={`降低${label}`}\n            disabled={!!error || number - step < min}\n            onClick={() => update(String(Number((number - step).toFixed(8))))}\n          >\n            <Minus />\n          </Button>\n          <Input\n            id={id}\n            type=\"number\"\n            min={min}\n            max={max}\n            step={step}\n            value={draft}\n            onChange={(event) => update(event.target.value)}\n            aria-invalid={!!error}\n            aria-describedby={`${id}-hint`}\n            className=\"min-w-0 text-center tabular-nums\"\n          />\n          <Button\n            type=\"button\"\n            size=\"icon\"\n            variant=\"secondary\"\n            aria-label={`提高${label}`}\n            disabled={!!error || number + step > max}\n            onClick={() => update(String(Number((number + step).toFixed(8))))}\n          >\n            <Plus />\n          </Button>\n        </div>\n        <p\n          id={`${id}-hint`}\n          className={\n            error ? \"text-sm text-destructive\" : \"text-sm text-muted-foreground\"\n          }\n        >\n          {error || (number === value ? \"当前设定与设备一致\" : \"草稿尚未生效\")}\n        </p>\n        {conflict && (\n          <div className=\"surface-inset space-y-3 p-4\">\n            <p role=\"alert\" className=\"text-sm text-warning-text\">\n              设备设定已被外部更新为 {value} {unit}，你的草稿仍保留。\n            </p>\n            <div className=\"flex flex-wrap gap-2\">\n              <Button\n                type=\"button\"\n                variant=\"secondary\"\n                onClick={() => setEdit(null)}\n              >\n                采用设备值\n              </Button>\n              <Button\n                type=\"button\"\n                variant=\"secondary\"\n                onClick={() => setEdit({ text: draft, baseline: value })}\n              >\n                保留草稿并重新确认\n              </Button>\n            </div>\n          </div>\n        )}\n        <div className=\"flex flex-wrap gap-3\">\n          <Button\n            type=\"submit\"\n            disabled={!!error || conflict || number === value}\n          >\n            {command.busy ? \"等待回执…\" : \"应用设定\"}\n          </Button>\n          {edit && (\n            <Button type=\"button\" variant=\"ghost\" onClick={() => setEdit(null)}>\n              撤销编辑\n            </Button>\n          )}\n        </div>\n      </fieldset>\n      <CommandStatus\n        record={command.record}\n        reported={Number.isFinite(value) ? `${value} ${unit}` : \"未知\"}\n        message={\n          disabled ? disabledReason || \"控制不可用，设定只读\" : undefined\n        }\n      />\n    </form>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/setpoint-control.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

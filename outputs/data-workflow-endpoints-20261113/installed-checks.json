@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "Six files installed by the CLI without showcase code; a host-defined trigger/source/sink chain builds correctly and filters incompatible types",
+    "No trigger templates and read-only empty states do not offer dead actions; outside clicks keep focus; external definition changes/readonly close stale pickers",
+    "Endpoint hover grows only the circular mark; hit area stays stable and transparent, Escape restores the endpoint, reduced-motion removes transitions",
+    "390px emulated touch: actual 40px endpoint hit target at editing zoom, long press shows hint without creating nodes, tap selects and connects; picker stays in viewport"
+  ],
+  "geometry": {
+    "hover": {
+      "button": {
+        "width": 40,
+        "height": 40,
+        "background": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "radius": "50%"
+      },
+      "mark": {
+        "transform": "matrix(1.12, 0, 0, 1.12, 0, 0)"
+      }
+    },
+    "touch": {
+      "x": 331,
+      "y": 490,
+      "width": 40,
+      "height": 40
+    }
+  },
+  "errors": []
+}

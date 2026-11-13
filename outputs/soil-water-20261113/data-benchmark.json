@@ -1,0 +1,21 @@
+{
+  "runtime": "v25.9.0",
+  "scope": "Node data pipeline, not browser interaction latency",
+  "generationMs": 91.108958,
+  "prepareMs": 48.35325,
+  "viewMs": 20.548958,
+  "exportSelectionMs": 0.4012920000000122,
+  "serializationMs": 69.145917,
+  "serializedBytes": 10276734,
+  "records": 175056,
+  "cells": 7300,
+  "drivers": 3,
+  "events": 25,
+  "memory": {
+    "rss": 292634624,
+    "heapTotal": 121225216,
+    "heapUsed": 86325816,
+    "external": 8528900,
+    "arrayBuffers": 88314
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "host": "installed",
+      "sizes": {
+        "hit": "40px",
+        "circle": "12px",
+        "icon": "7px"
+      },
+      "percentage": "72%",
+      "edgeInsertWorks": true
+    },
+    {
+      "host": "live",
+      "sizes": {
+        "hit": "40px",
+        "circle": "12px",
+        "icon": "7px"
+      },
+      "percentage": "72%",
+      "edgeInsertWorks": true
+    }
+  ],
+  "errors": []
+}

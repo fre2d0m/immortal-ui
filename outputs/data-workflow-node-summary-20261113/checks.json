@@ -1,0 +1,355 @@
+{
+  "browser": "157.0.8103.52",
+  "checks": [
+    "11 nodes have the same 232×168 bounds and aligned heading/summary regions in both themes",
+    "Condition summary tracks 0, negative, missing threshold and operator edits; undo restores summary; no guessed unit",
+    "Changed window 00:10–00:20 and max method show 10 min/maximum and produce 22 °C from 2 records; run rows stay separate and all nodes retain equal height",
+    "Export/import with every parameter array reversed retains the same summary meaning and ordering",
+    "Four ports on one side keep 42px separation and the same node height",
+    "Long labels/targets, 20px font and 320px viewport: equal node heights, no document overflow; keyboard outline opens complete untruncated configuration",
+    "Touch outline provides access to the full connection value"
+  ],
+  "measurements": {
+    "dark": [
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      }
+    ],
+    "light": [
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 168,
+        "heading": 58,
+        "summary": 62
+      }
+    ],
+    "run": [
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 200,
+        "heading": 58,
+        "summary": 62
+      }
+    ],
+    "narrow-dark": [
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      }
+    ],
+    "narrow-light": [
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      },
+      {
+        "width": 232,
+        "height": 179,
+        "heading": 75,
+        "summary": 62
+      }
+    ]
+  },
+  "errors": []
+}

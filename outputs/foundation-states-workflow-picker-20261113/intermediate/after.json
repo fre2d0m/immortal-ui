@@ -1,0 +1,51 @@
+{
+  "popup": {
+    "x": 1276,
+    "y": 626,
+    "width": 312,
+    "height": 480,
+    "bottom": 1106
+  },
+  "tabsRoot": {
+    "x": 1291,
+    "y": 741,
+    "width": 282,
+    "height": 350,
+    "bottom": 1091
+  },
+  "tablist": {
+    "x": 1291,
+    "y": 741,
+    "width": 184,
+    "height": 42,
+    "bottom": 783
+  },
+  "choices": {
+    "x": 1291,
+    "y": 795,
+    "width": 282,
+    "height": 296,
+    "bottom": 1091
+  },
+  "firstHeading": {
+    "x": 1303,
+    "y": 799,
+    "width": 258,
+    "height": 20,
+    "bottom": 819
+  },
+  "tabStyles": [
+    {
+      "label": "新增节点",
+      "selected": "true",
+      "background": "none",
+      "shadow": "none"
+    },
+    {
+      "label": "连接已有",
+      "selected": "false",
+      "background": "none",
+      "shadow": "none"
+    }
+  ]
+}

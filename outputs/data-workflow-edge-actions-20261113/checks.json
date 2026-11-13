@@ -1,0 +1,538 @@
+{
+  "checks": [
+    "输入无加号，已连接输出无加号；每条边唯一居中插入入口。鼠标/Enter 打开同一选择器，Escape 回到原按钮，取消不改图；普通边插入为一次可撤销变更。",
+    "并行边中插入只替换指定分支；节点标题的新增并行分支追加第三路、保留所有旧边，操作含义独立。",
+    "未命中与失败路径插入保留原始 false/error 出口和其他所有连接，不猜测业务分支。",
+    "插入按钮的右键与 Shift+F10 打开该连线菜单；菜单及选择器关闭后焦点返回原按钮。",
+    "原生拖线和选中线重接仍可用；连接建立/撤销自动切换端点与连线加号；节点移动、重接、缩放后插入按钮始终位于实际路径长度中点。",
+    "只读和运行中隐藏所有新增入口，保留分支文字；停止运行后恢复编辑。",
+    "深浅主题、展开工作区与 320px/20px 字号：插入选择器在视口内，不撑宽页面，Escape 优先关闭选择器。",
+    "Chrome 触控模拟可直接点击连线加号并插入，不依赖悬停或右键。",
+    "实际展示页本地演示的 20°C/26°C 输入结果仍分别进入归档/复核，样本数均为3。"
+  ],
+  "geometry": [
+    {
+      "label": "initial",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        }
+      ]
+    },
+    {
+      "label": "reconnected",
+      "rows": [
+        {
+          "id": "connection",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        }
+      ]
+    },
+    {
+      "label": "node-moved",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        }
+      ]
+    },
+    {
+      "label": "zoomed",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0.0000152587890625,
+          "dy": 0,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": -0.00000762939453125,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": -0.00006103515625,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": -0.00006103515625,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0.0000152587890625,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0.0000152587890625,
+          "dy": 0.000030517578125,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        },
+        {
+          "id": "edge-4",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        }
+      ]
+    },
+    {
+      "label": "readonly",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        }
+      ]
+    },
+    {
+      "label": "dark",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        }
+      ]
+    },
+    {
+      "label": "light",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

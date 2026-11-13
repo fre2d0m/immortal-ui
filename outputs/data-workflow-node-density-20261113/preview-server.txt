@@ -1,0 +1,6 @@
+
+  VITE v8.3.4  ready in 143 ms
+
+  ➜  Local:   http://127.0.0.1:4191/
+1:07:27 PM [vite] (client) page reload density-check.html
+1:08:58 PM [vite] (client) hmr update /src/density-check.tsx

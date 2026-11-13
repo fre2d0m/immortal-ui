@@ -1,0 +1,17 @@
+
+  VITE v8.3.4  ready in 152 ms
+
+  ➜  Local:   http://127.0.0.1:4190/
+12:53:08 PM [vite] (client) page reload state-check.html
+The request id "/private/tmp/immortal-foundation-states/preview/state-check.html" is outside of Vite serving allow list.
+
+- /tmp/immortal-foundation-states/preview
+- /Users/golo/Work/CodexProjects/immortal-ui/node_modules
+
+Refer to docs https://vite.dev/config/server-options.html#server-fs-allow for configurations and more details.
+
+12:55:19 PM [vite] vite.config.ts changed, restarting server...
+12:55:19 PM [vite] server restarted.
+12:56:22 PM [vite] (client) page reload state-check.html
+12:58:52 PM [vite] (client) hmr update /src/state-check.tsx, /src/index.css
+1:00:07 PM [vite] (client) hmr update /src/state-check.tsx, /src/index.css

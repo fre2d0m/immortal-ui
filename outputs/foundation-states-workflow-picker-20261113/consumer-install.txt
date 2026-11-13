@@ -1,0 +1,15 @@
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+✔ Created 6 files:
+  - src/components/ui/button.tsx
+  - src/components/ui/tabs.tsx
+  - src/components/blocks/data-workflow.tsx
+  - src/components/blocks/workflow-parts.tsx
+  - src/components/blocks/workflow-model.ts
+  - src/components/blocks/data-workflow.css
+- Updating src/index.css
+✔ Updating src/index.css

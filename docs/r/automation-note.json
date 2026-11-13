@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "automation-note",
+  "title": "Automation note",
+  "description": "Explainable suggestions with explicit human acceptance or dismissal and failure feedback.",
+  "dependencies": [
+    "cn",
+    "lucide-react",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/internal/panel-header.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\n/** Internal layout shared by domain panels. Shipped with its owning component. */\nexport function PanelHeader({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as: Heading = \"h3\",\n}: {\n  icon: ReactNode;\n  title: string;\n  description?: ReactNode;\n  status?: ReactNode;\n  action?: ReactNode;\n  as?: \"h2\" | \"h3\";\n}) {\n  return (\n    <div data-slot=\"panel-header\" className=\"min-w-0\">\n      <div\n        data-slot=\"panel-topline\"\n        className=\"grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2\"\n      >\n        <div\n          data-slot=\"panel-identity\"\n          className=\"flex min-w-0 items-start gap-3\"\n        >\n          <span\n            data-slot=\"panel-icon\"\n            aria-hidden=\"true\"\n            className=\"surface-control grid size-10 shrink-0 place-items-center rounded-full border bg-secondary text-secondary-foreground shadow-sm [&>svg]:size-4\"\n          >\n            {icon}\n          </span>\n          <div\n            data-slot=\"panel-heading\"\n            className=\"flex min-h-12 min-w-0 flex-col\"\n          >\n            <Heading\n              data-slot=\"panel-title\"\n              className=\"text-base font-medium leading-snug wrap-anywhere\"\n            >\n              {title}\n            </Heading>\n            {description && (\n              <p\n                data-slot=\"panel-description\"\n                className=\"mt-1 text-sm leading-relaxed text-muted-foreground wrap-anywhere\"\n              >\n                {description}\n              </p>\n            )}\n          </div>\n        </div>\n        {(status != null || action != null) && (\n          <div\n            data-slot=\"panel-meta\"\n            className=\"ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2 text-right text-sm text-muted-foreground\"\n          >\n            {status != null && (\n              <div data-slot=\"panel-status\" className=\"min-w-0 wrap-anywhere\">\n                {status}\n              </div>\n            )}\n            {action}\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel-header.tsx"
+    },
+    {
+      "path": "registry/immortal/components/internal/panel.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { PanelHeader } from \"@/components/iot/internal/panel-header\";\n\ntype PanelProps = ComponentProps<typeof PanelHeader> &\n  Omit<ComponentProps<\"section\">, \"title\"> & {\n    contentClassName?: string;\n  };\n\n/** Owns the surface, all four insets, header alignment and the content boundary. */\nexport function Panel({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as,\n  className = \"\",\n  contentClassName = \"\",\n  children,\n  ...props\n}: PanelProps) {\n  return (\n    <section\n      data-slot=\"panel\"\n      data-panel-layout=\"\"\n      className={`@container surface-raised grid min-w-0 gap-[var(--card-padding,24px)] rounded-xl border bg-card p-[var(--card-padding,24px)] text-card-foreground shadow-sm ${className}`}\n      {...props}\n    >\n      <PanelHeader\n        icon={icon}\n        title={title}\n        description={description}\n        status={status}\n        action={action}\n        as={as}\n      />\n      <div\n        data-slot=\"panel-content\"\n        className={`min-w-0 ${contentClassName || \"space-y-5\"}`}\n      >\n        {children}\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel.tsx"
+    },
+    {
+      "path": "registry/immortal/components/automation-note.tsx",
+      "content": "\"use client\";\n\nimport { Panel } from \"@/components/iot/internal/panel\";\nimport { useRef, useState } from \"react\";\nimport { Sparkles } from \"lucide-react\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function AutomationNote({\n  title,\n  reason,\n  source,\n  time,\n  status = \"proposed\",\n  onAccept,\n  onDismiss,\n  disabled = false,\n}: {\n  title: string;\n  reason: string;\n  source: string;\n  time: string;\n  status?: \"proposed\" | \"accepted\" | \"dismissed\";\n  disabled?: boolean;\n  onAccept: () => Promise<void>;\n  onDismiss: () => Promise<void>;\n}) {\n  const busy = useRef(false);\n  const [pending, setPending] = useState<\"accept\" | \"dismiss\" | null>(null);\n  const [error, setError] = useState(\"\");\n  async function act(action: \"accept\" | \"dismiss\") {\n    if (busy.current || disabled || status !== \"proposed\") return;\n    busy.current = true;\n    setPending(action);\n    setError(\"\");\n    try {\n      await (action === \"accept\" ? onAccept() : onDismiss());\n    } catch (cause) {\n      setError(cause instanceof Error ? cause.message : \"操作失败，请重试。\");\n    } finally {\n      busy.current = false;\n      setPending(null);\n    }\n  }\n  return (\n    <Panel\n      icon={<Sparkles />}\n      title={title}\n      description=\"AI 建议\"\n      status={\n        { proposed: \"待人决策\", accepted: \"已采纳\", dismissed: \"已忽略\" }[\n          status\n        ]\n      }\n    >\n      <p className=\"text-sm text-muted-foreground tabular-nums\">\n        生成时间 · {time}\n      </p>\n      <p className=\"text-sm leading-relaxed text-muted-foreground\">{reason}</p>\n      <p className=\"text-xs text-muted-foreground\">依据：{source}</p>\n      <div aria-live=\"polite\">\n        {status === \"proposed\" ? (\n          <div className=\"flex flex-wrap justify-end gap-2\">\n            <Button\n              variant=\"ghost\"\n              className=\"min-h-10\"\n              disabled={disabled || pending !== null}\n              onClick={() => act(\"dismiss\")}\n            >\n              {pending === \"dismiss\" ? \"处理中…\" : \"忽略\"}\n            </Button>\n            <Button\n              className=\"min-h-10\"\n              disabled={disabled || pending !== null}\n              onClick={() => act(\"accept\")}\n            >\n              {pending === \"accept\" ? \"等待确认…\" : \"采纳建议\"}\n            </Button>\n          </div>\n        ) : (\n          <p className=\"text-xs text-muted-foreground\">\n            {status === \"accepted\"\n              ? \"建议已采纳，执行进度请查看命令回执。\"\n              : \"建议已忽略，设备保持原有设定。\"}\n          </p>\n        )}\n      </div>\n      {error && (\n        <p role=\"alert\" className=\"text-xs text-destructive\">\n          {error}\n        </p>\n      )}\n    </Panel>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/automation-note.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "events"
+  ],
+  "type": "registry:component"
+}

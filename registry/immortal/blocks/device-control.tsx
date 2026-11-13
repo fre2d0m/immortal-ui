@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
-import { SlidersHorizontal, Check, LoaderCircle } from "lucide-react";
+import { Panel } from "@/components/iot/internal/panel";
+import { useId, useState, type FormEvent } from "react";
+import { Check, LoaderCircle, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -32,191 +28,263 @@ export type DeviceConfiguration = {
   watchdog: boolean;
   threshold: Threshold;
 };
-export function DeviceControl({
-  deviceId,
-  deviceName,
-  online,
-  configuration,
-  onApply,
-}: {
+type DeviceControlProps = {
   deviceId: string;
   deviceName: string;
   online: boolean;
   configuration: DeviceConfiguration;
   onApply: (configuration: DeviceConfiguration) => Promise<void>;
-}) {
+};
+const minTemperature = -20;
+const maxTemperature = 80;
+
+function sameConfiguration(a: DeviceConfiguration, b: DeviceConfiguration) {
+  return (
+    Object.is(a.interval, b.interval) &&
+    a.mode === b.mode &&
+    a.watchdog === b.watchdog &&
+    Object.is(a.threshold.low, b.threshold.low) &&
+    Object.is(a.threshold.high, b.threshold.high)
+  );
+}
+
+export function DeviceControl(props: DeviceControlProps) {
+  return <ConfigurationForm key={props.deviceId} {...props} />;
+}
+
+function ConfigurationForm({
+  deviceId,
+  deviceName,
+  online,
+  configuration,
+  onApply,
+}: DeviceControlProps) {
   const id = useId();
-  const [draft, setDraft] = useState(configuration);
+  const [draft, setDraft] = useState<{
+    baseline: DeviceConfiguration;
+    value: DeviceConfiguration;
+  } | null>(null);
   const [phase, setPhase] = useState<"idle" | "saving" | "saved" | "error">(
     "idle",
   );
   const [error, setError] = useState("");
-  useEffect(() => {
-    setDraft(configuration);
-  }, [configuration, deviceId]);
-  useEffect(() => {
+  const value = draft?.value ?? configuration;
+  const dirty = draft !== null && !sameConfiguration(value, draft.baseline);
+  const changedRemotely =
+    dirty && !sameConfiguration(configuration, draft.baseline);
+  const saving = phase === "saving";
+  const disabled = !online || saving;
+  const validInterval =
+    Number.isInteger(value.interval) &&
+    value.interval >= 5 &&
+    value.interval <= 3600;
+  const validRange = isValidThreshold(
+    value.threshold,
+    minTemperature,
+    maxTemperature,
+  );
+
+  function update(next: Partial<DeviceConfiguration>) {
+    setDraft((current) => {
+      const baseline = current?.baseline ?? configuration;
+      const updated = { ...(current?.value ?? configuration), ...next };
+      return sameConfiguration(updated, baseline)
+        ? null
+        : { baseline, value: updated };
+    });
     setPhase("idle");
-    setError("");
-  }, [deviceId]);
-  const valid =
-    Number.isInteger(draft.interval) &&
-    draft.interval >= 5 &&
-    draft.interval <= 3600 &&
-    isValidThreshold(draft.threshold, -20, 80);
-  const dirty = JSON.stringify(draft) !== JSON.stringify(configuration);
-  const update = (next: Partial<DeviceConfiguration>) => {
-    setDraft((current) => ({ ...current, ...next }));
+  }
+
+  function reset() {
+    setDraft(null);
     setPhase("idle");
-  };
-  async function submit(event: React.FormEvent) {
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!valid || !online || phase === "saving" || !dirty) return;
+    if (disabled || changedRemotely || !validInterval || !validRange || !dirty)
+      return;
     setPhase("saving");
     try {
-      await onApply(draft);
+      await onApply(value);
+      setDraft(null);
       setPhase("saved");
     } catch (cause) {
       setError(
-        cause instanceof Error
+        cause instanceof Error && cause.message
           ? cause.message
-          : "The configuration could not be saved. Please retry.",
+          : "配置保存失败。请重试。",
       );
       setPhase("error");
     }
   }
+
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between gap-3">
-          <span className="surface-control flex size-10 items-center justify-center">
-            <SlidersHorizontal className="size-4" />
-          </span>
-          <DeviceStatus state={online ? "online" : "offline"} />
-        </div>
-        <h2 className="mt-3 text-lg font-medium">{deviceName}</h2>
-        <p className="text-xs text-muted-foreground">
-          Configuration · {deviceId}
-        </p>
-      </CardHeader>
-      <form onSubmit={submit}>
-        <CardContent>
+    <Panel
+      as="h2"
+      icon={<SlidersHorizontal />}
+      title={deviceName}
+      description={deviceId}
+      status={
+        <DeviceStatus
+          state={online ? "online" : "offline"}
+          label={online ? "在线" : "离线"}
+        />
+      }
+      className="@container min-w-0"
+    >
+      <form noValidate onSubmit={submit} className="min-w-0">
+        <div className="pb-5">
           <fieldset
-            disabled={phase === "saving" || !online}
-            className="space-y-6"
+            disabled={disabled}
+            className="grid min-w-0 gap-5 @2xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
           >
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <section className="min-w-0 space-y-4">
+              <h3 className="font-medium">采集与连接</h3>
               <div className="space-y-2">
-                <Label htmlFor={`${id}-mode`}>Operating mode</Label>
+                <Label htmlFor={id + "-mode"}>运行模式</Label>
                 <Select
-                  value={draft.mode}
-                  onValueChange={(value) =>
-                    update({ mode: value as DeviceConfiguration["mode"] })
+                  value={value.mode}
+                  disabled={disabled}
+                  onValueChange={(mode) =>
+                    update({ mode: mode as DeviceConfiguration["mode"] })
                   }
-                  disabled={phase === "saving" || !online}
                 >
-                  <SelectTrigger id={`${id}-mode`} className="w-full">
+                  <SelectTrigger
+                    id={id + "-mode"}
+                    className="min-h-10 w-full"
+                    aria-label="运行模式"
+                  >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="balanced">Balanced</SelectItem>
-                    <SelectItem value="performance">Performance</SelectItem>
-                    <SelectItem value="low-power">Low power</SelectItem>
+                  <SelectContent position="popper">
+                    <SelectItem value="balanced">均衡</SelectItem>
+                    <SelectItem value="performance">性能优先</SelectItem>
+                    <SelectItem value="low-power">低功耗</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor={`${id}-interval`}>
-                  Report interval (seconds)
-                </Label>
+                <Label htmlFor={id + "-interval"}>上报间隔（秒）</Label>
                 <Input
-                  id={`${id}-interval`}
+                  id={id + "-interval"}
                   type="number"
-                  min="5"
-                  max="3600"
-                  step="1"
-                  value={Number.isFinite(draft.interval) ? draft.interval : ""}
+                  min={5}
+                  max={3600}
+                  step={1}
+                  className="min-h-10 tabular-nums"
+                  value={Number.isFinite(value.interval) ? value.interval : ""}
+                  aria-invalid={!validInterval || undefined}
+                  aria-describedby={id + "-interval-hint"}
                   onChange={(event) =>
                     update({ interval: event.target.valueAsNumber })
                   }
                 />
-              </div>
-            </div>
-            <div className="surface-inset p-5">
-              <ThresholdControl
-                min={-20}
-                max={80}
-                unit="°C"
-                value={draft.threshold}
-                onValueChange={(threshold) => update({ threshold })}
-                disabled={!online || phase === "saving"}
-              />
-            </div>
-            <div className="flex min-h-12 items-center justify-between gap-6">
-              <div>
-                <Label htmlFor={`${id}-watchdog`}>Connection watchdog</Label>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Reconnect when the heartbeat is lost.
+                <p
+                  id={id + "-interval-hint"}
+                  className={
+                    "text-sm " +
+                    (validInterval
+                      ? "text-muted-foreground"
+                      : "text-destructive")
+                  }
+                >
+                  输入 5–3,600 之间的整数。
                 </p>
               </div>
-              <Switch
-                id={`${id}-watchdog`}
-                checked={draft.watchdog}
-                onCheckedChange={(watchdog) => update({ watchdog })}
-                disabled={!online || phase === "saving"}
+              <div className="flex min-h-12 items-center justify-between gap-4 pt-1">
+                <div>
+                  <Label htmlFor={id + "-watchdog"}>自动重连</Label>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    心跳中断后尝试恢复连接。
+                  </p>
+                </div>
+                <Switch
+                  id={id + "-watchdog"}
+                  checked={value.watchdog}
+                  disabled={disabled}
+                  onCheckedChange={(watchdog) => update({ watchdog })}
+                />
+              </div>
+            </section>
+            <div className="surface-inset min-w-0 self-start p-4 @sm:p-5">
+              <ThresholdControl
+                min={minTemperature}
+                max={maxTemperature}
+                unit="°C"
+                value={value.threshold}
+                onValueChange={(threshold) => update({ threshold })}
+                disabled={disabled}
+                labels={{
+                  range: "温度告警范围",
+                  low: "下限",
+                  high: "上限",
+                  invalid: "下限应低于上限，且两者均在 −20 至 80 °C 内。",
+                }}
               />
             </div>
           </fieldset>
-          <div className="my-4 min-h-5 text-xs" aria-live="polite">
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0 text-sm">
             {!online ? (
-              <p className="text-warning">
-                Device is offline. Configuration is read-only.
+              <p role="status" className="text-warning-text">
+                设备离线。重新连接后可以提交。
+              </p>
+            ) : saving ? (
+              <p role="status" className="text-muted-foreground">
+                正在提交配置…
+              </p>
+            ) : changedRemotely ? (
+              <p role="status" className="text-warning-text">
+                设备配置已更新。载入最新配置后可继续编辑。
               </p>
             ) : phase === "error" ? (
               <p role="alert" className="text-destructive">
                 {error}
               </p>
             ) : phase === "saved" ? (
-              <p className="flex items-center gap-2 text-success">
-                <Check className="size-3" />
-                Configuration saved.
+              <p role="status" className="flex items-center gap-2 text-success">
+                <Check className="size-4" aria-hidden="true" /> 配置已保存
               </p>
-            ) : !valid ? (
-              <p className="text-destructive">
-                Use a whole-number interval from 5 to 3,600 seconds and a valid
-                range.
+            ) : dirty ? (
+              <p role="status" className="text-muted-foreground">
+                有待提交的更改
               </p>
-            ) : (
-              <p className="text-muted-foreground">
-                {dirty
-                  ? "You have unapplied changes."
-                  : "Configuration is up to date."}
-              </p>
-            )}
+            ) : null}
           </div>
-        </CardContent>
-        <CardFooter className="flex-wrap justify-end gap-2">
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={!dirty || phase === "saving"}
-            onClick={() => {
-              setDraft(configuration);
-              setPhase("idle");
-            }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="submit"
-            disabled={!online || !valid || !dirty || phase === "saving"}
-          >
-            {phase === "saving" && (
-              <LoaderCircle className="size-4 animate-spin" />
-            )}
-            {phase === "saving" ? "Applying…" : "Apply configuration"}
-          </Button>
-        </CardFooter>
+          <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="min-h-10"
+              disabled={!dirty || saving}
+              onClick={reset}
+            >
+              {changedRemotely ? "载入最新配置" : "还原"}
+            </Button>
+            <Button
+              type="submit"
+              className="min-h-10"
+              disabled={
+                disabled ||
+                changedRemotely ||
+                !validInterval ||
+                !validRange ||
+                !dirty
+              }
+            >
+              {saving && (
+                <LoaderCircle
+                  className="size-4 motion-safe:animate-spin"
+                  aria-hidden="true"
+                />
+              )}
+              {saving ? "保存中…" : "保存配置"}
+            </Button>
+          </div>
+        </div>
       </form>
-    </Card>
+    </Panel>
   );
 }

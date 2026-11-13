@@ -24,7 +24,10 @@ export function CodeSnippet({
   return (
     <div className="code-snippet surface-inset">
       <div className="flex min-w-0 items-center gap-2">
-        <code className="min-w-0 flex-1 overflow-x-auto text-xs leading-relaxed whitespace-pre">
+        <code
+          tabIndex={0}
+          className="min-w-0 flex-1 overflow-x-auto text-xs leading-relaxed whitespace-pre"
+        >
           {code}
         </code>
         <Button

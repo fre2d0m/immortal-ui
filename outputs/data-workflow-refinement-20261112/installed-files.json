@@ -1,0 +1,26 @@
+[
+  {
+    "file": "src/components/blocks/data-workflow.tsx",
+    "matches_registry": true,
+    "cli_change": null,
+    "sha256": "2d37905db83bf6009f1fa5d3bc6f9e65447ff388688f63732e7de9f512d44fff"
+  },
+  {
+    "file": "src/components/blocks/workflow-parts.tsx",
+    "matches_registry": true,
+    "cli_change": null,
+    "sha256": "aa31901265fc795ed57ad2ea707f97211ced5c4e4cbc9a361ec7e1702fcde349"
+  },
+  {
+    "file": "src/components/blocks/workflow-model.ts",
+    "matches_registry": true,
+    "cli_change": "leading documentation comment removed",
+    "sha256": "bb8c51cdff2c4d65466a807d8a9f6b4f87e0f61b582e80a7d98834d7f95fbb81"
+  },
+  {
+    "file": "src/components/blocks/data-workflow.css",
+    "matches_registry": true,
+    "cli_change": null,
+    "sha256": "e2989801d9a4b3b9f5fd722e870ca1b9c936ed2e930a8f68129f71d1d0771deb"
+  }
+]

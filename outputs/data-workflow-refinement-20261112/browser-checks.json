@@ -1,0 +1,46 @@
+{
+  "checks": [
+    "default 11-node topology fully in canvas; no Panel or permanent inspector; shared 34px controls",
+    "parameter 0 reflected in node; shared Tabs keyboard behavior; add/duplicate and one-step undo for a long drag; redo",
+    "keyboard connection form, duplicate rejection, edge removal, pointer connection with directional ports",
+    "canvas persists during test; run row selects matching node data; mean 20/26 and routing; failed source, invalid observation and cancellation",
+    "incomplete draft saves and survives reload; incomplete execution blocked; empty flow built and tested entirely without dragging",
+    "malformed import rejected, valid import undoable; native expanded workspace menu, Escape and focus restoration",
+    "dark/light, real Theme Studio 20px and long labels at 320px without document overflow; forced-colors edges",
+    "touch selection and parameter edit; header controls at least 40×40"
+  ],
+  "measurements": {
+    "default": {
+      "nodes": 11,
+      "heights": [
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34
+      ]
+    },
+    "touch": [
+      {
+        "width": 108,
+        "height": 40
+      },
+      {
+        "width": 108,
+        "height": 40
+      },
+      {
+        "width": 40,
+        "height": 40
+      },
+      {
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "errors": []
+}

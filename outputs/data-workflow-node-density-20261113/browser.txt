@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Dark/light, 232px fixed width: one-field sink is about 92px high; adding known rows increases height by 22px each; empty summary reserves no tracks. 0, false, empty text and missing value remain distinct.",
+    "Two-line titles grow by the used line; long target values remain complete in accessible names and the keyboard-opened inspector. No content overflow; line and port anchors track all height changes.",
+    "Six supplied run statuses add a result row only when a receipt exists; removing it restores compact height. Three/four same-side ports keep 40px targets, 42px center spacing and end clearance.",
+    "20px main text in both themes: titles and rows grow naturally; long values stay inside the node; endpoint targets remain separate.",
+    "Actual workflow: arrange uses measured compact heights, endpoint picker adds correct error edge, and demo run still yields 20°C from three supplied observations; normal archive succeeds and review branch skips.",
+    "320px/20px text retains full configuration through keyboard. Touch-emulated Chrome can tap a compact node endpoint and choose a next step."
+  ],
+  "errors": []
+}

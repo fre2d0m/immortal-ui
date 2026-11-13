@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "actuator-switch",
+  "title": "Actuator switch",
+  "description": "Readback-driven binary device control with async acknowledgement, offline, and lock states.",
+  "dependencies": [
+    "cn",
+    "lucide-react",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "switch",
+    "https://immortal.build/r/command-status.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/internal/panel-header.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\n/** Internal layout shared by domain panels. Shipped with its owning component. */\nexport function PanelHeader({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as: Heading = \"h3\",\n}: {\n  icon: ReactNode;\n  title: string;\n  description?: ReactNode;\n  status?: ReactNode;\n  action?: ReactNode;\n  as?: \"h2\" | \"h3\";\n}) {\n  return (\n    <div data-slot=\"panel-header\" className=\"min-w-0\">\n      <div\n        data-slot=\"panel-topline\"\n        className=\"grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2\"\n      >\n        <div\n          data-slot=\"panel-identity\"\n          className=\"flex min-w-0 items-start gap-3\"\n        >\n          <span\n            data-slot=\"panel-icon\"\n            aria-hidden=\"true\"\n            className=\"surface-control grid size-10 shrink-0 place-items-center rounded-full border bg-secondary text-secondary-foreground shadow-sm [&>svg]:size-4\"\n          >\n            {icon}\n          </span>\n          <div\n            data-slot=\"panel-heading\"\n            className=\"flex min-h-12 min-w-0 flex-col\"\n          >\n            <Heading\n              data-slot=\"panel-title\"\n              className=\"text-base font-medium leading-snug wrap-anywhere\"\n            >\n              {title}\n            </Heading>\n            {description && (\n              <p\n                data-slot=\"panel-description\"\n                className=\"mt-1 text-sm leading-relaxed text-muted-foreground wrap-anywhere\"\n              >\n                {description}\n              </p>\n            )}\n          </div>\n        </div>\n        {(status != null || action != null) && (\n          <div\n            data-slot=\"panel-meta\"\n            className=\"ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2 text-right text-sm text-muted-foreground\"\n          >\n            {status != null && (\n              <div data-slot=\"panel-status\" className=\"min-w-0 wrap-anywhere\">\n                {status}\n              </div>\n            )}\n            {action}\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel-header.tsx"
+    },
+    {
+      "path": "registry/immortal/components/internal/panel.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { PanelHeader } from \"@/components/iot/internal/panel-header\";\n\ntype PanelProps = ComponentProps<typeof PanelHeader> &\n  Omit<ComponentProps<\"section\">, \"title\"> & {\n    contentClassName?: string;\n  };\n\n/** Owns the surface, all four insets, header alignment and the content boundary. */\nexport function Panel({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as,\n  className = \"\",\n  contentClassName = \"\",\n  children,\n  ...props\n}: PanelProps) {\n  return (\n    <section\n      data-slot=\"panel\"\n      data-panel-layout=\"\"\n      className={`@container surface-raised grid min-w-0 gap-[var(--card-padding,24px)] rounded-xl border bg-card p-[var(--card-padding,24px)] text-card-foreground shadow-sm ${className}`}\n      {...props}\n    >\n      <PanelHeader\n        icon={icon}\n        title={title}\n        description={description}\n        status={status}\n        action={action}\n        as={as}\n      />\n      <div\n        data-slot=\"panel-content\"\n        className={`min-w-0 ${contentClassName || \"space-y-5\"}`}\n      >\n        {children}\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel.tsx"
+    },
+    {
+      "path": "registry/immortal/components/actuator-switch.tsx",
+      "content": "\"use client\";\n\nimport { Panel } from \"@/components/iot/internal/panel\";\nimport { useId, useRef, useState } from \"react\";\nimport { Power, LockKeyhole } from \"lucide-react\";\nimport { Switch } from \"@/components/ui/switch\";\nimport {\n  CommandStatus,\n  type CommandPhase,\n} from \"@/components/iot/command-status\";\n\n/** Resolve onCommand only on device acknowledgement; reported is owned by the caller. */\nexport function ActuatorSwitch({\n  label,\n  reported,\n  online = true,\n  locked = false,\n  onCommand,\n}: {\n  label: string;\n  reported: boolean | null;\n  online?: boolean;\n  locked?: boolean;\n  onCommand: (enabled: boolean) => Promise<void>;\n}) {\n  const id = useId();\n  const busy = useRef(false);\n  const [requested, setRequested] = useState<boolean | null>(null);\n  const [phase, setPhase] = useState<CommandPhase>(\"idle\");\n  const [error, setError] = useState(\"\");\n  const disabled =\n    !online || locked || reported === null || phase === \"pending\";\n  async function command(next: boolean) {\n    if (disabled || busy.current) return;\n    busy.current = true;\n    setRequested(next);\n    setPhase(\"pending\");\n    setError(\"\");\n    try {\n      await onCommand(next);\n      setPhase(\"confirmed\");\n    } catch (cause) {\n      setError(cause instanceof Error ? cause.message : \"发送失败，请重试。\");\n      setPhase(\"failed\");\n    } finally {\n      busy.current = false;\n    }\n  }\n  return (\n    <Panel\n      icon={<Power />}\n      title={label}\n      status={reported === null ? \"状态未知\" : reported ? \"运行中\" : \"已关闭\"}\n    >\n      <div className=\"flex items-center justify-between gap-4\">\n        <label htmlFor={id} className=\"text-sm\">\n          {label}开关\n        </label>\n        <Switch\n          id={id}\n          checked={reported === true}\n          disabled={disabled}\n          onCheckedChange={command}\n        />\n      </div>\n      {(!online || locked) && (\n        <p className=\"flex items-center gap-2 text-xs text-warning-text\">\n          <LockKeyhole aria-hidden=\"true\" className=\"size-3.5\" />\n          {!online ? \"设备离线，控制不可用\" : \"控制已锁定，仍可查看回读\"}\n        </p>\n      )}\n      <CommandStatus\n        phase={phase}\n        requested={requested === null ? \"—\" : requested ? \"开启\" : \"关闭\"}\n        reported={reported === null ? \"未知\" : reported ? \"开启\" : \"关闭\"}\n        message={error || undefined}\n      />\n    </Panel>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/actuator-switch.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,12 @@
+{
+  "url": "http://127.0.0.1:4177/#/blocks/data-workflow",
+  "nodes": 11,
+  "insertButtons": 11,
+  "captions": [
+    "失败",
+    "命中",
+    "未命中"
+  ],
+  "insertAndUndo": true,
+  "errors": []
+}

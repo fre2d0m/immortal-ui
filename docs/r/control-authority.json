@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "control-authority",
+  "title": "Control authority",
+  "description": "区分本地/远程、手动/策略、当前持有者和临时覆盖期限。期限到达只提示待确认，不擅自宣告控制权已释放。",
+  "dependencies": [
+    "cn",
+    "lucide-react",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "https://immortal.build/r/command-status.json",
+    "https://immortal.build/r/use-device-command.json",
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/internal/panel-header.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\n/** Internal layout shared by domain panels. Shipped with its owning component. */\nexport function PanelHeader({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as: Heading = \"h3\",\n}: {\n  icon: ReactNode;\n  title: string;\n  description?: ReactNode;\n  status?: ReactNode;\n  action?: ReactNode;\n  as?: \"h2\" | \"h3\";\n}) {\n  return (\n    <div data-slot=\"panel-header\" className=\"min-w-0\">\n      <div\n        data-slot=\"panel-topline\"\n        className=\"grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2\"\n      >\n        <div\n          data-slot=\"panel-identity\"\n          className=\"flex min-w-0 items-start gap-3\"\n        >\n          <span\n            data-slot=\"panel-icon\"\n            aria-hidden=\"true\"\n            className=\"surface-control grid size-10 shrink-0 place-items-center rounded-full border bg-secondary text-secondary-foreground shadow-sm [&>svg]:size-4\"\n          >\n            {icon}\n          </span>\n          <div\n            data-slot=\"panel-heading\"\n            className=\"flex min-h-12 min-w-0 flex-col\"\n          >\n            <Heading\n              data-slot=\"panel-title\"\n              className=\"text-base font-medium leading-snug wrap-anywhere\"\n            >\n              {title}\n            </Heading>\n            {description && (\n              <p\n                data-slot=\"panel-description\"\n                className=\"mt-1 text-sm leading-relaxed text-muted-foreground wrap-anywhere\"\n              >\n                {description}\n              </p>\n            )}\n          </div>\n        </div>\n        {(status != null || action != null) && (\n          <div\n            data-slot=\"panel-meta\"\n            className=\"ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2 text-right text-sm text-muted-foreground\"\n          >\n            {status != null && (\n              <div data-slot=\"panel-status\" className=\"min-w-0 wrap-anywhere\">\n                {status}\n              </div>\n            )}\n            {action}\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel-header.tsx"
+    },
+    {
+      "path": "registry/immortal/components/internal/panel.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { PanelHeader } from \"@/components/iot/internal/panel-header\";\n\ntype PanelProps = ComponentProps<typeof PanelHeader> &\n  Omit<ComponentProps<\"section\">, \"title\"> & {\n    contentClassName?: string;\n  };\n\n/** Owns the surface, all four insets, header alignment and the content boundary. */\nexport function Panel({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as,\n  className = \"\",\n  contentClassName = \"\",\n  children,\n  ...props\n}: PanelProps) {\n  return (\n    <section\n      data-slot=\"panel\"\n      data-panel-layout=\"\"\n      className={`@container surface-raised grid min-w-0 gap-[var(--card-padding,24px)] rounded-xl border bg-card p-[var(--card-padding,24px)] text-card-foreground shadow-sm ${className}`}\n      {...props}\n    >\n      <PanelHeader\n        icon={icon}\n        title={title}\n        description={description}\n        status={status}\n        action={action}\n        as={as}\n      />\n      <div\n        data-slot=\"panel-content\"\n        className={`min-w-0 ${contentClassName || \"space-y-5\"}`}\n      >\n        {children}\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel.tsx"
+    },
+    {
+      "path": "registry/immortal/components/control-authority.tsx",
+      "content": "\"use client\";\nimport { Panel } from \"@/components/iot/internal/panel\";\nimport { KeyRound } from \"lucide-react\";\nimport { Button } from \"@/components/ui/button\";\nimport { CommandStatus } from \"@/components/iot/command-status\";\nimport { useDeviceCommand } from \"@/components/iot/use-device-command\";\nimport { timeLabel, type CommandAction } from \"@/lib/iot-model\";\nexport function ControlAuthority({\n  location,\n  operatingMode,\n  owner,\n  source,\n  overrideExpiresAt,\n  now,\n  canRequest = false,\n  canRelease = false,\n  reason,\n  onChange,\n}: {\n  location: \"local\" | \"remote\" | \"unknown\";\n  operatingMode: \"manual\" | \"strategy\" | \"unknown\";\n  owner: string | null;\n  source: string;\n  overrideExpiresAt?: number | null;\n  now: number;\n  canRequest?: boolean;\n  canRelease?: boolean;\n  reason?: string;\n  onChange?: CommandAction<\"request\" | \"release\">;\n}) {\n  const command = useDeviceCommand();\n  const locationLabel = {\n    local: \"本地控制\",\n    remote: \"远程控制\",\n    unknown: \"控制位置未知\",\n  }[location];\n  const operation = {\n    manual: \"手动操作\",\n    strategy: \"策略运行\",\n    unknown: \"运行模式未知\",\n  }[operatingMode];\n  return (\n    <Panel icon={<KeyRound />} title=\"控制权\">\n      <div className=\"surface-inset space-y-4 p-4\">\n        <div className=\"flex flex-wrap gap-2\">\n          <span className=\"text-lg\">{locationLabel}</span>\n          <span className=\"text-lg text-muted-foreground\">· {operation}</span>\n        </div>\n        <dl className=\"grid gap-4 text-sm sm:grid-cols-2\">\n          <div>\n            <dt className=\"text-muted-foreground\">当前持有者</dt>\n            <dd className=\"mt-1\">{owner ?? \"未知\"}</dd>\n          </div>\n          <div>\n            <dt className=\"text-muted-foreground\">状态来源</dt>\n            <dd className=\"mt-1\">{source}</dd>\n          </div>\n        </dl>\n        {overrideExpiresAt != null && (\n          <p className=\"text-sm text-warning\">\n            {overrideExpiresAt <= now\n              ? \"覆盖期限已到，等待设备确认释放\"\n              : \"临时覆盖到 \" + timeLabel(overrideExpiresAt) + \" UTC\"}\n          </p>\n        )}\n      </div>\n      <p className=\"text-sm text-muted-foreground\">\n        {reason ||\n          (location === \"local\"\n            ? \"现场已接管，远程请求不可用。\"\n            : \"可用操作由权限与设备能力共同提供。\")}\n      </p>\n      <div className=\"flex flex-wrap gap-3\">\n        <Button\n          disabled={\n            !onChange || !canRequest || location !== \"remote\" || command.busy\n          }\n          onClick={() =>\n            onChange && command.run(\"申请临时控制权\", \"request\", onChange)\n          }\n        >\n          申请控制权\n        </Button>\n        <Button\n          variant=\"secondary\"\n          disabled={!onChange || !canRelease || command.busy}\n          onClick={() =>\n            onChange && command.run(\"释放临时控制权\", \"release\", onChange)\n          }\n        >\n          释放控制权\n        </Button>\n      </div>\n      <CommandStatus\n        record={command.record}\n        reported={locationLabel + \" · \" + (owner ?? \"持有者未知\")}\n      />\n    </Panel>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/control-authority.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

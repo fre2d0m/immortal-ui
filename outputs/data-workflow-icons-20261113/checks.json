@@ -1,0 +1,209 @@
+{
+  "browser": "157.0.8103.52",
+  "checks": [
+    "11 icon-only controls retain accessible names and shared 34×34 sizing in dark/light",
+    "Hints open on hover/focus, stay readable when hovered, dismiss with Escape",
+    "Library adds templates; outline lists 11 existing nodes and their connections; add/undo/redo remain functional; tooltip Escape preserves open drawer",
+    "Icon save persists the draft; icon test transitions to stop and produces actual demo run records",
+    "Hints and menu work in expanded native dialog; Escape dismisses the hint without closing the workspace",
+    "Zoom and fit keep separate behavior from workspace expansion",
+    "320px viewport with 20px font: no document overflow and hints remain within the viewport",
+    "Touch: all 11 controls ≥40×40; long-press shows label without activating; subsequent tap opens library; more menu exposes text"
+  ],
+  "measurements": {
+    "dark": [
+      {
+        "name": "保存草稿",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "测试流程",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "更多流程操作",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "展开工作区",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "添加节点",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "流程大纲",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "撤销",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "重做",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "缩小画布",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "显示完整流程",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "放大画布",
+        "text": "",
+        "width": 34,
+        "height": 34
+      }
+    ],
+    "light": [
+      {
+        "name": "保存草稿",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "测试流程",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "更多流程操作",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "展开工作区",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "添加节点",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "流程大纲",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "撤销",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "重做",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "缩小画布",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "显示完整流程",
+        "text": "",
+        "width": 34,
+        "height": 34
+      },
+      {
+        "name": "放大画布",
+        "text": "",
+        "width": 34,
+        "height": 34
+      }
+    ],
+    "touch": [
+      {
+        "name": "保存草稿",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "测试流程",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "更多流程操作",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "展开工作区",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "添加节点",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "流程大纲",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "撤销",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "重做",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "缩小画布",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "显示完整流程",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "name": "放大画布",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "soil-water-explorer.tsx",
+    "source": "e02f8a994e0758c3d7f96dae841f6499f28bfc2af61c1ebcf948d64f14d355fc",
+    "installed": "e02f8a994e0758c3d7f96dae841f6499f28bfc2af61c1ebcf948d64f14d355fc",
+    "equal": true
+  },
+  {
+    "name": "soil-water-explorer.css",
+    "source": "7f0aafde16bd608b4d3b912e3bce483c6c0bbdeaba198f7698a5f10cdb7d5475",
+    "installed": "7f0aafde16bd608b4d3b912e3bce483c6c0bbdeaba198f7698a5f10cdb7d5475",
+    "equal": true
+  },
+  {
+    "name": "soil-water-model.ts",
+    "source": "c5edaf6a15b9aeaeb4e0da51396e0e9ba3b36c967a3fd69dc9a8cc2027ccecbf",
+    "installed": "c5edaf6a15b9aeaeb4e0da51396e0e9ba3b36c967a3fd69dc9a8cc2027ccecbf",
+    "equal": true
+  },
+  {
+    "name": "soil-water-plots.tsx",
+    "source": "bffc76e8abb440a43aa37b97c4905131e4446a033b871a4f5757b06762b79828",
+    "installed": "bffc76e8abb440a43aa37b97c4905131e4446a033b871a4f5757b06762b79828",
+    "equal": true
+  }
+]

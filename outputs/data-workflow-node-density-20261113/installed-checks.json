@@ -1,0 +1,23 @@
+{
+  "sourceMatches": true,
+  "measurements": [
+    {
+      "mode": "dark",
+      "width": 232,
+      "height": 92,
+      "summary": 18
+    },
+    {
+      "mode": "light",
+      "width": 232,
+      "height": 92,
+      "summary": 18
+    }
+  ],
+  "checks": [
+    "Fresh CLI-installed Graphite + data-workflow render compact 232×92px node in both themes",
+    "Keyboard configuration edits retain full values and call host onChange",
+    "Input endpoint still opens the step picker"
+  ],
+  "errors": []
+}

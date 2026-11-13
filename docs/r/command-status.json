@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "command-status",
+  "title": "Command lifecycle",
+  "description": "从发送、接收、执行到回读验证，保留请求 ID、时间和期望值。超时明确标为结果未知，旧回执不能覆盖新指令。",
+  "dependencies": [
+    "cn",
+    "lucide-react",
+    "radix-ui@^1.8.1",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/command-status.tsx",
+      "content": "\"use client\";\nimport { useRef, useState } from \"react\";\nimport { cn } from \"cn\";\nimport { Button } from \"@/components/ui/button\";\nimport {\n  timeLabel,\n  type CommandRecord,\n  type LifecyclePhase,\n} from \"@/lib/iot-model\";\nexport type CommandPhase =\n  \"idle\" | \"pending\" | \"confirmed\" | \"failed\" | LifecyclePhase;\nexport const commandLabels: Record<CommandPhase, string> = {\n  idle: \"等待操作\",\n  pending: \"等待设备回执\",\n  confirmed: \"设备已确认\",\n  queued: \"已排队\",\n  sending: \"发送中\",\n  accepted: \"已接收 · 待设备回读\",\n  running: \"执行中\",\n  verified: \"回读已验证\",\n  rejected: \"设备拒绝\",\n  failed: \"执行失败\",\n  timeout: \"回执超时 · 结果未知\",\n  cancelled: \"已取消\",\n};\nexport function CommandStatus({\n  record,\n  phase = \"idle\",\n  requested = \"—\",\n  reported,\n  message,\n  className,\n  onRetry,\n  onCancel,\n}: {\n  record?: CommandRecord | null;\n  phase?: CommandPhase;\n  requested?: string;\n  reported: string;\n  message?: string;\n  className?: string;\n  onRetry?: (id: string) => Promise<void>;\n  onCancel?: (id: string) => Promise<void>;\n}) {\n  const lock = useRef<string | null>(null);\n  const [operation, setOperation] = useState<{\n    id: string;\n    pending: boolean;\n    error: string;\n  } | null>(null);\n  const pending = operation?.id === record?.id && operation?.pending === true;\n  const error = operation?.id === record?.id ? operation?.error : \"\";\n  const state = record?.phase ?? phase;\n  const tone = [\"verified\", \"confirmed\"].includes(state)\n    ? \"text-success\"\n    : [\"failed\", \"rejected\"].includes(state)\n      ? \"text-destructive\"\n      : state === \"idle\" || state === \"cancelled\"\n        ? \"text-muted-foreground\"\n        : \"text-warning-text\";\n  async function action(callback: (id: string) => Promise<void>) {\n    if (!record || lock.current === record.id) return;\n    const id = record.id;\n    lock.current = id;\n    setOperation({ id, pending: true, error: \"\" });\n    try {\n      await callback(id);\n    } catch (e) {\n      setOperation((previous) =>\n        previous?.id === id\n          ? { ...previous, error: e instanceof Error ? e.message : \"操作失败\" }\n          : previous,\n      );\n    } finally {\n      if (lock.current === id) lock.current = null;\n      setOperation((previous) =>\n        previous?.id === id ? { ...previous, pending: false } : previous,\n      );\n    }\n  }\n  return (\n    <section\n      className={cn(\"surface-inset space-y-3 p-4 text-sm\", className)}\n      aria-label=\"指令反馈\"\n      aria-busy={pending}\n    >\n      <p role=\"status\" className={cn(\"flex items-center gap-2\", tone)}>\n        <span className=\"size-1.5 rounded-full bg-current\" aria-hidden=\"true\" />\n        {commandLabels[state]}\n      </p>\n      <dl className=\"grid grid-cols-2 gap-4 tabular-nums\">\n        <div>\n          <dt className=\"text-muted-foreground\">请求值</dt>\n          <dd className=\"mt-1 break-words\">{record?.requested ?? requested}</dd>\n        </div>\n        <div>\n          <dt className=\"text-muted-foreground\">设备回读</dt>\n          <dd className=\"mt-1 break-words\">{reported}</dd>\n        </div>\n      </dl>\n      {(message || record?.message) && (\n        <p className=\"text-muted-foreground leading-relaxed\">\n          {message || record?.message}\n        </p>\n      )}\n      {record && (\n        <details>\n          <summary className=\"cursor-pointer py-1 text-muted-foreground\">\n            指令记录 · {record.id.slice(0, 8)}\n          </summary>\n          <p className=\"my-2 break-all text-muted-foreground\">\n            请求 ID：{record.id}\n          </p>\n          <ol className=\"space-y-2\">\n            {record.events.map((event, i) => (\n              <li key={i} className=\"flex flex-wrap justify-between gap-2\">\n                <span>\n                  {commandLabels[event.phase]}\n                  {event.detail && ` · ${event.detail}`}\n                </span>\n                <time className=\"text-muted-foreground tabular-nums\">\n                  {timeLabel(event.at)} UTC\n                </time>\n              </li>\n            ))}\n          </ol>\n        </details>\n      )}\n      {(onCancel || onRetry) && (\n        <div className=\"flex flex-wrap gap-2\">\n          {record && onCancel && [\"queued\", \"accepted\"].includes(state) && (\n            <Button\n              variant=\"secondary\"\n              disabled={pending}\n              onClick={() => action(onCancel)}\n            >\n              取消请求\n            </Button>\n          )}\n          {record && onRetry && [\"failed\", \"rejected\"].includes(state) && (\n            <Button\n              variant=\"secondary\"\n              disabled={pending}\n              onClick={() => action(onRetry)}\n            >\n              重新提交\n            </Button>\n          )}\n        </div>\n      )}\n      {error && (\n        <p role=\"alert\" className=\"text-destructive\">\n          {error}\n        </p>\n      )}\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/command-status.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

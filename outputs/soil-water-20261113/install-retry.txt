@@ -1,0 +1,17 @@
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+✔ Created 8 files:
+  - src/components/ui/button.tsx
+  - src/components/ui/input.tsx
+  - src/components/ui/tabs.tsx
+  - src/lib/telemetry.ts
+  - src/components/blocks/soil-water-explorer.tsx
+  - src/components/blocks/soil-water-model.ts
+  - src/components/blocks/soil-water-plots.tsx
+  - src/components/blocks/soil-water-explorer.css
+- Updating src/index.css
+✔ Updating src/index.css

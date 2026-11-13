@@ -1,0 +1,12 @@
+{
+  "value": 20,
+  "halo": {
+    "size": "20px",
+    "mark": "12px"
+  },
+  "zoomVisible": true,
+  "collapseKeyboard": true,
+  "oneSelectedTab": true,
+  "forcedColorsSelection": true,
+  "errors": []
+}

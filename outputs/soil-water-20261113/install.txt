@@ -1,0 +1,5 @@
+npm warn exec The following package was not found and will be installed: shadcn@4.23.0
+npm error code ERR_TLS_CERT_ALTNAME_INVALID
+npm error errno ERR_TLS_CERT_ALTNAME_INVALID
+npm error request to https://cdn.npmmirror.com/packages/postcss-selector-parser/7.2.1/postcss-selector-parser-7.2.1.tgz failed, reason: Hostname/IP does not match certificate's altnames: Host: cdn.npmmirror.com. is not in the cert's altnames: DNS:images.apple.com
+npm error A complete log of this run can be found in: /Users/golo/.npm/_logs/2026-11-12T16_34_31_007Z-debug-0.log

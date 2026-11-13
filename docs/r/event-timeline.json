@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "event-timeline",
+  "title": "Event timeline",
+  "description": "An ordered timeline of actors, changes, and device events with an empty state.",
+  "dependencies": [
+    "cn",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/immortal/components/event-timeline.tsx",
+      "content": "import { cn } from \"cn\";\n\nexport type TimelineEvent = {\n  id: string;\n  time: string;\n  actor: string;\n  title: string;\n  detail?: string;\n  tone?: \"neutral\" | \"warning\" | \"success\";\n};\nexport function EventTimeline({\n  events,\n  label = \"操作记录\",\n}: {\n  events: TimelineEvent[];\n  label?: string;\n}) {\n  return (\n    <section aria-label={label}>\n      <h3 className=\"mb-5 text-sm font-medium\">{label}</h3>\n      {!events.length ? (\n        <p className=\"py-6 text-sm text-muted-foreground\">暂无事件记录</p>\n      ) : (\n        <ol className=\"space-y-0\">\n          {events.map((event, i) => (\n            <li key={event.id} className=\"relative flex gap-4 pb-6 last:pb-0\">\n              <div className=\"relative flex w-3 shrink-0 justify-center\">\n                <span\n                  className={cn(\n                    \"relative z-10 mt-1.5 size-2 rounded-full\",\n                    event.tone === \"warning\"\n                      ? \"bg-warning\"\n                      : event.tone === \"success\"\n                        ? \"bg-success\"\n                        : \"bg-muted-foreground\",\n                  )}\n                />\n                {i < events.length - 1 && (\n                  <span className=\"absolute top-4 bottom-[-4px] w-px bg-border\" />\n                )}\n              </div>\n              <div className=\"min-w-0 flex-1\">\n                <div className=\"flex flex-wrap justify-between gap-2 text-xs text-muted-foreground\">\n                  <span>{event.actor}</span>\n                  <span className=\"tabular-nums\">{event.time}</span>\n                </div>\n                <p className=\"mt-1 text-sm font-medium\">{event.title}</p>\n                {event.detail && (\n                  <p className=\"mt-1 text-xs leading-relaxed text-muted-foreground\">\n                    {event.detail}\n                  </p>\n                )}\n              </div>\n            </li>\n          ))}\n        </ol>\n      )}\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/event-timeline.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "events"
+  ],
+  "type": "registry:component"
+}

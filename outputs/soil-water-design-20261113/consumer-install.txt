@@ -1,0 +1,16 @@
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+ℹ Updated 1 file:
+  - src/components/blocks/soil-water-explorer.css
+ℹ Skipped 7 files: (files might be identical, use --overwrite to overwrite)
+  - src/components/ui/button.tsx
+  - src/components/ui/input.tsx
+  - src/components/ui/tabs.tsx
+  - src/lib/telemetry.ts
+  - src/components/blocks/soil-water-explorer.tsx
+  - src/components/blocks/soil-water-model.ts
+  - src/components/blocks/soil-water-plots.tsx

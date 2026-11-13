@@ -25,6 +25,7 @@ export function SignalStrength({
         "inline-flex items-center gap-2.5 text-xs tabular-nums text-muted-foreground",
         className,
       )}
+      role="img"
       aria-label={
         known ? `${quality} signal, ${rssi} dBm` : "Signal unavailable"
       }

@@ -1,0 +1,11 @@
+{
+  "generatedSourcesMatch": [
+    "data-workflow.tsx",
+    "workflow-parts.tsx",
+    "workflow-model.ts",
+    "data-workflow.css"
+  ],
+  "canonicalRegistry": true,
+  "docsMatchBuild": true,
+  "testsPassed": 82
+}

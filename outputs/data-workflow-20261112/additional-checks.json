@@ -1,0 +1,214 @@
+{
+  "contrast": [
+    {
+      "mode": "dark",
+      "colors": [
+        {
+          "selector": ".wf-node p",
+          "foreground": [
+            160,
+            160,
+            157,
+            255
+          ],
+          "background": [
+            36,
+            36,
+            36,
+            255
+          ],
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-node strong",
+          "foreground": [
+            237,
+            237,
+            235,
+            255
+          ],
+          "background": [
+            36,
+            36,
+            36,
+            255
+          ],
+          "ratio": 13.241938026078083
+        },
+        {
+          "selector": ".wf-node-footer",
+          "foreground": [
+            160,
+            160,
+            157,
+            255
+          ],
+          "background": [
+            36,
+            36,
+            36,
+            255
+          ],
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-inspector p",
+          "foreground": [
+            160,
+            160,
+            157,
+            255
+          ],
+          "background": [
+            36,
+            36,
+            36,
+            255
+          ],
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-inspector label",
+          "foreground": [
+            237,
+            237,
+            235,
+            255
+          ],
+          "background": [
+            36,
+            36,
+            36,
+            255
+          ],
+          "ratio": 13.241938026078083
+        },
+        {
+          "selector": ".wf-canvas-help",
+          "foreground": [
+            160,
+            160,
+            157,
+            255
+          ],
+          "background": [
+            12,
+            12,
+            12,
+            255
+          ],
+          "ratio": 7.46127456477729
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "colors": [
+        {
+          "selector": ".wf-node p",
+          "foreground": [
+            100,
+            100,
+            97,
+            255
+          ],
+          "background": [
+            245,
+            245,
+            243,
+            255
+          ],
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-node strong",
+          "foreground": [
+            37,
+            37,
+            37,
+            255
+          ],
+          "background": [
+            245,
+            245,
+            243,
+            255
+          ],
+          "ratio": 14.042050881659097
+        },
+        {
+          "selector": ".wf-node-footer",
+          "foreground": [
+            100,
+            100,
+            97,
+            255
+          ],
+          "background": [
+            245,
+            245,
+            243,
+            255
+          ],
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-inspector p",
+          "foreground": [
+            100,
+            100,
+            97,
+            255
+          ],
+          "background": [
+            245,
+            245,
+            243,
+            255
+          ],
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-inspector label",
+          "foreground": [
+            37,
+            37,
+            37,
+            255
+          ],
+          "background": [
+            245,
+            245,
+            243,
+            255
+          ],
+          "ratio": 14.042050881659097
+        },
+        {
+          "selector": ".wf-canvas-help",
+          "foreground": [
+            100,
+            100,
+            97,
+            255
+          ],
+          "background": [
+            233,
+            233,
+            231,
+            255
+          ],
+          "ratio": 4.883376416597895
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "default dark/light text contrast at least 4.5:1",
+    "real Theme Studio fontSize 20 at 320px with long names",
+    "minimap node count and SVG/container geometry",
+    "pointer handle-to-handle connection",
+    "empty-state creation, manual trigger to sink execution",
+    "forced-colors edges remain visible"
+  ]
+}

@@ -1,0 +1,575 @@
+{
+  "checks": [
+    "Dark/light default, line, vertical and manual tabs: one persistent selection; hover, press and animation frames have no second raised surface; keyboard navigation skips disabled tabs and keeps visible focus; upstream static fallback remains selected.",
+    "Navigation, filters and single selection segments have flat hover distinct from selected state. Checkbox, switch, slider, text input and checked menu state retain their own behavior.",
+    "50 new and 30 existing choices: only result pane scrolls; heading/search/tabs stay fixed; both panels, search/no-match, End/Enter to last choice and Escape focus restore work in dark/light, 320px width, 480px height and 20px text.",
+    "Reduced motion disables indicator travel; forced colors keeps one selected tab and keyboard focus.",
+    "Touch-emulated Chrome: 40px tab targets, switching and selecting an existing choice work.",
+    "Actual demo endpoint 合并多源观测 / 失败: heading is below tabs, inactive hover is flat; choosing existing adds join→failure/error, choosing new adds one failure node and the corresponding edge."
+  ],
+  "measurements": [
+    {
+      "id": "default",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.939975 -0.000722156 0.00260894)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 250,
+          "y": 111,
+          "width": 86,
+          "height": 34,
+          "top": 111,
+          "right": 336,
+          "bottom": 145,
+          "left": 250
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "line",
+      "animationFrames": 18,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.916141 -0.000768318 0.00276007)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 729,
+          "y": 110.5,
+          "width": 70,
+          "height": 25,
+          "top": 110.5,
+          "right": 799,
+          "bottom": 135.5,
+          "left": 729
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "vertical",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.940073 -0.000721966 0.00260832)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 160,
+          "y": 300,
+          "width": 86,
+          "height": 34,
+          "top": 300,
+          "right": 246,
+          "bottom": 334,
+          "left": 160
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "vertical-line",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.939943 -0.000722219 0.00260915)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 655,
+          "y": 291,
+          "width": 70,
+          "height": 26,
+          "top": 291,
+          "right": 725,
+          "bottom": 317,
+          "left": 655
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "default",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.270144 -0.0000199553 0.000114021)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 250,
+          "y": 111,
+          "width": 86,
+          "height": 34,
+          "top": 111,
+          "right": 336,
+          "bottom": 145,
+          "left": 250
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "line",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.294247 -0.000156007 0.000576519)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 729,
+          "y": 110.5,
+          "width": 70,
+          "height": 25,
+          "top": 110.5,
+          "right": 799,
+          "bottom": 135.5,
+          "left": 729
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "vertical",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.270198 -0.0000202589 0.000115053)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 160,
+          "y": 300,
+          "width": 86,
+          "height": 34,
+          "top": 300,
+          "right": 246,
+          "bottom": 334,
+          "left": 160
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "id": "vertical-line",
+      "animationFrames": 19,
+      "hover": {
+        "background": "none",
+        "color": "oklab(0.270299 -0.00002083 0.000116994)",
+        "fill": "rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "none",
+        "outlineWidth": "3px",
+        "selected": "false",
+        "rect": {
+          "x": 655,
+          "y": 291,
+          "width": 70,
+          "height": 26,
+          "top": 291,
+          "right": 725,
+          "bottom": 317,
+          "left": 655
+        }
+      },
+      "focusOutline": "1px"
+    },
+    {
+      "mode": "dark",
+      "font": 14,
+      "width": 1280,
+      "height": 1000,
+      "geometry": {
+        "popup": {
+          "x": 156,
+          "y": 60,
+          "width": 312,
+          "height": 480,
+          "top": 60,
+          "right": 468,
+          "bottom": 540,
+          "left": 156
+        },
+        "header": {
+          "x": 171,
+          "y": 75,
+          "width": 282,
+          "height": 60,
+          "top": 75,
+          "right": 453,
+          "bottom": 135,
+          "left": 171
+        },
+        "search": {
+          "x": 171,
+          "y": 147,
+          "width": 282,
+          "height": 34,
+          "top": 147,
+          "right": 453,
+          "bottom": 181,
+          "left": 171
+        },
+        "list": {
+          "x": 171,
+          "y": 193,
+          "width": 184,
+          "height": 42,
+          "top": 193,
+          "right": 355,
+          "bottom": 235,
+          "left": 171
+        },
+        "panel": {
+          "x": 171,
+          "y": 247,
+          "width": 282,
+          "height": 278,
+          "top": 247,
+          "right": 453,
+          "bottom": 525,
+          "left": 171
+        },
+        "heading": {
+          "x": 183,
+          "y": 251,
+          "width": 258,
+          "height": 18,
+          "top": 251,
+          "right": 441,
+          "bottom": 269,
+          "left": 183
+        },
+        "scroll": 0,
+        "shellScrollLeft": 0,
+        "shellScrollWidth": 310,
+        "shellClientWidth": 310,
+        "scrollHeight": 3232,
+        "clientHeight": 278
+      }
+    },
+    {
+      "mode": "light",
+      "font": 14,
+      "width": 1280,
+      "height": 1000,
+      "geometry": {
+        "popup": {
+          "x": 156,
+          "y": 60,
+          "width": 312,
+          "height": 480,
+          "top": 60,
+          "right": 468,
+          "bottom": 540,
+          "left": 156
+        },
+        "header": {
+          "x": 171,
+          "y": 75,
+          "width": 282,
+          "height": 60,
+          "top": 75,
+          "right": 453,
+          "bottom": 135,
+          "left": 171
+        },
+        "search": {
+          "x": 171,
+          "y": 147,
+          "width": 282,
+          "height": 34,
+          "top": 147,
+          "right": 453,
+          "bottom": 181,
+          "left": 171
+        },
+        "list": {
+          "x": 171,
+          "y": 193,
+          "width": 184,
+          "height": 42,
+          "top": 193,
+          "right": 355,
+          "bottom": 235,
+          "left": 171
+        },
+        "panel": {
+          "x": 171,
+          "y": 247,
+          "width": 282,
+          "height": 278,
+          "top": 247,
+          "right": 453,
+          "bottom": 525,
+          "left": 171
+        },
+        "heading": {
+          "x": 183,
+          "y": 251,
+          "width": 258,
+          "height": 18,
+          "top": 251,
+          "right": 441,
+          "bottom": 269,
+          "left": 183
+        },
+        "scroll": 0,
+        "shellScrollLeft": 0,
+        "shellScrollWidth": 310,
+        "shellClientWidth": 310,
+        "scrollHeight": 3232,
+        "clientHeight": 278
+      }
+    },
+    {
+      "mode": "dark",
+      "font": 20,
+      "width": 320,
+      "height": 480,
+      "geometry": {
+        "popup": {
+          "x": 12,
+          "y": 62,
+          "width": 296,
+          "height": 406,
+          "top": 62,
+          "right": 308,
+          "bottom": 468,
+          "left": 12
+        },
+        "header": {
+          "x": 27,
+          "y": 77,
+          "width": 266,
+          "height": 69,
+          "top": 77,
+          "right": 293,
+          "bottom": 146,
+          "left": 27
+        },
+        "search": {
+          "x": 27,
+          "y": 158,
+          "width": 266,
+          "height": 36,
+          "top": 158,
+          "right": 293,
+          "bottom": 194,
+          "left": 27
+        },
+        "list": {
+          "x": 27,
+          "y": 206,
+          "width": 216,
+          "height": 44,
+          "top": 206,
+          "right": 243,
+          "bottom": 250,
+          "left": 27
+        },
+        "panel": {
+          "x": 27,
+          "y": 262,
+          "width": 266,
+          "height": 191,
+          "top": 262,
+          "right": 293,
+          "bottom": 453,
+          "left": 27
+        },
+        "heading": {
+          "x": 39,
+          "y": 266,
+          "width": 242,
+          "height": 18,
+          "top": 266,
+          "right": 281,
+          "bottom": 284,
+          "left": 39
+        },
+        "scroll": 0,
+        "shellScrollLeft": 0,
+        "shellScrollWidth": 294,
+        "shellClientWidth": 294,
+        "scrollHeight": 3682,
+        "clientHeight": 191
+      }
+    },
+    {
+      "mode": "light",
+      "font": 20,
+      "width": 320,
+      "height": 480,
+      "geometry": {
+        "popup": {
+          "x": 12,
+          "y": 62,
+          "width": 296,
+          "height": 406,
+          "top": 62,
+          "right": 308,
+          "bottom": 468,
+          "left": 12
+        },
+        "header": {
+          "x": 27,
+          "y": 77,
+          "width": 266,
+          "height": 69,
+          "top": 77,
+          "right": 293,
+          "bottom": 146,
+          "left": 27
+        },
+        "search": {
+          "x": 27,
+          "y": 158,
+          "width": 266,
+          "height": 36,
+          "top": 158,
+          "right": 293,
+          "bottom": 194,
+          "left": 27
+        },
+        "list": {
+          "x": 27,
+          "y": 206,
+          "width": 216,
+          "height": 44,
+          "top": 206,
+          "right": 243,
+          "bottom": 250,
+          "left": 27
+        },
+        "panel": {
+          "x": 27,
+          "y": 262,
+          "width": 266,
+          "height": 191,
+          "top": 262,
+          "right": 293,
+          "bottom": 453,
+          "left": 27
+        },
+        "heading": {
+          "x": 39,
+          "y": 266,
+          "width": 242,
+          "height": 18,
+          "top": 266,
+          "right": 281,
+          "bottom": 284,
+          "left": 39
+        },
+        "scroll": 0,
+        "shellScrollLeft": 0,
+        "shellScrollWidth": 294,
+        "shellClientWidth": 294,
+        "scrollHeight": 3682,
+        "clientHeight": 191
+      }
+    },
+    {
+      "mode": "dark",
+      "font": 20,
+      "width": 390,
+      "height": 640,
+      "geometry": {
+        "popup": {
+          "x": 16,
+          "y": 62,
+          "width": 312,
+          "height": 480,
+          "top": 62,
+          "right": 328,
+          "bottom": 542,
+          "left": 16
+        },
+        "header": {
+          "x": 31,
+          "y": 77,
+          "width": 282,
+          "height": 69,
+          "top": 77,
+          "right": 313,
+          "bottom": 146,
+          "left": 31
+        },
+        "search": {
+          "x": 31,
+          "y": 158,
+          "width": 282,
+          "height": 36,
+          "top": 158,
+          "right": 313,
+          "bottom": 194,
+          "left": 31
+        },
+        "list": {
+          "x": 31,
+          "y": 206,
+          "width": 216,
+          "height": 44,
+          "top": 206,
+          "right": 247,
+          "bottom": 250,
+          "left": 31
+        },
+        "panel": {
+          "x": 31,
+          "y": 262,
+          "width": 282,
+          "height": 265,
+          "top": 262,
+          "right": 313,
+          "bottom": 527,
+          "left": 31
+        },
+        "heading": {
+          "x": 43,
+          "y": 266,
+          "width": 258,
+          "height": 18,
+          "top": 266,
+          "right": 301,
+          "bottom": 284,
+          "left": 43
+        },
+        "scroll": 0,
+        "shellScrollLeft": 0,
+        "shellScrollWidth": 310,
+        "shellClientWidth": 310,
+        "scrollHeight": 3682,
+        "clientHeight": 265
+      }
+    }
+  ],
+  "errors": []
+}

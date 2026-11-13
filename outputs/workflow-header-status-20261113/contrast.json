@@ -1,0 +1,262 @@
+[
+  {
+    "mode": "dark",
+    "action": null,
+    "sample": [
+      {
+        "name": "publication",
+        "state": "draft",
+        "text": "Draft",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.419778150751533
+      }
+    ]
+  },
+  {
+    "mode": "dark",
+    "action": "publish",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "published",
+        "text": "Published",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.419778150751533
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.419778150751533
+      }
+    ]
+  },
+  {
+    "mode": "dark",
+    "action": "edit",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.388142378163119
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.419778150751533
+      }
+    ]
+  },
+  {
+    "mode": "dark",
+    "action": "one-issue",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.388142378163119
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "validation",
+        "state": "warning",
+        "text": "1 issue",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.388142378163119
+      }
+    ]
+  },
+  {
+    "mode": "dark",
+    "action": "two-issues",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 9.388142378163119
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.920809974403869,
+        "iconContrast": 5.920809974403869
+      },
+      {
+        "name": "validation",
+        "state": "invalid",
+        "text": "2 issues",
+        "textContrast": 7.227363208491725,
+        "iconContrast": 7.227363208491725
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "action": null,
+    "sample": [
+      {
+        "name": "publication",
+        "state": "draft",
+        "text": "Draft",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.39378306931486
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "action": "publish",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "published",
+        "text": "Published",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.39378306931486
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.39378306931486
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "action": "edit",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.703499198839408
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "validation",
+        "state": "valid",
+        "text": "0 issues",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.39378306931486
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "action": "one-issue",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.703499198839408
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "validation",
+        "state": "warning",
+        "text": "1 issue",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.703499198839408
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "action": "two-issues",
+    "sample": [
+      {
+        "name": "publication",
+        "state": "changed",
+        "text": "Unpublished changes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.703499198839408
+      },
+      {
+        "name": "nodes",
+        "text": "11 nodes",
+        "textContrast": 5.438446114953988,
+        "iconContrast": 5.438446114953988
+      },
+      {
+        "name": "validation",
+        "state": "invalid",
+        "text": "2 issues",
+        "textContrast": 6.169963382348055,
+        "iconContrast": 6.169963382348055
+      }
+    ]
+  }
+]

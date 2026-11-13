@@ -1,0 +1,109 @@
+{
+  "error": "TimeoutError: page.waitForFunction: Timeout 7000ms exceeded.",
+  "checks": [
+    "输入无加号，已连接输出无加号；每条边唯一居中插入入口。鼠标/Enter 打开同一选择器，Escape 回到原按钮，取消不改图；普通边插入为一次可撤销变更。",
+    "并行边中插入只替换指定分支；节点标题的新增并行分支追加第三路、保留所有旧边，操作含义独立。",
+    "未命中与失败路径插入保留原始 false/error 出口和其他所有连接，不猜测业务分支。",
+    "插入按钮的右键与 Shift+F10 打开该连线菜单；菜单及选择器关闭后焦点返回原按钮。"
+  ],
+  "geometry": [
+    {
+      "label": "initial",
+      "rows": [
+        {
+          "id": "edge-1",
+          "dx": 0,
+          "dy": 0.00000762939453125,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-2",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-3",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-4",
+          "dx": -0.0001220703125,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-5",
+          "dx": -0.0001220703125,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-6",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-7",
+          "dx": -0.0001220703125,
+          "dy": 0.0000152587890625,
+          "vertical": "false",
+          "overlap": false
+        },
+        {
+          "id": "edge-8",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "失败"
+        },
+        {
+          "id": "edge-9",
+          "dx": 0,
+          "dy": -0.0000152587890625,
+          "vertical": "true",
+          "overlap": false
+        },
+        {
+          "id": "edge-10",
+          "dx": 0,
+          "dy": 0.0000152587890625,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "命中"
+        },
+        {
+          "id": "edge-11",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false,
+          "caption": "未命中"
+        }
+      ]
+    },
+    {
+      "label": "reconnected",
+      "rows": [
+        {
+          "id": "connection",
+          "dx": 0,
+          "dy": 0,
+          "vertical": "true",
+          "overlap": false
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,29 @@
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+ℹ Updated 2 files:
+  - src/components/iot/internal/telemetry-plot.tsx
+  - src/components/iot/internal/data-card.tsx
+ℹ Skipped 17 files: (files might be identical, use --overwrite to overwrite)
+  - src/components/ui/button.tsx
+  - src/lib/iot-model.ts
+  - src/lib/telemetry.ts
+  - src/components/ui/input.tsx
+  - src/components/ui/tabs.tsx
+  - src/components/iot/data-freshness.tsx
+  - src/components/iot/internal/panel-header.tsx
+  - src/components/iot/internal/panel.tsx
+  - src/components/iot/daily-histogram.tsx
+  - src/components/iot/range-gauge.tsx
+  - src/components/iot/internal/telemetry-series-style.ts
+  - src/components/iot/telemetry-chart.tsx
+  - src/components/iot/internal/telemetry-sparkline.tsx
+  - src/components/iot/internal/data-card-model.ts
+  - src/components/iot/metric-card.tsx
+  - src/components/iot/indicator-card.tsx
+  - src/components/blocks/telemetry-explorer.tsx
+- Updating src/index.css
+✔ Updating src/index.css

@@ -1,9 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Activity, Cpu, Radio, Search, WifiOff } from "lucide-react";
+import { Panel } from "@/components/iot/internal/panel";
+import { useRef, useState } from "react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Cpu,
+  Search,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -15,246 +22,412 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
-import { DeviceStatus } from "@/components/iot/device-status";
+import type { Device } from "@/components/iot/device-card";
+import { DeviceStatus, type DeviceState } from "@/components/iot/device-status";
 import { SignalStrength } from "@/components/iot/signal-strength";
 import {
   TelemetryChart,
   type TelemetryPoint,
 } from "@/components/iot/telemetry-chart";
-import type { Device } from "@/components/iot/device-card";
+
+export type FleetDevice = Device & { product?: string; groups?: string[] };
+
+const statuses = [
+  { value: "online", label: "在线" },
+  { value: "warning", label: "需关注" },
+  { value: "offline", label: "离线" },
+  { value: "provisioning", label: "待接入" },
+  { value: "unknown", label: "连接未知" },
+] as const;
+const statusLabel = (state: DeviceState) =>
+  statuses.find((status) => status.value === state)?.label;
 
 export function FleetOverview({
   devices,
-  telemetry = [],
-  title = "Network overview",
+  telemetry,
+  telemetryMaxGapMs,
+  title = "设备目录",
   subtitle,
   onDeviceSelect,
+  deviceHref,
+  pageSize = 6,
 }: {
-  devices: Device[];
+  devices: FleetDevice[];
   telemetry?: TelemetryPoint[];
+  telemetryMaxGapMs?: number;
   title?: string;
   subtitle?: string;
-  onDeviceSelect?: (device: Device) => void;
+  onDeviceSelect?: (device: FleetDevice) => void;
+  deviceHref?: (device: FleetDevice) => string | undefined;
+  pageSize?: number;
 }) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
-  const [selected, setSelected] = useState<Device | null>(null);
-  const shown = useMemo(
-    () =>
-      devices.filter(
-        (device) =>
-          (filter === "all" || device.state === filter) &&
-          `${device.name} ${device.id} ${device.location}`
-            .toLowerCase()
-            .includes(query.toLowerCase()),
-      ),
-    [devices, query, filter],
-  );
-  const online = devices.filter((d) => d.state === "online").length;
-  const attention = devices.filter((d) => d.state === "warning").length;
-  const offline = devices.filter((d) => d.state === "offline").length;
-  const metrics = [
-    { label: "Registered devices", value: devices.length, icon: Cpu },
-    { label: "Online", value: online, icon: Radio },
-    { label: "Need attention", value: attention, icon: Activity },
-    { label: "Offline", value: offline, icon: WifiOff },
+  const [status, setStatus] = useState<DeviceState | "all">("all");
+  const [product, setProduct] = useState("");
+  const [page, setPage] = useState(0);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const trigger = useRef<HTMLButtonElement | null>(null);
+  const search = useRef<HTMLInputElement>(null);
+
+  const products = [
+    ...new Set(
+      devices.flatMap((device) => (device.product ? [device.product] : [])),
+    ),
   ];
+  const selectedProduct = products.includes(product) ? product : "";
+  const keyword = query.trim().toLowerCase();
+  const matching = devices.filter(
+    (device) =>
+      (!selectedProduct || device.product === selectedProduct) &&
+      [device.name, device.id, device.location, ...(device.groups ?? [])].some(
+        (value) => value.toLowerCase().includes(keyword),
+      ),
+  );
+  const filtered =
+    status === "all"
+      ? matching
+      : matching.filter((device) => device.state === status);
+  const size = Number.isFinite(pageSize)
+    ? Math.max(1, Math.floor(pageSize))
+    : 6;
+  const pageCount = Math.ceil(filtered.length / size);
+  const currentPage = Math.min(page, Math.max(0, pageCount - 1));
+  const shown = filtered.slice(currentPage * size, (currentPage + 1) * size);
+  const selected = devices.find((device) => device.id === selectedId);
+  const href = selected && deviceHref?.(selected);
+  const summary = [
+    { value: "all" as const, label: "全部设备", count: matching.length },
+    ...statuses
+      .map((item) => ({
+        ...item,
+        count: matching.filter((device) => device.state === item.value).length,
+      }))
+      .filter(
+        (item) =>
+          item.value !== "provisioning" ||
+          devices.some((device) => device.state === item.value) ||
+          status === item.value,
+      ),
+  ];
+
+  function clearFilters() {
+    setQuery("");
+    setStatus("all");
+    setProduct("");
+    setPage(0);
+  }
+
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <h2 className="text-xl font-medium tracking-tight">{title}</h2>
-            {subtitle && (
-              <p className="mt-1 text-xs text-muted-foreground">{subtitle}</p>
-            )}
+    <Panel
+      as="h2"
+      icon={<Cpu />}
+      title={title}
+      description={subtitle}
+      className="@container min-w-0"
+    >
+      <div className="space-y-5">
+        <div className="flex flex-wrap gap-2">
+          <div className="relative min-w-0 flex-[1_1_14rem]">
+            <Search
+              className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <Input
+              ref={search}
+              type="search"
+              className="min-h-10 pl-9!"
+              aria-label="搜索设备"
+              placeholder="搜索设备名、标识或群组"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setPage(0);
+              }}
+            />
           </div>
-          <span className="surface-inset px-3 py-2 text-xs text-muted-foreground">
-            {devices.length} endpoints
-          </span>
+          {products.length > 0 && (
+            <Select
+              value={selectedProduct ? "product:" + selectedProduct : "all"}
+              onValueChange={(value) => {
+                setProduct(value === "all" ? "" : value.slice(8));
+                setPage(0);
+              }}
+            >
+              <SelectTrigger
+                className="min-h-10 w-full max-w-full @md:w-48"
+                aria-label="筛选产品"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent position="popper">
+                <SelectItem value="all">全部产品</SelectItem>
+                {products.map((name) => (
+                  <SelectItem key={name} value={"product:" + name}>
+                    {name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {metrics.map(({ label, value, icon: Icon }) => (
-            <div key={label} className="surface-inset p-4">
-              <div className="mb-4 flex items-center justify-between gap-2 text-muted-foreground">
-                <span className="text-sm">{label}</span>
-                <Icon className="size-3.5" />
-              </div>
-              <span className="text-3xl font-medium tabular-nums tracking-[-0.05em]">
-                {value.toString().padStart(2, "0")}
-              </span>
-            </div>
-          ))}
-        </div>
-        <div className="surface-inset p-5">
-          <TelemetryChart
-            label="Messages received / minute"
-            unit="msg"
-            data={telemetry}
-            showTable={false}
-          />
-        </div>
-        <div>
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h3 className="text-sm font-medium">
-              Device inventory{" "}
-              <span className="ml-1 text-xs font-normal text-muted-foreground">
-                {shown.length}
-              </span>
-            </h3>
-            <div className="flex w-full flex-wrap gap-2 sm:w-auto">
-              <div className="relative min-w-0 flex-1 sm:w-52">
-                <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  className="pl-9!"
-                  aria-label="Search devices"
-                  placeholder="Search devices…"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                />
-              </div>
-              <Select value={filter} onValueChange={setFilter}>
-                <SelectTrigger
-                  aria-label="Filter device status"
-                  className="w-36"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All statuses</SelectItem>
-                  <SelectItem value="online">Online</SelectItem>
-                  <SelectItem value="warning">Attention</SelectItem>
-                  <SelectItem value="offline">Offline</SelectItem>
-                  <SelectItem value="provisioning">Provisioning</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+          <div
+            className="flex min-w-0 flex-wrap gap-1"
+            role="group"
+            aria-label="按设备状态筛选"
+          >
+            {summary.map((item) => (
+              <button
+                key={item.value}
+                type="button"
+                data-slot="filter-chip"
+                aria-pressed={status === item.value}
+                onClick={() => {
+                  setStatus(item.value);
+                  setPage(0);
+                }}
+              >
+                <span>{item.label}</span>
+                <span className="tabular-nums">{item.count}</span>
+              </button>
+            ))}
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-150 text-left text-xs">
-              <caption className="sr-only">Device inventory</caption>
-              <thead className="text-sm tracking-wider text-muted-foreground uppercase">
-                <tr>
-                  {["Device", "Status", "Protocol", "Signal", "Last seen"].map(
-                    (name) => (
-                      <th
-                        key={name}
-                        className="border-b border-border/60 px-3 py-3 font-normal first:pl-0"
-                      >
-                        {name}
-                      </th>
-                    ),
-                  )}
+          <p
+            role="status"
+            className="px-1 text-sm text-muted-foreground tabular-nums"
+          >
+            共 {filtered.length} 台设备
+          </p>
+        </div>
+
+        {shown.length ? (
+          <div className="surface-inset p-1 @md:p-2">
+            <table className="w-full table-fixed text-left text-sm">
+              <caption className="sr-only">设备列表</caption>
+              <thead className="text-muted-foreground">
+                <tr className="border-b border-border/60">
+                  <th
+                    scope="col"
+                    className="px-2 py-2.5 font-normal @md:w-[42%]"
+                  >
+                    设备
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden px-2 font-normal @md:table-cell"
+                  >
+                    {products.length ? "产品" : "通信协议"}
+                  </th>
+                  <th
+                    scope="col"
+                    className="w-19 px-1 text-right font-normal @md:w-[18%] @md:text-left"
+                  >
+                    状态<span className="sr-only @lg:hidden">与最近活动</span>
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden w-[18%] px-2 font-normal @lg:table-cell"
+                  >
+                    最近活动
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {shown.map((device) => (
                   <tr
                     key={device.id}
-                    className="border-b border-border/40 last:border-0"
+                    className="border-b border-border/50 last:border-0"
                   >
-                    <td className="py-3.5 pr-3">
+                    <th scope="row" className="px-2 py-1.5 font-normal">
                       <button
                         type="button"
-                        className="flex min-h-10 items-center gap-3 text-left hover:opacity-75"
-                        onClick={() => {
-                          setSelected(device);
+                        className="flex min-h-11 w-full items-center justify-between gap-2 rounded-md py-1 text-left hover:underline"
+                        aria-haspopup="dialog"
+                        onClick={(event) => {
+                          trigger.current = event.currentTarget;
+                          setSelectedId(device.id);
                           onDeviceSelect?.(device);
                         }}
                       >
-                        <span className="surface-control flex size-9 shrink-0 items-center justify-center rounded-lg!">
-                          <Cpu className="size-4 text-muted-foreground" />
-                        </span>
-                        <span>
-                          <span className="block font-medium">
+                        <span className="min-w-0">
+                          <span className="block font-medium wrap-break-word">
                             {device.name}
                           </span>
-                          <span className="mt-1 block text-sm text-muted-foreground">
-                            {device.id} · {device.location}
+                          <span className="mt-0.5 block text-xs wrap-break-word text-muted-foreground">
+                            {device.id}
                           </span>
+                          {(device.product || device.protocol) && (
+                            <span className="block text-xs wrap-break-word text-muted-foreground @md:hidden">
+                              {device.product || device.protocol}
+                            </span>
+                          )}
                         </span>
+                        <ChevronRight
+                          className="hidden size-4 shrink-0 text-muted-foreground @md:block"
+                          aria-hidden="true"
+                        />
                       </button>
+                    </th>
+                    <td className="hidden px-2 py-2 wrap-break-word text-muted-foreground @md:table-cell">
+                      {(products.length ? device.product : device.protocol) ||
+                        "—"}
                     </td>
-                    <td className="px-3">
-                      <DeviceStatus state={device.state} />
+                    <td className="px-1 text-right @md:text-left">
+                      <DeviceStatus
+                        state={device.state}
+                        label={statusLabel(device.state)}
+                      />
+                      <span className="mt-0.5 block text-sm wrap-break-word text-muted-foreground tabular-nums @lg:hidden">
+                        {device.lastSeen || "活动未知"}
+                      </span>
                     </td>
-                    <td className="px-3 text-muted-foreground">
-                      {device.protocol}
-                    </td>
-                    <td className="px-3">
-                      <SignalStrength rssi={device.rssi} />
-                    </td>
-                    <td className="px-3 whitespace-nowrap text-muted-foreground">
-                      {device.lastSeen}
+                    <td className="hidden px-2 tabular-nums wrap-break-word text-muted-foreground @lg:table-cell">
+                      {device.lastSeen || "未知"}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          {!shown.length && (
-            <div className="py-10 text-center">
-              <p className="mb-3 text-sm text-muted-foreground">
-                {devices.length
-                  ? "No devices match your filters."
-                  : "No devices registered yet."}
-              </p>
-              {devices.length > 0 && (
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    setQuery("");
-                    setFilter("all");
-                  }}
-                >
-                  Clear filters
-                </Button>
-              )}
-            </div>
-          )}
-        </div>
-      </CardContent>
+        ) : (
+          <div className="surface-inset space-y-3 px-4 py-9 text-center">
+            <p>{devices.length ? "没有符合条件的设备" : "暂无设备"}</p>
+            {devices.length > 0 && (
+              <Button
+                variant="secondary"
+                className="min-h-10"
+                onClick={clearFilters}
+              >
+                清除筛选
+              </Button>
+            )}
+          </div>
+        )}
+
+        {pageCount > 1 && (
+          <nav
+            className="flex flex-wrap items-center justify-end gap-2 text-sm text-muted-foreground"
+            aria-label="设备列表分页"
+          >
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-10!"
+              aria-label="上一页"
+              disabled={currentPage === 0}
+              onClick={() => setPage(currentPage - 1)}
+            >
+              <ChevronLeft aria-hidden="true" />
+            </Button>
+            <span aria-live="polite" className="tabular-nums">
+              第 {currentPage + 1} / {pageCount} 页
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-10!"
+              aria-label="下一页"
+              disabled={currentPage >= pageCount - 1}
+              onClick={() => setPage(currentPage + 1)}
+            >
+              <ChevronRight aria-hidden="true" />
+            </Button>
+          </nav>
+        )}
+
+        {telemetry !== undefined && (
+          <details className="surface-inset px-4">
+            <summary className="flex min-h-10 cursor-pointer items-center text-sm">
+              消息接收趋势
+            </summary>
+            <TelemetryChart
+              embedded
+              className="pb-4"
+              label="每分钟接收消息"
+              unit="条"
+              data={telemetry}
+              precision={0}
+              maxGapMs={telemetryMaxGapMs}
+              showTable={false}
+            />
+          </details>
+        )}
+      </div>
+
       <Dialog
         open={!!selected}
-        onOpenChange={(open) => !open && setSelected(null)}
+        onOpenChange={(open) => {
+          if (!open) setSelectedId(null);
+        }}
       >
-        <DialogContent>
+        <DialogContent
+          onCloseAutoFocus={(event) => {
+            const next = trigger.current?.isConnected
+              ? trigger.current
+              : search.current;
+            if (next) {
+              event.preventDefault();
+              next.focus();
+            }
+          }}
+        >
           <DialogHeader>
-            <DialogTitle>{selected?.name}</DialogTitle>
-            <DialogDescription>
-              {selected?.id} · {selected?.location}
+            <DialogTitle className="wrap-break-word">
+              {selected?.name}
+            </DialogTitle>
+            <DialogDescription className="wrap-break-word">
+              {selected?.id}
+              {selected?.location && " · " + selected.location}
             </DialogDescription>
           </DialogHeader>
           {selected && (
-            <dl className="surface-inset grid grid-cols-2 gap-y-5 p-5 text-sm">
-              <dt className="text-muted-foreground">Status</dt>
-              <dd>
-                <DeviceStatus state={selected.state} />
-              </dd>
-              <dt className="text-muted-foreground">Connection</dt>
-              <dd>{selected.protocol}</dd>
-              <dt className="text-muted-foreground">Signal</dt>
-              <dd>
-                <SignalStrength rssi={selected.rssi} />
-              </dd>
-              <dt className="text-muted-foreground">Battery</dt>
-              <dd>
-                {selected.battery === null
-                  ? "Unavailable"
-                  : `${selected.battery}%`}
-              </dd>
-              <dt className="text-muted-foreground">Last seen</dt>
-              <dd>{selected.lastSeen}</dd>
-            </dl>
+            <>
+              <dl className="surface-inset grid grid-cols-2 gap-x-3 gap-y-4 p-4 text-sm">
+                {[
+                  ["产品", selected.product || "—"],
+                  [
+                    "设备状态",
+                    <DeviceStatus
+                      state={selected.state}
+                      label={statusLabel(selected.state)}
+                    />,
+                  ],
+                  ["通信协议", selected.protocol || "未知"],
+                  ["最近活动", selected.lastSeen || "未知"],
+                  ["信号强度", <SignalStrength rssi={selected.rssi} />],
+                  [
+                    "电量",
+                    selected.battery == null ||
+                    !Number.isFinite(selected.battery)
+                      ? "未提供"
+                      : selected.battery + "%",
+                  ],
+                  ...(selected.groups?.length
+                    ? [["所属群组", selected.groups.join("、")]]
+                    : []),
+                ].map(([label, value], index) => (
+                  <div key={index} className="min-w-0 wrap-break-word">
+                    <dt className="text-muted-foreground">{label}</dt>
+                    <dd className="mt-1 tabular-nums">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {href && (
+                <Button asChild className="min-h-10 justify-self-end">
+                  <a href={href}>
+                    查看设备详情 <ArrowRight aria-hidden="true" />
+                  </a>
+                </Button>
+              )}
+            </>
           )}
         </DialogContent>
       </Dialog>
-    </Card>
+    </Panel>
   );
 }

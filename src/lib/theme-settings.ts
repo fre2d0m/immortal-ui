@@ -12,7 +12,13 @@ import {
 
 export const layoutNumberSettings = {
   fontSize: { label: "正文字号", min: 14, max: 20, step: 1, unit: "px" },
-  controlHeight: { label: "控件高度", min: 16, max: 56, step: 2, unit: "px" },
+  controlHeight: {
+    label: "共享控件高度",
+    min: 16,
+    max: 56,
+    step: 2,
+    unit: "px",
+  },
   spacing: { label: "间距基准", min: 0, max: 6, step: 0.25, unit: "px" },
   cardPadding: { label: "面板内边距", min: 0, max: 40, step: 2, unit: "px" },
   radius: { label: "基础圆角", min: 0, max: 20, step: 1, unit: "px" },
@@ -62,25 +68,33 @@ export type ThemeSettings = Record<NumberSetting, number> & {
 export const defaultSettings: ThemeSettings = {
   mode: "dark",
   primary: null,
-  fontSize: 16,
-  controlHeight: 32,
+  fontSize: 14,
+  controlHeight: 34,
   spacing: 4,
   cardPadding: 24,
-  radius: 8,
+  radius: 6,
   contentWidth: 1440,
   pillButtons: false,
   tabWidth: "content",
-  tabRadius: 15,
+  tabRadius: 18,
   tabPaddingX: 14,
-  tabPaddingY: 5,
-  tabListPadding: 2,
+  tabPaddingY: 4,
+  tabListPadding: 4,
   fontFamily: "geist",
   headingFont: "inherit",
   colors: { light: {}, dark: {} },
   shadows: { light: {}, dark: {} },
-  geometry: {},
+  geometry: {
+    "small-radius": 12,
+    "well-radius": 12,
+    "surface-radius": 12,
+    "nav-radius": 12,
+    "tag-height": 24,
+    "tag-radius": 18,
+    "tag-font-size": 12,
+  },
 };
-export const settingsKey = "immortal-theme-studio-v1";
+export const settingsKey = "immortal-theme-studio-v2";
 export const isHexColor = (value: unknown): value is string =>
   typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value);
 
@@ -275,6 +289,67 @@ export function commonVariables(settings: ThemeSettings) {
     "--tab-padding-y": `${settings.tabPaddingY}px`,
     "--tab-list-padding": `${settings.tabListPadding}px`,
   };
+  // Explicit category overrides win; unconfigured categories follow the shared scale.
+  // Resolve values here so the editor, imported JSON and exported CSS stay identical.
+  const g = settings.geometry;
+  const support = Math.max(14, settings.fontSize - 2);
+  // The shared minimum includes the default Tab's 8px padding and 2px border;
+  // otherwise compact fields shrink below the natural height of adjacent tabs.
+  const base = Math.ceil(
+    Math.max(
+      24,
+      settings.controlHeight,
+      settings.fontSize * 1.5 + 4,
+      support * 10 / 7 + 10,
+    ),
+  );
+  const button = g["button-height"] ?? base;
+  const select = g["select-height"] ?? base;
+  const fieldRadius = g["field-radius"] ?? radius;
+  const border = g["control-border-width"] ?? 0.5;
+  const componentValues = {
+    "button-height": button,
+    "button-height-xs": button * 0.75,
+    "button-height-sm": button * 0.875,
+    "button-height-lg": button * 1.125,
+    "button-font-size": support,
+    "button-icon-size": 16,
+    "button-gap": 6,
+    "button-border-width": border,
+    "input-height": base,
+    "input-font-size": settings.fontSize,
+    "input-border-width": border,
+    "select-height": select,
+    "select-height-sm": select * 0.875,
+    "select-padding-x": g["field-padding-x"] ?? 12,
+    "nav-height": base,
+    "nav-padding-x": 12,
+    "nav-gap": 8,
+    "nav-radius": radius,
+    "nav-font-size": support,
+    "menu-item-height": base,
+    "menu-font-size": support,
+    "menu-item-radius": fieldRadius,
+    "tab-height": base,
+    "tab-font-size": support,
+    "tab-gap": 4,
+    "tag-height": base * 0.75,
+    "tag-padding-x": 12,
+    "tag-radius": fieldRadius * 0.75,
+    "tag-font-size": support,
+    "table-row-height": base * 1.25,
+    "table-cell-padding-x": 12,
+    "table-font-size": support,
+    "slider-track-height": 5,
+    "slider-thumb-size": base * 0.5,
+    "avatar-size": base,
+    "checkbox-size": base * 0.4921875,
+    "switch-thumb-size": base * 0.546875,
+    "switch-thumb-size-sm": base * 0.4375,
+    "container-border-width": 1,
+  };
+  for (const [key, value] of Object.entries(componentValues))
+    variables[`--${key}`] = `${Number(value.toFixed(2))}px`;
   if (settings.primary) {
     const colors = primaryColors(settings.primary);
     Object.assign(variables, {

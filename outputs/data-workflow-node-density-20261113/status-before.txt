@@ -1,0 +1,201 @@
+## codex/component-taxonomy-blocks
+ M .gitignore
+ M README.md
+ D docs/assets/index-DxqCPRtw.css
+ D docs/assets/index-W8ZkFoDi.js
+ D docs/assets/theme-panel-DmmYUEhP.js
+ M docs/index.html
+ M docs/r/alert-console.json
+ M docs/r/device-card.json
+ M docs/r/device-control.json
+ M docs/r/device-status.json
+ M docs/r/fleet-overview.json
+ M docs/r/graphite.json
+ M docs/r/registry.json
+ M docs/r/signal-strength.json
+ M docs/r/telemetry-card.json
+ M docs/r/telemetry-chart.json
+ M docs/r/telemetry.json
+ M docs/r/threshold-control.json
+ M docs/themes/graphite.css
+ M package-lock.json
+ M package.json
+ M registry.json
+ M registry/catalog.mjs
+ M registry/immortal/blocks/alert-console.tsx
+ M registry/immortal/blocks/device-control.tsx
+ M registry/immortal/blocks/fleet-overview.tsx
+ M registry/immortal/components/device-card.tsx
+ M registry/immortal/components/device-status.tsx
+ M registry/immortal/components/signal-strength.tsx
+ M registry/immortal/components/telemetry-card.tsx
+ M registry/immortal/components/telemetry-chart.tsx
+ M registry/immortal/components/telemetry.ts
+ M registry/immortal/components/threshold-control.tsx
+ M registry/immortal/styles/graphite.css
+ M scripts/build-registry.mjs
+ M src/App.tsx
+ M src/components/CodeSnippet.tsx
+ M src/components/RegistryPreview.tsx
+ M src/components/theme-controls.tsx
+ M src/components/theme-panel.tsx
+ M src/components/ui/select.tsx
+ M src/components/ui/slider.tsx
+ M src/components/ui/tabs.tsx
+ M src/content/catalog.ts
+ M src/lib/demo-data.ts
+ M src/lib/theme-catalog.ts
+ M src/lib/theme-settings.ts
+ M src/lib/theme-storage.ts
+ M src/pages/CatalogPage.tsx
+ M src/pages/DocsPage.tsx
+ M src/pages/HomePage.tsx
+ M src/pages/ItemPage.tsx
+ M src/pages/ThemePage.tsx
+ M src/site.css
+ M src/theme-editor.css
+ M tests/registry.test.mjs
+ M tests/telemetry.test.mjs
+ M tests/theme-settings.test.mjs
+ M tsconfig.json
+ M vite.config.ts
+?? AGENTS.md
+?? design-notes/
+?? docs/assets/BlockPreview-7ygo9j9V.js
+?? docs/assets/ExtractedPreview-mHneoiFA.js
+?? docs/assets/FirstBatchPreview-upzN9rQi.js
+?? docs/assets/HomePage-D-IbWKW9.js
+?? docs/assets/IconsPage-C3_q2QXL.js
+?? docs/assets/ItemPage-CBqEDyf6.js
+?? docs/assets/SoilWaterPreview-BkJ89ba2.js
+?? docs/assets/SoilWaterPreview-BrqPbRVP.css
+?? docs/assets/WorkflowPreview-BdmZQ5EO.js
+?? docs/assets/WorkflowPreview-Bify2ZnS.css
+?? docs/assets/actuator-switch-CBZa5VBp.js
+?? docs/assets/alert-card-B0UXg9ea.js
+?? docs/assets/button-CMZBYW-L.js
+?? docs/assets/check-7QcQMyGl.js
+?? docs/assets/chevron-left-BUDSM_O6.js
+?? docs/assets/createLucideIcon-iAjGl61D.js
+?? docs/assets/d3-interpolate-QSVZzvHb.js
+?? docs/assets/demo-data-BQeF2T3G.js
+?? docs/assets/dialog-BTrAljd7.js
+?? docs/assets/dist-BPrEJrkn.js
+?? docs/assets/dist-CwEGf4ae.js
+?? docs/assets/dist-D1clVBsA.js
+?? docs/assets/dist-DaoPqr-f.js
+?? docs/assets/download-BRsF9N4w.js
+?? docs/assets/es2015-BI4JosIW.js
+?? docs/assets/event-timeline-DnlH8d10.js
+?? docs/assets/index-BzJbkVi2.css
+?? docs/assets/index-UATmR80R.js
+?? docs/assets/jsx-runtime-Wy9s6hX0.js
+?? docs/assets/minimize-2-CKEwoVJj.js
+?? docs/assets/soil-water-plots-DTDhMeCx.js
+?? docs/assets/telemetry-C5yJHPYL.js
+?? docs/assets/telemetry-plot-DNMsT0hE.js
+?? docs/assets/theme-panel-qSG0O7gh.js
+?? docs/assets/x-ThCvaBmp.js
+?? docs/examples/
+?? docs/icons/
+?? docs/r/actuator-control.json
+?? docs/r/actuator-switch.json
+?? docs/r/alert-card.json
+?? docs/r/automation-note.json
+?? docs/r/command-status.json
+?? docs/r/control-authority.json
+?? docs/r/control-mode.json
+?? docs/r/daily-histogram.json
+?? docs/r/data-freshness.json
+?? docs/r/data-workflow.json
+?? docs/r/device-detail.json
+?? docs/r/device-groups.json
+?? docs/r/device-profile.json
+?? docs/r/event-timeline.json
+?? docs/r/greenhouse-control.json
+?? docs/r/indicator-card.json
+?? docs/r/interlock-status.json
+?? docs/r/iot-icons.json
+?? docs/r/iot-model.json
+?? docs/r/irrigation-run.json
+?? docs/r/light-control.json
+?? docs/r/metric-card.json
+?? docs/r/range-gauge.json
+?? docs/r/setpoint-control.json
+?? docs/r/soil-profile.json
+?? docs/r/soil-water-explorer.json
+?? docs/r/tabs.json
+?? docs/r/telemetry-explorer.json
+?? docs/r/thermostat-control.json
+?? docs/r/use-device-command.json
+?? outputs/
+?? public/examples/
+?? registry/immortal/blocks/data-workflow.css
+?? registry/immortal/blocks/data-workflow.tsx
+?? registry/immortal/blocks/device-detail.tsx
+?? registry/immortal/blocks/device-groups.tsx
+?? registry/immortal/blocks/greenhouse-control.tsx
+?? registry/immortal/blocks/soil-profile.tsx
+?? registry/immortal/blocks/soil-water-explorer.css
+?? registry/immortal/blocks/soil-water-explorer.tsx
+?? registry/immortal/blocks/soil-water-model.ts
+?? registry/immortal/blocks/soil-water-plots.tsx
+?? registry/immortal/blocks/telemetry-explorer.tsx
+?? registry/immortal/blocks/workflow-model.ts
+?? registry/immortal/blocks/workflow-parts.tsx
+?? registry/immortal/components/actuator-control.tsx
+?? registry/immortal/components/actuator-switch.tsx
+?? registry/immortal/components/alert-card.tsx
+?? registry/immortal/components/automation-note.tsx
+?? registry/immortal/components/command-status.tsx
+?? registry/immortal/components/control-authority.tsx
+?? registry/immortal/components/control-mode.tsx
+?? registry/immortal/components/daily-histogram.tsx
+?? registry/immortal/components/data-freshness.tsx
+?? registry/immortal/components/device-profile.tsx
+?? registry/immortal/components/device.ts
+?? registry/immortal/components/event-timeline.tsx
+?? registry/immortal/components/indicator-card.tsx
+?? registry/immortal/components/interlock-status.tsx
+?? registry/immortal/components/internal/
+?? registry/immortal/components/iot-model.ts
+?? registry/immortal/components/irrigation-run.tsx
+?? registry/immortal/components/light-control.tsx
+?? registry/immortal/components/metric-card.tsx
+?? registry/immortal/components/range-gauge.tsx
+?? registry/immortal/components/setpoint-control.tsx
+?? registry/immortal/components/thermostat-control.tsx
+?? registry/immortal/components/use-device-command.ts
+?? registry/immortal/icons/
+?? scripts/build-icons.mjs
+?? src/catalog.css
+?? src/components/BlockPreview.tsx
+?? src/components/BlockVisual.tsx
+?? src/components/CatalogVisual.tsx
+?? src/components/DataCardsPreview.tsx
+?? src/components/DevicePreview.tsx
+?? src/components/ExtractedPreview.tsx
+?? src/components/FirstBatchPreview.tsx
+?? src/components/FoundationExtensions.tsx
+?? src/components/IoTIcon.tsx
+?? src/components/SoilWaterMiniature.tsx
+?? src/components/SoilWaterPreview.tsx
+?? src/components/ThemeCoveragePreview.tsx
+?? src/components/WorkflowPreview.tsx
+?? src/components/ui/dropdown-menu.tsx
+?? src/components/workflow-preview.css
+?? src/content/first-batch.ts
+?? src/content/icons.ts
+?? src/lib/block-demo-data.ts
+?? src/lib/chart-demo-data.ts
+?? src/lib/component-theme.ts
+?? src/lib/data-card-demo-data.ts
+?? src/lib/soil-water-demo.ts
+?? src/lib/workflow-demo-data.ts
+?? src/lib/workflow-demo-runner.ts
+?? src/pages/IconsPage.tsx
+?? tests/catalog.test.mjs
+?? tests/data-cards.test.mjs
+?? tests/first-batch.test.mjs
+?? tests/soil-water.test.mjs
+?? tests/workflow.test.mjs

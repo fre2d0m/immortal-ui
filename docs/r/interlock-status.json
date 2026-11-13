@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "interlock-status",
+  "title": "Permissives & interlocks",
+  "description": "将阻止操作的原因拆成可追溯条件，逐项呈现满足、未满足、未知与陈旧。总判定由设备或控制服务提供。",
+  "dependencies": [
+    "cn",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/internal/panel-header.tsx",
+      "content": "import type { ReactNode } from \"react\";\n\n/** Internal layout shared by domain panels. Shipped with its owning component. */\nexport function PanelHeader({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as: Heading = \"h3\",\n}: {\n  icon: ReactNode;\n  title: string;\n  description?: ReactNode;\n  status?: ReactNode;\n  action?: ReactNode;\n  as?: \"h2\" | \"h3\";\n}) {\n  return (\n    <div data-slot=\"panel-header\" className=\"min-w-0\">\n      <div\n        data-slot=\"panel-topline\"\n        className=\"grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2\"\n      >\n        <div\n          data-slot=\"panel-identity\"\n          className=\"flex min-w-0 items-start gap-3\"\n        >\n          <span\n            data-slot=\"panel-icon\"\n            aria-hidden=\"true\"\n            className=\"surface-control grid size-10 shrink-0 place-items-center rounded-full border bg-secondary text-secondary-foreground shadow-sm [&>svg]:size-4\"\n          >\n            {icon}\n          </span>\n          <div\n            data-slot=\"panel-heading\"\n            className=\"flex min-h-12 min-w-0 flex-col\"\n          >\n            <Heading\n              data-slot=\"panel-title\"\n              className=\"text-base font-medium leading-snug wrap-anywhere\"\n            >\n              {title}\n            </Heading>\n            {description && (\n              <p\n                data-slot=\"panel-description\"\n                className=\"mt-1 text-sm leading-relaxed text-muted-foreground wrap-anywhere\"\n              >\n                {description}\n              </p>\n            )}\n          </div>\n        </div>\n        {(status != null || action != null) && (\n          <div\n            data-slot=\"panel-meta\"\n            className=\"ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2 text-right text-sm text-muted-foreground\"\n          >\n            {status != null && (\n              <div data-slot=\"panel-status\" className=\"min-w-0 wrap-anywhere\">\n                {status}\n              </div>\n            )}\n            {action}\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel-header.tsx"
+    },
+    {
+      "path": "registry/immortal/components/internal/panel.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { PanelHeader } from \"@/components/iot/internal/panel-header\";\n\ntype PanelProps = ComponentProps<typeof PanelHeader> &\n  Omit<ComponentProps<\"section\">, \"title\"> & {\n    contentClassName?: string;\n  };\n\n/** Owns the surface, all four insets, header alignment and the content boundary. */\nexport function Panel({\n  icon,\n  title,\n  description,\n  status,\n  action,\n  as,\n  className = \"\",\n  contentClassName = \"\",\n  children,\n  ...props\n}: PanelProps) {\n  return (\n    <section\n      data-slot=\"panel\"\n      data-panel-layout=\"\"\n      className={`@container surface-raised grid min-w-0 gap-[var(--card-padding,24px)] rounded-xl border bg-card p-[var(--card-padding,24px)] text-card-foreground shadow-sm ${className}`}\n      {...props}\n    >\n      <PanelHeader\n        icon={icon}\n        title={title}\n        description={description}\n        status={status}\n        action={action}\n        as={as}\n      />\n      <div\n        data-slot=\"panel-content\"\n        className={`min-w-0 ${contentClassName || \"space-y-5\"}`}\n      >\n        {children}\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/internal/panel.tsx"
+    },
+    {
+      "path": "registry/immortal/components/interlock-status.tsx",
+      "content": "import { Panel } from \"@/components/iot/internal/panel\";\nimport { ShieldCheck } from \"lucide-react\";\nimport { timeLabel } from \"@/lib/iot-model\";\nexport type InterlockCondition = {\n  id: string;\n  label: string;\n  state: \"satisfied\" | \"blocked\" | \"unknown\" | \"stale\";\n  source: string;\n  at: number | null;\n  detail?: string;\n};\nconst labels = {\n  satisfied: \"满足\",\n  blocked: \"未满足\",\n  unknown: \"未知\",\n  stale: \"数据陈旧\",\n};\nexport function InterlockStatus({\n  decision,\n  reason,\n  conditions,\n  evaluatedAt,\n}: {\n  decision: \"permitted\" | \"blocked\" | \"unknown\";\n  reason: string;\n  conditions: InterlockCondition[];\n  evaluatedAt: number | null;\n}) {\n  const title = {\n    permitted: \"许可已满足\",\n    blocked: \"联锁阻止操作\",\n    unknown: \"许可状态未知\",\n  }[decision];\n  return (\n    <Panel\n      icon={<ShieldCheck />}\n      title=\"许可与联锁\"\n      status={\n        <span\n          className={\n            decision === \"permitted\" ? \"text-success\" : \"text-warning-text\"\n          }\n        >\n          {title}\n        </span>\n      }\n      aria-label=\"许可与联锁\"\n    >\n      <p className=\"text-sm text-muted-foreground\">{reason}</p>\n      <div className=\"surface-inset p-4\">\n        <ul className=\"divide-y divide-border/40\">\n          {conditions.map((condition) => (\n            <li key={condition.id} className=\"py-3 first:pt-0 last:pb-0\">\n              <details>\n                <summary className=\"flex cursor-pointer items-center justify-between gap-3 text-sm\">\n                  <span>{condition.label}</span>\n                  <span\n                    className={\n                      condition.state === \"satisfied\"\n                        ? \"text-success\"\n                        : \"text-warning\"\n                    }\n                  >\n                    {labels[condition.state]}\n                  </span>\n                </summary>\n                <div className=\"mt-3 space-y-2 text-sm text-muted-foreground\">\n                  <p>{condition.detail || \"未提供补充说明\"}</p>\n                  <p>\n                    {condition.source} · {timeLabel(condition.at)} UTC\n                  </p>\n                </div>\n              </details>\n            </li>\n          ))}\n        </ul>\n        {!conditions.length && (\n          <p className=\"text-sm text-muted-foreground\">\n            没有可显示的条件，不能据此视为许可。\n          </p>\n        )}\n      </div>\n      <p className=\"text-sm text-muted-foreground\">\n        判定来源：设备 / 控制服务 · {timeLabel(evaluatedAt)}{\" \"}\n        UTC。界面展示上游判定，不自行授权。\n      </p>\n    </Panel>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/interlock-status.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "file": "data-workflow.tsx",
+    "equal": true
+  },
+  {
+    "file": "data-workflow.css",
+    "equal": true
+  }
+]

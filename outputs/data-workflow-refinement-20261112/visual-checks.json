@@ -1,0 +1,67 @@
+{
+  "contrast": [
+    {
+      "mode": "dark",
+      "values": [
+        {
+          "selector": ".wf-node p",
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-node strong",
+          "ratio": 13.241938026078083
+        },
+        {
+          "selector": ".wf-node-title small",
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-topology-count",
+          "ratio": 5.920809974403869
+        },
+        {
+          "selector": ".wf-identity h3",
+          "ratio": 13.241938026078083
+        },
+        {
+          "selector": ".wf-identity > div > span",
+          "ratio": 5.920809974403869
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "values": [
+        {
+          "selector": ".wf-node p",
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-node strong",
+          "ratio": 14.042050881659097
+        },
+        {
+          "selector": ".wf-node-title small",
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-topology-count",
+          "ratio": 5.438446114953988
+        },
+        {
+          "selector": ".wf-identity h3",
+          "ratio": 14.042050881659097
+        },
+        {
+          "selector": ".wf-identity > div > span",
+          "ratio": 5.438446114953988
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "12 text contrast samples in default light/dark >=4.5:1",
+    "expanded work area fits full topology",
+    "native dialog, menu, layered Escape dismissal and return to embedded workspace"
+  ]
+}

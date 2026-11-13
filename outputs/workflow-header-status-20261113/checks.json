@@ -1,0 +1,154 @@
+{
+  "checks": [
+    {
+      "name": "dark shared metric geometry, hover/focus/click semantics, live states and 20 C execution",
+      "metrics": [
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(160, 160, 157)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        },
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(160, 160, 157)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        },
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(160, 160, 157)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        }
+      ]
+    },
+    {
+      "name": "light shared metric geometry, hover/focus/click semantics, live states and 20 C execution",
+      "metrics": [
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(100, 100, 97)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        },
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(100, 100, 97)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        },
+        {
+          "tag": "SPAN",
+          "cursor": "default",
+          "bg": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "h": 24,
+          "y": 57,
+          "font": "12px",
+          "gap": "6px",
+          "color": "rgb(100, 100, 97)",
+          "icon": {
+            "w": "14px",
+            "h": "14px",
+            "stroke": "1.75px"
+          },
+          "expanded": null,
+          "tab": 0
+        }
+      ]
+    },
+    {
+      "name": "390px touch with 20px text, shared long-press hints, inert tap, cancelled scroll and long publication value",
+      "boxes": [
+        {
+          "x": 83,
+          "y": 94,
+          "w": 142.34375,
+          "h": 40,
+          "right": 225.34375,
+          "bottom": 134
+        },
+        {
+          "x": 241.34375,
+          "y": 94,
+          "w": 73.109375,
+          "h": 40,
+          "right": 314.453125,
+          "bottom": 134
+        },
+        {
+          "x": 83,
+          "y": 138,
+          "w": 66.5,
+          "h": 40,
+          "right": 149.5,
+          "bottom": 178
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "installedParity": true
+}

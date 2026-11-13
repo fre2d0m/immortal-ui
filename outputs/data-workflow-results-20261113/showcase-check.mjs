@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {writeFile} from 'node:fs/promises';
+const out=new URL('./',import.meta.url).pathname;
+const b=await chromium.launch({channel:'chrome',headless:true});
+const p=await b.newPage({viewport:{width:1440,height:1100}});
+p.setDefaultTimeout(8000);
+const errors=[];
+p.on('pageerror',e=>errors.push(e.message));
+try {
+  await p.goto('http://127.0.0.1:4177/#/blocks/data-workflow');
+  await p.getByRole('button',{name:'恢复示例',exact:true}).click();
+  await p.getByRole('button',{name:'测试流程',exact:true}).click();
+  await p.waitForFunction(()=>document.querySelector('.wf-results-summary .wf-status')?.dataset.status==='succeeded');
+  await p.locator('[data-run-node="aggregate"]').click();
+  assert.equal(JSON.parse(await p.getByLabel('输出数据',{exact:true}).innerText()).value,20);
+  await p.locator('.wf-results').screenshot({path:out+'showcase-result.png'});
+  await p.locator('.wf-header').screenshot({path:out+'showcase-header.png'});
+  await p.locator('[data-edge-insert="edge-1"]').hover();
+  const halo=await p.locator('[data-edge-insert="edge-1"]').evaluate(e=>({size:getComputedStyle(e,'::before').width,mark:getComputedStyle(e.querySelector('.wf-endpoint-mark')).width}));
+  assert.equal(halo.size,'20px');assert.equal(halo.mark,'12px');
+  assert.match(await p.locator('.wf-zoom-value').innerText(),/\d+%/);
+  await p.locator('.wf-results-toggle').focus();await p.keyboard.press('Enter');
+  assert.equal(await p.locator('.wf-results-body').count(),0);await p.keyboard.press('Enter');
+  await p.getByRole('tab',{name:'输入',exact:true}).click();
+  await p.getByRole('tab',{name:'输出',exact:true}).hover();
+  assert.equal(await p.locator('.wf-result-data [aria-selected="true"]').count(),1);
+  await p.emulateMedia({forcedColors:'active'});
+  assert.equal(await p.locator('[data-run-node="aggregate"]').evaluate(e=>getComputedStyle(e).outlineWidth),'2px');
+  assert.deepEqual(errors,[]);
+  await writeFile(out+'showcase-checks.json',JSON.stringify({value:20,halo,zoomVisible:true,collapseKeyboard:true,oneSelectedTab:true,forcedColorsSelection:true,errors},null,2));
+  console.log('actual showcase checks passed');
+}finally{await b.close();}

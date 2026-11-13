@@ -1,0 +1,442 @@
+{
+  "data": [
+    {
+      "case": "soil-default",
+      "paths": [
+        "M64.681,208.096L105.097,209.952L145.514,210.88L185.931,210.88L226.347,209.952L266.764,208.096L307.181,204.384L347.597,200.672L388.014,196.032L428.431,190.464L468.847,184.896L509.264,178.4L549.681,172.832",
+        "M711.347,156.128L751.764,154.272L792.181,153.344L832.597,153.344L873.014,154.272L913.431,156.128L953.847,158.912L994.264,161.696",
+        "M64.681,157.056L105.097,157.984L145.514,158.912L185.931,158.912L226.347,157.056L266.764,155.2L307.181,152.416L347.597,148.704L388.014,144.064L428.431,139.424L468.847,133.856L509.264,129.216L549.681,123.648L590.097,119.008L630.514,115.296L670.931,111.584L711.347,108.8L751.764,106.016L792.181,105.088L832.597,105.088L873.014,106.016L913.431,106.944L953.847,108.8L994.264,111.584"
+      ],
+      "readout": "实际采样 · 2026-11-10 07:20:00 UTC含水率 · 10 cm19.3 %含水率 · 30 cm24.7 %"
+    },
+    {
+      "scenario": "可手算案例 · 跨年与缺测",
+      "dots": 2,
+      "paths": [
+        "M35,170.667L83.3,93.333",
+        "M518,248L1001,16",
+        "M35,132L518,54.667L1001,132"
+      ],
+      "plots": 1,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC测点 A测点 B°C 7 个读数 · 1 条缺测或无效参考尺度 -10–2023:5500:0000:0500:1000:1520100-10□ 估算 · ◇ 存疑，质量由来源提供实际采样 · 2026-01-01 00:15:00 UTC测点 A20.0 °C测点 B5.0 °C估算原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "scenario": "不同单位分图",
+      "dots": 5,
+      "paths": [
+        "M35,170.667L83.3,93.333",
+        "M518,248L1001,16",
+        "M35,132L518,54.667L1001,132"
+      ],
+      "plots": 2,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC测点 A测点 B相对湿度°C 7 个读数 · 1 条缺测或无效参考尺度 -10–2023:5500:0000:0500:1000:1520100-10□ 估算 · ◇ 存疑，质量由来源提供%RH 2 个读数参考尺度 0–10023:5500:0000:0500:1000:151007550250实际采样 · 2026-01-01 00:15:00 UTC测点 A20.0 °C测点 B5.0 °C估算相对湿度60 %RH原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "scenario": "单点零值",
+      "dots": 2,
+      "paths": [],
+      "plots": 1,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C 1 个读数参考尺度 -10–2023:5500:0000:0500:1000:1520100-10实际采样 · 2025-12-31 23:55:00 UTC测点 A0.0 °C原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "scenario": "常量零值",
+      "dots": 1,
+      "paths": [
+        "M35,170.667L83.3,170.667L179.9,170.667L518,170.667L1001,170.667"
+      ],
+      "plots": 1,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C 5 个读数参考尺度 -10–2023:5500:0000:0500:1000:1520100-10实际采样 · 2026-01-01 00:15:00 UTC测点 A0.0 °C原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "scenario": "无记录",
+      "dots": 0,
+      "paths": [],
+      "plots": 0,
+      "scroll": 1440,
+      "text": "此时间范围内没有采样",
+      "width": 1440
+    },
+    {
+      "scenario": "缺测与无效",
+      "dots": 0,
+      "paths": [],
+      "plots": 0,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C 0 个读数 · 5 条缺测或无效参考尺度 -10–20所选序列在此时段没有有效读数；可在数据表核对缺测和无效记录。实际采样 · 2026-01-01 00:15:00 UTC测点 A缺测原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "scenario": "极端值",
+      "dots": 1,
+      "paths": [
+        "M41,170.667L89,93.333",
+        "M521,248L1001,16"
+      ],
+      "plots": 1,
+      "scroll": 1440,
+      "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C 4 个读数 · 1 条缺测或无效参考尺度 -1E9–2E9 · 超界已扩展23:5500:0000:0500:1000:152E91E90-1E9实际采样 · 2026-01-01 00:15:00 UTC测点 A2,000,000,000.0 °C原始采样 · 间隔超过 12 分钟断线逐点浏览与读图说明指向或轻触曲线查看实际采样；箭头按钮或下方滑块可用键盘逐点读取。同单位序列共用纵轴，隐藏序列不会改变尺度。断线表示缺测、无效或超过来源给定的采样间隔。质量未标注时表示来源未提供质量。事件标记 · 12026-01-01 00:05:00 UTC · 人工复核",
+      "width": 1440
+    },
+    {
+      "case": "metric-filter",
+      "rows": 5,
+      "filtersClosed": true
+    },
+    {
+      "case": "export-filtered-a",
+      "rows": 5,
+      "hasZero": true,
+      "hasMissing": true,
+      "excludedDuplicate": true
+    },
+    {
+      "case": "live-selection-and-extreme-finite",
+      "kept": true,
+      "removedNotice": true,
+      "paths": [
+        "M108,184L159.5,100L211,16"
+      ],
+      "allFinite": true
+    },
+    {
+      "case": "installed-consumer",
+      "readout": "实时验证\n10.0 °C",
+      "width": {
+        "page": 309,
+        "viewport": 320
+      },
+      "errors": []
+    }
+  ],
+  "layouts": [
+    {
+      "route": "#/components/metric-card",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "Metric Card观测卡片",
+      "plots": 1,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/components/indicator-card",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "Indicator Card衍生指标卡片",
+      "plots": 1,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/blocks/greenhouse-control",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "温室控制系统",
+      "plots": 1,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/blocks/soil-profile",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "土壤观测剖面",
+      "plots": 0,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/blocks/fleet-overview",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "设备目录",
+      "plots": 0,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/blocks/device-detail",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "设备详情",
+      "plots": 0,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/theme",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "Graphite Instrument",
+      "plots": 3,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/blocks",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "Blocks",
+      "plots": 2,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/",
+      "theme": "light",
+      "canvas": 0,
+      "heading": "Interfaces forthe physical world.",
+      "plots": 1,
+      "scroll": 1440,
+      "width": 1440
+    },
+    {
+      "route": "#/components/metric-card",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/components/indicator-card",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/greenhouse-control",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/soil-profile",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/fleet-overview",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/device-detail",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/theme",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 3,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 2,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/",
+      "theme": "light",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/components/metric-card",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/components/indicator-card",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/greenhouse-control",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/soil-profile",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/fleet-overview",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks/device-detail",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 0,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/theme",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 3,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/blocks",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 2,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "#/",
+      "theme": "dark",
+      "canvas": 0,
+      "plots": 1,
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "route": "large-text-fixture",
+      "theme": "dark",
+      "invalidZone": true,
+      "paths": [],
+      "scroll": 309,
+      "values": [
+        {
+          "height": 61,
+          "scrollHeight": 61,
+          "scrollWidth": 105,
+          "text": "-10.0",
+          "width": 105
+        },
+        {
+          "height": 27,
+          "scrollHeight": 27,
+          "scrollWidth": 201,
+          "text": "-123,456,789,012,345.0",
+          "width": 201
+        }
+      ],
+      "width": 320
+    },
+    {
+      "route": "telemetry-explorer-query-expanded",
+      "theme": "dark",
+      "width": 320,
+      "scroll": 320
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "dark",
+      "backgrounds": [
+        "#252525",
+        "#242424"
+      ],
+      "palette": [
+        {
+          "color": "#83b5e6",
+          "minRatio": 7.09
+        },
+        {
+          "color": "#6bc4af",
+          "minRatio": 7.4
+        },
+        {
+          "color": "#bb9ce4",
+          "minRatio": 6.56
+        },
+        {
+          "color": "#e6b772",
+          "minRatio": 8.31
+        },
+        {
+          "color": "#e49db1",
+          "minRatio": 7.12
+        }
+      ],
+      "mutedMin": 5.85
+    },
+    {
+      "theme": "light",
+      "backgrounds": [
+        "#f9f9f7",
+        "#f6f6f4"
+      ],
+      "palette": [
+        {
+          "color": "#2366a0",
+          "minRatio": 5.58
+        },
+        {
+          "color": "#277567",
+          "minRatio": 5.07
+        },
+        {
+          "color": "#7858a0",
+          "minRatio": 5.24
+        },
+        {
+          "color": "#92651f",
+          "minRatio": 4.73
+        },
+        {
+          "color": "#a24a68",
+          "minRatio": 5.22
+        }
+      ],
+      "mutedMin": 5.49
+    }
+  ],
+  "notes": [
+    "当前内置浏览器不支持 Input.dispatchTouchEvent；新版触控未完成自动验证。",
+    "强制颜色模拟已核对系统色曲线、坐标与标记；不等同于原生高对比度设备验收。"
+  ]
+}

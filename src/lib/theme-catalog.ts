@@ -1,3 +1,7 @@
+import {
+  componentGeometryTokens,
+  componentGeometryGroups,
+} from "./component-theme.ts";
 export const colorGroups = [
   {
     label: "页面与容器",
@@ -93,6 +97,7 @@ export const shadowLabels = {
   "shadow-primary": "主按钮阴影",
   "shadow-pressed": "按下阴影",
   "shadow-overlay": "浮层外部阴影",
+  "shadow-menu": "菜单浮层阴影",
 } as const;
 
 export const fontChoices = {
@@ -130,7 +135,6 @@ export const geometryGroups = [
     label: "独立圆角",
     keys: [
       "small-radius",
-      "field-radius",
       "well-radius",
       "popup-radius",
       "surface-radius",
@@ -139,38 +143,11 @@ export const geometryGroups = [
       "radius-4xl-value",
     ],
   },
-  {
-    label: "按钮与输入框",
-    keys: [
-      "button-padding-x",
-      "field-padding-x",
-      "textarea-padding-y",
-      "textarea-min-height",
-      "control-border-width",
-    ],
-  },
-  {
-    label: "菜单与浮层",
-    keys: [
-      "menu-padding",
-      "menu-min-width",
-      "menu-item-padding-x",
-      "popup-padding",
-      "dialog-width",
-    ],
-  },
-  {
-    label: "选择控件与进度",
-    keys: [
-      "checkbox-size",
-      "switch-thumb-size",
-      "switch-thumb-size-sm",
-      "progress-height",
-    ],
-  },
+  ...componentGeometryGroups,
   {
     label: "交互反馈",
     keys: [
+      "control-border-width",
       "focus-width",
       "transition-duration",
       "press-scale",
@@ -188,6 +165,7 @@ type GeometrySpec = {
   fallback: string;
 };
 export const geometryTokens = {
+  ...componentGeometryTokens,
   "body-weight": {
     label: "正文字重",
     min: 100,
@@ -237,7 +215,7 @@ export const geometryTokens = {
     fallback: "4px",
   },
   "field-radius": {
-    label: "输入框与菜单项圆角",
+    label: "输入框与选择器圆角",
     min: 0,
     max: 80,
     step: 1,
@@ -245,7 +223,7 @@ export const geometryTokens = {
     fallback: "10px",
   },
   "well-radius": {
-    label: "凹槽与菜单圆角",
+    label: "凹槽圆角",
     min: 0,
     max: 80,
     step: 1,

@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "dark",
+    "ratios": [
+      {
+        "selector": ".wf-node-title small",
+        "ratio": 5.920809974403869
+      },
+      {
+        "selector": ".wf-node-fields dt",
+        "ratio": 5.920809974403869
+      },
+      {
+        "selector": ".wf-node-fields dd",
+        "ratio": 13.241938026078083
+      },
+      {
+        "selector": ".wf-node-expression > span",
+        "ratio": 5.920809974403869
+      },
+      {
+        "selector": ".wf-node-expression > strong",
+        "ratio": 13.241938026078083
+      }
+    ]
+  },
+  {
+    "mode": "light",
+    "ratios": [
+      {
+        "selector": ".wf-node-title small",
+        "ratio": 5.438446114953988
+      },
+      {
+        "selector": ".wf-node-fields dt",
+        "ratio": 5.438446114953988
+      },
+      {
+        "selector": ".wf-node-fields dd",
+        "ratio": 14.042050881659097
+      },
+      {
+        "selector": ".wf-node-expression > span",
+        "ratio": 5.438446114953988
+      },
+      {
+        "selector": ".wf-node-expression > strong",
+        "ratio": 14.042050881659097
+      }
+    ]
+  }
+]

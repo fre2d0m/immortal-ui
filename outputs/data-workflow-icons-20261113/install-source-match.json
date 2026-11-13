@@ -1,0 +1,17 @@
+{
+  "matches": [
+    {
+      "file": "data-workflow.tsx",
+      "sha256": "493b7a5755da71775e8a6f6e329605cb1d2f6da1e4b48f6ab85df4013b2253ce"
+    },
+    {
+      "file": "workflow-parts.tsx",
+      "sha256": "9e62eba2f914d6e356e42e45f46a9e35233752d5a55ac84d5cb75d4f2b5874c9"
+    },
+    {
+      "file": "data-workflow.css",
+      "sha256": "f361faef4d4a379a045d7bcf90b5c86de8bfcbde786d31b6006f1c15b50e8fef"
+    }
+  ],
+  "hintsAfterExpansionAndCollapse": true
+}

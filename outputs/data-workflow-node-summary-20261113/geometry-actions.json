@@ -1,0 +1,6 @@
+{
+  "checks": [
+    "New 232×168 node is centered correctly after canvas zoom",
+    "Duplicate placement accounts for measured node height and does not overlap its original"
+  ]
+}

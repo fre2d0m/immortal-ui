@@ -1,0 +1,147 @@
+{
+  "datasetId": "soil-hand-check",
+  "title": "跨年核对 · 3 个深度",
+  "source": "演示数据 · 手工可核对样例",
+  "timeZone": "UTC",
+  "window": {
+    "from": 1767218400000,
+    "to": 1767247200000,
+    "boundary": "[from,to)"
+  },
+  "unit": "%",
+  "precision": 1,
+  "cadenceMs": 3600000,
+  "depths": [
+    {
+      "id": "a",
+      "depthCm": 10,
+      "records": [
+        {
+          "timestamp": 1767218400000,
+          "value": 0
+        },
+        {
+          "timestamp": 1767222000000,
+          "value": 10
+        },
+        {
+          "timestamp": 1767225600000,
+          "value": null
+        },
+        {
+          "timestamp": 1767229200000,
+          "value": -5
+        },
+        {
+          "timestamp": 1767240000000,
+          "value": 70,
+          "quality": "uncertain"
+        },
+        {
+          "timestamp": 1767243600000,
+          "value": 20
+        }
+      ]
+    }
+  ],
+  "drivers": [
+    {
+      "id": "rain",
+      "label": "降雨",
+      "unit": "mm",
+      "precision": 1,
+      "source": "核对样例",
+      "kind": "observation",
+      "intervalMs": 14400000,
+      "records": [
+        {
+          "from": 1767218400000,
+          "to": 1767232800000,
+          "value": 0
+        },
+        {
+          "from": 1767232800000,
+          "to": 1767247200000,
+          "value": 12
+        }
+      ],
+      "rejected": 0
+    },
+    {
+      "id": "et0",
+      "label": "ET₀",
+      "unit": "mm",
+      "precision": 1,
+      "source": "核对样例",
+      "kind": "estimate",
+      "intervalMs": 14400000,
+      "records": [
+        {
+          "from": 1767218400000,
+          "to": 1767232800000,
+          "value": 2
+        },
+        {
+          "from": 1767232800000,
+          "to": 1767247200000,
+          "value": null
+        }
+      ],
+      "rejected": 0
+    },
+    {
+      "id": "kc",
+      "label": "Kc",
+      "unit": "1",
+      "precision": 2,
+      "source": "核对样例",
+      "kind": "coefficient",
+      "intervalMs": 14400000,
+      "records": [
+        {
+          "from": 1767218400000,
+          "to": 1767232800000,
+          "value": 0
+        },
+        {
+          "from": 1767232800000,
+          "to": 1767247200000,
+          "value": 1.2
+        }
+      ],
+      "rejected": 0
+    }
+  ],
+  "events": [
+    {
+      "id": "instant",
+      "kind": "installation",
+      "timing": "instant",
+      "from": 1767222000000,
+      "label": "安装：跨年核对"
+    },
+    {
+      "id": "duration",
+      "kind": "irrigation",
+      "timing": "interval",
+      "from": 1767222000000,
+      "to": 1767240000000,
+      "label": "持续灌溉"
+    },
+    {
+      "id": "overlap",
+      "kind": "irrigation",
+      "timing": "interval",
+      "from": 1767225600000,
+      "to": 1767232800000,
+      "label": "另一灌溉区域"
+    },
+    {
+      "id": "fault",
+      "kind": "fault",
+      "timing": "interval",
+      "from": 1767232800000,
+      "label": "持续故障"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "control-mode",
+  "title": "Control mode",
+  "description": "Keyboard-accessible manual and strategy operating mode selection; authority is a separate component.",
+  "dependencies": [
+    "cn",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/immortal/components/control-mode.tsx",
+      "content": "\"use client\";\n\nimport { useId } from \"react\";\nimport { Hand, Timer } from \"lucide-react\";\nimport { cn } from \"cn\";\n\nexport type ControlModeValue = \"manual\" | \"auto\";\nconst modes = [\n  { value: \"manual\", label: \"手动\", Icon: Hand },\n  { value: \"auto\", label: \"自动\", Icon: Timer },\n] as const;\nexport function ControlMode({\n  value,\n  onValueChange,\n  disabled = false,\n  description,\n  label = \"运行模式\",\n}: {\n  value: ControlModeValue;\n  onValueChange: (value: ControlModeValue) => void;\n  disabled?: boolean;\n  description?: string;\n  label?: string;\n}) {\n  const id = useId();\n  return (\n    <fieldset\n      disabled={disabled}\n      className=\"@container space-y-3\"\n      aria-describedby={description ? `${id}-hint` : undefined}\n    >\n      <legend className=\"mb-3 text-sm font-medium\">{label}</legend>\n      <div className=\"surface-inset grid grid-cols-2 gap-1 p-1\">\n        {modes.map(({ value: mode, label: text, Icon }) => (\n          <label\n            key={mode}\n            data-slot=\"segmented-control-item\"\n            data-state={value === mode ? \"checked\" : \"unchecked\"}\n            data-disabled={disabled ? \"\" : undefined}\n            className={cn(\n              \"relative flex min-h-14 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg px-1 text-sm transition-colors @sm:min-h-10 @sm:flex-row @sm:gap-2 @sm:px-2 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring\",\n              value === mode\n                ? \"bg-background text-foreground shadow-sm\"\n                : \"text-muted-foreground\",\n              disabled && \"cursor-not-allowed opacity-50\",\n            )}\n          >\n            <input\n              type=\"radio\"\n              name={id}\n              value={mode}\n              checked={value === mode}\n              onChange={() => onValueChange(mode)}\n              className=\"sr-only\"\n            />\n            <Icon aria-hidden=\"true\" className=\"size-4\" />\n            <span className=\"whitespace-nowrap\">{text}</span>\n          </label>\n        ))}\n      </div>\n      {description && (\n        <p\n          id={`${id}-hint`}\n          className=\"text-xs leading-relaxed text-muted-foreground\"\n        >\n          {description}\n        </p>\n      )}\n    </fieldset>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/control-mode.tsx"
+    }
+  ],
+  "categories": [
+    "iot",
+    "controls"
+  ],
+  "type": "registry:component"
+}

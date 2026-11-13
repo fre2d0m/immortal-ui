@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "settings": {
+    "fontSize": 16,
+    "controlHeight": 48,
+    "spacing": 4,
+    "cardPadding": 24,
+    "radius": 8,
+    "contentWidth": 1440,
+    "tabRadius": 15,
+    "tabPaddingX": 14,
+    "tabPaddingY": 5,
+    "tabListPadding": 2,
+    "mode": "dark",
+    "primary": null,
+    "pillButtons": false,
+    "tabWidth": "content",
+    "fontFamily": "geist",
+    "headingFont": "inherit",
+    "colors": {
+      "light": {},
+      "dark": {}
+    },
+    "shadows": {
+      "light": {},
+      "dark": {}
+    },
+    "geometry": {}
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "checks": [
+    {
+      "name": "dark counts, capability changes, disabled stability, menu, keyboard and undo/redo",
+      "four": {
+        "count": 4,
+        "bg": "rgb(36, 36, 36)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.4) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 158,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "default",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "three": {
+        "count": 3,
+        "bg": "rgb(36, 36, 36)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.4) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 120,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "two": {
+        "count": 2,
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "0px",
+        "shadow": "none",
+        "radius": "999px",
+        "w": 82,
+        "h": 44,
+        "children": [
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "history": {
+        "count": 2,
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "0px",
+        "shadow": "none",
+        "radius": "999px",
+        "w": 82,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": true
+          },
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": true
+          }
+        ]
+      },
+      "zoom": {
+        "count": 3,
+        "bg": "rgb(36, 36, 36)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.4) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 161.78125,
+        "h": 44,
+        "children": [
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "light counts, capability changes, disabled stability, menu, keyboard and undo/redo",
+      "four": {
+        "count": 4,
+        "bg": "rgb(245, 245, 243)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.75) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.08) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 158,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "default",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "three": {
+        "count": 3,
+        "bg": "rgb(245, 245, 243)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.75) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.08) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 120,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "two": {
+        "count": 2,
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "0px",
+        "shadow": "none",
+        "radius": "999px",
+        "w": 82,
+        "h": 44,
+        "children": [
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      },
+      "history": {
+        "count": 2,
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "0px",
+        "shadow": "none",
+        "radius": "999px",
+        "w": 82,
+        "h": 44,
+        "children": [
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": true
+          },
+          {
+            "variant": "outline",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": true
+          }
+        ]
+      },
+      "zoom": {
+        "count": 3,
+        "bg": "rgb(245, 245, 243)",
+        "border": "1px",
+        "shadow": "rgba(255, 255, 255, 0.75) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.08) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 6px -4px",
+        "radius": "999px",
+        "w": 161.78125,
+        "h": 44,
+        "children": [
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          },
+          {
+            "variant": "ghost",
+            "w": 34,
+            "h": 34,
+            "radius": "50%",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "forced colors preserve separate and grouped outlines",
+      "passed": true
+    },
+    {
+      "name": "390px touch, 20px text, compact group and menu",
+      "layout": {
+        "w": 182,
+        "right": 213,
+        "viewport": 390,
+        "ys": [
+          121,
+          121,
+          121,
+          121
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

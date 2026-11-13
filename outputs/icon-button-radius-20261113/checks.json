@@ -1,0 +1,1499 @@
+{
+  "checks": [
+    {
+      "name": "variants, sizes, themes, groups and mixed rows ?mode=dark",
+      "sizes": [
+        {
+          "label": "default icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "link icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        }
+      ],
+      "horizontal": [
+        [
+          "6px",
+          "0px",
+          "0px",
+          "6px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "6px",
+          "6px",
+          "0px"
+        ]
+      ]
+    },
+    {
+      "name": "variants, sizes, themes, groups and mixed rows ?mode=light",
+      "sizes": [
+        {
+          "label": "default icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.22) 0px 1px 2px 0px, rgba(0, 0, 0, 0.22) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.22) 0px 1px 2px 0px, rgba(0, 0, 0, 0.22) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.22) 0px 1px 2px 0px, rgba(0, 0, 0, 0.22) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.16) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.22) 0px 1px 2px 0px, rgba(0, 0, 0, 0.22) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(247, 247, 245), rgb(225, 225, 222))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.923137 0.842196 0.835608), color(srgb 0.941961 0.90149 0.894275))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.923137 0.842196 0.835608), color(srgb 0.941961 0.90149 0.894275))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.923137 0.842196 0.835608), color(srgb 0.941961 0.90149 0.894275))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.923137 0.842196 0.835608), color(srgb 0.941961 0.90149 0.894275))",
+          "shadow": "rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.13) 0px 1px 2px 0px, rgba(0, 0, 0, 0.16) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "link icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        }
+      ],
+      "horizontal": [
+        [
+          "6px",
+          "0px",
+          "0px",
+          "6px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "6px",
+          "6px",
+          "0px"
+        ]
+      ]
+    },
+    {
+      "name": "variants, sizes, themes, groups and mixed rows ?radius=0",
+      "sizes": [
+        {
+          "label": "default icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "link icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        }
+      ],
+      "horizontal": [
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ]
+      ]
+    },
+    {
+      "name": "variants, sizes, themes, groups and mixed rows ?radius=20&pill=1",
+      "sizes": [
+        {
+          "label": "default icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "link icon-xs",
+          "w": 25.5,
+          "h": 25.5,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-sm",
+          "w": 29.75,
+          "h": 29.75,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-lg",
+          "w": 38.25,
+          "h": 38.25,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        }
+      ],
+      "horizontal": [
+        [
+          "999px",
+          "0px",
+          "0px",
+          "999px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "999px",
+          "999px",
+          "0px"
+        ]
+      ]
+    },
+    {
+      "name": "variants, sizes, themes, groups and mixed rows ?height=48&font=20",
+      "sizes": [
+        {
+          "label": "default icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "default icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(101, 113, 220), rgb(83, 95, 204))",
+          "shadow": "rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.55) 0px 1px 2px 0px, rgba(0, 0, 0, 0.65) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "outline icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "secondary icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "ghost icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "destructive icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "linear-gradient(color(srgb 0.270431 0.205804 0.200157), color(srgb 0.205804 0.17349 0.170667))",
+          "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+          "focus": false
+        },
+        {
+          "label": "link icon-xs",
+          "w": 36,
+          "h": 36,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-sm",
+          "w": 42,
+          "h": 42,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon",
+          "w": 48,
+          "h": 48,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        },
+        {
+          "label": "link icon-lg",
+          "w": 54,
+          "h": 54,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": false
+        }
+      ],
+      "horizontal": [
+        [
+          "6px",
+          "0px",
+          "0px",
+          "6px"
+        ],
+        [
+          "0px",
+          "0px",
+          "0px",
+          "0px"
+        ],
+        [
+          "0px",
+          "6px",
+          "6px",
+          "0px"
+        ]
+      ]
+    },
+    {
+      "name": "hover, press, keyboard focus, forced colors and reduced motion",
+      "pressed": [
+        {
+          "label": "更多",
+          "w": 32.64000701904297,
+          "h": 32.6400146484375,
+          "radius": "50%",
+          "outline": "3px",
+          "scale": "0.96",
+          "bg": "linear-gradient(color(srgb 0.161882 0.161882 0.161882), color(srgb 0.150588 0.150588 0.150588))",
+          "shadow": "rgba(1, 1, 1, 0.098) 0px 0.995937px 0.995937px 0.00158555px inset, rgba(255, 255, 255, 0.067) 0px 0px 0px 0.497968px inset",
+          "focus": false
+        }
+      ],
+      "focus": [
+        {
+          "label": "展开",
+          "w": 34,
+          "h": 34,
+          "radius": "50%",
+          "outline": "1px",
+          "scale": "none",
+          "bg": "none",
+          "shadow": "none",
+          "focus": true
+        }
+      ]
+    },
+    {
+      "name": "workflow menu, save, mock run, expand and graph affordances",
+      "plus": {
+        "w": "40px",
+        "h": "40px",
+        "bg": "rgba(0, 0, 0, 0)",
+        "halo": [
+          "20px",
+          "20px"
+        ],
+        "mark": [
+          "12px",
+          "12px"
+        ]
+      }
+    },
+    {
+      "name": "390px, 20px text and touch targets",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

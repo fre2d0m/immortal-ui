@@ -1,0 +1,27 @@
+{
+  "bars": [
+    {
+      "label": "流程操作",
+      "count": 4,
+      "border": "1px"
+    },
+    {
+      "label": "编辑历史",
+      "count": 2,
+      "border": "0px"
+    },
+    {
+      "label": "画布视图",
+      "count": 3,
+      "border": "1px"
+    }
+  ],
+  "box": {
+    "x": 338,
+    "y": 442.21875,
+    "width": 1065,
+    "height": 690
+  },
+  "errors": [],
+  "warnings": []
+}

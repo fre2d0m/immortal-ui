@@ -1,0 +1,53 @@
+{
+  "light": {
+    "--foreground": 14.04,
+    "--muted-foreground": 5.44,
+    "--soil-et0": 4.73,
+    "--soil-fault": 4.85,
+    "--soil-freeze": 4.77,
+    "--soil-irrigation": 4.59,
+    "--soil-kc": 4.86,
+    "--soil-rain": 5.15,
+    "--soil-series-0": 5.77,
+    "--soil-series-1": 5.31,
+    "--soil-series-2": 5.11,
+    "--soil-series-3": 5.58,
+    "--soil-series-4": 5.37,
+    "range-min": 3.41
+  },
+  "dark": {
+    "--foreground": 13.24,
+    "--muted-foreground": 5.92,
+    "--soil-et0": 8.21,
+    "--soil-fault": 6.35,
+    "--soil-freeze": 6.93,
+    "--soil-irrigation": 7.18,
+    "--soil-kc": 7.6,
+    "--soil-rain": 6.94,
+    "--soil-series-0": 8.86,
+    "--soil-series-1": 8.74,
+    "--soil-series-2": 7.66,
+    "--soil-series-3": 7.33,
+    "--soil-series-4": 7.52,
+    "range-min": 3.84
+  },
+  "heat": {
+    "colors": [
+      "#e5ecd9",
+      "#b7cdb0",
+      "#87ad98",
+      "#578c80",
+      "#326967",
+      "#20474e"
+    ],
+    "luminance": [
+      0.81659,
+      0.56865,
+      0.37305,
+      0.22341,
+      0.11761,
+      0.05364
+    ],
+    "monotonic": true
+  }
+}

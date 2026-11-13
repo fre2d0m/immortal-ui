@@ -1,0 +1,393 @@
+{
+  "timings": [
+    {
+      "case": "annual-3-depths",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "25.7",
+      "records": "175056",
+      "renderMs": "145.6",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "13.4"
+    },
+    {
+      "case": "annual-all-20-depths",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "25.7",
+      "records": "175056",
+      "renderMs": "274.8",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "13.4"
+    },
+    {
+      "case": "7-days-all-20-depths",
+      "cells": "3360",
+      "expected": "175200",
+      "from": "1752019200000",
+      "preparedMs": "25.7",
+      "records": "175056",
+      "renderMs": "461.4",
+      "resolution": "3600000",
+      "slot": "soil-water-explorer",
+      "to": "1752624000000",
+      "viewMs": "1.1"
+    }
+  ],
+  "readings": [
+    {
+      "at": "start",
+      "text": "已固定\n\n2025/12/31 22:00\nUTC · 1 个采样时隙\n\n10 cm\n0.0\n●\n55 cm\n25.0\n○\n200 cm\n—\n○\n\n-5\n水分 / %\n70\n\n深度对比 1/3\n全选\n10 cm\n0.0 %\n\n2025/12/31 22:00 · 未提供质量\n\n降雨\n0.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nET₀\n2.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nKc\n0.00\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\n时段事件\n0\n\n没有关联事件"
+    },
+    {
+      "at": "missing",
+      "text": "已固定\n\n2026/01/01 00:00\nUTC · 1 个采样时隙\n\n10 cm\n—\n●\n55 cm\n25.0\n○\n200 cm\n—\n○\n\n-5\n水分 / %\n70\n\n深度对比 1/3\n全选\n10 cm\n— %\n\n2026/01/01 00:00 · 缺测\n\n降雨\n0.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nET₀\n2.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nKc\n0.00\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\n时段事件\n2\n持续灌溉\n持续区间\n另一灌溉区域\n持续区间"
+    },
+    {
+      "at": "negative",
+      "text": "已固定\n\n2026/01/01 01:00\nUTC · 1 个采样时隙\n\n10 cm\n-5.0\n●\n55 cm\n25.0\n○\n200 cm\n15.0\n○\n\n-5\n水分 / %\n70\n\n深度对比 1/3\n全选\n10 cm\n-5.0 %\n\n2026/01/01 01:00 · 未提供质量\n\n降雨\n0.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nET₀\n2.0 mm\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\nKc\n0.00\n\n2025/12/31 22:00 — 2026/01/01 02:00\n\n时段事件\n2\n持续灌溉\n持续区间\n另一灌溉区域\n持续区间"
+    },
+    {
+      "at": "duplicate-last",
+      "text": "已固定\n\n2026/01/01 05:00\nUTC · 1 个采样时隙\n\n10 cm\n20.0\n●\n55 cm\n25.0\n○\n200 cm\n—\n○\n\n-5\n水分 / %\n70\n\n深度对比 1/3\n全选\n10 cm\n20.0 %\n\n2026/01/01 05:00 · 未提供质量\n\n降雨\n12.0 mm\n\n2026/01/01 02:00 — 2026/01/01 06:00\n\nET₀\n— mm\n\n2026/01/01 02:00 — 2026/01/01 06:00\n\nKc\n1.20\n\n2026/01/01 02:00 — 2026/01/01 06:00\n\n时段事件\n1\n持续故障\n持续中"
+    }
+  ],
+  "interactions": [
+    {
+      "escape": true
+    },
+    {
+      "table": "当前时间范围与所选深度的原始记录，按采样时间、深度排序\n采样时间 · UTC\t深度 / cm\t水分 / %\t质量\n2025/12/31 22:00\t10\t0.0\t未提供质量\n2025/12/31 23:00\t10\t10.0\t未提供质量\n2026/01/01 00:00\t10\t缺测\t缺测\n2026/01/01 01:00\t10\t-5.0\t未提供质量\n2026/01/01 04:00\t10\t70.0\t存疑\n2026/01/01 05:00\t10\t20.0\t未提供质量"
+    },
+    {
+      "driversTable": "当前范围相交的气象与系数原始区间，不拆分、不摊薄\n序列\t开始 · UTC\t结束（不含）\t数值\t单位\t质量\nET₀\t2025/12/31 22:00\t2026/01/01 02:00\t2.0\tmm\t未提供质量\nKc\t2025/12/31 22:00\t2026/01/01 02:00\t0.00\t无量纲\t未提供质量\n降雨\t2025/12/31 22:00\t2026/01/01 02:00\t0.0\tmm\t未提供质量\nET₀\t2026/01/01 02:00\t2026/01/01 06:00\t缺测\tmm\t未提供质量\nKc\t2026/01/01 02:00\t2026/01/01 06:00\t1.20\t无量纲\t未提供质量\n降雨\t2026/01/01 02:00\t2026/01/01 06:00\t12.0\tmm\t未提供质量"
+    },
+    {
+      "downloadPath": "/Users/golo/Downloads/soil-hand-check-2025-12-31.json"
+    },
+    {
+      "pointerPin": "10 cm\n20.0 %\n\n20.0–20.1 · 24/24 样本",
+      "focus": "soil-water-plots"
+    },
+    {
+      "scenario": "hand",
+      "hover": "10 cm\n70.0 %\n\n2026/01/01 04:00 · 存疑 · 存疑",
+      "pin": "10 cm\n70.0 %\n\n2026/01/01 04:00 · 存疑 · 存疑",
+      "same": true
+    },
+    {
+      "case": "mobile-light-320",
+      "bodyColumns": "234px",
+      "compactReadout": "grid",
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "case": "locate-fault",
+      "cells": "2000",
+      "expected": "175200",
+      "from": "1752220800000",
+      "preparedMs": "46.0",
+      "records": "175056",
+      "renderMs": "49.9",
+      "resolution": "3600000",
+      "slot": "soil-water-explorer",
+      "to": "1752580800000",
+      "viewMs": "1.5"
+    },
+    {
+      "case": "navigator-drag",
+      "range": "2025/05/26 — 2025/08/31\nUTC · 右端不含",
+      "cells": "1960",
+      "expected": "175200",
+      "from": "1748224800000",
+      "preparedMs": "46.0",
+      "records": "175056",
+      "renderMs": "161.8",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1756620000000",
+      "viewMs": "3.2"
+    }
+  ],
+  "consumer": [
+    {
+      "case": "annual-default",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "30.7",
+      "records": "175056",
+      "renderMs": "145.9",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "15.3",
+      "windowRecords": "175056"
+    },
+    {
+      "case": "annual-20-curves",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "30.7",
+      "records": "175056",
+      "renderMs": "272.4",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "15.3",
+      "windowRecords": "175056"
+    },
+    {
+      "case": "7 天",
+      "cells": "3360",
+      "expected": "175200",
+      "from": "1752019200000",
+      "preparedMs": "30.7",
+      "records": "175056",
+      "renderMs": "467.2",
+      "resolution": "3600000",
+      "slot": "soil-water-explorer",
+      "to": "1752624000000",
+      "viewMs": "1.1",
+      "windowRecords": "3216"
+    },
+    {
+      "case": "30 天",
+      "cells": "620",
+      "expected": "175200",
+      "from": "1751025600000",
+      "preparedMs": "30.7",
+      "records": "175056",
+      "renderMs": "161.2",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1753617600000",
+      "viewMs": "1.1",
+      "windowRecords": "14256"
+    },
+    {
+      "case": "全年",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "30.7",
+      "records": "175056",
+      "renderMs": "287.5",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "12.4",
+      "windowRecords": "175056"
+    },
+    {
+      "case": "375-large-text-long-title",
+      "headingWidth": 192,
+      "plotFont": "14px",
+      "plotHeight": 1093,
+      "rootFont": "20px",
+      "scrollWidth": 364,
+      "viewport": 375
+    }
+  ],
+  "finalPerformance": [
+    {
+      "view": "production annual three layers",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "50.3",
+      "records": "175056",
+      "renderMs": "159.2",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "15.4",
+      "viewport": [
+        1280,
+        720
+      ],
+      "windowRecords": "175056"
+    },
+    {
+      "view": "production annual twenty layers",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "50.3",
+      "records": "175056",
+      "renderMs": "230.1",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "15.4",
+      "windowRecords": "175056"
+    },
+    {
+      "view": "production seven days twenty layers",
+      "cells": "3360",
+      "expected": "175200",
+      "from": "1752019200000",
+      "preparedMs": "50.3",
+      "records": "175056",
+      "renderMs": "424.4",
+      "resolution": "3600000",
+      "slot": "soil-water-explorer",
+      "to": "1752624000000",
+      "viewMs": "1.5",
+      "windowRecords": "3216"
+    },
+    {
+      "view": "production thirty days twenty layers",
+      "cells": "620",
+      "expected": "175200",
+      "from": "1751025600000",
+      "preparedMs": "50.3",
+      "records": "175056",
+      "renderMs": "168.7",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1753617600000",
+      "viewMs": "2.2",
+      "windowRecords": "14256"
+    }
+  ],
+  "largeTextFinal": {
+    "documentWidth": 364,
+    "headerButtons": [
+      {
+        "height": 34,
+        "label": "数据口径与来源",
+        "width": 34
+      },
+      {
+        "height": 34,
+        "label": "展开分析工作区",
+        "width": 34
+      }
+    ],
+    "plotFont": "17.5px",
+    "plotHeight": 1366.25,
+    "rootFont": "20px",
+    "width": 375
+  },
+  "themePreview": {
+    "canvases": 2,
+    "records": "175056",
+    "title": "北区 02 · 土壤水分"
+  },
+  "themeColors": {
+    "light": {
+      "background": "linear-gradient(155deg, rgb(249, 249, 247), rgb(246, 246, 244))",
+      "chart": [
+        "#286bb2",
+        "#996018",
+        "#277567",
+        "#7858a0",
+        "#a24a68"
+      ],
+      "foreground": "rgb(37, 37, 37)",
+      "muted": "#646461"
+    },
+    "dark": {
+      "background": "#242424",
+      "foreground": "#ededeb",
+      "muted": "#a0a09d",
+      "chart": [
+        "#77b5f8",
+        "#e8b86d",
+        "#6bc4af",
+        "#bb9ce4",
+        "#e49db1"
+      ]
+    }
+  },
+  "focusReturn": {
+    "label": "展开分析工作区",
+    "tag": "BUTTON"
+  },
+  "finalConsumerLogs": [],
+  "contrast": {
+    "light": {
+      "background": "#f6f6f4",
+      "mutedText": 5.49,
+      "series": [
+        5.06,
+        4.8,
+        5.07,
+        5.24,
+        5.22
+      ],
+      "intervalMarksAt80Percent": [
+        3.49,
+        3.34,
+        3.47,
+        3.52,
+        3.59
+      ]
+    },
+    "dark": {
+      "background": "#252525",
+      "mutedText": 5.85,
+      "series": [
+        7.12,
+        8.4,
+        7.4,
+        6.56,
+        7.12
+      ],
+      "intervalMarksAt80Percent": [
+        5.08,
+        5.91,
+        5.27,
+        4.73,
+        5.09
+      ]
+    }
+  },
+  "latestTwentyLayers": [
+    {
+      "view": "annual",
+      "cells": "7300",
+      "expected": "175200",
+      "from": "1735689600000",
+      "preparedMs": "49.8",
+      "records": "175056",
+      "renderMs": "212.7",
+      "resolution": "86400000",
+      "slot": "soil-water-explorer",
+      "to": "1767225600000",
+      "viewMs": "15.1",
+      "windowRecords": "175056"
+    },
+    {
+      "view": "seven days",
+      "cells": "3360",
+      "expected": "175200",
+      "from": "1752019200000",
+      "preparedMs": "49.8",
+      "records": "175056",
+      "renderMs": "428.9",
+      "resolution": "3600000",
+      "slot": "soil-water-explorer",
+      "to": "1752624000000",
+      "viewMs": "1.1",
+      "windowRecords": "3216"
+    }
+  ],
+  "touchTargets": {
+    "mode": "emulated pointer coarse, not a native gesture test",
+    "headerButtons": [
+      40,
+      40
+    ],
+    "depthRows": 42
+  }
+}

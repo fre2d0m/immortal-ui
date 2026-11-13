@@ -1,0 +1,1 @@
+这些是验收宿主，不是安装依赖。audit-check.html 放在隔离预览根目录，audit-check.tsx 放在该预览的 src/；同目录保留当前项目 src/、registry/、public/ 和配置。验收脚本使用预览端口 4193。consumer-main.tsx 用于通过注册表安装 data-workflow 与 Graphite 后的独立宿主，端口 4194；演示数据由宿主从工作流演示定义单独提供。临时服务已停止，仓库原有的 4177 服务保留。

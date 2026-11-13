@@ -1,0 +1,1057 @@
+.soil-water-workspace,
+.soil-water-info {
+  --soil-series-0: var(--soil-depth-1, #176c5b);
+  --soil-series-1: var(--soil-depth-2, #8c5b18);
+  --soil-series-2: var(--soil-depth-3, #316c9d);
+  --soil-series-3: var(--soil-depth-4, #7650a3);
+  --soil-series-4: var(--soil-depth-5, #a04765);
+  --soil-rain: #326b9e;
+  --soil-et0: #94631f;
+  --soil-kc: #52735b;
+  --soil-installation: #646b75;
+  --soil-irrigation: #2c7c69;
+  --soil-fault: #a6534e;
+  --soil-freeze: #586aa7;
+  --soil-caption: max(11px, 0.7857rem);
+  --soil-label: max(12px, 0.857rem);
+}
+.soil-water-workspace {
+  --soil-min-chart-size: max(21rem, calc(var(--body-font-size, 14px) * 21));
+  container-type: inline-size;
+  block-size: clamp(40rem, calc(100dvh - 88px), 56rem);
+  min-block-size: max(40rem, calc(var(--body-font-size, 14px) * 40));
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 16px);
+  padding: 18px;
+  color: var(--foreground);
+  font-size: 1rem;
+}
+.dark .soil-water-workspace,
+.dark .soil-water-info {
+  --soil-series-0: var(--soil-depth-1, #79d4bf);
+  --soil-series-1: var(--soil-depth-2, #e6bc78);
+  --soil-series-2: var(--soil-depth-3, #8bbbe7);
+  --soil-series-3: var(--soil-depth-4, #bea7eb);
+  --soil-series-4: var(--soil-depth-5, #e8a1b2);
+  --soil-rain: #85b1e3;
+  --soil-et0: #dfb679;
+  --soil-kc: #9bbea2;
+  --soil-installation: #b1b7c0;
+  --soil-irrigation: #76bea9;
+  --soil-fault: #dc938b;
+  --soil-freeze: #9cacdf;
+}
+.soil-water-expanded {
+  width: calc(100dvw - 24px);
+  max-width: 1600px;
+  height: calc(100dvh - 24px);
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 16px);
+  background: var(--card);
+  color: var(--foreground);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.soil-water-expanded::backdrop {
+  background: rgb(0 0 0 / 0.55);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+.soil-water-expanded .soil-water-workspace {
+  block-size: 100%;
+  border: 0;
+  border-radius: 0;
+}
+.soil-water-header,
+.soil-water-title,
+.soil-water-header-actions,
+.soil-water-rangebar,
+.soil-water-presets,
+.soil-water-viewbar,
+.soil-water-scale,
+.soil-water-scale > div,
+.soil-water-inspector-head,
+.soil-water-depth-heading,
+.soil-water-pagination,
+.soil-water-footer,
+.soil-water-table-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+.soil-water-header {
+  align-items: center;
+  margin-bottom: 14px;
+}
+.soil-water-title {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.soil-water-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.soil-water-title h2 {
+  margin: 0;
+  font-size: max(17px, 1.214rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.soil-water-title p {
+  margin: 2px 0 0;
+  color: var(--muted-foreground);
+  font-size: var(--soil-label);
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-title p span {
+  padding-inline: 4px;
+}
+.soil-water-header-actions {
+  gap: 2px;
+  flex-shrink: 0;
+}
+.soil-water-rangebar {
+  flex-wrap: wrap;
+  padding-block: 0;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.soil-water-range {
+  display: grid;
+  gap: 0;
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-range strong {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: var(--soil-label);
+  font-weight: 500;
+}
+.soil-water-range strong > span {
+  white-space: nowrap;
+  color: inherit;
+}
+.soil-water-range span,
+.soil-water-muted {
+  color: var(--muted-foreground);
+}
+.soil-water-range > span {
+  font-size: var(--soil-caption);
+}
+.soil-water-presets {
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.soil-water-presets [aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--foreground);
+  box-shadow: inset 0 -2px var(--soil-series-0);
+}
+.soil-water-nav-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  margin: 2px 0 0;
+}
+.soil-water-nav-wrap {
+  flex: 1;
+  min-width: 0;
+}
+.soil-water-navigator {
+  height: 32px;
+  min-width: 0;
+}
+.soil-water-viewbar {
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+.soil-water-resolution {
+  color: var(--muted-foreground);
+  font-size: var(--soil-caption);
+  white-space: nowrap;
+}
+.soil-water-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 246px;
+  gap: 20px;
+  align-items: stretch;
+  block-size: 100%;
+  min-block-size: 0;
+}
+.soil-water-chart-column {
+  min-width: 0;
+  min-block-size: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows:
+    max-content minmax(var(--soil-min-chart-size), 1fr)
+    max-content;
+}
+.soil-water-compact-cursor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  font-size: var(--soil-caption);
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-compact-cursor strong {
+  font-weight: 500;
+}
+.soil-water-compact-cursor small {
+  color: var(--muted-foreground);
+}
+.soil-water-compact-cursor button {
+  flex-shrink: 0;
+}
+.soil-water-workspace[data-compact="true"] .soil-water-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+.soil-water-workspace[data-compact="true"] {
+  padding: 12px;
+}
+.soil-water-workspace[data-compact="true"] .soil-water-chart-column {
+  grid-template-rows:
+    max-content max-content minmax(var(--soil-min-chart-size), 1fr)
+    max-content;
+}
+
+.soil-water-profile-axis {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 46px 0 48px;
+  font-size: var(--soil-caption);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-record-switch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.soil-water-record-switch [aria-pressed="true"] {
+  box-shadow: inset 0 -2px var(--soil-series-0);
+}
+.soil-water-scale {
+  height: 26px;
+  margin-bottom: 2px;
+  font-size: var(--soil-caption);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-scale > div {
+  gap: 6px;
+}
+.soil-water-scale i {
+  display: inline-block;
+  width: 88px;
+  height: 6px;
+  border-radius: 2px;
+  border: 0;
+}
+.soil-water-missing-key {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-left: 6px;
+  background: var(--muted);
+  border-bottom: 2px dotted var(--muted-foreground);
+}
+.soil-water-plots {
+  font-size: max(0.875rem, var(--body-font-size, 14px));
+  position: relative;
+  height: 100%;
+  min-block-size: var(--soil-min-chart-size);
+  width: 100%;
+  min-width: 0;
+  outline-offset: -2px;
+  contain: layout style;
+}
+.soil-water-track-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  font-size: 0.857em;
+  font-weight: 500;
+  pointer-events: none;
+}
+.soil-water-track-label small {
+  font-size: 0.8em;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  overflow-wrap: anywhere;
+}
+.soil-water-crosshair {
+  position: absolute;
+  z-index: 3;
+  width: 1px;
+  border-left: 1px solid color-mix(in srgb, var(--foreground) 65%, transparent);
+  pointer-events: none;
+}
+.soil-water-canvas {
+  position: absolute;
+  inset: 0;
+}
+.soil-water-invalid-key {
+  width: 9px;
+  height: 9px;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--soil-fault),
+    var(--soil-fault) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+.soil-water-scale,
+.soil-water-scale > div {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 26px;
+}
+.soil-water-plots:focus-visible {
+  outline: 2px solid var(--ring);
+}
+.soil-water-inspector {
+  min-width: 0;
+  border-left: 1px solid var(--border);
+  padding-left: 20px;
+  min-block-size: 0;
+  max-block-size: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.soil-water-inspector-head {
+  color: var(--muted-foreground);
+  font-size: var(--soil-caption);
+  min-height: 32px;
+}
+.soil-water-focus-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: max(16px, 1.143rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+.soil-water-focus-time small {
+  display: block;
+  font-size: var(--soil-caption);
+  font-weight: 400;
+  color: var(--muted-foreground);
+  padding-top: 4px;
+}
+.soil-water-profile {
+  display: grid;
+  gap: 0;
+}
+.soil-water-profile-row {
+  display: grid;
+  grid-template-columns: 42px minmax(15px, 1fr) 36px 10px;
+  gap: 7px;
+  align-items: center;
+  width: 100%;
+  min-height: 34px;
+  border: 0;
+  background: transparent;
+  padding: 0 3px;
+  text-align: left;
+  font-size: var(--soil-caption);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  border-radius: 3px;
+}
+.soil-water-profile-row:hover {
+  background: var(--accent);
+}
+.soil-water-profile-row:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+.soil-water-profile-row small {
+  font-size: 0.5625rem;
+  color: var(--muted-foreground);
+}
+.soil-water-profile-row b {
+  font-weight: 500;
+  text-align: right;
+}
+.soil-water-profile-track {
+  position: relative;
+  display: block;
+  background: color-mix(in srgb, var(--muted-foreground) 10%, transparent);
+  height: 3px;
+}
+.soil-water-profile-track i {
+  display: block;
+  position: absolute;
+  top: -1px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: var(--muted-foreground);
+}
+.soil-water-profile-row[aria-pressed="true"] {
+  color: var(--soil-series-color);
+}
+.soil-water-profile-row[aria-pressed="true"] .soil-water-profile-track i {
+  background: var(--soil-series-color);
+  height: 4px;
+}
+.soil-water-selection-mark {
+  font-size: var(--soil-label);
+}
+.soil-water-depth-heading {
+  margin-top: 0;
+}
+.soil-water-depth-heading h3,
+.soil-water-focus-events h3 {
+  margin: 0;
+  font-weight: 500;
+  font-size: var(--soil-label);
+}
+.soil-water-depth-heading small,
+.soil-water-focus-events h3 small {
+  color: var(--muted-foreground);
+  margin-left: 4px;
+}
+.soil-water-depth-heading button {
+  font-size: var(--soil-caption);
+  padding-inline: 6px;
+}
+.soil-water-readings {
+  display: grid;
+  gap: 4px;
+  max-block-size: 16rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.soil-water-reading > button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.soil-water-reading > button > span:not(.soil-water-reading-meta) {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--soil-series-color);
+  font-size: var(--soil-label);
+}
+.soil-water-reading strong,
+.soil-water-driver-readings strong {
+  font-weight: 500;
+  font-size: max(18px, 1.2857rem);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.soil-water-reading strong small,
+.soil-water-driver-readings strong small {
+  font-size: var(--soil-caption);
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+.soil-water-reading-meta,
+.soil-water-driver-readings p {
+  font-size: var(--soil-caption);
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  margin: 0 0 6px 28px;
+  overflow-wrap: anywhere;
+}
+.soil-water-driver-section {
+  margin-block: 4px;
+  border-block: 1px solid var(--border);
+  padding-block: 0 6px;
+}
+.soil-water-driver-readings {
+  display: grid;
+  gap: 6px;
+}
+.soil-water-inspector-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.soil-water-inspector-section h3,
+.soil-water-readings-title {
+  font-size: var(--soil-label);
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.soil-water-readings-title small {
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+.soil-water-inspector-section h3 {
+  margin: 0;
+}
+.soil-water-driver-readings > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+.soil-water-driver-readings p {
+  grid-column: 1/-1;
+}
+.soil-water-driver-label {
+  font-size: var(--soil-label);
+}
+.soil-water-driver-label::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  border-top: 2px solid;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.soil-water-driver-rain {
+  color: var(--soil-rain);
+}
+.soil-water-driver-et0 {
+  color: var(--soil-et0);
+}
+.soil-water-driver-et0::before {
+  border-top-style: dashed;
+}
+.soil-water-driver-kc {
+  color: var(--soil-kc);
+}
+.soil-water-focus-events {
+  padding-top: 0;
+  max-block-size: 12rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.soil-water-focus-events > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 6px;
+  font-size: var(--soil-label);
+}
+.soil-water-focus-events > button > span {
+  flex: 1;
+}
+.soil-water-focus-events > button small {
+  display: inline;
+  color: var(--muted-foreground);
+  font-size: var(--soil-caption);
+  margin: 0 0 0 8px;
+}
+.soil-water-focus-events i {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--soil-installation);
+  flex-shrink: 0;
+}
+.soil-water-focus-events i[data-kind="irrigation"] {
+  background: var(--soil-irrigation);
+}
+.soil-water-focus-events i[data-kind="fault"] {
+  background: var(--soil-fault);
+}
+.soil-water-focus-events i[data-kind="freeze"] {
+  background: var(--soil-freeze);
+}
+.soil-water-focus-events .soil-water-muted {
+  font-size: var(--soil-caption);
+  margin-block: 12px;
+}
+.soil-water-table-controls {
+  flex-wrap: wrap;
+  color: var(--muted-foreground);
+  font-size: var(--soil-label);
+  margin-bottom: 12px;
+}
+.soil-water-table-scroll {
+  overflow: auto;
+  max-height: 700px;
+  max-width: 100%;
+  outline-offset: 3px;
+}
+.soil-water-table-scroll table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--soil-label);
+  font-variant-numeric: tabular-nums;
+}
+.soil-water-table-scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--card);
+}
+.soil-water-table-scroll th,
+.soil-water-table-scroll td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.soil-water-table-scroll th {
+  font-weight: 500;
+}
+.soil-water-table-scroll tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--card);
+  max-width: 280px;
+  white-space: normal;
+}
+.soil-water-table-scroll th small {
+  display: block;
+  color: var(--muted-foreground);
+  font-weight: 400;
+  padding-top: 4px;
+}
+.soil-water-table-scroll .numeric {
+  text-align: right;
+}
+.soil-water-pagination {
+  justify-content: flex-end;
+  padding-top: 12px;
+  font-size: var(--soil-label);
+}
+.soil-water-info {
+  z-index: 60;
+  width: min(380px, calc(100vw - 24px));
+  max-height: min(650px, calc(100dvh - 32px));
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-menu);
+  font-size: var(--soil-label);
+  line-height: 1.7;
+}
+.soil-water-info h3 {
+  font-weight: 600;
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+}
+.soil-water-info dt {
+  font-weight: 500;
+  margin-top: 12px;
+}
+.soil-water-info dd,
+.soil-water-info p {
+  color: var(--muted-foreground);
+  margin: 3px 0;
+}
+.soil-water-dateform {
+  display: grid;
+  gap: 8px;
+}
+.soil-water-dateform input {
+  min-width: 0;
+  width: 100%;
+}
+.soil-water-dateform button {
+  margin-top: 8px;
+}
+.soil-water-footer {
+  color: var(--muted-foreground);
+  font-size: var(--soil-caption);
+  margin-top: 4px;
+}
+.soil-water-footer > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.soil-water-depth-popover {
+  width: min(360px, calc(100dvw - 24px));
+}
+.soil-water-depth-popover .soil-water-profile {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 12px;
+}
+.soil-water-depth-popover .soil-water-profile-row {
+  grid-template-columns: 36px minmax(5px, 1fr) 32px 8px;
+  gap: 4px;
+}
+.soil-water-depth-popover .soil-water-depth-heading {
+  margin-bottom: 8px;
+}
+.soil-water-depth-popover .soil-water-profile-axis {
+  margin-inline: 40px;
+}
+.soil-water-readout-popover {
+  width: min(360px, calc(100dvw - 24px));
+  padding: 16px;
+}
+.soil-water-readout-popover .soil-water-inspector {
+  padding: 0;
+  border: 0;
+  max-block-size: none;
+  overflow: visible;
+}
+.soil-water-empty {
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  color: var(--muted-foreground);
+}
+@container (width < 480px) {
+  .soil-water-header {
+    gap: 4px;
+  }
+  .soil-water-title h2 {
+    font-size: 1rem;
+  }
+  .soil-water-title p {
+    font-size: var(--soil-caption);
+  }
+  .soil-water-header-actions {
+    gap: 0;
+  }
+  .soil-water-rangebar {
+    gap: 4px;
+  }
+  .soil-water-range strong {
+    font-size: var(--soil-caption);
+    gap: 4px;
+  }
+  .soil-water-range > span {
+    font-size: var(--soil-caption);
+  }
+  .soil-water-presets {
+    justify-content: flex-start;
+  }
+  .soil-water-scale {
+    font-size: var(--soil-caption);
+    gap: 0 8px;
+  }
+  .soil-water-scale i {
+    width: 56px;
+  }
+  .soil-water-viewbar {
+    gap: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .soil-water-workspace * {
+    scroll-behavior: auto;
+  }
+}
+@media (pointer: coarse) {
+  .soil-water-profile-row,
+  .soil-water-focus-events > button {
+    min-height: 40px;
+  }
+}
+@media (forced-colors: active) {
+  .soil-water-workspace {
+    border: 1px solid CanvasText;
+  }
+  .soil-water-profile-row[aria-pressed="true"] {
+    outline: 1px solid Highlight;
+  }
+  .soil-water-plots,
+  .soil-water-navigator {
+    background: var(--card);
+    color: var(--foreground);
+    forced-color-adjust: none;
+  }
+}
+
+.soil-water-tabs {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  block-size: 100%;
+  min-width: 0;
+  min-block-size: 0;
+  gap: 0;
+}
+.soil-water-workspace[data-compact="true"] .soil-water-tabs {
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+}
+.soil-water-tabs > [data-slot="tabs-content"] {
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.soil-water-tabs > .soil-water-chart-view {
+  overflow: auto;
+}
+.soil-water-header > [data-slot="tabs-list"] {
+  margin-inline: auto;
+  align-self: center;
+  flex-shrink: 0;
+}
+.soil-water-workspace [data-slot="tabs-list"][data-variant="line"] {
+  height: auto;
+}
+.soil-water-workspace
+  [data-slot="tabs-list"][data-variant="line"]
+  [data-slot="tabs-trigger"] {
+  height: auto;
+  min-height: max(34px, var(--control-hit-height, 34px));
+  padding-inline: 10px;
+}
+.soil-water-query-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.soil-water-scale {
+  min-height: 20px;
+}
+.soil-water-scale > div {
+  min-height: 20px;
+}
+.soil-water-workspace[data-compact="true"] .soil-water-viewbar {
+  margin-bottom: 6px;
+}
+.soil-water-workspace[data-compact="true"] .soil-water-query-actions {
+  justify-content: flex-start;
+}
+
+/* Interaction emphasis is shared by the trace and its readable legend. */
+.soil-water-reading > button {
+  width: 100%;
+  min-height: 40px;
+  padding: 3px 5px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.soil-water-reading > button:hover,
+.soil-water-reading > button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--soil-series-color) 9%, transparent);
+}
+.soil-water-reading > button[aria-pressed="true"] {
+  box-shadow: inset 2px 0 var(--soil-series-color);
+}
+.soil-water-reading > button:focus-visible,
+.soil-water-focus-events > button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+.soil-water-reading-meta[data-quality="bad"] {
+  color: var(--soil-fault);
+}
+.soil-water-reading-meta[data-quality="uncertain"] {
+  color: var(--soil-et0);
+}
+.soil-water-focus-events > button {
+  min-height: 40px;
+  border-radius: 5px;
+  color: var(--foreground);
+}
+.soil-water-focus-events > button:hover {
+  background: var(--accent);
+}
+.soil-water-focus-events > button[aria-pressed="true"] {
+  background: color-mix(
+    in srgb,
+    var(--soil-event-color, var(--soil-installation)) 9%,
+    transparent
+  );
+  box-shadow: inset 2px 0 var(--soil-event-color, var(--soil-installation));
+}
+.soil-water-event-window {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  border-inline: 1px solid var(--soil-event-color, var(--soil-installation));
+  background: color-mix(
+    in srgb,
+    var(--soil-event-color, var(--soil-installation)) 5%,
+    transparent
+  );
+}
+.soil-water-event-window[data-instant="true"] {
+  border-right: 0;
+}
+:is(.soil-water-workspace, .soil-water-info) [data-kind="irrigation"] {
+  --soil-event-color: var(--soil-irrigation);
+}
+:is(.soil-water-workspace, .soil-water-info) [data-kind="fault"] {
+  --soil-event-color: var(--soil-fault);
+}
+:is(.soil-water-workspace, .soil-water-info) [data-kind="freeze"] {
+  --soil-event-color: var(--soil-freeze);
+}
+.soil-water-cursor-point {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid currentColor;
+  transform: translate(-50%, -50%);
+}
+.soil-water-plots[data-dense="true"] .soil-water-cursor-point {
+  width: 5px;
+  height: 5px;
+  border-width: 1px;
+}
+@container (width < 760px) {
+  .soil-water-workspace {
+    padding: 12px;
+  }
+  .soil-water-header {
+    margin-bottom: 8px;
+  }
+  .soil-water-rangebar {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+  }
+}
+@media (forced-colors: active) {
+  .soil-water-reading > button[aria-pressed="true"],
+  .soil-water-focus-events > button[aria-pressed="true"] {
+    outline: 1px solid Highlight;
+  }
+  .soil-water-event-window {
+    border-color: Highlight;
+  }
+  .soil-water-cursor-point {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+}
+
+.soil-water-scale-context {
+  gap: 12px !important;
+}
+.soil-water-scale-options {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.soil-water-scale-options button {
+  min-height: 40px;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: var(--soil-caption);
+  cursor: pointer;
+}
+.soil-water-scale-options button[aria-pressed="true"] {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+.soil-water-scale-options button:hover {
+  color: var(--foreground);
+}
+.soil-water-scale-options button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+.soil-water-reading > button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  min-height: 44px;
+  padding: 5px 6px;
+}
+.soil-water-reading > button > strong {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+.soil-water-reading-meta {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0 0 0 25px;
+  line-height: 1.35;
+}
+.soil-water-focus-events h3 small {
+  display: inline;
+}
+.soil-water-focus-time {
+  margin-bottom: 10px;
+}
+
+.soil-water-inspector-head {
+  align-items: flex-start;
+  margin-bottom: 10px;
+  color: var(--foreground);
+}
+.soil-water-inspector-head .soil-water-focus-time {
+  margin: 0;
+}
+.soil-water-inspector-head button[aria-pressed="true"] {
+  color: var(--soil-series-0);
+}
+
+.soil-water-inspector {
+  display: flex;
+  flex-direction: column;
+}
+.soil-water-inspector-head,
+.soil-water-readings-title,
+.soil-water-driver-section {
+  flex-shrink: 0;
+}
+.soil-water-readings {
+  flex: 0 1 auto;
+  min-block-size: 48px;
+}
+.soil-water-focus-events {
+  flex: 1 0 100px;
+  min-block-size: 100px;
+  max-block-size: none;
+}
+.soil-water-readout-popover .soil-water-focus-events {
+  max-block-size: 12rem;
+  flex-basis: auto;
+}
+
+.soil-water-workspace[data-compact="true"] .soil-water-header {
+  align-items: flex-start;
+}
+
+.soil-water-focus-events h3 {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  z-index: 1;
+  padding-bottom: 4px;
+}

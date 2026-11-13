@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "CLI installs six source files including shared Tabs, no Panel",
+    "independent typecheck and production bundle",
+    "save failure and acknowledged success",
+    "stale run ignored after external definition update",
+    "canvas persists, cross-year UTC dates, 0 input and false output",
+    "host-specific field configuration participates in undo and read-only behavior",
+    "read-only canvas and external run invalidation"
+  ],
+  "errors": []
+}

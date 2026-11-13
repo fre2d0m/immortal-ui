@@ -1,0 +1,64 @@
+{
+  "checks": [
+    "Fresh CLI install of Graphite + data-workflow matches four block source files and shared Tabs",
+    "Installed theme in both modes: transparent inactive hover; one selected tab; 12px gap between tabs and active results",
+    "Choosing existing failure node calls host onChange with join→failure/error"
+  ],
+  "measurements": [
+    {
+      "mode": "dark",
+      "list": {
+        "x": 1276,
+        "y": 433,
+        "width": 184,
+        "height": 42,
+        "top": 433,
+        "right": 1460,
+        "bottom": 475,
+        "left": 1276
+      },
+      "pane": {
+        "x": 1276,
+        "y": 487,
+        "width": 282,
+        "height": 296,
+        "top": 487,
+        "right": 1558,
+        "bottom": 783,
+        "left": 1276
+      },
+      "background": "none",
+      "fill": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "selectedCount": 1
+    },
+    {
+      "mode": "light",
+      "list": {
+        "x": 1276,
+        "y": 433,
+        "width": 184,
+        "height": 42,
+        "top": 433,
+        "right": 1460,
+        "bottom": 475,
+        "left": 1276
+      },
+      "pane": {
+        "x": 1276,
+        "y": 487,
+        "width": 282,
+        "height": 296,
+        "top": 487,
+        "right": 1558,
+        "bottom": 783,
+        "left": 1276
+      },
+      "background": "none",
+      "fill": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "selectedCount": 1
+    }
+  ],
+  "errors": []
+}

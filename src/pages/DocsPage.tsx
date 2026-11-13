@@ -8,7 +8,6 @@ export function DocsPage() {
   return (
     <div className="docs-page">
       <div className="page-heading">
-        <p className="eyebrow">Documentation / Getting started</p>
         <h1>Make it yours.</h1>
         <p>
           Immortal UI is a source registry for React, Tailwind CSS v4, and
@@ -44,14 +43,14 @@ export function DocsPage() {
       </p>
       <CodeSnippet code={namespace} label="namespace configuration" />
       <div className="mt-3">
-        <CodeSnippet code="npx shadcn@latest add @immortal/telemetry-card" />
+        <CodeSnippet code="npx shadcn@latest add @immortal/metric-card" />
       </div>
       <h2 className="doc-heading">Connect your data</h2>
       <p className="doc-copy">
         Components receive typed data through props. Blocks expose callbacks for
-        configuration and alert acknowledgement. The registry has no MQTT
-        client, credentials, backend, or polling loop. Keep authorization and
-        transport in your application.
+        configuration, telemetry queries, exports and alert operations. The
+        registry has no MQTT client, credentials, backend, or polling loop. Keep
+        authorization and transport in your application.
       </p>
       <CodeSnippet
         code={
@@ -64,6 +63,23 @@ export function DocsPage() {
         epoch milliseconds for telemetry timestamps, and pass explicit device
         states. Demo snapshots belong to the showcase and are not installed with
         registry items.
+      </p>
+      <p className="doc-copy">
+        First-batch controls keep the request, device readback and command
+        result separate. A callback that resolves without a receipt means
+        accepted; return a verified receipt only when the device result is
+        confirmed. Requests include an ID and AbortSignal. Timeouts remain
+        unknown outcomes. Source quality, sample freshness, alarm
+        acknowledgement and recovery are independent states supplied by your
+        application.
+      </p>
+      <h2 className="doc-heading">Consistent component settings</h2>
+      <p className="doc-copy">
+        Theme Studio derives button, input, select, navigation, menu and Tab
+        heights from a shared scale. Category-specific overrides cover spacing,
+        type, corners and relevant sizes; clear an override to restore the
+        shared scale. JSON preserves these settings, while exported CSS contains
+        the fully resolved values used in the preview.
       </p>
       <h2 className="doc-heading">Registry endpoints</h2>
       <div className="doc-links">

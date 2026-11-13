@@ -19,9 +19,6 @@ export function HomePage() {
   return (
     <>
       <section className="home-hero">
-        <div className="eyebrow">
-          <span className="status-led" /> Built on shadcn/ui · Made for IoT
-        </div>
         <h1>
           Interfaces for
           <br />
@@ -70,6 +67,7 @@ export function HomePage() {
             <FleetOverview
               devices={demoDevices}
               telemetry={demoTraffic}
+              telemetryMaxGapMs={450_000}
               title="North facility"
               subtitle="Device network · 28 October 2026, 10:00 UTC"
             />
@@ -105,7 +103,6 @@ export function HomePage() {
       </section>
       <section className="home-library">
         <div className="section-intro">
-          <p className="eyebrow">A system you can make your own</p>
           <h2>One foundation. Built for your domain.</h2>
         </div>
         <div className="foundation-grid">
@@ -139,7 +136,6 @@ export function HomePage() {
       </section>
       <section className="home-install">
         <div>
-          <p className="eyebrow">Your code. Your product.</p>
           <h2>Start with the material.</h2>
           <p>Install Graphite, then add only the pieces you need.</p>
         </div>

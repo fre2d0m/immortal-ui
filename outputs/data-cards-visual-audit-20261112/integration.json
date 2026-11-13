@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "kind": "metric",
+      "mode": "dark",
+      "width": 1440,
+      "geometry": {
+        "height": 443.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "metric",
+      "mode": "dark",
+      "width": 390,
+      "geometry": {
+        "height": 471.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "metric",
+      "mode": "light",
+      "width": 1440,
+      "geometry": {
+        "height": 443.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "metric",
+      "mode": "light",
+      "width": 390,
+      "geometry": {
+        "height": 471.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "indicator",
+      "mode": "dark",
+      "width": 1440,
+      "geometry": {
+        "height": 528.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "indicator",
+      "mode": "dark",
+      "width": 390,
+      "geometry": {
+        "height": 580.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "indicator",
+      "mode": "light",
+      "width": 1440,
+      "geometry": {
+        "height": 528.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "kind": "indicator",
+      "mode": "light",
+      "width": 390,
+      "geometry": {
+        "height": 580.75,
+        "headerGap": 24,
+        "overflow": false
+      }
+    },
+    {
+      "route": "theme",
+      "cards": 2
+    },
+    {
+      "route": "blocks/device-detail?device=SOIL-N02",
+      "cards": 3
+    }
+  ],
+  "nontext": [
+    {
+      "theme": "light",
+      "results": {
+        "track": {
+          "color": "oklab(0.502253 -0.00130901 0.00448748 / 0.75)",
+          "ratio": 3.256618477794742
+        },
+        "target": {
+          "color": "color(srgb 0.145098 0.446275 0.261176)",
+          "ratio": 5.441315825118853
+        },
+        "marker": {
+          "color": "rgb(37, 37, 37)",
+          "ratio": 14.165796565711968
+        },
+        "focus": {
+          "color": "#686865",
+          "ratio": 5.166087437493533
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "results": {
+        "track": {
+          "color": "oklab(0.704853 -0.00118873 0.00413311 / 0.75)",
+          "ratio": 3.9358589752369766
+        },
+        "target": {
+          "color": "color(srgb 0.490196 0.866667 0.639216)",
+          "ratio": 9.301754122390463
+        },
+        "marker": {
+          "color": "rgb(237, 237, 235)",
+          "ratio": 13.076024684581746
+        },
+        "focus": {
+          "color": "#7d7d79",
+          "ratio": 3.7091386369363937
+        }
+      }
+    }
+  ],
+  "errors": []
+}

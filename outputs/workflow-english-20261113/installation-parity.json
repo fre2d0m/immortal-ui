@@ -1,0 +1,26 @@
+[
+  {
+    "file": "data-workflow.tsx",
+    "exact": true,
+    "parity": true,
+    "normalization": null
+  },
+  {
+    "file": "data-workflow.css",
+    "exact": true,
+    "parity": true,
+    "normalization": null
+  },
+  {
+    "file": "workflow-parts.tsx",
+    "exact": true,
+    "parity": true,
+    "normalization": null
+  },
+  {
+    "file": "workflow-model.ts",
+    "exact": false,
+    "parity": true,
+    "normalization": "CLI strips the first model documentation comment"
+  }
+]

@@ -1,0 +1,667 @@
+{
+  "checks": [
+    {
+      "case": "setpoint-conflict",
+      "draft": "27.5",
+      "applyEnabled": false,
+      "message": "设备设定已被外部更新为 28 °C，你的草稿仍保留。"
+    },
+    {
+      "case": "setpoint-confirm",
+      "text": "回读已验证\n\n请求值\n27.5 °C\n设备回读\n27.5 °C\n\n演示回读与本次请求一致。\n\n指令记录 · 36698a52"
+    },
+    {
+      "case": "setpoint-failure",
+      "text": "执行失败\n\n请求值\n27 °C\n设备回读\n26 °C\n\n演示：控制服务拒绝连接，设备状态未改变。草稿已保留。\n\n指令记录 · 112c365b",
+      "draft": "27"
+    },
+    {
+      "case": "theme-default",
+      "sizes": [
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "button",
+          "weight": "500"
+        },
+        {
+          "font": "16px",
+          "height": 32,
+          "name": "input",
+          "weight": "400"
+        },
+        {
+          "font": "16px",
+          "height": 32,
+          "name": "select",
+          "weight": "400"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "nav",
+          "weight": "400"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "nav",
+          "weight": "400"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "nav",
+          "weight": "400"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "tab",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 24,
+          "name": "button-xs",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 28,
+          "name": "button-sm",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "button-default",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 36,
+          "name": "button-lg",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 24,
+          "name": "icon-xs",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 28,
+          "name": "icon-sm",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 32,
+          "name": "icon",
+          "weight": "500"
+        },
+        {
+          "font": "14px",
+          "height": 36,
+          "name": "icon-lg",
+          "weight": "500"
+        }
+      ]
+    },
+    {
+      "case": "theme-shared-48",
+      "sizes": [
+        {
+          "height": 48,
+          "name": "button"
+        },
+        {
+          "height": 48,
+          "name": "input"
+        },
+        {
+          "height": 48,
+          "name": "select"
+        },
+        {
+          "height": 48,
+          "name": "nav"
+        },
+        {
+          "height": 48,
+          "name": "nav"
+        },
+        {
+          "height": 48,
+          "name": "nav"
+        },
+        {
+          "height": 48,
+          "name": "tab"
+        },
+        {
+          "height": 36,
+          "name": "button-xs"
+        },
+        {
+          "height": 42,
+          "name": "button-sm"
+        },
+        {
+          "height": 48,
+          "name": "button-default"
+        },
+        {
+          "height": 54,
+          "name": "button-lg"
+        },
+        {
+          "height": 36,
+          "name": "icon-xs"
+        },
+        {
+          "height": 42,
+          "name": "icon-sm"
+        },
+        {
+          "height": 48,
+          "name": "icon"
+        },
+        {
+          "height": 54,
+          "name": "icon-lg"
+        }
+      ]
+    },
+    {
+      "case": "theme-input-override",
+      "sizes": [
+        {
+          "height": 48,
+          "name": "button"
+        },
+        {
+          "height": 40,
+          "name": "input"
+        },
+        {
+          "height": 48,
+          "name": "select"
+        }
+      ]
+    },
+    {
+      "case": "theme-input-reset",
+      "height": 48
+    },
+    {
+      "case": "menu-shared-48",
+      "rows": [
+        {
+          "height": 48,
+          "text": "北侧温室",
+          "weight": "400"
+        },
+        {
+          "height": 48,
+          "text": "南侧温室",
+          "weight": "400"
+        },
+        {
+          "height": 48,
+          "text": "暂不可用区域",
+          "weight": "400"
+        }
+      ]
+    },
+    {
+      "case": "nav-selection-stability",
+      "before": {
+        "weight": "400",
+        "width": 52
+      },
+      "after": {
+        "weight": "400",
+        "width": 52
+      }
+    },
+    {
+      "case": "theme-import-roundtrip",
+      "buttonHeight": 48
+    },
+    {
+      "case": "thermostat-invalid-band",
+      "applyEnabled": false,
+      "error": "冷热目标至少间隔 1 °C"
+    },
+    {
+      "case": "thermostat-verified",
+      "text": "回读已验证\n\n请求值\n自动 · 23–26 °C · 30分钟\n设备回读\n自动 · 23–26 °C\n\n演示回读与本次请求一致。\n\n指令记录 · 7219296a",
+      "alerts": [
+        "设备目标已变化，请先采用设备值再编辑。"
+      ]
+    },
+    {
+      "case": "thermostat-self-readback-retest",
+      "alerts": [],
+      "applyEnabled": false
+    },
+    {
+      "case": "position-stop-before-reverse",
+      "closeEnabled": false,
+      "stopEnabled": true
+    },
+    {
+      "case": "position-stop-confirmed",
+      "closeEnabled": true
+    },
+    {
+      "case": "alarm-ack-not-recovery",
+      "state": "仍在发生 · 已确认"
+    },
+    {
+      "case": "alarm-restored-ack",
+      "state": "已恢复 · 已确认"
+    },
+    {
+      "case": "irrigation-pause",
+      "text": "回读已验证\n\n请求值\n暂停本次灌溉\n设备回读\n已暂停\n\n演示回读与本次请求一致。\n\n指令记录 · 0eaa1641",
+      "resume": true
+    },
+    {
+      "case": "irrigation-stop-confirmation",
+      "hasConfirmation": true
+    },
+    {
+      "case": "irrigation-stopped",
+      "text": "回读已验证\n\n请求值\n停止本次灌溉\n设备回读\n已停止\n\n演示回读与本次请求一致。\n\n指令记录 · 9da34f03"
+    },
+    {
+      "case": "mobile-320-all-twelve",
+      "results": [
+        {
+          "name": "Measurement readout",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Measurement trust",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Trend inspector",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Light control",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Thermostat",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Position control",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Setpoint editor",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Control authority",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Permissives & interlocks",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Command lifecycle",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Irrigation run",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        },
+        {
+          "name": "Alarm state",
+          "document": 320,
+          "inner": 282,
+          "preview": 284,
+          "viewport": 320
+        }
+      ]
+    },
+    {
+      "case": "mobile-slider-refinement",
+      "tracks": [
+        160,
+        160
+      ]
+    },
+    {
+      "case": "light-keyboard-slider",
+      "value": "73"
+    },
+    {
+      "case": "authority-request",
+      "text": "回读已验证\n\n请求值\n申请临时控制权\n设备回读\n远程控制 · 张工\n\n演示回读与本次请求一致。\n\n指令记录 · a7cf8421",
+      "releaseEnabled": true
+    },
+    {
+      "case": "authority-release",
+      "text": "回读已验证\n\n请求值\n释放临时控制权\n设备回读\n远程控制 · 气候策略\n\n演示回读与本次请求一致。\n\n指令记录 · f0f79476"
+    },
+    {
+      "case": "interlock-detail",
+      "text": "联锁阻止操作\n\n雨保护触发，开窗请求将被阻止。\n\n远程控制许可\n满足\n雨保护\n未满足\n\n检测到降雨，禁止开窗。\n\n气象站 WS-01 · 11/04 06:31:56 UTC\n\n风速限制\n满足\n\n判定来源：设备 / 控制服务 · 11/04 06:32:00 UTC。界面展示上游判定，不自行授权。"
+    },
+    {
+      "case": "trend-gaps-table",
+      "gaps": 9,
+      "plots": 2
+    },
+    {
+      "case": "trend-keyboard",
+      "cursor": "1"
+    },
+    {
+      "test": "independent-consumer-installed-all12",
+      "result": {
+        "headings": [
+          "Independent registry consumer",
+          "空气温度",
+          "补光灯",
+          "温控",
+          "通风窗",
+          "控制权",
+          "联锁阻止操作",
+          "高温告警",
+          "晨间灌溉"
+        ],
+        "overflow": false,
+        "well": []
+      }
+    },
+    {
+      "test": "consumer-dark-material",
+      "result": {
+        "buttonHeight": 32,
+        "mode": "dark",
+        "wells": [
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          },
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          }
+        ]
+      }
+    },
+    {
+      "test": "consumer-light-material",
+      "result": {
+        "mode": "dark",
+        "wells": [
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          },
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          }
+        ]
+      }
+    },
+    {
+      "test": "measurement-zero",
+      "text": "Components\n/\n感知与测量\n/\nMeasurement readout\nMeasurement readout\n测量读数\n\n精度、单位、量程、来源与质量共同构成读数。零值、负值、无效数据和离线快照有各自的表达。\n\n有效\n估算\n无效\n陈旧\n离线快照\n零值\n负值\n超量程\nInteractive preview\n演示数据 · 仅本地交互\n演示场景\n零值\n重置示例\n北侧温室 · 空气温度\n\nGH-01 / ENV-T01\n\nOnline\n0.0\n°C\n\n量程内 · 原始测量\n\n有效\n·\n新鲜 · 12 秒前\n\n传感器 T-01 · 网关 GW-01\n\n"
+    },
+    {
+      "test": "measurement-无效质量",
+      "text": "Components\n/\n感知与测量\n/\nMeasurement readout\nMeasurement readout\n测量读数\n\n精度、单位、量程、来源与质量共同构成读数。零值、负值、无效数据和离线快照有各自的表达。\n\n有效\n估算\n无效\n陈旧\n离线快照\n零值\n负值\n超量程\nInteractive preview\n演示数据 · 仅本地交互\n演示场景\n无效质量\n重置示例\n北侧温室 · 空气温度\n\nGH-01 / ENV-T01\n\nOnline\n—\n°C\n\n无效测量 · 不用于当前判断\n\n无效\n·\n新鲜 · 12 秒前\n\n传感器 T-01 · 网关 GW-01\n\n"
+    },
+    {
+      "test": "measurement-离线",
+      "text": "Components\n/\n感知与测量\n/\nMeasurement readout\nMeasurement readout\n测量读数\n\n精度、单位、量程、来源与质量共同构成读数。零值、负值、无效数据和离线快照有各自的表达。\n\n有效\n估算\n无效\n陈旧\n离线快照\n零值\n负值\n超量程\nInteractive preview\n演示数据 · 仅本地交互\n演示场景\n离线\n重置示例\n北侧温室 · 空气温度\n\nGH-01 / ENV-T01\n\nOffline\n24.6\n°C\n\n最后有效快照 · 非当前实时值\n\n有效\n·\n离线快照 · 12 秒前\n\n传感器 T-01 · 网关 GW-01\n\n"
+    },
+    {
+      "test": "consumer-light-material-retest",
+      "result": {
+        "background": "rgb(233, 233, 231)",
+        "mode": "",
+        "wells": [
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          },
+          {
+            "border": "0px",
+            "shadow": "rgba(0, 0, 0, 0.07) 0px 2px 4px 0px inset, rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset"
+          }
+        ]
+      }
+    },
+    {
+      "test": "command-accepted",
+      "text": "Components\n/\n控制与执行\n/\nCommand lifecycle\nCommand lifecycle\n指令生命周期\n\n从发送、接收、执行到回读验证，保留请求 ID、时间和期望值。超时明确标为结果未知，旧回执不能覆盖新指令。\n\n排队\n发送\n接收\n执行\n验证\n拒绝\n失败\n超时未知\n取消\nInteractive preview\n演示数据 · 仅本地交互\n演示场景\n已接收未生效\n重置示例\n\n已接收 · 待设备回读\n\n请求值\n通风窗目标 60%\n设备回读\n35% · 已停止\n指令记录 · cmd-2026\n取消请求\n"
+    },
+    {
+      "test": "command-cancel",
+      "text": "已接收 · 待设备回读\n\n请求值\n通风窗目标 60%\n设备回读\n35% · 已停止\n指令记录 · cmd-2026\n取消请求"
+    },
+    {
+      "test": "command-timeout",
+      "text": "回执超时 · 结果未知\n\n请求值\n通风窗目标 60%\n设备回读\n35% · 已停止\n\n执行结果未知，请查询设备回读。不要直接重复执行。\n\n指令记录 · cmd-2026",
+      "retryCount": 0
+    },
+    {
+      "test": "command-cancel-retest",
+      "text": "已取消\n\n请求值\n通风窗目标 60%\n设备回读\n35% · 已停止\n指令记录 · cmd-2026"
+    },
+    {
+      "test": "trend-empty",
+      "text": "温室气候 · 12 分钟\n历史窗口 · 原始采样 · Asia/Shanghai\n空气温度\n叶面温度\n湿度\n此时间窗内没有采样\n事件标记\n查看精确数据表"
+    },
+    {
+      "test": "mobile-trend-refinement",
+      "geometry": {
+        "scrollWidth": 1440,
+        "sliderWidths": [
+          846.21875
+        ],
+        "width": 1440
+      }
+    },
+    {
+      "test": "mobile-thermostat-refinement",
+      "geometry": {
+        "scrollWidth": 1440,
+        "width": 1440
+      }
+    },
+    {
+      "test": "consumer-mobile",
+      "geometry": {
+        "scrollWidth": 309,
+        "width": 320
+      }
+    },
+    {
+      "test": "mobile-thermostat-refinement-final",
+      "geometry": {
+        "scrollWidth": 320,
+        "width": 320
+      }
+    },
+    {
+      "test": "mobile-trend-refinement-final",
+      "geometry": {
+        "scrollWidth": 320,
+        "sliderWidths": [
+          200
+        ],
+        "width": 320
+      }
+    },
+    {
+      "test": "tab-selection-no-layout-shift",
+      "before": {
+        "height": 32,
+        "weight": "500",
+        "width": 86
+      },
+      "after": {
+        "height": 32,
+        "weight": "500",
+        "width": 86
+      }
+    },
+    {
+      "test": "theme-editor-mobile",
+      "geometry": {
+        "panel": [
+          {
+            "scrollWidth": 307,
+            "width": 320
+          }
+        ],
+        "scrollWidth": 320,
+        "width": 320
+      }
+    },
+    {
+      "test": "final-main-console",
+      "logs": [],
+      "viewport": {
+        "height": 1000,
+        "scrollWidth": 1440,
+        "width": 1440
+      }
+    }
+  ],
+  "mobileChecks": [
+    {
+      "name": "Measurement readout",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Measurement trust",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Trend inspector",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Light control",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Thermostat",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Position control",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Setpoint editor",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Control authority",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Permissives & interlocks",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Command lifecycle",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Irrigation run",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    },
+    {
+      "name": "Alarm state",
+      "document": 320,
+      "inner": 282,
+      "preview": 284,
+      "viewport": 320
+    }
+  ]
+}

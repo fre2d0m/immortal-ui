@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "components",
+    "blocks",
+    "theme",
+    "blocks/greenhouse-control",
+    "blocks/soil-profile",
+    "blocks/device-detail",
+    "home"
+  ],
+  "errors": []
+}

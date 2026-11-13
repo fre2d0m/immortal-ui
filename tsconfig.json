@@ -12,9 +12,11 @@
     "jsx": "react-jsx",
     "paths": {
       "@/components/iot/*": ["./registry/immortal/components/*"],
+      "@/components/icons/*": ["./registry/immortal/icons/*"],
       "@/components/blocks/*": ["./registry/immortal/blocks/*"],
       "@/*": ["./src/*"],
-      "@/lib/telemetry": ["./registry/immortal/components/telemetry.ts"]
+      "@/lib/telemetry": ["./registry/immortal/components/telemetry.ts"],
+      "@/lib/iot-model": ["./registry/immortal/components/iot-model.ts"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true

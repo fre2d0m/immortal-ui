@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "data-freshness",
+  "title": "Measurement trust",
+  "description": "分别呈现测量质量和数据年龄，展开来源、采样时间与接收时间。新鲜数据也可能无效，离线数据也可能保留有效历史。",
+  "dependencies": [
+    "cn",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://immortal.build/r/iot-model.json"
+  ],
+  "files": [
+    {
+      "path": "registry/immortal/components/data-freshness.tsx",
+      "content": "import { cn } from \"cn\";\nimport {\n  qualityLabels,\n  sampleAge,\n  timeLabel,\n  type Quality,\n} from \"@/lib/iot-model\";\nexport type MeasurementTrust = {\n  quality?: Quality;\n  sampledAt?: number | null;\n  receivedAt?: number | null;\n  now?: number;\n  expectedInterval?: number;\n  source?: string;\n  reason?: string;\n};\n/** Caller owns the clock: deterministic in SSR, tests and historical inspections. */\nexport function DataFreshness({\n  ageSeconds,\n  staleAfter = 60,\n  offline = false,\n  className,\n  quality = \"unknown\",\n  sampledAt,\n  receivedAt,\n  now,\n  expectedInterval,\n  source,\n  reason,\n  detailed = false,\n}: MeasurementTrust & {\n  ageSeconds?: number | null;\n  staleAfter?: number;\n  offline?: boolean;\n  className?: string;\n  detailed?: boolean;\n}) {\n  const age =\n    now !== undefined && sampledAt !== undefined\n      ? sampleAge(now, sampledAt)\n      : (ageSeconds ?? null);\n  const known = age !== null && Number.isFinite(age) && age >= 0;\n  const threshold =\n    expectedInterval != null &&\n    Number.isFinite(expectedInterval) &&\n    expectedInterval > 0\n      ? expectedInterval * 2\n      : staleAfter;\n  const stale =\n    known && Number.isFinite(threshold) && threshold >= 0 && age > threshold;\n  const duration = !known\n    ? \"采样时间未知\"\n    : age < 60\n      ? `${Math.floor(age)} 秒前`\n      : age < 3600\n        ? `${Math.floor(age / 60)} 分钟前`\n        : `${Math.floor(age / 3600)} 小时前`;\n  const temporal = offline\n    ? \"离线快照\"\n    : !known\n      ? \"时效未知\"\n      : stale\n        ? \"已陈旧\"\n        : \"新鲜\";\n  const summary = (\n    <span\n      className={cn(\n        \"inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm tabular-nums\",\n        className,\n      )}\n    >\n      <span\n        className={\n          quality === \"bad\"\n            ? \"text-destructive\"\n            : quality !== \"good\"\n              ? \"text-warning-text\"\n              : \"text-muted-foreground\"\n        }\n      >\n        {qualityLabels[quality]}\n      </span>\n      <span aria-hidden=\"true\" className=\"text-muted-foreground\">\n        ·\n      </span>\n      <span\n        className={offline || stale ? \"text-warning-text\" : \"text-muted-foreground\"}\n      >\n        {temporal} · {duration}\n      </span>\n    </span>\n  );\n  if (!detailed) return summary;\n  return (\n    <div className={cn(\"space-y-4\", className)}>\n      {summary}\n      <dl className=\"grid grid-cols-1 gap-3 text-sm sm:grid-cols-2\">\n        {[\n          [\"采样时间\", timeLabel(sampledAt) + \" · UTC\"],\n          [\"接收时间\", timeLabel(receivedAt) + \" · UTC\"],\n          [\n            \"预期采样间隔\",\n            expectedInterval != null && expectedInterval > 0\n              ? `${expectedInterval} 秒`\n              : \"未提供\",\n          ],\n          [\"数据来源\", source || \"未提供\"],\n        ].map(([label, value]) => (\n          <div key={label}>\n            <dt className=\"text-muted-foreground\">{label}</dt>\n            <dd className=\"mt-1 break-words tabular-nums\">{value}</dd>\n          </div>\n        ))}\n      </dl>\n      {reason && <p className=\"text-sm text-muted-foreground\">{reason}</p>}\n      <p className=\"text-sm text-muted-foreground\">\n        质量由数据源报告；时效依据采样时间计算。离线不等于历史值无效。\n      </p>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "@components/iot/data-freshness.tsx"
+    }
+  ],
+  "meta": {
+    "internal": true,
+    "replacement": "metric-card"
+  },
+  "categories": [
+    "iot",
+    "sensors"
+  ],
+  "type": "registry:component"
+}

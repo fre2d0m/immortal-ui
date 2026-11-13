@@ -1,0 +1,26 @@
+[
+  {
+    "file": "soil-water-explorer.tsx",
+    "sourceSha256": "86a960bc36cd809c9b03d05c6f99f385e127ae4f1caf2e3cc088c6e71262fad0",
+    "installedSha256": "86a960bc36cd809c9b03d05c6f99f385e127ae4f1caf2e3cc088c6e71262fad0",
+    "matches": true
+  },
+  {
+    "file": "soil-water-explorer.css",
+    "sourceSha256": "4340379aeeb0ca35562c5f99029470f0746f0f712529334efb73321e2a52d11e",
+    "installedSha256": "4340379aeeb0ca35562c5f99029470f0746f0f712529334efb73321e2a52d11e",
+    "matches": true
+  },
+  {
+    "file": "soil-water-plots.tsx",
+    "sourceSha256": "aedcc0290fb1031316afa4b15b85230101f596846604609bfed7d64eb6930369",
+    "installedSha256": "aedcc0290fb1031316afa4b15b85230101f596846604609bfed7d64eb6930369",
+    "matches": true
+  },
+  {
+    "file": "soil-water-model.ts",
+    "sourceSha256": "2e549b9f7019880ad8ec3da31230d0f202b99f69e7c7f8c7c7a225067be5a603",
+    "installedSha256": "2e549b9f7019880ad8ec3da31230d0f202b99f69e7c7f8c7c7a225067be5a603",
+    "matches": true
+  }
+]

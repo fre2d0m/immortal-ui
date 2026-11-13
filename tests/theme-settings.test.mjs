@@ -110,6 +110,7 @@ test("older saved themes gain Tab defaults without losing existing choices", () 
   assert.deepEqual(parseSettings({ version: 1, settings: legacy }), {
     ...defaultSettings,
     ...legacy,
+    geometry: {},
   });
 });
 test("Tab export retains content width and independent padding and radii", () => {
@@ -141,6 +142,7 @@ test("theme export changes actual geometry and keeps nested menu radii concentri
     cardPadding: 32,
     spacing: 5,
     pillButtons: false,
+    geometry: {},
   });
   for (const value of [
     "--field-radius: 15px",
@@ -156,6 +158,23 @@ test("theme export changes actual geometry and keeps nested menu radii concentri
     !themeOverrides(defaultSettings).includes("--primary:"),
     "default palettes remain intact",
   );
+});
+test("navigation radius follows the base with independent field and button radii", () => {
+  const settings = {
+    ...defaultSettings,
+    radius: 0,
+    geometry: { "field-radius": 11, "button-radius": 20 },
+  };
+  const automatic = commonVariables(settings);
+  assert.equal(automatic["--nav-radius"], "0px");
+  assert.equal(automatic["--field-radius"], "11px");
+  assert.equal(automatic["--button-radius"], "20px");
+
+  const manual = commonVariables({
+    ...settings,
+    geometry: { ...settings.geometry, "nav-radius": 14 },
+  });
+  assert.equal(manual["--nav-radius"], "14px");
 });
 test("custom primary colors choose readable text for both gradient endpoints", () => {
   for (const primary of [

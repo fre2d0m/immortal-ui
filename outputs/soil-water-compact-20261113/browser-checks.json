@@ -1,0 +1,354 @@
+{
+  "desktopAllTwenty": {
+    "dialogHeight": 694,
+    "dialogScrollHeight": 694,
+    "records": "3216",
+    "tracks": [
+      {
+        "bottom": 323.2109375,
+        "name": "moisture",
+        "top": 145
+      },
+      {
+        "bottom": 437.8671875,
+        "name": "comparison",
+        "top": 333.2109375
+      },
+      {
+        "bottom": 491.875,
+        "name": "weather",
+        "top": 447.875
+      },
+      {
+        "bottom": 527.875,
+        "name": "kc",
+        "top": 501.875
+      },
+      {
+        "bottom": 609.875,
+        "name": "events",
+        "top": 537.875
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ],
+    "workspaceHeight": 694
+  },
+  "narrowExpanded": {
+    "chart": {
+      "bottom": 833.875,
+      "height": 524.0625,
+      "left": 27,
+      "right": 292,
+      "top": 309.8125,
+      "width": 265,
+      "x": 27,
+      "y": 309.8125
+    },
+    "dialog": {
+      "clientWidth": 293,
+      "height": 888,
+      "scroll": 888,
+      "scrollWidth": 293
+    },
+    "tracks": [
+      {
+        "bottom": 507.890625,
+        "name": "moisture",
+        "top": 313.8125
+      },
+      {
+        "bottom": 631.8671875,
+        "name": "comparison",
+        "top": 517.890625
+      },
+      {
+        "bottom": 685.875,
+        "name": "weather",
+        "top": 641.875
+      },
+      {
+        "bottom": 721.875,
+        "name": "kc",
+        "top": 695.875
+      },
+      {
+        "bottom": 803.875,
+        "name": "events",
+        "top": 731.875
+      }
+    ],
+    "viewport": [
+      319,
+      914
+    ]
+  },
+  "knownZero": "已固定\n\n2025/12/31 22:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n0.0 %\n\n2025/12/31 22:00 · 未提供质量\n\n气象与系数\n降雨\n0.0 mm\nET₀\n2.0 mm\nKc\n0.00\n时段事件 0\n\n没有关联事件",
+  "knownSeventy": "已固定\n\n2026/01/01 04:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n70.0 %\n\n2026/01/01 04:00 · 存疑\n\n气象与系数\n降雨\n12.0 mm\nET₀\n— mm\nKc\n1.20\n时段事件 1\n持续故障持续中",
+  "pointerNegative": "已固定\n\n2026/01/01 01:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n-5.0 %\n\n2026/01/01 01:00 · 未提供质量\n\n气象与系数\n降雨\n0.0 mm\nET₀\n2.0 mm\nKc\n0.00\n时段事件 2\n持续灌溉持续区间\n另一灌溉区域持续区间",
+  "rawHandTable": "当前时间范围与所选深度的原始记录，按采样时间、深度排序\n采样时间 · UTC\t深度 / cm\t水分 / %\t质量\n2025/12/31 22:00\t10\t0.0\t未提供质量\n2025/12/31 23:00\t10\t10.0\t未提供质量\n2026/01/01 00:00\t10\t缺测\t缺测\n2026/01/01 01:00\t10\t-5.0\t未提供质量\n2026/01/01 04:00\t10\t70.0\t存疑\n2026/01/01 05:00\t10\t20.0\t未提供质量",
+  "consumer": {
+    "chartView": {
+      "height": 493,
+      "scroll": 493
+    },
+    "pageWidth": 1280,
+    "tracks": [
+      {
+        "bottom": 331.890625,
+        "name": "moisture",
+        "top": 194
+      },
+      {
+        "bottom": 422.8671875,
+        "name": "comparison",
+        "top": 341.890625
+      },
+      {
+        "bottom": 476.875,
+        "name": "weather",
+        "top": 432.875
+      },
+      {
+        "bottom": 512.875,
+        "name": "kc",
+        "top": 486.875
+      },
+      {
+        "bottom": 594.875,
+        "name": "events",
+        "top": 522.875
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ],
+    "workspace": {
+      "bottom": 693,
+      "height": 632,
+      "left": 24,
+      "right": 1256,
+      "top": 61,
+      "width": 1232,
+      "x": 24,
+      "y": 61
+    }
+  },
+  "locatedEvent": {
+    "chartView": {
+      "height": 493,
+      "scroll": 493
+    },
+    "reading": "已固定2025/07/12 08:00UTC · 1 个采样时隙水分 / %10 cm20.2 %2025/07/12 08:00 · 有效50 cm— %2025/07/12 08:00 · 无效 · 通道故障150 cm26.6 %2025/07/12 08:00 · 有效气象与系数降雨42.0 mmET₀4.37 mmKc1.15 时段事件 2 A 区灌溉持续区间 20–50 cm 通道故障持续区间",
+    "window": {
+      "cells": "2000",
+      "from": "1752220800000",
+      "to": "1752580800000"
+    }
+  },
+  "largeText": {
+    "chart": {
+      "clientHeight": 394,
+      "clientWidth": 275,
+      "height": 393.875,
+      "scrollHeight": 508,
+      "scrollWidth": 275,
+      "width": 286,
+      "x": 39,
+      "y": 429.375
+    },
+    "pageWidth": 364,
+    "tracks": [
+      {
+        "clientHeight": 71,
+        "clientWidth": 50,
+        "height": 70.875,
+        "scrollHeight": 71,
+        "scrollWidth": 50,
+        "track": "moisture",
+        "width": 50,
+        "x": 39,
+        "y": 493.625
+      },
+      {
+        "clientHeight": 42,
+        "clientWidth": 50,
+        "height": 41.625,
+        "scrollHeight": 42,
+        "scrollWidth": 50,
+        "track": "comparison",
+        "width": 50,
+        "x": 39,
+        "y": 584.5
+      },
+      {
+        "clientHeight": 55,
+        "clientWidth": 50,
+        "height": 55,
+        "scrollHeight": 55,
+        "scrollWidth": 50,
+        "track": "weather",
+        "width": 50,
+        "x": 39,
+        "y": 646.125
+      },
+      {
+        "clientHeight": 33,
+        "clientWidth": 50,
+        "height": 32.5,
+        "scrollHeight": 38,
+        "scrollWidth": 50,
+        "track": "kc",
+        "width": 50,
+        "x": 39,
+        "y": 721.125
+      },
+      {
+        "clientHeight": 90,
+        "clientWidth": 50,
+        "height": 90,
+        "scrollHeight": 90,
+        "scrollWidth": 50,
+        "track": "events",
+        "width": 50,
+        "x": 39,
+        "y": 773.625
+      }
+    ],
+    "viewport": [
+      375,
+      812
+    ],
+    "workspace": null
+  },
+  "installedFinal": {
+    "chart": {
+      "clientHeight": 493,
+      "clientWidth": 1202,
+      "height": 492.875,
+      "scrollHeight": 493,
+      "scrollWidth": 1202,
+      "width": 1202,
+      "x": 39,
+      "y": 168
+    },
+    "pageWidth": 1280,
+    "readout": "已固定2025/07/12 08:00UTC · 1 个采样时隙水分 / %10 cm20.2 %2025/07/12 08:00 · 有效50 cm— %2025/07/12 08:00 · 无效 · 通道故障150 cm26.6 %2025/07/12 08:00 · 有效气象与系数降雨42.0 mmET₀4.37 mmKc1.15 时段事件 2 A 区灌溉持续区间 20–50 cm 通道故障持续区间",
+    "tracks": [
+      {
+        "clientHeight": 119,
+        "clientWidth": 40,
+        "height": 118.984375,
+        "scrollHeight": 119,
+        "scrollWidth": 40,
+        "track": "moisture",
+        "width": 40,
+        "x": 39,
+        "y": 200
+      },
+      {
+        "clientHeight": 70,
+        "clientWidth": 40,
+        "height": 69.8828125,
+        "scrollHeight": 70,
+        "scrollWidth": 40,
+        "track": "comparison",
+        "width": 40,
+        "x": 39,
+        "y": 334.984375
+      },
+      {
+        "clientHeight": 44,
+        "clientWidth": 40,
+        "height": 44,
+        "scrollHeight": 44,
+        "scrollWidth": 40,
+        "track": "weather",
+        "width": 40,
+        "x": 39,
+        "y": 420.875
+      },
+      {
+        "clientHeight": 26,
+        "clientWidth": 40,
+        "height": 26,
+        "scrollHeight": 35,
+        "scrollWidth": 40,
+        "track": "kc",
+        "width": 40,
+        "x": 39,
+        "y": 480.875
+      },
+      {
+        "clientHeight": 72,
+        "clientWidth": 40,
+        "height": 72,
+        "scrollHeight": 72,
+        "scrollWidth": 40,
+        "track": "events",
+        "width": 40,
+        "x": 39,
+        "y": 522.875
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ],
+    "workspace": {
+      "clientHeight": 630,
+      "clientWidth": 1230,
+      "height": 632,
+      "scrollHeight": 630,
+      "scrollWidth": 1230,
+      "width": 1232,
+      "x": 24,
+      "y": 61
+    }
+  },
+  "console": [],
+  "finalPreview": {
+    "dialog": {
+      "clientHeight": 694,
+      "clientWidth": 1254,
+      "height": 696,
+      "scrollHeight": 694,
+      "scrollWidth": 1254,
+      "width": 1256
+    },
+    "tracks": [
+      {
+        "bottom": 310.3046875,
+        "top": 151,
+        "track": "moisture"
+      },
+      {
+        "bottom": 419.8671875,
+        "top": 326.3046875,
+        "track": "comparison"
+      },
+      {
+        "bottom": 479.875,
+        "top": 435.875,
+        "track": "weather"
+      },
+      {
+        "bottom": 521.875,
+        "top": 495.875,
+        "track": "kc"
+      },
+      {
+        "bottom": 609.875,
+        "top": 537.875,
+        "track": "events"
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  }
+}

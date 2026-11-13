@@ -1,0 +1,22 @@
+[
+  {
+    "file": "data-workflow.tsx",
+    "equal": true,
+    "withoutHeader": true
+  },
+  {
+    "file": "data-workflow.css",
+    "equal": true,
+    "withoutHeader": true
+  },
+  {
+    "file": "workflow-model.ts",
+    "equal": false,
+    "withoutHeader": true
+  },
+  {
+    "file": "workflow-parts.tsx",
+    "equal": true,
+    "withoutHeader": true
+  }
+]

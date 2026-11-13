@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Save icon exposes busy state and actual error",
+    "Successful save changes persisted state only after response",
+    "Stop icon cancels wait and late response stays ignored"
+  ],
+  "errors": []
+}

@@ -1,0 +1,87 @@
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+ℹ Updated 3 files:
+  - src/components/blocks/data-workflow.tsx
+  - src/components/blocks/workflow-parts.tsx
+  - src/components/blocks/data-workflow.css
+ℹ Skipped 3 files: (files might be identical, use --overwrite to overwrite)
+  - src/components/ui/button.tsx
+  - src/components/ui/tabs.tsx
+  - src/components/blocks/workflow-model.ts
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2051 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.37 kB │ gzip:   0.27 kB
+dist/assets/index-DYPz6JZl.css  119.62 kB │ gzip:  18.77 kB
+dist/assets/index-DoHH9DHZ.js   586.87 kB │ gzip: 189.44 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 392ms
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+ℹ Updated 2 files:
+  - src/components/blocks/data-workflow.tsx
+  - src/components/blocks/workflow-parts.tsx
+ℹ Skipped 4 files: (files might be identical, use --overwrite to overwrite)
+  - src/components/ui/button.tsx
+  - src/components/ui/tabs.tsx
+  - src/components/blocks/workflow-model.ts
+  - src/components/blocks/data-workflow.css
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2051 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.37 kB │ gzip:   0.27 kB
+dist/assets/index-DYPz6JZl.css  119.62 kB │ gzip:  18.77 kB
+dist/assets/index-CPjnWVjZ.js   586.86 kB │ gzip: 189.45 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 504ms
+- Checking registry.
+✔ Checking registry.
+- Installing dependencies.
+- Installing dependencies.
+✔ Installing dependencies.
+- Updating files.
+ℹ Updated 1 file:
+  - src/components/blocks/data-workflow.css
+ℹ Skipped 5 files: (files might be identical, use --overwrite to overwrite)
+  - src/components/ui/button.tsx
+  - src/components/ui/tabs.tsx
+  - src/components/blocks/data-workflow.tsx
+  - src/components/blocks/workflow-parts.tsx
+  - src/components/blocks/workflow-model.ts
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2051 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.37 kB │ gzip:   0.27 kB
+dist/assets/index-DVhKgjuQ.css  119.70 kB │ gzip:  18.78 kB
+dist/assets/index-C4OALQj6.js   586.86 kB │ gzip: 189.45 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 797ms

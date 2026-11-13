@@ -1,0 +1,340 @@
+{
+  "data": [
+    {
+      "case": "keyboard-irregular-minute-1",
+      "detail": "2025-12-31\n23:56:00 UTC\n\n测点 A\n10.0°C\n测点 B\n无此时刻采样"
+    },
+    {
+      "case": "keyboard-missing-minute-3",
+      "detail": "2025-12-31\n23:58:00 UTC\n\n测点 A\n缺测\n测点 B\n无此时刻采样"
+    },
+    {
+      "case": "pointer-first-sample",
+      "detail": "2025-12-31\n23:55:00 UTC\n\n测点 A\n0.0°C\n测点 B\n5.0°C"
+    },
+    {
+      "case": "单点零值",
+      "result": [
+        {
+          "dots": 1,
+          "paths": [],
+          "plots": 1,
+          "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C测点 A23:5500:0000:0500:1000:1520100-10◆"
+        }
+      ]
+    },
+    {
+      "case": "常量零值",
+      "result": [
+        {
+          "dots": 0,
+          "paths": [
+            "M35,192L75.5,192L156.5,192L440,192L845,192"
+          ],
+          "plots": 1,
+          "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C测点 A23:5500:0000:0500:1000:1520100-10◆"
+        }
+      ]
+    },
+    {
+      "case": "无记录",
+      "result": []
+    },
+    {
+      "case": "缺测与无效",
+      "result": [
+        {
+          "dots": 0,
+          "paths": [],
+          "plots": 0,
+          "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C测点 A所选序列在此时段没有有效读数；可在数据表核对缺测和无效记录。"
+        }
+      ]
+    },
+    {
+      "case": "极端值",
+      "result": [
+        {
+          "dots": 0,
+          "paths": [
+            "M41,192L81.2,104",
+            "M443,280L845,16"
+          ],
+          "plots": 1,
+          "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C测点 A23:5500:0000:0500:1000:152E91E90-1E9◆"
+        }
+      ]
+    },
+    {
+      "case": "不同单位分图",
+      "result": [
+        {
+          "dots": 2,
+          "paths": [
+            "M35,192L75.5,104",
+            "M440,280L845,16",
+            "M35,148L440,60L845,148"
+          ],
+          "plots": 2,
+          "text": "同单位共用纵轴，不同单位分图。断线表示缺测或无效记录，超过 720 秒的间隔也断线。2025-12-31 23:55:00 – 2026-01-01 00:15:00 UTC°C测点 A测点 B23:5500:0000:0500:1000:1520100-10◆%RH相对湿度23:5500:0000:0500:1000:151007550250◆"
+        }
+      ]
+    },
+    {
+      "case": "filtered-table",
+      "rows": 5,
+      "table": "原始采样 · UTC\n采样时间（UTC）\t指标\t读数\t质量\n2026-01-01 00:15:00\t测点 A\t20.0 °C\t未提供质量\n2026-01-01 00:05:00\t测点 A\t-10.0 °C\t未提供质量\n2025-12-31 23:58:00\t测点 A\t缺测\t未提供质量\n2025-12-31 23:56:00\t测点 A\t10.0 °C\t未提供质量\n2025-12-31 23:55:00\t测点 A\t0.0 °C\t未提供质量"
+    },
+    {
+      "case": "filtered-csv",
+      "content": "﻿timestamp_utc,metric_id,label,unit,value,state,quality,quality_reason\r\n2026-01-01T00:15:00.000Z,\"a\",\"测点 A\",\"°C\",20,\"valid\",\"\",\"\"\r\n2026-01-01T00:05:00.000Z,\"a\",\"测点 A\",\"°C\",-10,\"valid\",\"\",\"\"\r\n2025-12-31T23:58:00.000Z,\"a\",\"测点 A\",\"°C\",,\"missing\",\"\",\"\"\r\n2025-12-31T23:56:00.000Z,\"a\",\"测点 A\",\"°C\",10,\"valid\",\"\",\"\"\r\n2025-12-31T23:55:00.000Z,\"a\",\"测点 A\",\"°C\",0,\"valid\",\"\",\"\""
+    },
+    {
+      "case": "live-insert-retains-time",
+      "detail": "2026-01-01\n00:01:00 UTC\n\n实时验证\n10.0°C"
+    },
+    {
+      "case": "live-remove-notice",
+      "visible": true
+    },
+    {
+      "case": "installed-consumer-tooltip",
+      "detail": "2026-01-01\n00:01:00 UTC\n\n实时验证\n10.0°C",
+      "errors": []
+    },
+    {
+      "case": "installed-final",
+      "detail": "2026-01-01\n00:01:00 UTC\n\n实时验证\n10.0°C",
+      "errors": []
+    }
+  ],
+  "interaction": [
+    {
+      "case": "escape-dismiss",
+      "closed": true
+    },
+    {
+      "case": "tooltip-hoverable",
+      "detail": "2025-12-31\n23:55:00 UTC\n\n测点 A\n0.0°C\n测点 B\n5.0°C"
+    },
+    {
+      "case": "click-pinned-pointer-outside",
+      "open": true
+    },
+    {
+      "case": "outside-click-dismiss",
+      "closed": true
+    },
+    {
+      "case": "legend-hide",
+      "pressed": "false",
+      "paths": 2,
+      "sameScale": true
+    },
+    {
+      "case": "query-restores-focus",
+      "filterOpen": "false",
+      "focus": " 筛选",
+      "series": [
+        "测点 A"
+      ]
+    },
+    {
+      "case": "legend-emphasis",
+      "lines": [
+        {
+          "dash": null,
+          "opacity": "1",
+          "width": "3"
+        },
+        {
+          "dash": null,
+          "opacity": "1",
+          "width": "3"
+        },
+        {
+          "dash": "8 4",
+          "opacity": "0.25",
+          "width": "2.5"
+        }
+      ]
+    },
+    {
+      "case": "pointer-focus-owned-by-chart",
+      "slot": "telemetry-plot",
+      "tag": "DIV"
+    },
+    {
+      "case": "installed-click-focus",
+      "slot": "telemetry-plot"
+    },
+    {
+      "case": "forced-colors-reduced-motion",
+      "forcedColors": true,
+      "reducedMotion": true,
+      "stroke": "rgb(0, 0, 0)",
+      "tooltipBackground": "rgb(255, 255, 255)",
+      "transition": "1e-05s"
+    }
+  ],
+  "layout": [
+    {
+      "case": "desktop-tooltip",
+      "eventFill": "rgb(160, 160, 157)",
+      "page": 1280,
+      "tooltip": {
+        "left": 374,
+        "right": 662,
+        "width": 288
+      },
+      "width": 1280
+    },
+    {
+      "case": "320-before-tooltip-reflow",
+      "page": 320,
+      "tooltip": {
+        "left": 55,
+        "right": 265,
+        "width": 210
+      },
+      "width": 320
+    },
+    {
+      "case": "320-dark-tooltip-reflow",
+      "legendHeight": 78,
+      "page": 320,
+      "tooltipPosition": "relative",
+      "tooltipWidth": 234,
+      "width": 320
+    },
+    {
+      "case": "320-light-tooltip",
+      "page": 320,
+      "position": "relative",
+      "width": 320
+    },
+    {
+      "case": "320-light-sparkline-info",
+      "page": 320,
+      "width": 320
+    },
+    {
+      "case": "large-font-extreme",
+      "font": "20px",
+      "page": 309,
+      "paths": [
+        "M108,216L161.5,116L215,16"
+      ],
+      "tooltip": {
+        "left": 41,
+        "width": 227
+      },
+      "width": 320
+    },
+    {
+      "case": "#/components/metric-card",
+      "page": 1280,
+      "plots": 1,
+      "width": 1280
+    },
+    {
+      "case": "#/components/indicator-card",
+      "page": 1280,
+      "plots": 1,
+      "width": 1280
+    },
+    {
+      "case": "#/blocks/greenhouse-control",
+      "page": 1280,
+      "plots": 1,
+      "width": 1280
+    },
+    {
+      "case": "#/theme",
+      "page": 1280,
+      "plots": 3,
+      "width": 1280
+    }
+  ],
+  "notes": [
+    "内置浏览器不支持触摸事件派发；本轮未完成真实触控验证。"
+  ],
+  "palette": {
+    "dark": {
+      "background": "linear-gradient(155deg, rgb(37, 37, 37), rgb(36, 36, 36))",
+      "colors": [
+        "#77b5f8",
+        "#e8b86d",
+        "#6bc4af",
+        "#bb9ce4",
+        "#e49db1"
+      ],
+      "muted": "#a0a09d"
+    },
+    "light": {
+      "background": "linear-gradient(155deg, rgb(249, 249, 247), rgb(246, 246, 244))",
+      "colors": [
+        "#286bb2",
+        "#996018",
+        "#277567",
+        "#7858a0",
+        "#a24a68"
+      ],
+      "muted": "#646461"
+    }
+  },
+  "contrast": [
+    {
+      "theme": "dark",
+      "series": [
+        {
+          "color": "#77b5f8",
+          "min": 7.12
+        },
+        {
+          "color": "#e8b86d",
+          "min": 8.4
+        },
+        {
+          "color": "#6bc4af",
+          "min": 7.4
+        },
+        {
+          "color": "#bb9ce4",
+          "min": 6.56
+        },
+        {
+          "color": "#e49db1",
+          "min": 7.12
+        }
+      ],
+      "muted": 5.85
+    },
+    {
+      "theme": "light",
+      "series": [
+        {
+          "color": "#286bb2",
+          "min": 5.06
+        },
+        {
+          "color": "#996018",
+          "min": 4.8
+        },
+        {
+          "color": "#277567",
+          "min": 5.07
+        },
+        {
+          "color": "#7858a0",
+          "min": 5.24
+        },
+        {
+          "color": "#a24a68",
+          "min": 5.22
+        }
+      ],
+      "muted": 5.49
+    }
+  ]
+}

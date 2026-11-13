@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "CLI installation with Graphite",
+    "independent type check and production build",
+    "save failure and confirmed save success",
+    "stale async result ignored after external edit",
+    "cross-year UTC timestamps, 0 input and false output preserved",
+    "read-only configuration and canvas",
+    "completed runs invalidated by definition changes"
+  ],
+  "errors": []
+}

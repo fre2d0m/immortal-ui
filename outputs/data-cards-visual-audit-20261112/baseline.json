@@ -1,0 +1,521 @@
+{
+  "report": [
+    {
+      "name": "metric",
+      "width": 505,
+      "height": 439.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric",
+      "width": 288,
+      "height": 537.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "indicator",
+      "width": 505,
+      "height": 522.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 有效\n\n统计窗口 11/10 07:14:00–11/10 07:29:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "name": "indicator",
+      "width": 288,
+      "height": 640.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 有效\n\n统计窗口 11/10 07:14:00–11/10 07:29:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "name": "metric-range",
+      "width": 505,
+      "height": 500.25,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-range",
+      "width": 288,
+      "height": 570.25,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-range-minimum",
+      "width": 505,
+      "height": 500.25,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n-10.0°C\n\n-34.2 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-range-minimum",
+      "width": 288,
+      "height": 570.25,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n-10.0°C\n\n-34.2 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-range-negative",
+      "width": 505,
+      "height": 500.25,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n-8.2°C\n\n-32.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-range-negative",
+      "width": 288,
+      "height": 570.25,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n-8.2°C\n\n-32.4 °C\n较前一采样\n\n探头最近一次上报的观测值\n\n-10 °C\n50 °C\n\n目标区间 18–28 °C\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "indicator-table",
+      "width": 505,
+      "height": 392.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "虫情识别\n\n北区诱捕点 · 相机 CAM-02\n\n识别类别\t数量 (只)\t模型得分\n鳞翅目\t12\t0.92\n鞘翅目\t0\t—\n\n本次图像识别的分类结果\n\n计算于 11/10 07:29:00 UTC · 有效\n\n计算依据与口径"
+    },
+    {
+      "name": "indicator-table",
+      "width": 288,
+      "height": 434.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "虫情识别\n\n北区诱捕点 · 相机 CAM-02\n\n识别类别\t数量 (只)\t模型得分\n鳞翅目\t12\t0.92\n鞘翅目\t0\t—\n\n本次图像识别的分类结果\n\n计算于 11/10 07:29:00 UTC · 有效\n\n计算依据与口径"
+    },
+    {
+      "name": "indicator-table-wide",
+      "width": 505,
+      "height": 520.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "虫情识别\n\n北区诱捕点 · 相机 CAM-02\n\n识别类别\t数量 (只)\t模型得分\t完整结果记录标识\nLepidoptera-0\t0\t0.9234\tCAM02-20261110T0729-detection-result-0\nLepidoptera-1\t1\t0.9234\tCAM02-20261110T0729-detection-result-1\nLepidoptera-2\t2\t0.9234\tCAM02-20261110T0729-detection-result-2\nLepidoptera-3\t3\t0.9234\tCAM02-20261110T0729-detection-result-3\nLepidoptera-4\t4\t0.9234\tCAM02-20261110T0729-detection-result-4\nLepidoptera-5\t5\t0.9234\tCAM02-20261110T0729-detection-result-5\nLepidoptera-6\t6\t0.9234\tCAM02-20261110T0729-detection-result-6\nLepidoptera-7\t7\t0.9234\tCAM02-20261110T0729-detection-result-7\nLepidoptera-8\t8\t0.9234\tCAM02-20261110T0729-detection-result-8\nLepidoptera-9\t9\t0.9234\tCAM02-20261110T0729-detection-result-9\nLepidoptera-10\t10\t0.9234\tCAM02-20261110T0729-detection-result-10\nLepidoptera-11\t11\t0.9234\tCAM02-20261110T0729-detection-result-11\nLepidoptera-12\t12\t0.9234\tCAM02-20261110T0729-detection-result-12\nLepidoptera-13\t13\t0.9234\tCAM02-20261110T0729-detection-result-13\n\n本次图像识别的分类结果\n\n计算于 11/10 07:29:00 UTC · 有效\n\n计算依据与口径"
+    },
+    {
+      "name": "indicator-table-wide",
+      "width": 288,
+      "height": 562.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "虫情识别\n\n北区诱捕点 · 相机 CAM-02\n\n识别类别\t数量 (只)\t模型得分\t完整结果记录标识\nLepidoptera-0\t0\t0.9234\tCAM02-20261110T0729-detection-result-0\nLepidoptera-1\t1\t0.9234\tCAM02-20261110T0729-detection-result-1\nLepidoptera-2\t2\t0.9234\tCAM02-20261110T0729-detection-result-2\nLepidoptera-3\t3\t0.9234\tCAM02-20261110T0729-detection-result-3\nLepidoptera-4\t4\t0.9234\tCAM02-20261110T0729-detection-result-4\nLepidoptera-5\t5\t0.9234\tCAM02-20261110T0729-detection-result-5\nLepidoptera-6\t6\t0.9234\tCAM02-20261110T0729-detection-result-6\nLepidoptera-7\t7\t0.9234\tCAM02-20261110T0729-detection-result-7\nLepidoptera-8\t8\t0.9234\tCAM02-20261110T0729-detection-result-8\nLepidoptera-9\t9\t0.9234\tCAM02-20261110T0729-detection-result-9\nLepidoptera-10\t10\t0.9234\tCAM02-20261110T0729-detection-result-10\nLepidoptera-11\t11\t0.9234\tCAM02-20261110T0729-detection-result-11\nLepidoptera-12\t12\t0.9234\tCAM02-20261110T0729-detection-result-12\nLepidoptera-13\t13\t0.9234\tCAM02-20261110T0729-detection-result-13\n\n本次图像识别的分类结果\n\n计算于 11/10 07:29:00 UTC · 有效\n\n计算依据与口径"
+    },
+    {
+      "name": "metric-long",
+      "width": 505,
+      "height": 552.75,
+      "scrollWidth": 1361,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "北侧科研温室环境空气温度观测指标（第三通道）\n\n农业试验基地 · 北侧科研温室 · 第二分区 · T-01\n\n24.6°C\n\n+0.4 °C\n较前一个已确认有效且处于相同采样窗口的观测记录\n\nSOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n有效\n·\n新鲜 · 12 秒前\n参与统计的有效样本总数\n87 / 90\n数据处理版本\ntemperatureAggregationVersion-20261110-beta\n来源与测量定义"
+    },
+    {
+      "name": "metric-long",
+      "width": 288,
+      "height": 725.53125,
+      "scrollWidth": 1361,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "北侧科研温室环境空气温度观测指标（第三通道）\n\n农业试验基地 · 北侧科研温室 · 第二分区 · T-01\n\n24.6°C\n\n+0.4 °C\n较前一个已确认有效且处于相同采样窗口的观测记录\n\nSOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_SOURCE_MESSAGE_WITHOUT_SPACES_\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n有效\n·\n新鲜 · 12 秒前\n参与统计的有效样本总数\n87 / 90\n数据处理版本\ntemperatureAggregationVersion-20261110-beta\n来源与测量定义"
+    },
+    {
+      "name": "metric-huge",
+      "width": 505,
+      "height": 467.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n1,234,567,890,123.1μmol·m⁻²·s⁻¹\n\n+1,234,567,890,098.9 μmol·m⁻²·s⁻¹\n较前一采样\n\n超出定义范围\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 μmol·m⁻²·s⁻¹\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-huge",
+      "width": 288,
+      "height": 592.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n1,234,567,890,123.1μmol·m⁻²·s⁻¹\n\n+1,234,567,890,098.9 μmol·m⁻²·s⁻¹\n较前一采样\n\n超出定义范围\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 μmol·m⁻²·s⁻¹\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-text-empty",
+      "width": 505,
+      "height": 280.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "巡检记录\n\n北侧温室 · 测点 T-01\n\n最近一次设备自检返回的文字结果\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-text-empty",
+      "width": 288,
+      "height": 322.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "巡检记录\n\n北侧温室 · 测点 T-01\n\n最近一次设备自检返回的文字结果\n\n有效\n·\n新鲜 · 12 秒前\n来源与测量定义"
+    },
+    {
+      "name": "metric-missing",
+      "width": 505,
+      "height": 279.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n—°C\n\n暂无数据\n\n来源与测量定义"
+    },
+    {
+      "name": "metric-missing",
+      "width": 288,
+      "height": 321.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n—°C\n\n暂无数据\n\n来源与测量定义"
+    },
+    {
+      "name": "metric-loading",
+      "width": 505,
+      "height": 275,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n正在读取观测…\n\n来源与测量定义"
+    },
+    {
+      "name": "metric-loading",
+      "width": 288,
+      "height": 317,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n正在读取观测…\n\n来源与测量定义"
+    },
+    {
+      "name": "metric-error",
+      "width": 505,
+      "height": 275,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n读取失败，请检查数据连接后重试。\n\n来源与测量定义"
+    },
+    {
+      "name": "metric-error",
+      "width": 288,
+      "height": 317,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "空气温度\n\n北侧温室 · 测点 T-01\n\n读取失败，请检查数据连接后重试。\n\n来源与测量定义"
+    },
+    {
+      "name": "indicator-estimated",
+      "width": 505,
+      "height": 522.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 估算\n\n统计窗口 11/10 07:14:00–11/10 07:29:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "name": "indicator-estimated",
+      "width": 288,
+      "height": 640.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 估算\n\n统计窗口 11/10 07:14:00–11/10 07:29:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "name": "indicator-cross-year",
+      "width": 505,
+      "height": 522.75,
+      "scrollWidth": 503,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 有效\n\n统计窗口 12/31 23:45:00–01/01 00:00:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "name": "indicator-cross-year",
+      "width": 288,
+      "height": 640.75,
+      "scrollWidth": 286,
+      "headerGap": 48,
+      "headerMargin": "24px",
+      "overflow": [],
+      "text": "温室均温\n\n北侧温室 · 3 个测点\n\n24.6°C\n\n+0.4 °C\n较前一采样\n\n最近 15 分钟有效样本的算术平均值\n\n最近 8 分钟 · 原始观测 · UTC\n最低 23.2 · 最高 24.6 °C\n\n计算于 11/10 07:29:00 UTC · 有效\n\n统计窗口 12/31 23:45:00–01/01 00:00:00 UTC\n\n有效样本\n87 / 90\n参与测点\n3 个\n计算依据与口径"
+    },
+    {
+      "theme": "light",
+      "colors": {
+        "colors": {
+          "foreground": {
+            "css": "rgb(37, 37, 37)",
+            "rgba": [
+              37,
+              37,
+              37,
+              255
+            ]
+          },
+          "muted-foreground": {
+            "css": "rgb(100, 100, 97)",
+            "rgba": [
+              100,
+              100,
+              97,
+              255
+            ]
+          },
+          "card": {
+            "css": "rgb(245, 245, 243)",
+            "rgba": [
+              245,
+              245,
+              243,
+              255
+            ]
+          },
+          "success": {
+            "css": "rgb(37, 133, 74)",
+            "rgba": [
+              37,
+              133,
+              74,
+              255
+            ]
+          },
+          "destructive": {
+            "css": "rgb(185, 56, 56)",
+            "rgba": [
+              185,
+              56,
+              56,
+              255
+            ]
+          },
+          "warning": {
+            "css": "rgb(171, 106, 18)",
+            "rgba": [
+              171,
+              106,
+              18,
+              255
+            ]
+          },
+          "color-warning-text": {
+            "css": "rgb(37, 37, 37)",
+            "rgba": [
+              37,
+              37,
+              37,
+              255
+            ]
+          },
+          "ring": {
+            "css": "rgb(104, 104, 101)",
+            "rgba": [
+              104,
+              104,
+              101,
+              255
+            ]
+          },
+          "primary": {
+            "css": "rgb(48, 48, 48)",
+            "rgba": [
+              48,
+              48,
+              48,
+              255
+            ]
+          },
+          "surface-top": {
+            "css": "rgb(249, 249, 247)",
+            "rgba": [
+              249,
+              249,
+              247,
+              255
+            ]
+          },
+          "surface-bottom": {
+            "css": "rgb(246, 246, 244)",
+            "rgba": [
+              246,
+              246,
+              244,
+              255
+            ]
+          }
+        },
+        "background": "rgba(0, 0, 0, 0) linear-gradient(155deg, rgb(249, 249, 247), rgb(246, 246, 244)) repeat scroll 0% 0% / auto padding-box border-box",
+        "summaryOutline": "oklab(0.516332 -0.00129899 0.00445753 / 0.5) none 3px"
+      }
+    },
+    {
+      "theme": "dark",
+      "colors": {
+        "colors": {
+          "foreground": {
+            "css": "rgb(237, 237, 235)",
+            "rgba": [
+              237,
+              237,
+              235,
+              255
+            ]
+          },
+          "muted-foreground": {
+            "css": "rgb(160, 160, 157)",
+            "rgba": [
+              160,
+              160,
+              157,
+              255
+            ]
+          },
+          "card": {
+            "css": "rgb(36, 36, 36)",
+            "rgba": [
+              36,
+              36,
+              36,
+              255
+            ]
+          },
+          "success": {
+            "css": "rgb(97, 217, 145)",
+            "rgba": [
+              97,
+              217,
+              145,
+              255
+            ]
+          },
+          "destructive": {
+            "css": "rgb(242, 139, 130)",
+            "rgba": [
+              242,
+              139,
+              130,
+              255
+            ]
+          },
+          "warning": {
+            "css": "rgb(245, 175, 96)",
+            "rgba": [
+              245,
+              175,
+              96,
+              255
+            ]
+          },
+          "color-warning-text": {
+            "css": "rgb(237, 237, 235)",
+            "rgba": [
+              237,
+              237,
+              235,
+              255
+            ]
+          },
+          "ring": {
+            "css": "rgb(125, 125, 121)",
+            "rgba": [
+              125,
+              125,
+              121,
+              255
+            ]
+          },
+          "primary": {
+            "css": "rgb(222, 222, 220)",
+            "rgba": [
+              222,
+              222,
+              220,
+              255
+            ]
+          },
+          "surface-top": {
+            "css": "rgb(37, 37, 37)",
+            "rgba": [
+              37,
+              37,
+              37,
+              255
+            ]
+          },
+          "surface-bottom": {
+            "css": "rgb(36, 36, 36)",
+            "rgba": [
+              36,
+              36,
+              36,
+              255
+            ]
+          }
+        },
+        "background": "rgba(0, 0, 0, 0) linear-gradient(155deg, rgb(37, 37, 37), rgb(36, 36, 36)) repeat scroll 0% 0% / auto padding-box border-box",
+        "summaryOutline": "oklab(0.588463 -0.0016813 0.00574791 / 0.5) none 3px"
+      }
+    }
+  ],
+  "errors": []
+}

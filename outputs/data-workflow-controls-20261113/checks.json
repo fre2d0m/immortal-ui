@@ -1,0 +1,308 @@
+{
+  "checks": [
+    "dark: 100%→120%→100% 与真实视口一致，百分比不跳宽；加号12px/图标7px/命中40px，两类端点均9px；外围点击、键盘插入和撤销正常。",
+    "light: 100%→120%→100% 与真实视口一致，百分比不跳宽；加号12px/图标7px/命中40px，两类端点均9px；外围点击、键盘插入和撤销正常。",
+    "完整流程适配以及 15%/180% 上下限均显示真实比例。",
+    "Chrome Ctrl+滚轮缩放即时更新百分比。",
+    "普通动效下缩放动画的中间帧也更新比例。",
+    "强制配色下取消渐变，实心与空心仍明确不同。",
+    "320px宽度/20px字号的两种主题中，比例和工具栏完整留在画布内，无横向溢出。",
+    "空画布与只读视图也显示实际比例。",
+    "触控模拟可操作缩小后的加号并插入节点。"
+  ],
+  "measurements": [
+    {
+      "mode": "dark",
+      "styles": {
+        "endpoint": {
+          "width": "40px",
+          "height": "40px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "edge": {
+          "width": "40px",
+          "height": "40px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "mark": {
+          "width": "12px",
+          "height": "12px",
+          "background": "none",
+          "shadow": "none",
+          "border": "1px"
+        },
+        "icon": {
+          "width": "7px",
+          "height": "7px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "filled": {
+          "width": "9px",
+          "height": "9px",
+          "background": "linear-gradient(145deg, color(srgb 0.702941 0.702941 0.692157), rgb(160, 160, 157) 55%, color(srgb 0.557804 0.557804 0.547451))",
+          "shadow": "rgba(255, 255, 255, 0.3) 0px 0.5px 0.5px 0px inset, rgba(0, 0, 0, 0.28) 0px -0.5px 0.5px 0px inset",
+          "border": "2px"
+        },
+        "hollow": {
+          "width": "9px",
+          "height": "9px",
+          "background": "linear-gradient(rgb(36, 36, 36), rgb(36, 36, 36)), linear-gradient(145deg, color(srgb 0.702941 0.702941 0.692157), rgb(160, 160, 157) 55%, color(srgb 0.557804 0.557804 0.547451))",
+          "shadow": "rgba(0, 0, 0, 0.3) 0px 0.5px 1px 0px inset",
+          "border": "1px"
+        }
+      }
+    },
+    {
+      "mode": "light",
+      "styles": {
+        "endpoint": {
+          "width": "40px",
+          "height": "40px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "edge": {
+          "width": "40px",
+          "height": "40px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "mark": {
+          "width": "12px",
+          "height": "12px",
+          "background": "none",
+          "shadow": "none",
+          "border": "1px"
+        },
+        "icon": {
+          "width": "7px",
+          "height": "7px",
+          "background": "none",
+          "shadow": "none",
+          "border": "0px"
+        },
+        "filled": {
+          "width": "9px",
+          "height": "9px",
+          "background": "linear-gradient(145deg, color(srgb 0.330392 0.330392 0.321569), rgb(100, 100, 97) 55%, color(srgb 0.454745 0.454745 0.443451))",
+          "shadow": "rgba(255, 255, 255, 0.3) 0px 0.5px 0.5px 0px inset, rgba(0, 0, 0, 0.28) 0px -0.5px 0.5px 0px inset",
+          "border": "2px"
+        },
+        "hollow": {
+          "width": "9px",
+          "height": "9px",
+          "background": "linear-gradient(rgb(245, 245, 243), rgb(245, 245, 243)), linear-gradient(145deg, color(srgb 0.330392 0.330392 0.321569), rgb(100, 100, 97) 55%, color(srgb 0.454745 0.454745 0.443451))",
+          "shadow": "rgba(0, 0, 0, 0.3) 0px 0.5px 1px 0px inset",
+          "border": "1px"
+        }
+      }
+    },
+    {
+      "animatedZoom": [
+        {
+          "time": 15.799999952316284,
+          "z": 1,
+          "label": "100%"
+        },
+        {
+          "time": 31.699999928474426,
+          "z": 1,
+          "label": "100%"
+        },
+        {
+          "time": 48.60000002384186,
+          "z": 1,
+          "label": "100%"
+        },
+        {
+          "time": 65.79999995231628,
+          "z": 1.00026,
+          "label": "100%"
+        },
+        {
+          "time": 82.5,
+          "z": 1.00335,
+          "label": "100%"
+        },
+        {
+          "time": 98.89999997615814,
+          "z": 1.01273,
+          "label": "101%"
+        },
+        {
+          "time": 115.29999995231628,
+          "z": 1.03192,
+          "label": "103%"
+        },
+        {
+          "time": 132.39999997615814,
+          "z": 1.06485,
+          "label": "106%"
+        },
+        {
+          "time": 148.39999997615814,
+          "z": 1.11574,
+          "label": "112%"
+        },
+        {
+          "time": 165.19999992847443,
+          "z": 1.15473,
+          "label": "115%"
+        },
+        {
+          "time": 182.29999995231628,
+          "z": 1.1806,
+          "label": "118%"
+        },
+        {
+          "time": 198.60000002384186,
+          "z": 1.19432,
+          "label": "119%"
+        },
+        {
+          "time": 215.19999992847443,
+          "z": 1.19922,
+          "label": "120%"
+        },
+        {
+          "time": 232,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 248.5,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 264.89999997615814,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 282,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 299.10000002384186,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 315.10000002384186,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 331.5,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 348.2999999523163,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 365.6999999284744,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 381.60000002384186,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 398.89999997615814,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 415.6999999284744,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 432.1999999284744,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 449.10000002384186,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 465,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 481.89999997615814,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 498.7999999523163,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 515.2999999523163,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 532.5,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 549,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 565.1000000238419,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 582.3999999761581,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 598.5,
+          "z": 1.2,
+          "label": "120%"
+        },
+        {
+          "time": 615.6999999284744,
+          "z": 1.2,
+          "label": "120%"
+        }
+      ]
+    },
+    {
+      "forced": {
+        "filled": "rgb(0, 0, 0)",
+        "hollow": "rgb(255, 255, 255)",
+        "hollowBorder": "rgb(0, 0, 0)",
+        "filledImage": "none",
+        "hollowImage": "none"
+      }
+    }
+  ],
+  "errors": []
+}

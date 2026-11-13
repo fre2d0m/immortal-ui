@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Installed component without an adapter summary reports parameter counts, not arbitrary descriptions",
+    "Host form updates the generic fallback count without changing summary presentation"
+  ],
+  "heights": [
+    200,
+    200
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "checks": [
+    {
+      "name": "dark read-only validation, restored header, keyboard, edit history, forms and expanded workspace",
+      "toolbars": [
+        {
+          "label": "Workflow actions",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Edit history",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Canvas view",
+          "border": "1px",
+          "bg": "rgb(36, 36, 36)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "light read-only validation, restored header, keyboard, edit history, forms and expanded workspace",
+      "toolbars": [
+        {
+          "label": "Workflow actions",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Edit history",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Canvas view",
+          "border": "1px",
+          "bg": "rgb(245, 245, 243)",
+          "children": [
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            },
+            {
+              "w": 34,
+              "h": 34,
+              "radius": "50%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "English run results with normal inputs",
+      "passed": true
+    },
+    {
+      "name": "English run results with warm inputs",
+      "passed": true
+    },
+    {
+      "name": "English run results with missing inputs",
+      "passed": true
+    },
+    {
+      "name": "English run results with failure inputs",
+      "passed": true
+    },
+    {
+      "name": "Node context menu, edge insertion, compatible candidates, empty trigger and import error",
+      "passed": true
+    },
+    {
+      "name": "390px touch, 20px font, long name, compact menus and results",
+      "mobileToolbars": [
+        {
+          "label": "Workflow actions",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Edit history",
+          "border": "0px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "children": [
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            }
+          ]
+        },
+        {
+          "label": "Canvas view",
+          "border": "1px",
+          "bg": "rgb(36, 36, 36)",
+          "children": [
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            },
+            {
+              "w": 40,
+              "h": 40,
+              "radius": "50%"
+            }
+          ]
+        }
+      ],
+      "picker": {
+        "x": 66,
+        "y": 268,
+        "width": 312,
+        "height": 402
+      }
+    },
+    {
+      "name": "Actual showcase: legacy labels migrated, topology preserved, warmer input computes 26 C",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

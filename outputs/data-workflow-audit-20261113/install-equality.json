@@ -1,0 +1,26 @@
+[
+  {
+    "file": "data-workflow.tsx",
+    "byteIdentical": true,
+    "onlyDifference": null,
+    "sourceSha256": "1c9d45c46d4de2eb69ff8b3ce50eaaa8ba1179af9b262170d80fcef6c2c3c23b"
+  },
+  {
+    "file": "workflow-parts.tsx",
+    "byteIdentical": true,
+    "onlyDifference": null,
+    "sourceSha256": "294fe650dd1dcad5e0d6050d40b658b5281f3437e49c3ae6e4e22fef6db4a10b"
+  },
+  {
+    "file": "workflow-model.ts",
+    "byteIdentical": false,
+    "onlyDifference": "shadcn removed leading documentation comment",
+    "sourceSha256": "2b78752570886fa5bd9f67784d26c9dffaf559f1898743b44da824bbbc70b9a2"
+  },
+  {
+    "file": "data-workflow.css",
+    "byteIdentical": true,
+    "onlyDifference": null,
+    "sourceSha256": "1cd6026b65b861c8fcaec424c8670fc7b45eee9bf6c3a2c87f7eb1c2bfeb215d"
+  }
+]

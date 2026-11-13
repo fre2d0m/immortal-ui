@@ -1,0 +1,635 @@
+{
+  "light": {
+    "colors": {
+      "--card": "#f5f5f3",
+      "--foreground": "#252525",
+      "--muted-foreground": "#646461",
+      "--soil-et0": "#94631f",
+      "--soil-fault": "#a6534e",
+      "--soil-freeze": "#5a6fb0",
+      "--soil-irrigation": "#2c7c69",
+      "--soil-kc": "#52735b",
+      "--soil-rain": "#326b9e",
+      "--soil-series-0": "#176c5b",
+      "--soil-series-1": "#8c5b18",
+      "--soil-series-2": "#316c9d",
+      "--soil-series-3": "#7650a3",
+      "--soil-series-4": "#a04765"
+    },
+    "panels": [
+      {
+        "class": "flex-1 text-sm outline-none soil-water-chart-view",
+        "height": 520,
+        "scroll": 520
+      },
+      {
+        "class": "soil-water-inspector",
+        "height": 520,
+        "scroll": 520
+      },
+      {
+        "class": "soil-water-readings",
+        "height": 152,
+        "scroll": 152
+      },
+      {
+        "class": "soil-water-focus-events",
+        "height": 149,
+        "scroll": 149
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "observedDomain": {
+    "max": 31.856,
+    "min": 13.644,
+    "points": [
+      {
+        "left": "374.429px",
+        "top": "157.77px"
+      },
+      {
+        "left": "374.429px",
+        "top": "125.441px"
+      }
+    ],
+    "track": {
+      "height": "115.446px",
+      "top": "92.7572px"
+    }
+  },
+  "referenceDomain": {
+    "max": 50,
+    "min": 0,
+    "points": [
+      {
+        "left": "374.429px",
+        "top": "158.33px"
+      },
+      {
+        "left": "374.429px",
+        "top": "146.555px"
+      }
+    ],
+    "track": {
+      "height": "115.446px",
+      "top": "92.7572px"
+    }
+  },
+  "twenty": {
+    "cells": "7300",
+    "dialog": {
+      "height": 694,
+      "scroll": 694
+    },
+    "domain": [
+      "13.644",
+      "31.856"
+    ],
+    "panels": [
+      {
+        "class": "flex-1 text-sm outline-none soil-water-chart-view",
+        "height": 520,
+        "scroll": 520
+      },
+      {
+        "class": "soil-water-inspector",
+        "height": 520,
+        "scroll": 520
+      },
+      {
+        "class": "soil-water-readings",
+        "height": 221,
+        "scroll": 1173
+      },
+      {
+        "class": "soil-water-focus-events",
+        "height": 80,
+        "scroll": 141
+      }
+    ],
+    "records": "175056"
+  },
+  "dark": {
+    "colors": {
+      "--card": "#242424",
+      "--foreground": "#ededeb",
+      "--muted-foreground": "#a0a09d",
+      "--soil-et0": "#dfb679",
+      "--soil-fault": "#dc938b",
+      "--soil-freeze": "#9cacdf",
+      "--soil-irrigation": "#76bea9",
+      "--soil-kc": "#9bbea2",
+      "--soil-rain": "#85b1e3",
+      "--soil-series-0": "#79d4bf",
+      "--soil-series-1": "#e6bc78",
+      "--soil-series-2": "#8bbbe7",
+      "--soil-series-3": "#bea7eb",
+      "--soil-series-4": "#e8a1b2"
+    }
+  },
+  "narrow": {
+    "chart": {
+      "height": 538,
+      "scroll": 538
+    },
+    "dialog": {
+      "height": 786,
+      "scroll": 786,
+      "scrollWidth": 349,
+      "width": 349
+    },
+    "tracks": [
+      {
+        "bottom": 387.078125,
+        "name": "moisture",
+        "top": 328.59375
+      },
+      {
+        "bottom": 496.5,
+        "name": "comparison",
+        "top": 401.078125
+      },
+      {
+        "bottom": 554.5,
+        "name": "weather",
+        "top": 510.5
+      },
+      {
+        "bottom": 594.5,
+        "name": "kc",
+        "top": 568.5
+      },
+      {
+        "bottom": 698.5,
+        "name": "events",
+        "top": 608.5
+      }
+    ],
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "zero": "2025/12/31 22:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n0.0 %\n未提供质量\n气象与系数\n降雨\n0.0 mm\nET₀\n2.0 mm\nKc\n0.00\n时段事件 0\n\n没有关联事件",
+  "seventy": "2026/01/01 04:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n70.0 %\n存疑\n气象与系数\n降雨\n12.0 mm\nET₀\n— mm\nKc\n1.20\n时段事件 1\n持续故障持续中",
+  "negative": "2026/01/01 01:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n-5.0 %\n未提供质量\n气象与系数\n降雨\n0.0 mm\nET₀\n2.0 mm\nKc\n0.00\n时段事件 2\n持续灌溉5 h\n另一灌溉区域2 h",
+  "coarse": {
+    "coarse": true,
+    "controls": [
+      {
+        "height": 25,
+        "name": "联动分析",
+        "width": 70
+      },
+      {
+        "height": 25,
+        "name": "原始数据",
+        "width": 70
+      },
+      {
+        "height": 25,
+        "name": "事件 4",
+        "width": 55.0703125
+      },
+      {
+        "height": 40,
+        "name": "数据口径与来源",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "重置视图",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "展开分析工作区",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "选择对比深度，已选 1 / 3",
+        "width": 97.1796875
+      },
+      {
+        "height": 40,
+        "name": "全部",
+        "width": 51.390625
+      },
+      {
+        "height": 40,
+        "name": "90 天",
+        "width": 58.859375
+      },
+      {
+        "height": 40,
+        "name": "30 天",
+        "width": 58.859375
+      },
+      {
+        "height": 40,
+        "name": "7 天",
+        "width": 49.7734375
+      },
+      {
+        "height": 40,
+        "name": "1 天",
+        "width": 47.765625
+      },
+      {
+        "height": 40,
+        "name": "自定义时间范围",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "观测范围",
+        "width": 60
+      },
+      {
+        "height": 40,
+        "name": "完整量程",
+        "width": 60
+      },
+      {
+        "height": 40,
+        "name": "前移一个时间窗口",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "后移一个时间窗口",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": "解除固定读数",
+        "width": 40
+      },
+      {
+        "height": 48,
+        "name": "突出 10 cm 曲线，-5.0 %",
+        "width": 203
+      },
+      {
+        "height": 40,
+        "name": "气象区间与质量",
+        "width": 40
+      },
+      {
+        "height": 40,
+        "name": " 持续灌溉5 h",
+        "width": 214
+      },
+      {
+        "height": 40,
+        "name": " 另一灌溉区域2 h",
+        "width": 214
+      }
+    ]
+  },
+  "rawTable": "当前时间范围与所选深度的原始记录，按采样时间、深度排序\n采样时间 · UTC\t深度 / cm\t水分 / %\t质量\n2025/12/31 22:00\t10\t0.0\t未提供质量\n2025/12/31 22:00\t55\t25.0\t有效\n2025/12/31 23:00\t10\t10.0\t未提供质量\n2025/12/31 23:00\t55\t25.0\t有效\n2026/01/01 00:00\t10\t缺测\t缺测\n2026/01/01 00:00\t55\t25.0\t有效\n2026/01/01 01:00\t10\t-5.0\t未提供质量\n2026/01/01 01:00\t55\t25.0\t有效\n2026/01/01 01:00\t200\t15.0\t未提供质量\n2026/01/01 02:00\t55\t25.0\t有效\n2026/01/01 02:00\t200\t无效\t无效\n2026/01/01 03:00\t55\t25.0\t有效\n2026/01/01 04:00\t10\t70.0\t存疑\n2026/01/01 04:00\t55\t25.0\t有效\n2026/01/01 05:00\t10\t20.0\t未提供质量\n2026/01/01 05:00\t55\t25.0\t有效",
+  "large": {
+    "chart": {
+      "height": 338,
+      "scroll": 508,
+      "scrollWidth": 279,
+      "width": 279
+    },
+    "pageWidth": 364,
+    "rootFont": "20px",
+    "tracks": [
+      {
+        "font": "14.9975px",
+        "track": "moisture"
+      },
+      {
+        "font": "14.9975px",
+        "track": "comparison"
+      },
+      {
+        "font": "14.9975px",
+        "track": "weather"
+      },
+      {
+        "font": "14.9975px",
+        "track": "kc"
+      },
+      {
+        "font": "14.9975px",
+        "track": "events"
+      }
+    ],
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "largeFinal": {
+    "chart": {
+      "height": 338,
+      "scroll": 580
+    },
+    "colors": {
+      "--card": "#f5f5f3",
+      "--foreground": "#252525",
+      "--muted-foreground": "#646461",
+      "--soil-et0": "#94631f",
+      "--soil-fault": "#a6534e",
+      "--soil-freeze": "#586aa7",
+      "--soil-irrigation": "#2c7c69",
+      "--soil-kc": "#52735b",
+      "--soil-rain": "#326b9e",
+      "--soil-series-0": "#176c5b",
+      "--soil-series-1": "#8c5b18",
+      "--soil-series-2": "#316c9d",
+      "--soil-series-3": "#7650a3",
+      "--soil-series-4": "#a04765"
+    },
+    "legend": {
+      "bottom": 604.5,
+      "height": 92,
+      "top": 512.5,
+      "width": 279
+    },
+    "pageWidth": 364,
+    "plot": {
+      "bottom": 1026.5,
+      "height": 420,
+      "top": 606.5,
+      "width": 279
+    },
+    "rootFont": "20px",
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "coarseFinal": {
+    "coarse": true,
+    "smallButtons": [],
+    "tabs": [
+      {
+        "height": 40,
+        "name": "联动分析",
+        "width": 78
+      },
+      {
+        "height": 40,
+        "name": "原始数据",
+        "width": 78
+      },
+      {
+        "height": 40,
+        "name": "事件 25",
+        "width": 71.46875
+      }
+    ]
+  },
+  "installedFinal": {
+    "bands": 1,
+    "selected": [
+      "观测范围",
+      "",
+      " 20–50 cm 通道故障52 h"
+    ],
+    "viewport": [
+      1280,
+      720
+    ],
+    "workspace": [
+      {
+        "className": "soil-water-chart-column",
+        "client": 456,
+        "rect": {
+          "height": 456.203125,
+          "width": 928,
+          "x": 43,
+          "y": 197.296875
+        },
+        "scroll": 456
+      },
+      {
+        "className": "soil-water-inspector",
+        "client": 456,
+        "rect": {
+          "height": 456.203125,
+          "width": 246,
+          "x": 991,
+          "y": 197.296875
+        },
+        "scroll": 456
+      }
+    ]
+  },
+  "afterLocatedArrow": "2025/07/12 09:00\nUTC · 1 个采样时隙\n\n水分 / %\n10 cm\n20.5 %\n有效\n50 cm\n— %\n无效 · 通道故障\n150 cm\n26.6 %\n有效\n气象与系数\n降雨\n42.0 mm\nET₀\n4.37 mm\nKc\n1.15\n时段事件 2\nA 区灌溉12 h\n20–50 cm 通道故障52 h",
+  "export": {
+    "datasetId": "soil-hand-check",
+    "window": {
+      "from": 1767218400000,
+      "to": 1767247200000,
+      "boundary": "[from,to)"
+    },
+    "depths": [
+      {
+        "id": "a",
+        "values": [
+          0,
+          10,
+          null,
+          -5,
+          70,
+          20
+        ]
+      }
+    ],
+    "drivers": 3,
+    "events": 4
+  },
+  "empty": "无记录样地\n\n0 深度 · 1 h 采样 · 0 条\n\n联动分析\n原始数据\n事件 0\n2025/01/01\n—\n2026/01/01\nUTC · 右端不含\n深度 0/0\n全年\n90 天\n30 天\n7 天\n1 天\n\n没有可用深度或观测记录\n\n演示数据 · 可重复合成场景 v1",
+  "consumerConsole": [],
+  "narrowFinal": {
+    "bands": 1,
+    "chart": [
+      {
+        "height": 530,
+        "scrollHeight": 530
+      }
+    ],
+    "dialog": [
+      {
+        "height": 786,
+        "scrollHeight": 786,
+        "scrollWidth": 349,
+        "width": 349
+      }
+    ],
+    "pageWidth": 375,
+    "tracks": [
+      {
+        "bottom": 392.03125,
+        "label": "深度cm",
+        "top": 336.59375
+      },
+      {
+        "bottom": 496.4921875,
+        "label": "水分%",
+        "top": 406.03125
+      },
+      {
+        "bottom": 554.5,
+        "label": "气象mm/24h",
+        "top": 510.5
+      },
+      {
+        "bottom": 594.5,
+        "label": "Kc无量纲",
+        "top": 568.5
+      },
+      {
+        "bottom": 698.5,
+        "label": "事件",
+        "top": 608.5
+      }
+    ],
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "finalConsole": [
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:09:42.751Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:09:45.359Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:09:47.064Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:10:07.298Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:10:21.635Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:10:58.328Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:11:00.786Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:11:40.559Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:11:55.743Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:12:09.930Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:12:11.329Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:13:13.537Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:13:29.104Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:13:32.867Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:13:33.019Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:14:12.074Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:14:23.719Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:14:27.603Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:14:27.666Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    },
+    {
+      "level": "warn",
+      "message": "[ECharts] Can't get DOM width or height. Please check dom.clientWidth and dom.clientHeight. They should not be 0.For example, you may need to call this in the callback of window.onload.",
+      "timestamp": "2026-11-13T04:14:40.796Z",
+      "url": "http://127.0.0.1:4177/@vite/client"
+    }
+  ],
+  "finalPreview": {
+    "url": "http://127.0.0.1:4178/#/blocks/soil-water-explorer",
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "finalProductionConsole": [],
+  "consoleScopeNote": "The main tab retains development-server logs across navigation. finalConsole is the unfiltered history; finalProductionConsole filters to the 4178 production origin. consumerConsole belongs to the independent installed production preview."
+}

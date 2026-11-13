@@ -1,0 +1,90 @@
+[
+  {
+    "id": "event",
+    "width": 232,
+    "height": 114,
+    "heading": 38,
+    "summary": 40,
+    "fields": 2
+  },
+  {
+    "id": "parallel",
+    "width": 232,
+    "height": 114,
+    "heading": 38,
+    "summary": 40,
+    "fields": 2
+  },
+  {
+    "id": "water",
+    "width": 232,
+    "height": 114,
+    "heading": 38,
+    "summary": 40,
+    "fields": 2
+  },
+  {
+    "id": "weather",
+    "width": 232,
+    "height": 114,
+    "heading": 38,
+    "summary": 40,
+    "fields": 2
+  },
+  {
+    "id": "join",
+    "width": 232,
+    "height": 114,
+    "heading": 38,
+    "summary": 40,
+    "fields": 2
+  },
+  {
+    "id": "quality",
+    "width": 232,
+    "height": 92,
+    "heading": 38,
+    "summary": 18,
+    "fields": 1
+  },
+  {
+    "id": "aggregate",
+    "width": 232,
+    "height": 136,
+    "heading": 38,
+    "summary": 62,
+    "fields": 3
+  },
+  {
+    "id": "condition",
+    "width": 232,
+    "height": 117,
+    "heading": 38,
+    "summary": 43,
+    "fields": 0
+  },
+  {
+    "id": "notify",
+    "width": 232,
+    "height": 92,
+    "heading": 38,
+    "summary": 18,
+    "fields": 1
+  },
+  {
+    "id": "store",
+    "width": 232,
+    "height": 92,
+    "heading": 38,
+    "summary": 18,
+    "fields": 1
+  },
+  {
+    "id": "failure",
+    "width": 232,
+    "height": 92,
+    "heading": 38,
+    "summary": 18,
+    "fields": 1
+  }
+]

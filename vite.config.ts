@@ -8,6 +8,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
+      "@/components/icons": fileURLToPath(
+        new URL("./registry/immortal/icons", import.meta.url),
+      ),
+      "@/lib/iot-model": fileURLToPath(
+        new URL("./registry/immortal/components/iot-model.ts", import.meta.url),
+      ),
       "@/lib/telemetry": fileURLToPath(
         new URL("./registry/immortal/components/telemetry.ts", import.meta.url),
       ),

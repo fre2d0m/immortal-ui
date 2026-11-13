@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Dark/light default, line, vertical and manual tabs: one persistent selection; hover, press and animation frames have no second raised surface; keyboard navigation skips disabled tabs and keeps visible focus; upstream static fallback remains selected.",
+    "Navigation, filters and single selection segments have flat hover distinct from selected state. Checkbox, switch, slider, text input and checked menu state retain their own behavior.",
+    "50 new and 30 existing choices: only result pane scrolls; heading/search/tabs stay fixed; both panels, search/no-match, End/Enter to last choice and Escape focus restore work in dark/light, 320px width, 480px height and 20px text.",
+    "Reduced motion disables indicator travel; forced colors keeps one selected tab and keyboard focus.",
+    "Touch-emulated Chrome: 40px tab targets, switching and selecting an existing choice work.",
+    "Actual demo endpoint 合并多源观测 / 失败: heading is below tabs, inactive hover is flat; choosing existing adds join→failure/error, choosing new adds one failure node and the corresponding edge."
+  ],
+  "errors": []
+}

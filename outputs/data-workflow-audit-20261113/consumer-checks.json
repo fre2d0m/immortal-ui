@@ -1,0 +1,6 @@
+{
+  "checks": [
+    "Fresh registry installation: Graphite menus, toolbar focus, reserved inspector, explicit source/port selection, exact parallel branch insertion and undo work in both themes."
+  ],
+  "errors": []
+}

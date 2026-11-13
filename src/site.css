@@ -4,7 +4,7 @@
 }
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
 }
 a {
   color: inherit;
@@ -46,29 +46,11 @@ p {
 }
 .brand small {
   margin-left: 3px;
-  padding: 2px 5px;
-  border: 0.5px solid var(--border);
-  border-radius: 5px;
-  color: var(--muted-foreground);
-  font:
-    var(--text-sm) ui-monospace,
-    monospace;
-  letter-spacing: 0;
 }
 .top-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
-  font-size: var(--text-sm);
-  color: var(--muted-foreground);
-}
-.top-nav a {
-  padding: 24px 0;
-  transition: color 140ms ease-out;
-}
-.top-nav a:hover,
-.top-nav a[aria-current] {
-  color: var(--foreground);
+  gap: 6px;
 }
 .header-actions {
   margin-left: auto;
@@ -95,24 +77,7 @@ p {
   padding: 82px 0 58px;
   text-align: center;
 }
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-}
-.home-hero .eyebrow {
-  justify-content: center;
-}
-.home-hero .status-led {
-  width: 5px;
-  height: 5px;
-}
+
 .home-hero h1 {
   margin: 21px 0 20px;
   font-size: clamp(40px, 5vw, 66px);
@@ -175,6 +140,21 @@ p {
   line-height: 1.7;
   color: var(--muted-foreground);
 }
+.foundation-extensions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 32px;
+  padding-top: 28px;
+  border-top: 0.5px solid var(--border);
+}
+.foundation-extensions section {
+  min-width: 0;
+}
+.foundation-extensions h2 {
+  margin-bottom: 18px;
+  font-size: var(--text-base);
+  font-weight: 500;
+}
 .foundation-grid a:hover h3 {
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -192,7 +172,7 @@ p {
 }
 .site-layout {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-columns: var(--lab-sidebar-width, 224px) minmax(0, 1fr);
   max-width: var(--content-width);
   min-height: calc(100dvh - 72px);
   margin: 0 auto;
@@ -211,32 +191,14 @@ p {
   padding-left: 12px;
   color: var(--muted-foreground);
   font-size: var(--text-sm);
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 .sidebar-nav p:first-child {
   margin-top: 0;
 }
 .sidebar-nav a {
   display: flex;
-  align-items: center;
-  min-height: 37px;
-  margin: 1px 0;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: var(--text-sm);
-  color: var(--muted-foreground);
-  transition:
-    color 140ms,
-    background-color 140ms;
-}
-.sidebar-nav a:hover {
-  color: var(--foreground);
-  background: var(--muted);
-}
-.sidebar-nav a[aria-current] {
-  background: linear-gradient(var(--well-top), var(--well-bottom));
-  color: var(--foreground);
-  box-shadow: var(--shadow-well);
+  margin: 2px 0;
 }
 .docs-main {
   min-width: 0;
@@ -248,7 +210,7 @@ p {
   max-width: 660px;
 }
 .page-heading h1 {
-  margin: 15px 0;
+  margin: 0 0 16px;
   font-size: clamp(32px, 4vw, 44px);
   line-height: 1.13;
   font-weight: 500;
@@ -313,7 +275,7 @@ p {
 .preview-shell {
   overflow: hidden;
   border: var(--container-border-width) solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--surface-radius);
 }
 .preview-label {
   display: flex;
@@ -388,6 +350,9 @@ p {
 .swatch {
   height: 110px;
   margin-bottom: 18px;
+}
+.swatch.surface-control {
+  border-radius: var(--button-radius);
 }
 .material-swatches h2 {
   font-size: var(--text-sm);
@@ -533,4 +498,60 @@ p {
   .site-footer > span {
     display: none;
   }
+}
+
+/* Page scrolling stays available without a permanent native gutter. */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--foreground) 24%, transparent)
+    transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--foreground) 24%, transparent);
+}
+*::-webkit-scrollbar-button {
+  display: none;
+}
+.site-sidebar {
+  scrollbar-color: transparent transparent;
+}
+.site-sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.site-sidebar:hover,
+.site-sidebar:focus-within {
+  scrollbar-color: color-mix(in srgb, var(--foreground) 24%, transparent)
+    transparent;
+}
+.site-sidebar:hover::-webkit-scrollbar-thumb,
+.site-sidebar:focus-within::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 24%, transparent);
+}
+
+/* Site navigation consumes the same exported category tokens. */
+.sidebar-nav a,
+.top-nav a {
+  min-height: max(var(--nav-height), var(--control-hit-height));
+  padding-block: 4px;
+  padding-inline: var(--nav-padding-x);
+  font-size: var(--nav-font-size);
+}
+.site-sidebar {
+  width: var(--lab-sidebar-width, 224px);
+  flex-basis: var(--lab-sidebar-width, 224px);
 }

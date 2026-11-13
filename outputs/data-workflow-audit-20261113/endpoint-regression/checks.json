@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "Node library and outline entry points removed; every editable input/output has a visible plus",
+    "Dashed empty node opens trigger-only picker; Escape restores focus without mutation; search/ArrowDown/Enter creates a trigger",
+    "Trigger → parallel → two data sources → shared existing join is built with endpoint picks and correct connections",
+    "Occupied output inserts one step and preserves both ends, unrelated branches and existing positions; a single undo/redo restores the entire edit",
+    "Failure picker excludes observation processors; input endpoint can insert upstream while preserving the source",
+    "Condition continuation is explicitly selected and retains the original false branch",
+    "Dragging a handle to empty canvas opens the nearby picker; Escape makes no edit, choosing adds node and edge atomically",
+    "Direct drag to an existing compatible handle still creates one edge without opening a picker",
+    "Dropping on an incompatible node body makes no edit; secondary menu adds another trigger; unmatched searches and Escape leave the graph intact",
+    "Expanded workspace keeps picker in the dialog; Escape closes picker first. 320px and 20px text stay within viewport in both themes"
+  ],
+  "geometry": {
+    "dark": {
+      "x": 12,
+      "y": 356,
+      "width": 296,
+      "height": 366
+    },
+    "light": {
+      "x": 12,
+      "y": 356,
+      "width": 296,
+      "height": 366
+    }
+  },
+  "errors": []
+}

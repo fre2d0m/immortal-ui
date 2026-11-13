@@ -1,0 +1,106 @@
+[
+  {
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "picker": {
+      "x": 66,
+      "y": 396,
+      "w": 312,
+      "h": 436,
+      "right": 378,
+      "bottom": 832,
+      "scroll": 310,
+      "client": 310,
+      "text": "Choose the next stepNorth bank temperature / FailureNew nodeConnect existingData processingModel inferenceProcess input with a registered modelFlow controlParallel splitDispatch independent branches concurrentlyJoinContinue after all inputs or any successful inputOutputs and errorsData storageTime-series database, object storage or warehouseWebhook deliverySend processed results to a downstream serviceNotificationsAlarm centers, subscriptions or manual reviewFailure archiveSend error context to a replay queue"
+    },
+    "tabs": [
+      {
+        "x": 85,
+        "y": 530,
+        "w": 112.640625,
+        "h": 40,
+        "right": 197.640625,
+        "bottom": 570,
+        "scroll": 111,
+        "client": 111,
+        "text": "New node"
+      },
+      {
+        "x": 201.640625,
+        "y": 530,
+        "w": 167.890625,
+        "h": 40,
+        "right": 369.53125,
+        "bottom": 570,
+        "scroll": 166,
+        "client": 166,
+        "text": "Connect existing"
+      }
+    ],
+    "list": {
+      "x": 81,
+      "y": 586,
+      "w": 282,
+      "h": 231,
+      "right": 363,
+      "bottom": 817,
+      "scroll": 282,
+      "client": 282,
+      "text": "Data processingModel inferenceProcess input with a registered modelFlow controlParallel splitDispatch independent branches concurrentlyJoinContinue after all inputs or any successful inputOutputs and errorsData storageTime-series database, object storage or warehouseWebhook deliverySend processed results to a downstream serviceNotificationsAlarm centers, subscriptions or manual reviewFailure archiveSend error context to a replay queue"
+    }
+  },
+  {
+    "viewport": {
+      "w": 820,
+      "h": 480
+    },
+    "picker": {
+      "x": 496,
+      "y": 12,
+      "w": 312,
+      "h": 242.15625,
+      "right": 808,
+      "bottom": 254.15625,
+      "scroll": 310,
+      "client": 310,
+      "text": "Choose the next stepNorth bank temperature / FailureNew nodeConnect existingData processingModel inferenceProcess input with a registered modelFlow controlParallel splitDispatch independent branches concurrentlyJoinContinue after all inputs or any successful inputOutputs and errorsData storageTime-series database, object storage or warehouseWebhook deliverySend processed results to a downstream serviceNotificationsAlarm centers, subscriptions or manual reviewFailure archiveSend error context to a replay queue"
+    },
+    "tabs": [
+      {
+        "x": 515,
+        "y": 142,
+        "w": 112.640625,
+        "h": 36,
+        "right": 627.640625,
+        "bottom": 178,
+        "scroll": 111,
+        "client": 111,
+        "text": "New node"
+      },
+      {
+        "x": 631.640625,
+        "y": 142,
+        "w": 167.890625,
+        "h": 36,
+        "right": 799.53125,
+        "bottom": 178,
+        "scroll": 166,
+        "client": 166,
+        "text": "Connect existing"
+      }
+    ],
+    "list": {
+      "x": 511,
+      "y": 194,
+      "w": 282,
+      "h": 45.15625,
+      "right": 793,
+      "bottom": 239.15625,
+      "scroll": 282,
+      "client": 282,
+      "text": "Data processingModel inferenceProcess input with a registered modelFlow controlParallel splitDispatch independent branches concurrentlyJoinContinue after all inputs or any successful inputOutputs and errorsData storageTime-series database, object storage or warehouseWebhook deliverySend processed results to a downstream serviceNotificationsAlarm centers, subscriptions or manual reviewFailure archiveSend error context to a replay queue"
+    }
+  }
+]

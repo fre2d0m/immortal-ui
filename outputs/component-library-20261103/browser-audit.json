@@ -1,0 +1,281 @@
+{
+  "desktopComponents": [
+    {
+      "heading": "Sensor reading传感器读数",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/telemetry-card",
+      "preview": true
+    },
+    {
+      "heading": "Device card设备身份卡",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/device-card",
+      "preview": true
+    },
+    {
+      "heading": "Device status连接状态",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/device-status",
+      "preview": true
+    },
+    {
+      "heading": "Signal strength信号强度",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/signal-strength",
+      "preview": true
+    },
+    {
+      "heading": "Data freshness数据时效",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/data-freshness",
+      "preview": true
+    },
+    {
+      "heading": "Telemetry chart时序趋势",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/telemetry-chart",
+      "preview": true
+    },
+    {
+      "heading": "Range gauge量程仪表",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/range-gauge",
+      "preview": true
+    },
+    {
+      "heading": "Interval histogram时段柱图",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/daily-histogram",
+      "preview": true
+    },
+    {
+      "heading": "Control mode控制模式",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/control-mode",
+      "preview": true
+    },
+    {
+      "heading": "Actuator switch二态执行器",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/actuator-switch",
+      "preview": true
+    },
+    {
+      "heading": "Setpoint control目标值设定",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/setpoint-control",
+      "preview": true
+    },
+    {
+      "heading": "Threshold control上下限范围",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/threshold-control",
+      "preview": true
+    },
+    {
+      "heading": "Directional control三段式执行器",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/actuator-control",
+      "preview": true
+    },
+    {
+      "heading": "Command status命令回执",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/command-status",
+      "preview": true
+    },
+    {
+      "heading": "Alert card告警条目",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/alert-card",
+      "preview": true
+    },
+    {
+      "heading": "Event timeline事件时间线",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/event-timeline",
+      "preview": true
+    },
+    {
+      "heading": "Automation note可解释建议",
+      "invalidNumber": false,
+      "overflow": false,
+      "path": "#/components/automation-note",
+      "preview": true
+    }
+  ],
+  "mobilePages": [
+    {
+      "clipped": [],
+      "path": "#/components",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/telemetry-card",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/device-card",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/device-status",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/signal-strength",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/data-freshness",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/telemetry-chart",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/range-gauge",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/daily-histogram",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/control-mode",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/actuator-switch",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/setpoint-control",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/threshold-control",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/actuator-control",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/command-status",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/alert-card",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/event-timeline",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/components/automation-note",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/greenhouse-control",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/irrigation-scheduling",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/cold-chain-monitoring",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/energy-management",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/fleet-overview",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/device-control",
+      "viewport": 305,
+      "width": 305
+    },
+    {
+      "clipped": [],
+      "path": "#/blocks/alert-console",
+      "viewport": 305,
+      "width": 305
+    }
+  ]
+}

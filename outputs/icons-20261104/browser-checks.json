@@ -1,0 +1,330 @@
+[
+  {
+    "test": "catalog-default",
+    "result": {
+      "count": 36,
+      "document": 1280,
+      "icons": [
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        },
+        {
+          "stroke": "2",
+          "viewBox": "0 0 24 24",
+          "width": 24
+        }
+      ],
+      "svgCount": 36,
+      "viewport": 1280
+    }
+  },
+  {
+    "test": "custom-svg-copy",
+    "hasSvg": true,
+    "hasSource": true,
+    "hasCurrentColor": true,
+    "length": 469
+  },
+  {
+    "test": "react-copy",
+    "code": "import { FieldBus } from \"@/components/icons/iot-icons\";\n\n<FieldBus size={24} strokeWidth={2} aria-label=\"有线总线\" />"
+  },
+  {
+    "test": "dialog-focus-return",
+    "focus": null
+  },
+  {
+    "test": "empty-search",
+    "empty": true
+  },
+  {
+    "test": "lucide-filter",
+    "count": 26
+  },
+  {
+    "test": "custom-filter-16px",
+    "count": 10,
+    "widths": [
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16
+    ]
+  },
+  {
+    "test": "dialog-focus-after-exit",
+    "focus": {
+      "label": "查看水泵图标",
+      "tag": "BUTTON"
+    }
+  },
+  {
+    "test": "lucide-svg-copy",
+    "license": true,
+    "hasSvg": true,
+    "source": true
+  },
+  {
+    "test": "all-32px",
+    "widths": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32
+    ]
+  },
+  {
+    "test": "mobile-320",
+    "result": {
+      "document": 320,
+      "icons": 36,
+      "width": 320
+    }
+  },
+  {
+    "test": "mobile-dialog",
+    "result": {
+      "height": 768,
+      "scrollHeight": 897,
+      "scrollWidth": 275,
+      "width": 288
+    }
+  },
+  {
+    "test": "category-spaces-mobile",
+    "count": 6,
+    "heading": "空间与资产\n6 个图标"
+  },
+  {
+    "test": "category-and-source-combined",
+    "count": 3
+  },
+  {
+    "test": "final-console",
+    "logs": [],
+    "viewport": {
+      "height": 1839,
+      "width": 1280
+    }
+  },
+  {
+    "test": "final-restored-viewport",
+    "result": {
+      "document": 1280,
+      "height": 720,
+      "icons": 36,
+      "width": 1280
+    },
+    "logs": []
+  }
+]

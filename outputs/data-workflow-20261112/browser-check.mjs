@@ -1,0 +1,57 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+const output='/Users/golo/Work/CodexProjects/immortal-ui/outputs/data-workflow-20261112';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const context=await browser.newContext({viewport:{width:1600,height:1200},reducedMotion:'reduce'});
+const page=await context.newPage();
+page.setDefaultTimeout(12000);
+const errors=[]; const checks=[];
+page.on('pageerror',e=>errors.push(e.message));
+const base='http://127.0.0.1:4177/#/blocks/data-workflow';
+const root=page.locator('.wf-root');
+const exportFlow=async()=>{const promise=page.waitForEvent('download'); await page.getByRole('button',{name:'导出流程 JSON',exact:true}).click();const file=await promise;return JSON.parse(await readFile(await file.path(),'utf8'));};
+const chooseNode=async(name)=>{await page.getByRole('button',{name:'节点列表',exact:true}).click();await page.locator('.wf-node-list').getByRole('button',{name:new RegExp(name)}).click();};
+const run=async()=>{await page.getByRole('button',{name:'演示试运行',exact:true}).click();await page.getByRole('button',{name:'取消等待',exact:true}).waitFor({state:'hidden'});};
+try {
+ await page.goto(base); await page.locator('.react-flow__node').first().waitFor();
+ assert.equal(await page.locator('.react-flow__minimap-node').count(),11);await page.getByRole('button',{name:'校验',exact:true}).click(); assert.match(await page.locator('.wf-notice').innerText(),/校验通过/); await page.getByRole('button',{name:'校验',exact:true}).click();
+ const event=page.locator('.react-flow__node[data-id="event"]');
+ await event.scrollIntoViewIfNeeded(); const before=await event.getAttribute('style'); const box=await event.boundingBox();
+ await page.mouse.move(box.x+70,box.y+45);await page.mouse.down();await page.mouse.move(box.x+100,box.y+65,{steps:8});await page.mouse.up();assert.notEqual(await event.getAttribute('style'),before);
+ await event.focus();await page.keyboard.press('Enter');const keyed=await event.getAttribute('style');await page.keyboard.press('ArrowRight');await page.waitForFunction(prev=>document.querySelector('.react-flow__node[data-id=event]').getAttribute('style')!==prev,keyed);await page.keyboard.press('Escape');
+ checks.push('pointer drag and keyboard selection/movement');
+ await chooseNode('水温复核条件'); await page.getByLabel('比较阈值',{exact:false}).fill('0'); assert.equal((await exportFlow()).nodes.find(n=>n.id==='condition').parameters.find(p=>p.key==='threshold').value,0); await page.getByLabel('比较阈值',{exact:false}).fill('21');
+ await page.getByRole('button',{name:'连接',exact:true}).first().click();
+ await page.getByRole('combobox',{name:'来源节点',exact:true}).selectOption('event'); await page.getByRole('combobox',{name:'目标节点',exact:true}).selectOption('parallel'); await page.locator('.wf-connect-form').getByRole('button',{name:'连接',exact:true}).click();assert.match(await page.locator('.wf-notice').innerText(),/已经存在/);
+ await page.getByRole('button',{name:'移除连接 edge-11',exact:true}).click();
+ await page.getByRole('combobox',{name:'来源节点',exact:true}).selectOption('condition'); await page.getByRole('combobox',{name:'出口',exact:true}).selectOption('false'); await page.getByRole('combobox',{name:'目标节点',exact:true}).selectOption('store');await page.locator('.wf-connect-form').getByRole('button',{name:'连接',exact:true}).click(); assert.equal((await exportFlow()).edges.length,11);
+ checks.push('parameter edits, duplicate rejection and keyboard connection form');
+ await page.getByRole('button',{name:'添加节点',exact:true}).click(); await page.getByLabel('搜索节点类型',{exact:true}).fill('转换');await page.locator('.wf-library').getByRole('button',{name:/字段与单位转换/}).click();assert.equal((await exportFlow()).nodes.length,12);await page.getByRole('button',{name:'移除节点',exact:true}).click();assert.equal((await exportFlow()).nodes.length,11);
+ const exported=await exportFlow();
+ await page.locator('input[type=file]').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"nodes":[null]}')});await page.getByRole('status').filter({hasText:'不是受支持'}).waitFor();
+ await page.locator('input[type=file]').setInputFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...exported,name:'导入流程验证'}))});await page.getByLabel('流程名称',{exact:true}).waitFor();assert.equal(await page.getByLabel('流程名称',{exact:true}).inputValue(),'导入流程验证');
+ await page.getByLabel('流程名称',{exact:true}).fill(exported.name);
+ checks.push('node library and full JSON round-trip, malformed import rejection');
+ await run();assert.match(await page.locator('.wf-notice').innerText(),/已完成/);await page.locator('.wf-runs').getByRole('button',{name:'水温窗口聚合',exact:true}).click();await page.locator('.wf-payloads summary').filter({hasText:'输出数据'}).click();assert.match(await page.locator('.wf-payloads pre').last().innerText(),/"value": 20/);assert.match(await page.locator('.wf-payloads pre').last().innerText(),/"sampleCount": 3/);await root.screenshot({path:output+'/run-normal-dark.png'});
+ await page.getByLabel('演示输入场景',{exact:true}).selectOption('warm');await run();await page.locator('.wf-runs').getByRole('button',{name:'水温窗口聚合',exact:true}).click();await page.locator('.wf-payloads summary').filter({hasText:'输出数据'}).click();assert.match(await page.locator('.wf-payloads pre').last().innerText(),/"value": 26/);assert.match(await page.locator('.wf-runs tr').filter({hasText:'提交人工复核'}).innerText(),/已完成/);
+ await page.getByLabel('演示输入场景',{exact:true}).selectOption('failure');await run();assert.match(await page.locator('.wf-notice').innerText(),/失败/);assert.match(await page.locator('.wf-runs tr').filter({hasText:'合并多源观测'}).innerText(),/失败/);assert.match(await page.locator('.wf-runs tr').filter({hasText:'常规结果归档'}).innerText(),/已跳过/);
+ await page.getByLabel('演示输入场景',{exact:true}).selectOption('missing');await chooseNode('质量校验');await page.getByLabel('无效数据处理',{exact:false}).selectOption('reject');await run();assert.match(await page.locator('.wf-runs tr').filter({hasText:'失败归档'}).innerText(),/已完成/);
+ await page.getByRole('button',{name:'演示试运行',exact:true}).click();await page.getByRole('button',{name:'取消等待',exact:true}).click();await page.getByRole('status').filter({hasText:'已请求取消'}).waitFor();await page.waitForTimeout(450);assert.match(await page.locator('.wf-notice').innerText(),/已请求取消/);
+ checks.push('normal 20 °C, warm 26 °C, missing/error routing and cancelled run isolation');
+ await page.goto(base);await page.reload();await page.locator('.react-flow__node').first().waitFor();
+ for (const theme of ['dark','light']) {
+  const toggle=page.getByRole('button',{name:'Switch to '+theme+' theme'});if(await toggle.count()) await toggle.click();
+  await page.getByRole('button',{name:'流程画布',exact:true}).click();await page.getByRole('button',{name:'关闭节点配置',exact:true}).count().then(async count=>{if(count) await page.getByRole('button',{name:'关闭节点配置',exact:true}).click();});
+  await root.screenshot({path:output+'/canvas-'+theme+'.png'});
+  await page.getByRole('button',{name:'展开工作区',exact:true}).click();await page.getByRole('dialog',{name:'数据处理工作流展开视图',exact:true}).waitFor();await page.getByRole('button',{name:'显示完整流程',exact:true}).click();await page.waitForTimeout(200);await page.screenshot({path:output+'/overview-fullscreen-'+theme+'.png'});await page.keyboard.press('Escape');await page.getByRole('dialog',{name:'数据处理工作流展开视图',exact:true}).waitFor({state:'hidden'});assert.equal(await page.getByRole('button',{name:'展开工作区',exact:true}).evaluate(el=>el===document.activeElement),true);
+  await page.setViewportSize({width:320,height:900});await page.getByRole('button',{name:'节点列表',exact:true}).click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),320);await root.screenshot({path:output+'/mobile-'+theme+'.png'});
+  await chooseNode('水温复核条件'); await page.getByLabel('比较阈值',{exact:false}).fill('0');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),320);
+  await page.evaluate(()=>{document.documentElement.style.setProperty('--body-font-size','20px');document.documentElement.style.setProperty('--support-font-size','20px');document.documentElement.style.setProperty('--text-sm','20px');});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),320);await root.screenshot({path:output+'/large-text-'+theme+'.png'});
+  await page.evaluate(()=>{document.documentElement.style.removeProperty('--body-font-size');document.documentElement.style.removeProperty('--support-font-size');document.documentElement.style.removeProperty('--text-sm');});await page.setViewportSize({width:1600,height:1200});
+ }
+ checks.push('dark/light, 320px reflow, 20px text, expanded workspace, Escape and focus restoration');
+ const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});const mobile=await touch.newPage();await mobile.goto(base);await mobile.getByRole('button',{name:'节点列表',exact:true}).tap();await mobile.locator('.wf-node-list').getByRole('button',{name:/并行分发/}).tap();assert.equal(await mobile.getByLabel('节点名称',{exact:true}).inputValue(),'并行分发');await mobile.getByRole('button',{name:'连接',exact:true}).first().tap();assert.ok(await mobile.getByRole('combobox',{name:'来源节点',exact:true}).isVisible());assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth),390);await touch.close();
+ checks.push('touch node selection and connection form');
+ assert.deepEqual(errors,[]);await writeFile(output+'/browser-checks.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors},null,2));
+} catch(error) {await page.screenshot({path:output+'/browser-failure.png',fullPage:true});throw error;} finally {await browser.close();}

@@ -1,0 +1,16 @@
+{
+  "dark": {
+    "plus": 5.920809974403869,
+    "border": "rgb(160, 160, 157)",
+    "background": "rgb(36, 36, 36)",
+    "secondaryTextTop": 5.623430551878876,
+    "secondaryTextBottom": 6.358778609565743
+  },
+  "light": {
+    "plus": 5.438446114953988,
+    "border": "rgb(100, 100, 97)",
+    "background": "rgb(245, 245, 243)",
+    "secondaryTextTop": 5.680670636460272,
+    "secondaryTextBottom": 5.1068990653431525
+  }
+}

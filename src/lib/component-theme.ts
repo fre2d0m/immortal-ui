@@ -1,0 +1,142 @@
+type Spec = {
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  unit: string;
+  fallback: string;
+};
+const px = (label: string, value: number, min = 0, max = 80): Spec => ({
+  label,
+  min,
+  max,
+  step: 1,
+  unit: "px",
+  fallback: value + "px",
+});
+export const componentGeometryTokens = {
+  "button-height": px("按钮默认高度", 32, 16),
+  "button-height-xs": px("按钮 XS 高度", 24, 16),
+  "button-height-sm": px("按钮 SM 高度", 28, 16),
+  "button-height-lg": px("按钮 LG 高度", 36, 16),
+  "button-font-size": px("按钮字号", 14, 12, 24),
+  "button-icon-size": px("按钮图标尺寸", 16, 8, 32),
+  "button-gap": px("按钮图文间距", 6, 0, 24),
+  "button-radius": px("按钮圆角", 8, 0, 999),
+  "button-border-width": { ...px("按钮边框", 1, 0, 4), step: 0.5 },
+  "input-height": px("输入框高度", 32, 16),
+  "input-font-size": px("输入框字号", 16, 12, 24),
+  "input-border-width": { ...px("输入框边框", 1, 0, 4), step: 0.5 },
+  "select-height": px("选择器高度", 32, 16),
+  "select-height-sm": px("选择器 SM 高度", 28, 16),
+  "select-padding-x": px("选择器左右内边距", 12, 0, 40),
+  "nav-height": px("导航项高度", 32, 16),
+  "nav-padding-x": px("导航项左右内边距", 12, 0, 40),
+  "nav-gap": px("导航图文间距", 8, 0, 32),
+  "nav-radius": px("导航项圆角", 8, 0, 40),
+  "nav-font-size": px("导航字号", 14, 12, 24),
+  "menu-item-height": px("菜单项高度", 32, 16),
+  "menu-font-size": px("菜单字号", 14, 12, 24),
+  "menu-item-radius": px("菜单项圆角", 8, 0, 40),
+  "tab-height": px("Tab 高度", 32, 16),
+  "tab-font-size": px("Tab 字号", 14, 12, 24),
+  "tab-gap": px("Tab 之间间距", 2, 0, 24),
+  "tag-height": px("标签高度", 24, 16),
+  "tag-padding-x": px("标签左右内边距", 8, 0, 32),
+  "tag-radius": px("标签圆角", 6, 0, 40),
+  "tag-font-size": px("标签字号", 14, 12, 24),
+  "table-row-height": px("表格行高度", 40, 24, 120),
+  "table-cell-padding-x": px("表格单元格左右内边距", 12, 0, 40),
+  "table-font-size": px("表格字号", 14, 12, 24),
+  "slider-track-height": px("滑动条轨道高度", 5, 2, 16),
+  "slider-thumb-size": px("滑动条滑块尺寸", 16, 8, 40),
+  "avatar-size": px("头像尺寸", 32, 16, 96),
+  "container-border-width": { ...px("浮层边框", 1, 0, 4), step: 0.5 },
+} as const;
+export const componentGeometryGroups = [
+  {
+    label: "按钮 Button",
+    keys: [
+      "button-height",
+      "button-height-xs",
+      "button-height-sm",
+      "button-height-lg",
+      "button-padding-x",
+      "button-gap",
+      "button-icon-size",
+      "button-font-size",
+      "button-radius",
+      "button-border-width",
+    ],
+  },
+  {
+    label: "输入与选择 Input / Select",
+    keys: [
+      "input-height",
+      "select-height",
+      "select-height-sm",
+      "field-padding-x",
+      "select-padding-x",
+      "input-font-size",
+      "field-radius",
+      "input-border-width",
+      "textarea-min-height",
+      "textarea-padding-y",
+    ],
+  },
+  {
+    label: "导航与侧栏 Navigation / Sidebar",
+    keys: [
+      "nav-height",
+      "nav-padding-x",
+      "nav-gap",
+      "nav-radius",
+      "nav-font-size",
+      "lab-sidebar-width",
+      "lab-sidebar-mobile-width",
+      "lab-sidebar-icon-width",
+    ],
+  },
+  {
+    label: "菜单与浮层 Menu / Popover",
+    keys: [
+      "menu-item-height",
+      "menu-item-padding-x",
+      "menu-item-radius",
+      "menu-font-size",
+      "menu-padding",
+      "menu-min-width",
+      "popup-padding",
+      "dialog-width",
+      "container-border-width",
+    ],
+  },
+  {
+    label: "标签页尺寸 Tabs",
+    keys: ["tab-height", "tab-font-size", "tab-gap"],
+  },
+  {
+    label: "标签、表格与头像 Badge / Table / Avatar",
+    keys: [
+      "tag-height",
+      "tag-padding-x",
+      "tag-radius",
+      "tag-font-size",
+      "table-row-height",
+      "table-cell-padding-x",
+      "table-font-size",
+      "avatar-size",
+    ],
+  },
+  {
+    label: "选择与进度 Checkbox / Switch / Slider",
+    keys: [
+      "checkbox-size",
+      "switch-thumb-size",
+      "switch-thumb-size-sm",
+      "slider-track-height",
+      "slider-thumb-size",
+      "progress-height",
+    ],
+  },
+] as const;

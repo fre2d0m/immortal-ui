@@ -1,0 +1,270 @@
+{
+  "checks": [
+    {
+      "name": "header identity and separate validation",
+      "icon": {
+        "width": "40px",
+        "height": "40px",
+        "radius": "50%",
+        "background": "linear-gradient(rgb(59, 59, 59), rgb(44, 44, 44))",
+        "shadow": "rgba(255, 255, 255, 0.12) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.12) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px 0px, rgba(0, 0, 0, 0.6) 0px 3px 5px -3px",
+        "svg": "16px"
+      }
+    },
+    {
+      "name": "data-driven normal",
+      "value": {
+        "kind": "aggregation",
+        "metric": "water.temperature",
+        "method": "mean",
+        "value": 20,
+        "unit": "°C",
+        "sampleCount": 3,
+        "inputWindow": {
+          "from": "2026-11-12T00:00:00.000Z",
+          "to": "2026-11-12T00:20:00.000Z",
+          "boundaries": "inclusive"
+        },
+        "source": "演示数据"
+      },
+      "defaultNode": "store"
+    },
+    {
+      "name": "data-driven warm",
+      "value": {
+        "kind": "aggregation",
+        "metric": "water.temperature",
+        "method": "mean",
+        "value": 26,
+        "unit": "°C",
+        "sampleCount": 3,
+        "inputWindow": {
+          "from": "2026-11-12T00:00:00.000Z",
+          "to": "2026-11-12T00:20:00.000Z",
+          "boundaries": "inclusive"
+        },
+        "source": "演示数据"
+      },
+      "defaultNode": "notify"
+    },
+    {
+      "name": "failed run opens first failure",
+      "text": "气象背景数据\n失败\n耗时 21 ms\n尝试 1 次\n\n演示 HTTP 数据源不可用；没有读取或补造观测。\n\n输入\n输出\n执行信息\n{\n  \"error\": \"演示 HTTP 数据源不可用；没有读取或补造观测。\",\n  \"nodeId\": \"weather\",\n  \"input\": {\n    \"type\": \"telemetry.received\",\n    \"occurredAt\": \"2026-11-12T00:20:00Z\",\n    \"demonstration\": true\n  }\n}"
+    },
+    {
+      "name": "all receipt states, raw values, metadata, filter, keyboard, changed input and stale definitions",
+      "passed": true
+    },
+    {
+      "name": "optional execution connection and read-only receipt",
+      "passed": true
+    },
+    {
+      "name": "requestFail",
+      "passed": true
+    },
+    {
+      "name": "partialFail",
+      "passed": true
+    },
+    {
+      "name": "cancel preserves last receipt without fabricating cancelled state",
+      "passed": true
+    },
+    {
+      "name": "streaming updates preserve explicit selection",
+      "passed": true
+    },
+    {
+      "name": "layout dark",
+      "wide": {
+        "document": 1360,
+        "viewport": 1360,
+        "results": {
+          "x": 17,
+          "y": 766,
+          "width": 1326,
+          "height": 401,
+          "top": 766,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 17
+        },
+        "body": {
+          "x": 17,
+          "y": 811,
+          "width": 1326,
+          "height": 356,
+          "top": 811,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 17
+        },
+        "nav": {
+          "x": 17,
+          "y": 847,
+          "width": 318.234375,
+          "height": 320,
+          "top": 847,
+          "right": 335.234375,
+          "bottom": 1167,
+          "left": 17
+        },
+        "detail": {
+          "x": 335.234375,
+          "y": 847,
+          "width": 1007.765625,
+          "height": 320,
+          "top": 847,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 335.234375
+        }
+      },
+      "narrow": {
+        "document": 390,
+        "viewport": 390,
+        "results": {
+          "x": 17,
+          "y": 715,
+          "width": 356,
+          "height": 631,
+          "top": 715,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        },
+        "body": {
+          "x": 17,
+          "y": 762,
+          "width": 356,
+          "height": 584,
+          "top": 762,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        },
+        "nav": {
+          "x": 17,
+          "y": 816,
+          "width": 356,
+          "height": 190,
+          "top": 816,
+          "right": 373,
+          "bottom": 1006,
+          "left": 17
+        },
+        "detail": {
+          "x": 17,
+          "y": 1006,
+          "width": 356,
+          "height": 340,
+          "top": 1006,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        }
+      }
+    },
+    {
+      "name": "layout light",
+      "wide": {
+        "document": 1360,
+        "viewport": 1360,
+        "results": {
+          "x": 17,
+          "y": 766,
+          "width": 1326,
+          "height": 401,
+          "top": 766,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 17
+        },
+        "body": {
+          "x": 17,
+          "y": 811,
+          "width": 1326,
+          "height": 356,
+          "top": 811,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 17
+        },
+        "nav": {
+          "x": 17,
+          "y": 847,
+          "width": 318.234375,
+          "height": 320,
+          "top": 847,
+          "right": 335.234375,
+          "bottom": 1167,
+          "left": 17
+        },
+        "detail": {
+          "x": 335.234375,
+          "y": 847,
+          "width": 1007.765625,
+          "height": 320,
+          "top": 847,
+          "right": 1343,
+          "bottom": 1167,
+          "left": 335.234375
+        }
+      },
+      "narrow": {
+        "document": 390,
+        "viewport": 390,
+        "results": {
+          "x": 17,
+          "y": 715,
+          "width": 356,
+          "height": 631,
+          "top": 715,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        },
+        "body": {
+          "x": 17,
+          "y": 762,
+          "width": 356,
+          "height": 584,
+          "top": 762,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        },
+        "nav": {
+          "x": 17,
+          "y": 816,
+          "width": 356,
+          "height": 190,
+          "top": 816,
+          "right": 373,
+          "bottom": 1006,
+          "left": 17
+        },
+        "detail": {
+          "x": 17,
+          "y": 1006,
+          "width": 356,
+          "height": 340,
+          "top": 1006,
+          "right": 373,
+          "bottom": 1346,
+          "left": 17
+        }
+      }
+    },
+    {
+      "name": "touch selection and 40px tabs",
+      "targets": [
+        40,
+        40,
+        40
+      ]
+    }
+  ],
+  "errors": []
+}

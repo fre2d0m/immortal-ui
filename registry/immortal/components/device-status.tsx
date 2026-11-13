@@ -1,11 +1,13 @@
 import { cn } from "cn";
 
-export type DeviceState = "online" | "warning" | "offline" | "provisioning";
+export type DeviceState =
+  "online" | "warning" | "offline" | "provisioning" | "unknown";
 const labels: Record<DeviceState, string> = {
   online: "Online",
   warning: "Attention",
   offline: "Offline",
   provisioning: "Provisioning",
+  unknown: "Unknown",
 };
 
 /** A status always includes text; color is a secondary cue. */
@@ -31,7 +33,7 @@ export function DeviceStatus({
           "bg-success shadow-[0_0_8px_color-mix(in_srgb,var(--success)_35%,transparent)]":
             state === "online",
           "bg-warning": state === "warning",
-          "bg-muted-foreground": state === "offline",
+          "bg-muted-foreground": state === "offline" || state === "unknown",
           "border border-current bg-transparent": state === "provisioning",
         })}
       />

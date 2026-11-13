@@ -103,7 +103,6 @@ export function ThemePanel({
       <div className="theme-editor-toolbar">
         <div className="theme-editor-heading">
           <div>
-            <p className="theme-editor-kicker">THEME STUDIO</p>
             <h2>样式配置</h2>
           </div>
           <button
@@ -214,7 +213,7 @@ export function ThemePanel({
           "尺寸 间距",
           key,
           numberSettings[key].label,
-          "胶囊形按钮",
+          "胶囊形文字按钮 按钮组",
         ),
       ) && (
         <ConfigGroup title="基础尺寸与间距" query={query}>
@@ -229,8 +228,8 @@ export function ThemePanel({
             )
             .map(renderRange)}
           <p className="theme-editor-hint">
-            基础圆角联动面板、输入框与菜单；间距基准统一调整布局疏密。正文字号独立调整，辅助文字不低于
-            14px。
+            共享高度联动按钮、输入、选择器、导航、菜单与 Tabs。XS / SM / LG
+            按比例变化；分类中显式设置的尺寸保持独立，点击“自动”恢复联动。高度过小时保留文字所需空间。
           </p>
           <label className="theme-check">
             <input
@@ -240,11 +239,15 @@ export function ThemePanel({
                 onChange({ pillButtons: event.target.checked })
               }
             />
-            胶囊形按钮
+            文字按钮与按钮组使用胶囊形
           </label>
         </ConfigGroup>
       )}
-      {matchesSetting(query, "Tab 标签页 宽度 圆角 内边距 内容 铺满") && (
+      {matchesSetting(
+        query,
+        "Tab 标签页 筛选 宽度 圆角 内边距 内容 铺满",
+        ...Object.values(tabNumberSettings).map(({ label }) => label),
+      ) && (
         <ConfigGroup title="Tab 标签页" query={query}>
           <p className="theme-editor-hint">宽度方式</p>
           <div className="theme-mode" aria-label="Tab 宽度方式" role="group">
@@ -265,7 +268,7 @@ export function ThemePanel({
           </div>
           {(Object.keys(tabNumberSettings) as NumberSetting[]).map(renderRange)}
           <p className="theme-editor-hint">
-            标签按文字与内边距决定大小；轨道圆角随标签圆角和轨道内边距联动。
+            标签高度默认跟随共享基准。筛选按钮共用 Tab 圆角，轨道圆角随标签圆角和内边距联动。
           </p>
         </ConfigGroup>
       )}

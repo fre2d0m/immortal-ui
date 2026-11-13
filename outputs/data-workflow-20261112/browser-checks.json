@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "pointer drag and keyboard selection/movement",
+    "parameter edits, duplicate rejection and keyboard connection form",
+    "node library and full JSON round-trip, malformed import rejection",
+    "normal 20 °C, warm 26 °C, missing/error routing and cancelled run isolation",
+    "dark/light, 320px reflow, 20px text, expanded workspace, Escape and focus restoration",
+    "touch node selection and connection form"
+  ],
+  "errors": []
+}

@@ -1,0 +1,297 @@
+{
+  "checks": [
+    {
+      "name": "independent publication, save, layout, edits, undo, workflow identity and node counts",
+      "passed": true
+    },
+    {
+      "name": "colors and compact list dark",
+      "zero": {
+        "fg": "color(srgb 0.490196 0.866667 0.639216)",
+        "bg": "rgb(36, 36, 36)",
+        "ratio": 9.419778150751533
+      },
+      "one": {
+        "fg": "color(srgb 0.952 0.754353 0.529098)",
+        "bg": "rgb(36, 36, 36)",
+        "ratio": 9.388142378163119
+      },
+      "two": {
+        "fg": "color(srgb 0.946078 0.602745 0.571569)",
+        "bg": "rgb(36, 36, 36)",
+        "ratio": 7.227363208491725
+      },
+      "draft": {
+        "fg": "color(srgb 0.952 0.754353 0.529098)",
+        "bg": "rgb(36, 36, 36)",
+        "ratio": 9.388142378163119
+      },
+      "layout": [
+        {
+          "height": 32,
+          "centers": [
+            885,
+            885,
+            885
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            917,
+            917,
+            917
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            949,
+            949,
+            949
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            981,
+            981,
+            981
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1013,
+            1013,
+            1013
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1045,
+            1045,
+            1045
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1077,
+            1077,
+            1077
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1109,
+            1109,
+            1109
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1141,
+            1141,
+            1141
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1173,
+            1173,
+            1173
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1205,
+            1205,
+            1205
+          ],
+          "right": 307.234375
+        }
+      ],
+      "active": {
+        "visible": true,
+        "shadow": "none",
+        "border": "0px"
+      }
+    },
+    {
+      "name": "colors and compact list light",
+      "zero": {
+        "fg": "color(srgb 0.145098 0.446275 0.261176)",
+        "bg": "rgb(245, 245, 243)",
+        "ratio": 5.39378306931486
+      },
+      "one": {
+        "fg": "color(srgb 0.523451 0.339922 0.091451)",
+        "bg": "rgb(245, 245, 243)",
+        "ratio": 5.703499198839408
+      },
+      "two": {
+        "fg": "color(srgb 0.638431 0.208431 0.208431)",
+        "bg": "rgb(245, 245, 243)",
+        "ratio": 6.169963382348055
+      },
+      "draft": {
+        "fg": "color(srgb 0.523451 0.339922 0.091451)",
+        "bg": "rgb(245, 245, 243)",
+        "ratio": 5.703499198839408
+      },
+      "layout": [
+        {
+          "height": 32,
+          "centers": [
+            885,
+            885,
+            885
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            917,
+            917,
+            917
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            949,
+            949,
+            949
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            981,
+            981,
+            981
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1013,
+            1013,
+            1013
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1045,
+            1045,
+            1045
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1077,
+            1077,
+            1077
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1109,
+            1109,
+            1109
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1141,
+            1141,
+            1141
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1173,
+            1173,
+            1173
+          ],
+          "right": 307.234375
+        },
+        {
+          "height": 32,
+          "centers": [
+            1205,
+            1205,
+            1205
+          ],
+          "right": 307.234375
+        }
+      ],
+      "active": {
+        "visible": true,
+        "shadow": "none",
+        "border": "0px"
+      }
+    },
+    {
+      "name": "long names, keyboard tooltip, full detail, narrow viewport",
+      "label": {
+        "scroll": 1720,
+        "client": 227,
+        "white": "nowrap",
+        "overflow": "ellipsis"
+      }
+    },
+    {
+      "name": "touch hints, targets and row selection",
+      "targets": [
+        {
+          "w": 40,
+          "h": 40
+        },
+        {
+          "w": 44.90625,
+          "h": 40
+        },
+        {
+          "w": 44.90625,
+          "h": 40
+        }
+      ]
+    },
+    {
+      "name": "failure state and forced-color selection",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

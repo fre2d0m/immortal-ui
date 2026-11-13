@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Empty fit is disabled; zoom controls stop exactly at 15% and 180% and expose disabled state.",
+    "Backspace inside a name edits text and never deletes the focused node.",
+    "Both themes retain one selected tab; inactive hover has no raised fill or shadow; tabs and list remain separated.",
+    "Forced-color emulation retains keyboard menu navigation and Escape focus return."
+  ],
+  "errors": []
+}

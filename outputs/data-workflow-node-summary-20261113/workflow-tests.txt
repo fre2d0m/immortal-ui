@@ -1,0 +1,25 @@
+✔ adapter summaries follow stable parameter keys and changed configuration without changing the definition (1.351834ms)
+✔ generic summaries expose only editor-owned structure and never choose arbitrary adapter parameters (0.223084ms)
+✔ the complete multi-source demo validates and round trips without losing its policy or positions (1.028333ms)
+✔ empty workflows, disconnected branches and invalid required configuration are actionable (0.247792ms)
+✔ layout reserves measured height for long labels and enlarged text (0.151584ms)
+✔ connections reject self loops, cycles, wrong ports, missing nodes, incompatible types and duplicate fanout (0.31675ms)
+✔ import rejects malformed nested config and duplicate ids while retaining editable structural errors (0.677958ms)
+✔ all node kinds have templates; configuration changes invalidate runs but positions do not (0.279292ms)
+✔ known inputs drive sample counts, units, windows and opposite condition branches (24.085625ms)
+✔ parallel source tasks overlap and ALL waits for both; the concurrency cap is enforced (39.814916ms)
+✔ ANY continues after a successful branch even if another branch fails; ALL blocks it (13.566583ms)
+✔ missing values change coverage; explicit rejection sends the actual error to the failure route (17.239667ms)
+✔ retry and timeout policy are observed and cancellation does not dispatch downstream work (19.204625ms)
+✔ aggregation preserves zero, negatives, exact window boundaries and mixed-unit errors (0.3065ms)
+✔ constant and single observations stay exact; no model inference is invented (0.149083ms)
+✔ conversion targets one metric, preserves other units and retains the original observation (0.175917ms)
+✔ install package declares React Flow and ships its own styles/model without showcase adapters (1.444917ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 196.311542

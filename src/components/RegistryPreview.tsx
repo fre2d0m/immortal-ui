@@ -1,26 +1,41 @@
-import { useState } from "react";
+import { DataCardsPreview } from "@/components/DataCardsPreview";
+import { DevicePreview } from "@/components/DevicePreview";
+import { firstBatchNames } from "@/content/first-batch";
+import { lazy, Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
+import { FoundationExtensions } from "@/components/FoundationExtensions";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DeviceStatus } from "@/components/iot/device-status";
 import { SignalStrength } from "@/components/iot/signal-strength";
-import { TelemetryCard } from "@/components/iot/telemetry-card";
-import { TelemetryChart } from "@/components/iot/telemetry-chart";
-import { DeviceCard } from "@/components/iot/device-card";
+
 import { ThresholdControl } from "@/components/iot/threshold-control";
-import { FleetOverview } from "@/components/blocks/fleet-overview";
-import { DeviceControl } from "@/components/blocks/device-control";
-import { AlertConsole } from "@/components/blocks/alert-console";
-import {
-  demoDevices,
-  demoTraffic,
-  demoTemperature,
-  demoConfiguration,
-  demoAlerts,
-} from "@/lib/demo-data";
+
+const FirstBatchPreview = lazy(() =>
+  import("@/components/FirstBatchPreview").then((module) => ({
+    default: module.FirstBatchPreview,
+  })),
+);
+const newNames = new Set([
+  "control-mode",
+  "actuator-switch",
+  "setpoint-control",
+  "actuator-control",
+  "command-status",
+  "alert-card",
+  "event-timeline",
+  "automation-note",
+]);
+const hasExtractedPreview = (name: string) => newNames.has(name);
+
+const ExtractedPreview = lazy(() =>
+  import("@/components/ExtractedPreview").then((module) => ({
+    default: module.ExtractedPreview,
+  })),
+);
 
 export function FoundationsPreview() {
   const [enabled, setEnabled] = useState(true);
@@ -58,27 +73,39 @@ export function FoundationsPreview() {
           <Label htmlFor="foundation-alert">Receive alerts</Label>
         </div>
       </div>
+      <FoundationExtensions />
     </div>
   );
 }
 
 export function RegistryPreview({ name }: { name: string }) {
   const [range, setRange] = useState({ low: 10, high: 35 });
-  const [configuration, setConfiguration] = useState(demoConfiguration);
-  const [alerts, setAlerts] = useState(demoAlerts);
-  const [offline, setOffline] = useState(false);
-  const [fail, setFail] = useState(false);
-  const [empty, setEmpty] = useState(false);
-  const [message, setMessage] = useState("");
-  const delay = () => new Promise<void>((resolve) => setTimeout(resolve, 500));
+  if (firstBatchNames.has(name))
+    return (
+      <Suspense fallback={<p role="status">正在加载组件…</p>}>
+        <FirstBatchPreview key={name} name={name} />
+      </Suspense>
+    );
+  if (hasExtractedPreview(name))
+    return (
+      <Suspense
+        fallback={
+          <p role="status" className="text-sm text-muted-foreground">
+            正在加载组件…
+          </p>
+        }
+      >
+        <ExtractedPreview name={name} />
+      </Suspense>
+    );
   if (name === "device-status")
     return (
       <div className="flex flex-wrap justify-center gap-8 py-10">
-        {(["online", "warning", "offline", "provisioning"] as const).map(
-          (state) => (
-            <DeviceStatus key={state} state={state} />
-          ),
-        )}
+        {(
+          ["online", "warning", "offline", "provisioning", "unknown"] as const
+        ).map((state) => (
+          <DeviceStatus key={state} state={state} />
+        ))}
       </div>
     );
   if (name === "signal-strength")
@@ -89,48 +116,10 @@ export function RegistryPreview({ name }: { name: string }) {
         ))}
       </div>
     );
-  if (name === "telemetry-chart")
-    return (
-      <div className="surface-inset p-6">
-        <TelemetryChart
-          label="Ambient temperature"
-          unit="°C"
-          data={demoTemperature.map((point, i) =>
-            i === 9 || i === 10 ? { ...point, value: null } : point,
-          )}
-        />
-      </div>
-    );
-  if (name === "telemetry-card")
-    return (
-      <div className="mx-auto max-w-md">
-        <TelemetryCard
-          label="Ambient temperature"
-          value={23.8}
-          unit="°C"
-          description="North greenhouse · latest sample"
-          data={demoTemperature}
-        />
-      </div>
-    );
-  if (name === "device-card")
-    return (
-      <div className="mx-auto max-w-sm">
-        <DeviceCard
-          device={demoDevices[0]}
-          onOpen={(device) =>
-            setMessage(
-              `${device.name} selected. The onOpen callback receives the full device.`,
-            )
-          }
-        />
-        {message && (
-          <p role="status" className="mt-4 text-xs text-muted-foreground">
-            {message}
-          </p>
-        )}
-      </div>
-    );
+  if (name === "metric-card") return <DataCardsPreview kind="metric" />;
+  if (name === "indicator-card") return <DataCardsPreview kind="indicator" />;
+  if (name === "device-card") return <DevicePreview kind="card" />;
+  if (name === "device-profile") return <DevicePreview kind="profile" />;
   if (name === "threshold-control")
     return (
       <div className="surface-inset mx-auto max-w-lg p-6">
@@ -140,89 +129,6 @@ export function RegistryPreview({ name }: { name: string }) {
           min={-20}
           max={80}
           unit="°C"
-        />
-      </div>
-    );
-  if (name === "fleet-overview")
-    return (
-      <div className="space-y-4">
-        <div className="flex min-h-10 items-center gap-3">
-          <Switch id="empty-fleet" checked={empty} onCheckedChange={setEmpty} />
-          <Label htmlFor="empty-fleet">Preview empty inventory</Label>
-        </div>
-        <FleetOverview
-          devices={empty ? [] : demoDevices}
-          telemetry={empty ? [] : demoTraffic}
-          title="North facility"
-          subtitle="Fixed demo snapshot"
-        />
-      </div>
-    );
-  if (name === "device-control")
-    return (
-      <div className="mx-auto max-w-xl space-y-5">
-        <div className="flex flex-wrap gap-x-6 gap-y-3 text-xs">
-          <div className="flex min-h-10 items-center gap-3">
-            <Switch
-              id="demo-offline"
-              checked={offline}
-              onCheckedChange={setOffline}
-            />
-            <Label htmlFor="demo-offline">Offline device</Label>
-          </div>
-          <div className="flex min-h-10 items-center gap-3">
-            <Switch
-              id="demo-failure"
-              checked={fail}
-              onCheckedChange={setFail}
-            />
-            <Label htmlFor="demo-failure">Simulate request failure</Label>
-          </div>
-        </div>
-        <DeviceControl
-          deviceId="ENV-001"
-          deviceName="Ambient sensor"
-          online={!offline}
-          configuration={configuration}
-          onApply={async (next) => {
-            await delay();
-            if (fail)
-              throw new Error(
-                "Demo request failed. Your changes are still available to retry.",
-              );
-            setConfiguration(next);
-          }}
-        />
-      </div>
-    );
-  if (name === "alert-console")
-    return (
-      <div className="mx-auto max-w-2xl space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex min-h-10 items-center gap-3">
-            <Switch
-              id="alert-failure"
-              checked={fail}
-              onCheckedChange={setFail}
-            />
-            <Label htmlFor="alert-failure">Simulate request failure</Label>
-          </div>
-          <Button variant="ghost" onClick={() => setAlerts(demoAlerts)}>
-            Reset demo
-          </Button>
-        </div>
-        <AlertConsole
-          alerts={alerts}
-          onAcknowledge={async (id) => {
-            await delay();
-            if (fail)
-              throw new Error("Demo acknowledgement failed. Please retry.");
-            setAlerts((current) =>
-              current.map((alert) =>
-                alert.id === id ? { ...alert, acknowledged: true } : alert,
-              ),
-            );
-          }}
         />
       </div>
     );

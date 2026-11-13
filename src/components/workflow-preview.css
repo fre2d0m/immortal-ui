@@ -1,0 +1,32 @@
+.workflow-preview .block-preview-bar {
+  gap: 10px 16px;
+  margin-bottom: 14px;
+}
+.workflow-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+.workflow-demo-controls select {
+  min-width: 0;
+  max-width: 100%;
+  appearance: auto;
+}
+.workflow-demo-notes {
+  margin-top: 14px;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm, 14px);
+}
+.workflow-demo-notes summary {
+  min-height: 40px;
+  display: list-item;
+  padding-block: 10px;
+  cursor: pointer;
+}
+.workflow-demo-notes p {
+  margin: 8px 0;
+  max-width: 80ch;
+  line-height: 1.7;
+}

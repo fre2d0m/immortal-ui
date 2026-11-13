@@ -30,7 +30,7 @@
   color: var(--foreground);
   border: 1px solid var(--border);
   border-radius: 20px 20px 0 0;
-  box-shadow: 0 -16px 48px rgb(0 0 0 / 0.2);
+  box-shadow: 0 -2px 8px rgb(0 0 0 / 0.12);
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 400;
@@ -64,11 +64,7 @@
   font-weight: 600;
   letter-spacing: -0.03em;
 }
-.theme-editor-kicker {
-  color: var(--muted-foreground);
-  font-size: 14px;
-  letter-spacing: 0.14em;
-}
+
 .theme-editor-description {
   margin: 12px 0 20px;
   color: var(--muted-foreground);
@@ -96,15 +92,18 @@
   background: var(--secondary);
   color: var(--foreground);
   font: inherit;
+  line-height: 20px;
   transition:
     background-color 140ms ease-out,
     scale 100ms ease-out;
 }
-.theme-editor button:active {
+.theme-editor button:active:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 96%, black);
+  box-shadow: var(--shadow-press-soft);
   scale: 0.96;
 }
 @media (hover: hover) {
-  .theme-editor button:hover:not(:active):not([aria-pressed="true"]) {
+  .theme-editor button:hover:not(:active, :disabled, [aria-pressed="true"]) {
     background: var(--accent);
   }
 }
@@ -126,6 +125,10 @@
   color: var(--primary-foreground);
   border-color: var(--primary);
 }
+.theme-mode button[aria-pressed="true"]:active:not(:disabled) {
+  background: color-mix(in srgb, var(--primary) 96%, black);
+  color: var(--primary-foreground);
+}
 .theme-color-row {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
@@ -135,7 +138,7 @@
 }
 .theme-color-row input {
   width: 100%;
-  height: 42px;
+  height: 40px;
   min-width: 0;
   border: 1px solid var(--input);
   border-radius: 10px;
@@ -217,6 +220,12 @@
 }
 .theme-search-bar button {
   flex-shrink: 0;
+}
+.theme-search-bar input,
+.theme-editor select,
+.theme-number-row input[type="number"] {
+  height: 40px;
+  line-height: 20px;
 }
 .theme-config-group {
   border-top: 1px solid var(--border);
@@ -363,7 +372,7 @@
   .theme-editor button {
     transition: none;
   }
-  .theme-editor button:active {
+  .theme-editor button:active:not(:disabled) {
     scale: 1;
   }
 }

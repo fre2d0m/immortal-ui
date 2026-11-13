@@ -1,0 +1,22 @@
+[
+  {
+    "file": "data-workflow.tsx",
+    "sha256": "88356ef9fec81bf17a607616eeb18770a1f492c48ab28319a040f0d5195113d1",
+    "cliStripsHeaderComment": false
+  },
+  {
+    "file": "workflow-parts.tsx",
+    "sha256": "7dad640648a02f5ebbe9dcdebafc3fb705de28019aaf728859a2c4cad7b0e39b",
+    "cliStripsHeaderComment": false
+  },
+  {
+    "file": "workflow-model.ts",
+    "sha256": "a348d721b020b955f17306b0cf617665af5be46470f5963b57a45043b79b2ebf",
+    "cliStripsHeaderComment": true
+  },
+  {
+    "file": "data-workflow.css",
+    "sha256": "de6813bab50d35ae588b0ffb95db79b75b241b05a5c34bd61c92c357615532f7",
+    "cliStripsHeaderComment": false
+  }
+]

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Metric Card / Indicator Card · 视觉走查</title>
+  <style>
+    :root{color-scheme:light;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#202521;background:#f6f7f4;line-height:1.75}*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:48px 28px 80px}h1{font-size:32px;line-height:1.3;margin:8px 0 20px}h2{font-size:23px;margin:48px 0 18px}h3{font-size:17px;margin:0 0 12px}p{margin:12px 0}a{color:#176044;text-underline-offset:3px}small,.muted{color:#5e665e}.eyebrow{font-size:13px;letter-spacing:.08em;color:#59645c}.lead{font-size:19px;max-width:850px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}.stat{border-top:2px solid #9cafa1;padding:16px 0}.stat strong{display:block;font-size:29px;line-height:1.4}.stat span{font-size:14px;color:#5e665e}.table-wrap{overflow:auto;border:1px solid #d9dfd7;border-radius:10px;background:white}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:14px 16px;border-bottom:1px solid #e3e7e0;text-align:left;vertical-align:top}th{background:#edf0e9;white-space:nowrap;font-weight:600}tr:last-child td{border-bottom:0}td:first-child{min-width:110px}td:nth-child(2){min-width:200px}.issue{margin:0 0 18px;padding:18px 22px;background:white;border:1px solid #d9dfd7;border-radius:10px}.priority{font-size:12px;color:#715222;background:#f7eed9;padding:3px 7px;border-radius:4px;margin-right:8px}.priority.polish{color:#3c5c55;background:#e8f1eb}.issue p{margin-bottom:0}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.comparison figure,.gallery figure{margin:0}.comparison img,.gallery img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #d2d8d0}.comparison figcaption,.gallery figcaption{font-size:14px;margin:10px 0 20px}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}.note{padding:18px 22px;background:#edf0e9;border-left:3px solid #8b9c8c}.facts{padding-left:22px}.facts li{margin:8px 0}code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.9em}.links{display:flex;flex-wrap:wrap;gap:10px 22px}footer{border-top:1px solid #d4dcd1;margin-top:44px;padding-top:18px;font-size:14px;color:#5e665e}@media(max-width:700px){main{padding:28px 18px 50px}h1{font-size:26px}.summary{grid-template-columns:1fr 1fr}.comparison,.gallery{grid-template-columns:1fr}.comparison img,.gallery img{max-width:520px}.lead{font-size:17px}}@media print{body{background:white}main{padding:10mm}h2{break-after:avoid}.issue,figure{break-inside:avoid}}
+  </style>
+</head>
+<body><main>
+  <div class="eyebrow">IMMORTAL UI / 2026-11-12</div>
+  <h1>Metric Card / Indicator Card<br>视觉走查与修正记录</h1>
+  <p class="lead">本轮发现并修正 11 类问题。两张卡片继续按“设备观测”和“衍生结果”区分业务含义，共用信息层级、间距、材质、数据格式与交互规则。</p>
+  <div class="summary">
+    <div class="stat"><strong>11 类</strong><span>问题已修正</span></div>
+    <div class="stat"><strong>241 组</strong><span>渲染与布局检查通过</span></div>
+    <div class="stat"><strong>5.22 : 1</strong><span>受测文字最低对比度，四舍五入</span></div>
+    <div class="stat"><strong>40 项</strong><span>项目测试通过，构建通过</span></div>
+  </div>
+  <p>审查采用实际页面截图、边界场景目测、浏览器尺寸和颜色测量、键盘与触控模拟，并验证了独立安装。241 组是自动化渲染检查数量；目测覆盖下方列出的代表界面，不将两者混称为逐张人工验收。</p>
+
+  <h2>审查标准与完整范围</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>维度</th><th>覆盖内容</th><th>本轮验收原则</th></tr></thead>
+    <tbody>
+      <tr><td>信息结构</td><td>图标、标题、副标题、右上角入口、主值、比较、说明、图表、时间、质量、关联信息、展开详情</td><td>主结果首先可读；标题说明“是什么”，副标题说明作用对象；历史入口属于操作；来源与计算依据进入详情。</td></tr>
+      <tr><td>几何与层级</td><td>四边内距、图文间距、头部到正文、数字基线、单位、分隔线、圆角、阴影</td><td>默认外壳内距 24px、图文间距 12px、头部到正文 24px。外壳和圆形图标凸起，正文、图形、表格及元信息平面呈现。</td></tr>
+      <tr><td>文字与颜色</td><td>标题、数值、单位、长名称、长标识、说明、语义色、对比度</td><td>普通文字至少 4.5:1，大字与必要图形至少 3:1；颜色需有文字辅助。长数字不从中间换行，长说明不越界。依据 <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG 1.4.3</a>、<a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">1.4.11</a>。</td></tr>
+      <tr><td>数据可视化</td><td>数值、趋势、范围、枚举/布尔、文本、结构化结果表</td><td>单位和比较基准完整；趋势给出实际时刻与缺测信息；范围有量程、目标与当前位置；表格保留列含义与数据精度。</td></tr>
+      <tr><td>数据状态</td><td>0、false、负数、超界、空文本、空结果表、无记录、无效、估算、不确定、未知质量、陈旧、离线、加载、失败</td><td>不同状态不混用。有效数值与质量分别表达；不把离线等同于历史值无效，不把计算时间等同于输入数据新鲜。</td></tr>
+      <tr><td>交互</td><td>历史入口、详情展开、悬停/按下、键盘焦点、横向表格滚动、触控尺寸</td><td>保持轻微明暗反馈；展开状态靠箭头和内容表达；键盘可操作且焦点可见。项目采用 40px 触控入口，WCAG AA 的最低尺寸标准为 24px 并有例外，见 <a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html">2.5.8</a>。</td></tr>
+      <tr><td>适配与偏好</td><td>深浅主题、505/288px 卡片、320px 视口、20px 字号、圆角和内距、强制颜色、减少动效</td><td>卡片正文重排，不产生页面横向溢出；宽表格在局部滚动。参照 <a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html">WCAG 1.4.10</a>。</td></tr>
+      <tr><td>交付一致性</td><td>组件页面、目录缩略图、Theme、设备详情、独立安装</td><td>业务组件和网站使用同一实现及 Graphite 样式；缩略图的图标语义与实际组件一致。</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>发现的问题与修复</h2>
+  <div class="issue"><h3><span class="priority">P1</span>01 · 头部间距被重复计算</h3><p>头部外边距和容器间距叠加，24px 变成 48px。已由内部容器明确拥有布局，Metric 与 Indicator 使用自己的业务标识时仍只保留一份间距。12/24/40px 三档配置均实测一致。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>02 · 历史按钮在窄卡片中掉到标题下面</h3><p>一个紧凑操作被当成多项状态区换行，形成独立、含义不清的一行。已保持在右上角，与左侧 40px 身份图标的中心对齐；长标题和副标题自行换行。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>03 · 长数值、比较和说明破坏阅读顺序</h3><p>长数值会从数字中间断开；比较的箭头、值和基准挤成碎片；连续说明文字越过卡片边界。已保留完整数位，按长度和容器宽度调节字号；比较值成组，基准可换行；长说明与标识在卡内重排。极长数值保留局部滚动作为兜底。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>04 · 浅色正向小字对比度不足，质量状态表达不一致</h3><p>原正向颜色在浅色卡片上的对比度约 4.28:1，低于普通文字要求。已增加用于文字的正向色；Indicator 的无效、估算、不确定和未知质量与 Metric 使用一致的语义色。受测文字最低为 5.22:1（四舍五入），不对任意自定义颜色作此保证。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>05 · 范围图留白失衡，最小值没有位置标记</h3><p>主值移出半圆后，图形留下大块空心区域；位于最小值时，填充长度为零，当前位置不可见。卡片内改为紧凑位置轨道：量程、目标区间、当前位置各有表达，最小值仍有标记。目标外和量程外用文字区分。轨道、目标边界与位置标记均通过至少 3:1 的对比度检查。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>06 · 日期时间拆散，跨年信息丢失</h3><p>原窗口可能在日期或时钟中间换行，且没有年份。已保留年份与 UTC；日期、时钟是各自完整的文字单元；同日窗口复用日期，跨日保留两端日期。观测采样、接收、计算与输入窗口保持独立。</p></div>
+  <div class="issue"><h3><span class="priority">P1</span>07 · 表格数值难比较，窄屏内容被拆碎</h3><p>数值列与文字列全部左对齐，长类别在单词中间折行，横向内容没有提示。已将数值列及其表头右对齐，支持列精度；保留类别和数字的完整性；超宽时提示滚动，键盘可滚动，表头在纵向滚动时保留。</p></div>
+  <div class="issue"><h3><span class="priority polish">P2</span>08 · 空文本没有可辨认结果</h3><p>合法空字符串原来显示为一块空白。现在明确显示“空文本”，与 null 的“暂无数据”、空数组的“本次结果为空”分别表达。</p></div>
+  <div class="issue"><h3><span class="priority polish">P2</span>09 · 趋势缺少实际时刻与可见缺测说明</h3><p>原来只有“最近若干分钟”的标签，断线含义主要写在辅助标签中。已补实际起止时刻、可见的“含缺测”说明，并扩充图形的可访问描述，包含有效点数、极值和单位。保留断线，不补造连续曲线。</p></div>
+  <div class="issue"><h3><span class="priority polish">P2</span>10 · 详情触发区和状态反馈不完整</h3><p>原触发区只包住文字，依赖默认三角和默认焦点。已改为整行至少 40px，使用明确箭头和焦点轮廓；悬停、按下只轻调文字明暗，展开旋转箭头。Enter / Space 可展开和收起。</p></div>
+  <div class="issue"><h3><span class="priority polish">P2</span>11 · 衍生指标图标暗示了不存在的 AI 来源</h3><p>原星光图标容易把均值、规则分级等所有衍生结果都理解成 AI 生成。已改为计算符号，并同步目录缩略图；实际算法、版本和输入仍由内容说明。</p></div>
+
+  <h2>前后对照</h2>
+  <h3>Metric：标题与正文关系、趋势时间</h3>
+  <div class="comparison"><figure><img src="before/metric-trend.png" alt="修正前：标题与正文间距过大，趋势没有实际起止时间"><figcaption>修正前：头部到正文 48px。</figcaption></figure><figure><img src="after/showcase-metric-dark-1440.png" alt="修正后：统一24像素间距，趋势补充时间与缺测说明"><figcaption>修正后：24px 间距；起止时间、缺测和极值各有说明。</figcaption></figure></div>
+  <h3>范围：位置、目标与边界</h3>
+  <div class="comparison"><figure><img src="before/metric-range.png" alt="修正前空心半圆范围图"><figcaption>修正前：数值在图外，半圆中心没有承担信息。</figcaption></figure><figure><img src="after/showcase-metric-range.png" alt="修正后紧凑范围位置轨道"><figcaption>修正后：单一主值，轨道明确当前位置与目标区间。</figcaption></figure></div>
+  <h3>Indicator：结果表与计算依据</h3>
+  <div class="comparison"><figure><img src="before/indicator-table.png" alt="修正前数值列左对齐的结果表"><figcaption>修正前：数值列全部左对齐，标题间距重复。</figcaption></figure><figure><img src="after/showcase-indicator-table.png" alt="修正后右对齐数值列与完整计算日期"><figcaption>修正后：数值列对齐、时间完整、详情结构一致。</figcaption></figure></div>
+
+  <h2>适配与边界复查</h2>
+  <div class="gallery">
+    <figure><img src="after/showcase-indicator-light-390.png" alt="浅色窄屏Indicator Card"><figcaption>浅色、390px 视口：主值、窗口与关联信息保持层级。</figcaption></figure>
+    <figure><img src="after/metric-dark-288.png" alt="288像素卡片保留右上历史按钮"><figcaption>288px 卡片：操作继续留在右上角。</figcaption></figure>
+    <figure><img src="after/indicator-table-wide-dark-288.png" alt="窄卡片内的宽表格和横向滚动提示"><figcaption>宽表格在卡片内滚动，保留类别和数值。</figcaption></figure>
+    <figure><img src="after/metric-huge-dark-288.png" alt="长数值保留完整数位"><figcaption>长数字缩放后保留完整数位，单位单独换行。</figcaption></figure>
+    <figure><img src="after/indicator-dark-large-text.png" alt="320像素视口和20像素字号下的信息重排"><figcaption>320px 视口、20px 字号：文本重排，键盘焦点可见。</figcaption></figure>
+    <figure><img src="after/metric-forced-colors.png" alt="强制颜色模式中仍可辨认范围与位置"><figcaption>强制颜色模式：目标、当前位置、操作和详情仍可辨认。</figcaption></figure>
+  </div>
+
+  <h2>验证结果与边界</h2>
+  <ul class="facts">
+    <li>50 个数据/呈现/状态场景 × 2 种主题 × 2 个卡片宽度，共 200 组；大字号及详情展开 32 组；内边距与圆角 9 组。合计 241 组，未检测到正文越界、页面横向溢出或默认文字对比度不达标。</li>
+    <li>浅色范围轨道最低对比度 3.26:1；受测焦点轮廓最低 3.71:1。触控历史入口 40×40px，详情入口至少 40px 高。悬停与按下保留轻微明暗区别。</li>
+    <li>缺测、单点、常量、无历史、零值、false、无效质量、离线和陈旧记录均已覆盖。未执行真实设备采样或指标计算。</li>
+    <li>Theme 中两张卡片、设备详情中的三张 Metric Card、组件展示页及目录图标已复查。干净安装创建 11 个文件，类型检查、构建及 1440/768/390/320px 深浅主题浏览器检查通过。</li>
+    <li>项目 40 项测试、类型检查、生产构建通过。生成的站点与安装包已同步到本地工程；本轮未执行发布。</li>
+  </ul>
+  <div class="note">验证环境为 macOS 上的 Chromium，包含触控、减少动效及强制颜色模拟。未进行 Safari / Firefox、真实手机、屏幕阅读器人工测试，也未覆盖任意用户自定义配色；本记录不是完整 WCAG 合规认证。趋势是静态概览，逐点查询属于历史工作区；卡片高度允许随数据形态和详情展开变化。</div>
+  <h2>核验材料</h2>
+  <div class="links"><a href="baseline.json">修正前测量</a><a href="verification.json">241 组检查明细</a><a href="integration.json">页面与图形对比度检查</a><a href="check.log">项目检查记录</a><a href="install.log">独立安装记录</a><a href="after/installed-dark.png">安装后深色预览</a><a href="after/installed-light.png">安装后浅色预览</a></div>
+  <footer>长期规范已更新到 <a href="../../design-notes/foundation-consistency.md">基础样式的一致性规则</a> 的“数据卡片视觉验收规则”。问题修复落在两张业务卡片的内部呈现、范围图、共同布局标记及 Graphite 样式中。</footer>
+</main></body></html>

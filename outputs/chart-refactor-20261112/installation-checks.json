@@ -1,0 +1,11 @@
+{
+  "consumer": "/tmp/immortal-chart-consumer-ehI72L",
+  "checks": [
+    "shadcn CLI independent installation of Graphite, Metric/Indicator, Telemetry Explorer, interval bars and Soil Profile",
+    "independent TypeScript check and production build",
+    "keyboard exact readings and live timestamp retention",
+    "out-of-range position track, signed bars, empty/invalid records and rejected timestamps",
+    "320px reflow in installed production build"
+  ],
+  "errors": []
+}
